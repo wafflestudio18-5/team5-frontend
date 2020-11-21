@@ -1,4 +1,4 @@
-function Board() {
+function BoardPage() {
   return(
     <div>
       Login
@@ -6,4 +6,4 @@ function Board() {
   )
 }
 
-export default Board;
+export default BoardPage;
