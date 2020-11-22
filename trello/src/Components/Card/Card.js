@@ -1,7 +1,7 @@
 function Card() {
   return(
     <div>
-      Login
+      Card
     </div>
   )
 }

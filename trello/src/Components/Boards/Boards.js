@@ -1,7 +1,7 @@
 function Boards() {
   return(
     <div>
-      Login
+      Boards
     </div>
   )
 }
