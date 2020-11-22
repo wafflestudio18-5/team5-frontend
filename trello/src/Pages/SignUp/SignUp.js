@@ -1,8 +1,8 @@
+import SignUp from '../../Components/Signup/SignUp.js';
+
 function SignUpPage() {
   return(
-    <div>
-      Signup
-    </div>
+    <SignUp/>
   )
 }
 
