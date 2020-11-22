@@ -1,9 +1,9 @@
-function Login() {
+import { Login } from '../../Components/Login/Login.js';
+
+function LoginPage() {
   return(
-    <div>
-      Login
-    </div>
+    <Login/>
   )
 }
 
-export default Login;
+export default LoginPage;
