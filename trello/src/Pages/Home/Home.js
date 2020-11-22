@@ -1,9 +1,10 @@
-function Home() {
+import { Home } from '../../Components';
+import { routes } from '../../Routes';
+
+function HomePage() {
   return(
-    <div>
-      Login
-    </div>
+    <Home login={routes.Login} signup={routes.SignUp}/>
   )
 }
 
-export default Home;
+export default HomePage;

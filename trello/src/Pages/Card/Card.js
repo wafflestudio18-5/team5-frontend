@@ -1,4 +1,4 @@
-function Card() {
+function CardPage() {
   return(
     <div>
       Login
@@ -6,4 +6,4 @@ function Card() {
   )
 }
 
-export default Card;
+export default CardPage;
