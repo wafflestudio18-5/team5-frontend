@@ -7,7 +7,7 @@ import SocialLoginButtons from './SocialLoginButtons.js';
 function SignUp() {
 
   const [email, setEmail] = React.useState("");
-  const [style, setStyle] = React.useState({gray: {color: 'black'}, green: {display: 'none'}, social: {color: 'black'}, whiteBox: {height: 430}});
+  const [style, setStyle] = React.useState({gray: {color: 'black'}, green: {display: 'none'}, social: {color: 'black'}, whiteBox: {height: 460}});
   const [account, setAccount] = React.useState(false);
   const [fn, setFn] = React.useState("");
   const [pw, setPw] = React.useState("");
@@ -21,7 +21,7 @@ function SignUp() {
         setStyle({gray: {color: 'black'}, green: {display: 'none'}, whiteBox: {height: 250}, social: {display: 'none'}});
       }
     } else {
-      setStyle({gray: {color: 'black'}, green: {display: 'none'}, whiteBox: {height: 430}, social: {color: 'black'}});
+      setStyle({gray: {color: 'black'}, green: {display: 'none'}, whiteBox: {height: 460}, social: {color: 'black'}});
     }
   }
 

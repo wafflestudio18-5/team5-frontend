@@ -44,12 +44,16 @@
 input {
     color: black;
     width: 330px;
-    padding: 10px;
+    padding: 9px;
     margin: 5px;
     margin-bottom: 20px;
     background-color: rgb(250, 250, 250);
     border: 2px lightgray solid;
     border-radius: 3px;
+}
+
+input:hover {
+    background-color: rgb(245, 245, 245);
 }
 
 a {
@@ -81,6 +85,10 @@ div button {
     border-radius: 3px;
 }
 
+div button:hover {
+    background-color: rgb(240, 240, 240);
+}
+
 .TextCenter {
     text-align: center;
 }
@@ -89,6 +97,7 @@ div button {
     font-size: 13px;
     text-align: left;
     font-weight: 100 !important;
+    margin-bottom: 25px !important;
 }
 
 #signup-or {
@@ -102,6 +111,7 @@ div button {
     border-top: 1px lightgray solid;
     width: 350px;
     margin: 20px;
+    margin-bottom: 10px !important;
 }
 
 #signup-continue {
@@ -177,7 +187,7 @@ select {
 }
 
 #signup-green:hover {
-    background-color: rgb(2, 139, 2);
+    background-color: rgb(1, 146, 1);
 }
 
 #signup-blue {
@@ -187,7 +197,7 @@ select {
 }
 
 #signup-blue:hover {
-    background-color: rgb(70, 113, 243);
+    background-color: #4d79ff;
 }
 
 #signup-one {
