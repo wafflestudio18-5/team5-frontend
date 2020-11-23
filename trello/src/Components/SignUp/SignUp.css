@@ -41,11 +41,12 @@
     margin: 0px !important;
 }
 
-#signup-email-input {
+input {
     color: black;
     width: 330px;
     padding: 10px;
     margin: 5px;
+    margin-bottom: 20px;
     background-color: rgb(250, 250, 250);
     border: 2px lightgray solid;
     border-radius: 3px;
@@ -177,4 +178,30 @@ select {
 
 #signup-green:hover {
     background-color: rgb(2, 139, 2);
+}
+
+#signup-blue {
+    background-color: royalblue;
+    color: white !important;
+    border: 1px transparent solid;
+}
+
+#signup-blue:hover {
+    background-color: rgb(70, 113, 243);
+}
+
+#signup-one {
+    color: gray;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 100 !important;
+    margin-bottom: 20px;
+}
+
+#signup-protect {
+    color: gray;
+    margin-left: 10px;
+    margin-top: 20px !important;
+    font-size: 13px;
+    font-weight: 100 !important;
 }
