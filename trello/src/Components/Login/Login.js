@@ -43,7 +43,7 @@ function Login() {
       <div className="center" id="login-login"><button onClick={onClick} className="bold_center" id="login-green">Log in</button></div>
 
       <div className="socialLogin">
-      <SocialLoginButtons/>
+      <SocialLoginButtons login={true}/>
       </div>
 
       <p id="login-forgot-or-signup" className="center"><br/><a href="https://trello.com/forgot">Can't log in?</a>  •  <Link email={email} to="/signup">Sign up for an account</Link></p>

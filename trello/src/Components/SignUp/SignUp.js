@@ -61,7 +61,7 @@ function SignUp() {
       <div className="center" id="signup-coutinue"><button style={style['green']} onClick={greenClick} className="bold_center" id="signup-green">Continue</button><button style={style['gray']} className="bold_center" id="signup-gray">Continue</button></div>
 
       <div className="socialLogin" style={style['social']}>
-      <SocialLoginButtons/>
+      <SocialLoginButtons login={false}/>
       </div>
 
       <p id="signup-login" className="center"><br/><Link to="/login">Already have an account? Log in</Link></p>
@@ -96,7 +96,7 @@ function SignUp() {
       <div className="center" id="signup-signup"><button onClick={blueClick} className="bold_center" id="signup-blue">Sign up</button></div>
 
       <div className="socialLogin">
-      <SocialLoginButtons/>
+      <SocialLoginButtons login={false}/>
       </div>
 
       <p id="signup-login" className="center"><br/><Link email={email} to="/login">Already have an account? Log in</Link></p>
