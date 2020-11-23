@@ -12,7 +12,6 @@
 
 .whiteBox {
     width: 350px;
-    height: 440px;
     background-color: white;
     align-items: center !important;
     text-align: center !important;
@@ -62,8 +61,13 @@ a:hover {
 
 #signup-trello-logo {
     max-width: 140px;
-    margin: 30px;
-    margin-top: 0px !important;
+    margin: 40px;
+    margin-bottom: 30px !important;
+}
+
+#signup-atlassian-logo {
+    max-width: 150px;    
+    margin-bottom: 10px;
 }
 
 div button {
@@ -144,4 +148,33 @@ select {
     position: relative;
     top: 2px;
     margin-right: 10px;
+}
+
+#signup-grayline-before-atlassian-logo {
+    width: 350px;
+    border-top: 1px lightgray solid;
+    margin-bottom: 30px;
+}
+
+#signup-footer a {
+    color: gray;
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 100 !important;
+}
+
+#signup-gray {
+    background-color: lightgrey;
+    color: black !important;
+    border: 1px transparent solid;
+}
+
+#signup-green {
+    background-color: green;
+    color: white !important;
+    border: 1px transparent solid;
+}
+
+#signup-green:hover {
+    background-color: rgb(2, 139, 2);
 }
