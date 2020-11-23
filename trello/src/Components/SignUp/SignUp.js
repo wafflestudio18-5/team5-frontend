@@ -2,6 +2,8 @@ import React from 'react';
 import './SignUp.css';
 import { Link } from 'react-router-dom';
 import SocialLoginButtons from './SocialLoginButtons.js';
+import trelloLogo from './trello-logo-blue.svg';
+import atlassianLogo from './atlassian-logo-blue.svg';
 
 
 function SignUp() {
@@ -45,7 +47,7 @@ function SignUp() {
   if (!account) {
     return(
     <div className="SignUpPage">
-    <img id="signup-trello-logo" src="https://d2k1ftgv7pobq7.cloudfront.net/meta/c/p/res/images/trello-header-logos/76ceb1faa939ede03abacb6efacdde16/trello-logo-blue.svg" alt="trello blue logo"/>
+    <img id="signup-trello-logo" src={trelloLogo} alt="trello blue logo"/>
     
 
     <div className="whiteBox" style={style['whiteBox']}>
@@ -71,7 +73,7 @@ function SignUp() {
     </select>
 
     <p id="signup-grayline-before-atlassian-logo"></p>
-    <img id="signup-atlassian-logo" src="https://d2k1ftgv7pobq7.cloudfront.net/meta/c/p/res/images/16006ae28f149063408d601e8c80eddc/atlassian-logo-blue-small.svg" alt="atlassian logo"/>
+    <img id="signup-atlassian-logo" src={atlassianLogo} alt="atlassian logo"/>
 
     <p id="signup-footer"><a href="https://trello.com/templates">Templates</a> <a href="https://trello.com/pricing">Pricing</a> <a href="https://trello.com/platforms">Apps</a> <a href="https://www.atlassian.com/company/careers/trello">Jobs</a> <a href="https://blog.trello.com/">Blog</a> <a href="http://developers.trello.com/">Developers</a> <a href="https://trello.com/about">About</a> <a href="http://help.trello.com/">Help</a> <a href="https://trello.com/signup#">Cookie Settings</a></p>
     </div>
@@ -79,7 +81,7 @@ function SignUp() {
     } else {
       return (
     <div className="SignUpPage">
-    <img id="signup-trello-logo" src="https://d2k1ftgv7pobq7.cloudfront.net/meta/c/p/res/images/trello-header-logos/76ceb1faa939ede03abacb6efacdde16/trello-logo-blue.svg" alt="trello blue logo"/>
+    <img id="signup-trello-logo" src={trelloLogo} alt="trello blue logo"/>
     
     <div className="whiteBox" style={{height: 580}}>
       <p className="bold_center">Sign up for your account</p>
@@ -103,7 +105,7 @@ function SignUp() {
     <p id="signup-protect">This page is protected by reCAPTCHA and the Google <a href="https://www.google.com/policies/privacy/">Privacy Policy</a> and <br/><a href="https://www.google.com/policies/terms/">Terms of Service</a> apply</p>
 
     <p id="signup-grayline-before-atlassian-logo"></p>
-    <img id="signup-atlassian-logo" src="https://d2k1ftgv7pobq7.cloudfront.net/meta/c/p/res/images/16006ae28f149063408d601e8c80eddc/atlassian-logo-blue-small.svg" alt="atlassian logo"/>
+    <img id="signup-atlassian-logo" src={atlassianLogo} alt="atlassian logo"/>
     <p id="signup-one">One account for Trello, Jira, Confluence and <a href="https://confluence.atlassian.com/cloud/your-atlassian-account-976161169.html">more</a>.</p>
     </div>
     )
@@ -111,6 +113,3 @@ function SignUp() {
 };
 
 export default SignUp;
-
-
-//    <img id="signup-background" src="./signup-background.png" alt="background"/>
