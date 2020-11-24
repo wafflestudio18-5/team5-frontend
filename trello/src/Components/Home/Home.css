@@ -12,7 +12,7 @@ header.home_header {
   padding-bottom: 16px;
   padding-left: 16px;
   padding-right: 16px;
-  background-color: #4488ff;
+  background-color: rgb(0, 121, 191);
 }
 
 nav.home_header_nav {
@@ -46,13 +46,13 @@ a.home_header_button#hhb_login  {
 
 a.home_header_button#hhb_signup  {
   background-color: white;
-  color: #4488ff;
+  color: rgb(0, 121, 191);
 }
 
 section.home_section1 {
   height: 711px;
   width: 100%;
-  background-color: #4488ff;
+  background-color: rgb(0, 121, 191);
 }
 
 img.home_section1_img {
@@ -62,4 +62,8 @@ img.home_section1_img {
 
 img.home_section2_img {
   width: 100%;
+}
+
+#hhb_signup {
+  text-decoration: none;
 }
