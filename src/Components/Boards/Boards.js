@@ -50,7 +50,7 @@ function Boards() {
           </li>
         </ul>
         <div className="Teams-hdr">
-          <p>Teams</p>
+          <p>T E A M S</p>
           <p>+</p>
         </div>
         <ul className="Teams">
