@@ -1,23 +1,50 @@
 import "./Header.css";
-import * as assets from "./assets";
+import { useState } from 'react';
+import { svg_hl_1, svg_hl_2, svg_hl_3, svg_hr_1, svg_hr_2, svg_hr_3, logo } from "./assets";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+import { faWindowClose } from "@fortawesome/free-regular-svg-icons";
+import { useHistory } from "react-router-dom";
+
+// button macros
+const bm = {
+  L1: 1,
+  L2: 2,
+  L3: 3,
+  R1: 4,
+  R2: 5,
+  R3: 6,
+  NONE: 0
+}
+
+const modal1 = (
+  <section>
+
+  </section>
+);
 
 function Header(props) {
-  const {
-    svg_hl_1,
-    svg_hl_2,
-    svg_hl_3,
-    svg_hr_1,
-    svg_hr_2,
-    svg_hr_3,
-    logo,
-  } = assets;
+  const [serkey, setSerkey] = useState("");
+  const [serFocused, setSerFocused] = useState(false);
+  const { user_data, history } = props;
+
+  const onSerChange = (e) => {
+    setSerkey(e.target.value);
+  }
+
+  const toggleFocus = () => {
+    setSerFocused(!serFocused);
+  }
+
+  const goToBoards = () => {
+    history.push(`/${user_data.name}/boards`);
+  }
+  
   return (
     <header className="logged_header">
       <div className="header-left-wrapper">
         <div className="App-Switcher-Button-Wrapper">{svg_hl_1}</div>
-        <div className="Home-Button-Wrapper">{svg_hl_2}</div>
+        <div className="Home-Button-Wrapper" onClick={goToBoards}>{svg_hl_2}</div>
         <div className="Boards-Link-Wrapper">
           {svg_hl_3}
           <p>
@@ -25,8 +52,10 @@ function Header(props) {
           </p>
         </div>
         <div className="inputWrapper">
-          <input className="Boards-Search-Wrapper" />
-          <FontAwesomeIcon className="inputIcon" icon={faSearch} />
+          <input className={`Boards-Search-Wrapper ${serFocused? 'active' : 'inactive'}`}  value={serkey} onChange={onSerChange} onFocus={toggleFocus} onBlur = {toggleFocus} />
+          <FontAwesomeIcon className={`inputIcon ${serFocused? 'hide' : 'active'}`} icon={faSearch} />
+          <FontAwesomeIcon className={`inputExtern ${serFocused? 'active' : 'hide'}`} icon={faExternalLinkAlt} />
+          <FontAwesomeIcon className={`inputFin ${serFocused? 'active' : 'hide'}`} icon={faWindowClose} />
         </div>
       </div>
       <div className="header-logo-wrapper">{logo}</div>
