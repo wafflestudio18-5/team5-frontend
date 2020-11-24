@@ -5,7 +5,7 @@ import { routes } from '../../Routes'
 const LoginPage = () => {
     return (
         <>
-        <Route exact path={routes.Login.path} component={routes.Login.component} />
+            <Route exact path={routes.Login.path} component={routes.Login.component} />
         </>
     )
 }
