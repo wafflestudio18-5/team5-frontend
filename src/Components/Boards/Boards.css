@@ -1,0 +1,27 @@
+body {
+  background-color: #eeeeee;
+}
+
+li.left-button-wrapper {
+  display: flex;
+  width: 240px;
+  height: 32px;
+  line-height: 32px;
+  background-color: #eeeeee;
+  margin-bottom: 4px;
+}
+
+li.left-button-wrapper p {
+  margin: 0;
+}
+
+section.left-buttons {
+  width: 272px;
+}
+
+div.main-wrapper {
+  padding-left: 8px;
+  padding-right: 8px;
+  display: flex;
+  padding-top: 50px;
+}
