@@ -16,7 +16,7 @@ function BoardsPage(props) {
   
   return(
     <>
-      <Header user_data={user_data}/>
+      <Header user_data={user_data} history={history}/>
       <Boards user_data={user_data}/>
     </>
   )
