@@ -47,7 +47,7 @@
     margin: 0px !important;
 }
 
-input {
+input.loginInput {
     width: 330px;
     padding: 9px !important;
     padding-top: 14px !important;
