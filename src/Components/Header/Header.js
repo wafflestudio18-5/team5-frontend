@@ -4,7 +4,7 @@ import { svg_hl_1, svg_hl_2, svg_hl_3, svg_hr_1, svg_hr_2, svg_hr_3, logo } from
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import { faWindowClose } from "@fortawesome/free-regular-svg-icons";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // button macros
 const bm = {
@@ -58,7 +58,9 @@ function Header(props) {
           <FontAwesomeIcon className={`inputFin ${serFocused? 'active' : 'hide'}`} icon={faWindowClose} />
         </div>
       </div>
-      <div className="header-logo-wrapper">{logo}</div>
+      <div className="header-logo-wrapper">
+        <Link to="/">{logo}</Link>
+      </div>
       <div className="header-right-wrapper">
         <div className="Add-Wrapper">{svg_hr_1}</div>
         <div className="Info-Wrapper">{svg_hr_2}</div>
