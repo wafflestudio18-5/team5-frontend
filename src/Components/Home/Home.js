@@ -1,8 +1,3 @@
-/*
- TODO: logo img src 는 나중에 백엔드에서 불러와야 합니다. 
- 일단은 웹에서 불러오려 했는데 웹에 있는 게 svg네요. alt 띄워두겠습니다.
-*/
-
 import { Link } from "react-router-dom";
 import "./Home.css";
 import img1 from './sec1_img.png';
@@ -14,7 +9,7 @@ function Home({login, signup}) {
       <header className="home_header">
         <nav className="home_header_nav">
           <span className="home_logo">
-            <img className="home_logo" alt="logo" src="" />
+            <img className="home_logo" alt="logo" id="trello_logo" src="https://d2k1ftgv7pobq7.cloudfront.net/meta/u/res/images/trello-header-logos/af7af6ed478d3460709d715d9b3f74a4/trello-logo-white.svg" />
           </span>
           <div className="home_log">
             <Link to={login.path} className="home_header_button" id="hhb_login">

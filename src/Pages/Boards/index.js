@@ -2,12 +2,12 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { routes } from '../../Routes'
 
-const LoginPage = () => {
+const BoardsPage = () => {
     return (
         <>
-            <Route exact path={routes.Login.path} component={routes.Login.component} />
+            <Route exact path={routes.Boards.path} component={routes.Boards.component} />
         </>
     )
 }
 
-export default LoginPage;
+export default BoardsPage;

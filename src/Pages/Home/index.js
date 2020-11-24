@@ -2,12 +2,12 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { routes } from '../../Routes'
 
-const LoginPage = () => {
+const HomePage = () => {
     return (
         <>
-            <Route exact path={routes.Login.path} component={routes.Login.component} />
+            <Route exact path={routes.Home.path} component={routes.Home.component} />
         </>
     )
 }
 
-export default LoginPage;
+export default HomePage;

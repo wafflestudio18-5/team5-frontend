@@ -2,6 +2,10 @@ body {
 
 }
 
+#trello_logo {
+  width: 120px;
+} 
+
 header.home_header {
   height: 40px;
   position: fixed;
