@@ -1,4 +1,32 @@
 import "./Boards.css";
+import { Link } from 'react-router-dom';
+
+const temp_board1 = {
+  title: "Waffle-18.5-toyproject-team5"
+}
+
+const temp_board2 = {
+  title: "temporary board"
+}
+
+const temp_recent = [
+  temp_board1,
+  temp_board2
+]
+
+const temp_personal = [
+  temp_board1,
+]
+
+const temp_workspace = [
+  temp_board2
+]
+
+const title_to_board = (title, i) => (
+  <li className="board-wrapper" key={i}>
+    {title}
+  </li>
+)
 
 function Boards() {
   return (
@@ -18,7 +46,10 @@ function Boards() {
             <p className="left-button-desc">Home</p>
           </li>
         </ul>
-        <p>Teams</p>
+        <div className="Teams">
+          <p>Teams</p>
+          <p>+</p>
+        </div>
         <ul>
           <li>
             Trello Workspace
@@ -27,24 +58,45 @@ function Boards() {
       </section>
       <section className="main-boards">
         <div className="boards-desc" id="recently">
-          <h3>Recently Viewed</h3>
+          <div>
+          <img alt="o"/>
+          <h4>Recently Viewed</h4>
+          </div>
         </div>
         <ul className="boards-boards" id="recently">
-          list 들어가야 함
+          {temp_recent.map((item, i) => title_to_board(item.title, i))}
         </ul>
 
         <div className="boards-desc" id="personal">
-          <h3>Personal Boards</h3>
+          <div>
+          <img alt="o"/>
+          <h4>Personal Boards</h4>
+          </div>
         </div>
         <ul className="boards-boards" id="personal">
-          list 들어가야 함
+          {temp_personal.map((item, i) => title_to_board(item.title, i))}
+          <li className="board-wrapper create">
+            Create new board
+          </li>
         </ul>
 
         <div className="boards-desc" id="workspace">
-          <h3>Trello workspace</h3>
+          <div>
+            <img alt="o"/>
+            <h4>Trello workspace</h4>
+          </div>
+          <nav>
+            <Link to={"https://trello.com/userworkspace" + "(유저 고유번호인듯)"}>Boards</Link>
+            <Link to={"https://trello.com/userworkspace" + "(유저 고유번호인듯)" + "/members"}>Members</Link>
+            <Link to={"https://trello.com/userworkspace" + "(유저 고유번호인듯)" + "/account"}>Settings</Link>
+            <p>Upgrade</p>
+          </nav>
         </div>
         <ul className="boards-boards" id="workspace">
-          list 들어가야 함
+          {temp_workspace.map((item, i) => title_to_board(item.title, i))}
+          <li className="board-wrapper create">
+            Create new board
+          </li>
         </ul>
       </section>
     </div>

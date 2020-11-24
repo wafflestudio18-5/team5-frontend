@@ -2,13 +2,40 @@ body {
   background-color: #eeeeee;
 }
 
+ul, li {
+  list-style: none;
+}
+
 li.left-button-wrapper {
   display: flex;
   width: 240px;
   height: 32px;
   line-height: 32px;
-  background-color: #eeeeee;
+  background-color: white;
   margin-bottom: 4px;
+}
+
+.boards-desc {
+  display: flex;
+  height: 32px;
+  line-height: 32px;
+  justify-content: space-between;
+}
+
+.boards-desc div {
+  display: flex;
+}
+
+div.boards-desc h4 {
+  margin: 0px;
+}
+
+div.boards-desc#personal, div.boards-desc#workspace {
+  margin-top: 30px;
+}
+
+section.left-buttons ul {
+  padding: 0;
 }
 
 li.left-button-wrapper p {
@@ -16,12 +43,60 @@ li.left-button-wrapper p {
 }
 
 section.left-buttons {
-  width: 272px;
+  width: 240px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 div.main-wrapper {
   padding-left: 8px;
   padding-right: 8px;
   display: flex;
-  padding-top: 50px;
+  padding-top: 40px;
+}
+
+section.main-boards {
+  padding-left: 16px;
+  padding-right: 16px;
+  width: calc(100% - 272px - 32px);
+}
+
+ul li.board-wrapper {
+  height: 80px;
+  padding: 8px;
+  width: 150px;
+  margin: 8px;
+  border-radius: 4px;
+  background-color: rgb(0, 121, 191);
+}
+
+ul.boards-boards {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0px;
+  padding: 0px;
+}
+
+li.board-wrapper.create {
+  background-color: #dddddd;
+  text-align: center;
+  line-height: 80px;
+}
+
+.left-buttons div.Teams {
+  display: flex;
+  justify-content: space-between;
+}
+
+.boards-desc nav {
+  display: flex;
+}
+
+.boards-desc nav p, .boards-desc nav a {
+  margin-top: 0;
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-bottom: 0;
+  text-decoration: none;
+  color: black;
 }
