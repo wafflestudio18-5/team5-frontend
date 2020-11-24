@@ -3,7 +3,7 @@ header.logged_header {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  background-color: rgb(0, 121, 191);
+  background-color: #026aa7;
   /* background-color의 경우 추후 테마 설정 기능이 추가되면 업데이트되어야 함 */
 }
 
@@ -17,7 +17,11 @@ div.App-Switcher-Button-Wrapper {
   width: 28px;
   height: 28px;
   padding: 2px;
-  background-color: white;
+  background-color: hsla(0, 0%, 100%, .3);
+}
+
+div.App-Switcher-Button-Wrapper svg {
+  margin: auto;
 }
 
 div.Home-Button-Wrapper {
@@ -26,30 +30,59 @@ div.Home-Button-Wrapper {
   width: 28px;
   height: 28px;
   padding: 2px;
-  background-color: white;
+  background-color: hsla(0, 0%, 100%, .3);
+}
+
+div.Home-Button-Wrapper svg {
+  margin: auto;
 }
 
 div.Boards-Link-Wrapper {
   border-radius: 4px;
   margin: 3px;
-  width: 56px;
+  width: 90px;
+  padding-right: 10px;
   height: 28px;
   padding: 2px;
-  background-color: white;
+  line-height: 28px;
+  color: white;
+  background-color:hsla(0, 0%, 100%, .3);
 }
 
-div.Boards-Search-Wrapper {
+div.Boards-Link-Wrapper svg {
+  margin: auto;
+}
+
+div.Boards-Link-Wrapper p {
+  margin: 0;
+  margin-right: 7px;
+}
+
+input.Boards-Search-Wrapper {
   border-radius: 4px;
   margin: 3px;
-  width: 56px;
+  width: 180px;
+  height: 28px;
+  padding: 2px;
+  background-color: hsla(0, 0%, 100%, .3);
+}
+
+input.Boards-Search-Wrapper.active {
+  border-radius: 4px;
+  margin: 3px;
+  width: 280px;
   height: 28px;
   padding: 2px;
   background-color: white;
 }
 
 .header-logo-wrapper {
+  position: absolute;
+  left: calc(50% - 60px);
   line-height: 40px;
   height: 40px;
+  width: 120px;
+  top: 3px;
 }
 
 .header-logo-wrapper img.header_logo {
@@ -63,7 +96,11 @@ div.Add-Wrapper {
   width: 28px;
   height: 28px;
   padding: 2px;
-  background-color: white;
+  background-color: hsla(0, 0%, 100%, .3);
+}
+
+div.Add-Wrapper svg {
+  margin: auto;
 }
 
 div.Info-Wrapper {
@@ -72,9 +109,12 @@ div.Info-Wrapper {
   width: 28px;
   height: 28px;
   padding: 2px;
-  background-color: white;
+  background-color: hsla(0, 0%, 100%, .3);
 }
 
+div.Info-Wrapper svg {
+  margin: auto;
+}
 
 div.Notifications-Wrapper {
   border-radius: 4px;
@@ -82,9 +122,12 @@ div.Notifications-Wrapper {
   width: 28px;
   height: 28px;
   padding: 2px;
-  background-color: white;
+  background-color: hsla(0, 0%, 100%, .3);
 }
 
+div.Notifications-Wrapper svg {
+  margin: auto;
+}
 
 div.Profile-Wrapper {
   margin: 3px;
@@ -92,7 +135,7 @@ div.Profile-Wrapper {
   width: 28px;
   height: 28px;
   padding: 2px;
-  background-color: white;
+  background-color: hsla(0, 0%, 100%, .3);
 }
 
 
