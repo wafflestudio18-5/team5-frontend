@@ -34,9 +34,9 @@ function SocialLoginButtons({ login }) {
 
     return (
         <><p id="signup-or" className="center">OR</p>
-        <button onClick={googleClick} className="bold_center"><img alt="logo-google" className="logo-google" src={google}/>Continue with Google</button><br/>
-        <button onClick={microsoftClick} className="bold_center"><img alt="logo-microsoft" className="logo-microsoft" src={microsoft}/>Continue with Microsoft</button><br/>
-        <button onClick={appleClick} className="bold_center"><img alt="logo-apple" className="logo-apple" src={apple}/>Continue with Apple</button><br/></>
+        <button onClick={googleClick} className="social"><img alt="logo-google" className="logo-google" src={google}/>Continue with Google</button><br/>
+        <button onClick={microsoftClick} className="social"><img alt="logo-microsoft" className="logo-microsoft" src={microsoft}/>Continue with Microsoft</button><br/>
+        <button onClick={appleClick} className="social"><img alt="logo-apple" className="logo-apple" src={apple}/>Continue with Apple</button><br/></>
 )
 }
 
