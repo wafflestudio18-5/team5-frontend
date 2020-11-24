@@ -67,6 +67,17 @@ input.Boards-Search-Wrapper {
   background-color: hsla(0, 0%, 100%, .3);
 }
 
+.inputWrapper {
+  position: relative;
+}
+
+.header-left-wrapper .inputWrapper svg {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  color: white;
+}
+
 input.Boards-Search-Wrapper.active {
   border-radius: 4px;
   margin: 3px;
