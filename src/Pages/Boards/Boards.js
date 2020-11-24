@@ -10,14 +10,14 @@ const get_user_data = (user_name) => {
 }
 
 function BoardsPage(props) {
-  const { history, location, match } = props;
+  const { history, match } = props;
   const user_name = match.params.user;
   const user_data = get_user_data(user_name);
   
   return(
     <>
       <Header user_data={user_data} history={history}/>
-      <Boards user_data={user_data}/>
+      <Boards user_data={user_data} history={history}/>
     </>
   )
 }

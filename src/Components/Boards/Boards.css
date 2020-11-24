@@ -11,9 +11,21 @@ li.left-button-wrapper {
   width: 232px;
   height: 32px;
   line-height: 32px;
+  border-radius: 4px;
   background-color: #eeeeee;
   margin-bottom: 4px;
   padding-left: 8px;
+  color: #0f0f0f;
+}
+
+li.left-button-wrapper:hover {
+  background-color: #dddddd;
+  color: black;
+}
+
+li.left-button-wrapper.active {
+  background-color: #bdd3fe;
+  color: #073faf;
 }
 
 .boards-desc {
@@ -89,6 +101,17 @@ ul li.board-wrapper {
   color: white;
 }
 
+ul li.board-wrapper:hover {
+  height: 80px;
+  padding: 8px;
+  width: 150px;
+  margin: 8px;
+  border-radius: 4px;
+  background-color: rgb(0, 101, 171);
+  font-weight: bolder;
+  color: white;
+}
+
 ul.boards-boards {
   display: flex;
   flex-wrap: wrap;
@@ -98,6 +121,14 @@ ul.boards-boards {
 
 li.board-wrapper.create {
   background-color: #dddddd;
+  text-align: center;
+  line-height: 80px;
+  color: black;
+  font-weight: normal;
+}
+
+li.board-wrapper.create:hover {
+  background-color: #cccccc;
   text-align: center;
   line-height: 80px;
   color: black;
@@ -133,9 +164,28 @@ li.board-wrapper.create {
 }
 
 .boards-desc nav p {
-  background-color: lightpink;
+  background-color: pink;
+}
+
+.boards-desc nav a:hover {
+  background-color: #cccccc;
+}
+
+.boards-desc nav p:hover {
+  background-color: hotpink;
 }
 
 svg.tw_icon {
   margin-right: 10px;
+}
+
+ul.Teams li {
+  width: 240px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 4px;
+}
+
+ul.Teams li:hover {
+  background-color: #cccccc;
 }

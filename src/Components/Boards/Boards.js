@@ -1,10 +1,19 @@
 import "./Boards.css";
+import { useState } from 'react';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrello } from "@fortawesome/free-brands-svg-icons";
-import { faUser, faHome, faUserFriends, faCog, faBriefcase } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faHome,
+  faUserFriends,
+  faCog,
+  faBriefcase,
+} from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
+import BoardThumbnail from './BoardThumbnail';
 
+/* ----------------------------temp datas------------------------------ */
 const temp_board1 = {
   title: "Waffle-18.5-toyproject-team5",
 };
@@ -19,30 +28,28 @@ const temp_personal = [temp_board1];
 
 const temp_workspace = [temp_board2];
 
-const title_to_board = (title, i) => (
-  <li className="board-wrapper" key={i}>
-    {title}
-  </li>
-);
+/* --------------------------------------------------------------------- */
 
-function Boards() {
+function Boards(props) {
+  const [active, setActive] = useState(1);
+  
   return (
     <div className="main-wrapper">
       <section className="left-buttons">
         <ul>
-          <li className="left-button-wrapper" id="Boards-wrapper">
+          <li className={`left-button-wrapper ${active === 1? 'active' : 'inactive'}`} id="Boards-wrapper">
             <FontAwesomeIcon icon={faTrello} />
             <p className="left-button-desc" id="boards">
               Boards
             </p>
           </li>
-          <li className="left-button-wrapper" id="Templates-wrapper">
+          <li className={`left-button-wrapper ${active === 2? 'active' : 'inactive'}`} id="Templates-wrapper">
             <FontAwesomeIcon icon={faTrello} />
             <p className="left-button-desc" id="templates">
               Templates
             </p>
           </li>
-          <li className="left-button-wrapper" id="Home-wrapper">
+          <li className={`left-button-wrapper ${active === 3? 'active' : 'inactive'}`} id="Home-wrapper">
             <FontAwesomeIcon icon={faHome} />
             <p className="left-button-desc" id="home">
               Home
@@ -68,7 +75,7 @@ function Boards() {
           </div>
         </div>
         <ul className="boards-boards" id="recently">
-          {temp_recent.map((item, i) => title_to_board(item.title, i))}
+          {temp_recent.map((item, i) => <BoardThumbnail key={i} history={props.history} item={item}/>)}
         </ul>
 
         <div className="boards-desc" id="personal">
@@ -78,7 +85,7 @@ function Boards() {
           </div>
         </div>
         <ul className="boards-boards" id="personal">
-          {temp_personal.map((item, i) => title_to_board(item.title, i))}
+          {temp_personal.map((item, i) => <BoardThumbnail key={i} history={props.history} item={item}/>)}
           <li className="board-wrapper create">Create new board</li>
         </ul>
 
@@ -88,23 +95,30 @@ function Boards() {
             <h4>Trello workspace</h4>
           </div>
           <nav>
-            <Link to={`https://trello.com/userworkspace${"유저 고유번호"}`}>
+            <Link className="tw_link" to={`https://trello.com/userworkspace${"유저 고유번호"}`}>
               <FontAwesomeIcon className="tw_icon" icon={faTrello} />
               Boards
             </Link>
-            <Link to={`https://trello.com/userworkspace${"유저 고유번호"}/members`}>
+            <Link className="tw_link"
+              to={`https://trello.com/userworkspace${"유저 고유번호"}/members`}
+            >
               <FontAwesomeIcon className="tw_icon" icon={faUser} />
               Members
             </Link>
-            <Link to={`https://trello.com/userworkspace${"유저 고유번호"}/account`}>
+            <Link className="tw_link"
+              to={`https://trello.com/userworkspace${"유저 고유번호"}/account`}
+            >
               <FontAwesomeIcon className="tw_icon" icon={faCog} />
               Settings
             </Link>
-            <p><FontAwesomeIcon className="tw_icon" icon={faBriefcase} />Upgrade</p>
+            <p  className="tw_p">
+              <FontAwesomeIcon className="tw_icon" icon={faBriefcase} />
+              Upgrade
+            </p>
           </nav>
         </div>
         <ul className="boards-boards" id="workspace">
-          {temp_workspace.map((item, i) => title_to_board(item.title, i))}
+          {temp_workspace.map((item, i) => <BoardThumbnail key={i} history={props.history} item={item}/>)}
           <li className="board-wrapper create">Create new board</li>
         </ul>
       </section>
