@@ -58,7 +58,7 @@ function Boards(props) {
         </ul>
         <div className="Teams-hdr">
           <p>T E A M S</p>
-          <p>+</p>
+          <p id="boards-teams-add">+</p>
         </div>
         <ul className="Teams">
           <li>

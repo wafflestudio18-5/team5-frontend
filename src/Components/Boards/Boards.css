@@ -201,3 +201,11 @@ ul.Teams li:hover {
   margin-right: 5px;
 
 }
+
+#boards-teams-add {
+  font-size: 27px !important;
+  position: relative;
+  top: -20px;
+  margin-bottom: 0px!important;
+  color: #42526E;
+}
