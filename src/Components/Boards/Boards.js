@@ -138,6 +138,7 @@ function Boards(props) {
           {temp_workspace.map((item, i) => <BoardThumbnail key={i} history={props.history} item={item}/>)}
           <li className="board-wrapper create">Create new board</li>
         </ul>
+        <br/><br/>
       </section>
     </div>
   );
