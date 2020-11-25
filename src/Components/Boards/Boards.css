@@ -1,5 +1,5 @@
 body {
-  background-color: #eeeeee;
+  background-color: #FAFBFC;
 }
 
 ul, li {
@@ -12,20 +12,20 @@ li.left-button-wrapper {
   height: 32px;
   line-height: 32px;
   border-radius: 4px;
-  background-color: #eeeeee;
+  background-color: #FAFBFC;
   margin-bottom: 4px;
   padding-left: 8px;
   color: #0f0f0f;
 }
 
 li.left-button-wrapper:hover {
-  background-color: #dddddd;
+  background-color: #F0F2F5;
   color: black;
 }
 
 li.left-button-wrapper.active {
-  background-color: #bdd3fe;
-  color: #073faf;
+  background-color: rgb(228, 240, 246);
+  color: rgb(0, 121, 191);
 }
 
 .boards-desc {
@@ -120,7 +120,7 @@ ul.boards-boards {
 }
 
 li.board-wrapper.create {
-  background-color: #dddddd;
+  background-color: #F0F2F5;
   text-align: center;
   line-height: 80px;
   color: black;
@@ -128,7 +128,7 @@ li.board-wrapper.create {
 }
 
 li.board-wrapper.create:hover {
-  background-color: #cccccc;
+  background-color: #E7E9ED;
   text-align: center;
   line-height: 80px;
   color: black;
@@ -160,7 +160,7 @@ li.board-wrapper.create:hover {
 }
 
 .boards-desc nav a {
-  background-color: #dddddd;
+  background-color: #F0F2F5;
 }
 
 .boards-desc nav p {
@@ -168,7 +168,7 @@ li.board-wrapper.create:hover {
 }
 
 .boards-desc nav a:hover {
-  background-color: #cccccc;
+  background-color: #E7E9ED;
 }
 
 .boards-desc nav p:hover {
@@ -187,7 +187,7 @@ ul.Teams li {
 }
 
 ul.Teams li:hover {
-  background-color: #cccccc;
+  background-color: #E7E9ED;
 }
 
 #boards-upgrade-icon {
