@@ -9,6 +9,7 @@ function App() {
         <Route path={routes.Login.path} component={routes.Login.component}/>
         <Route path={routes.SignUp.path} component={routes.SignUp.component}/>
         <Route path={routes.Home.path} component={routes.Home.component}/>
+        <Route path={routes.Board.path} component={routes.Board.component}/>
       </Switch>
     </BrowserRouter>
   );
