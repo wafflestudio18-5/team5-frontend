@@ -112,7 +112,7 @@ function Boards(props) {
               Settings
             </Link>
             <p  className="tw_p">
-              <FontAwesomeIcon className="tw_icon" icon={faBriefcase} id="boards-upgrade-icon" />
+              <FontAwesomeIcon className="tw_icon" icon={faTrello} id="boards-upgrade-icon" />
               Upgrade
             </p>
           </nav>

@@ -193,9 +193,11 @@ ul.Teams li:hover {
 #boards-upgrade-icon {
   background-color: rgb(137, 96, 158);
   color: white;
-  padding: 3px;
+  padding: 3px !important;
+  margin: 0px;
   border-radius: 3px;
   position: relative;
   top: 3px;
   margin-right: 5px;
+
 }
