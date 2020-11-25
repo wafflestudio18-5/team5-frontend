@@ -80,10 +80,11 @@ function Boards(props) {
             Most popular templates</h3><br/>
           </div>
           <p>Get going faster with a template from the Trello community!</p>
-          <img alt="Template-Project Management" src={template1}/>
-          <img alt="Template-Kanban Template" src={template2}/>
-          <img alt="Template-Simple Project Board" src={template3}/>
-          <img alt="Template-Remote Team Hub" src={template4}/>
+          <a href="https://trello.com/b/1x4Uql2u/project-management"><img alt="Template-Project Management" src={template1}/></a>
+          <a href="https://trello.com/b/LGHXvZNL/kanban-template"><img alt="Template-Kanban Template" src={template2}/></a>
+          <a href="https://trello.com/b/6QW0Ciu8/simple-project-board"><img alt="Template-Simple Project Board" src={template3}/></a>
+          <a href="https://trello.com/b/E4uILULn/remote-team-hub"><img alt="Template-Remote Team Hub" src={template4}/></a>
+          <br></br><a id="boards-templates-browse" href="https://trello.com/templates">Browse the full template gallery</a>
         </div>
         <div className="boards-desc" id="recently">
           <div>

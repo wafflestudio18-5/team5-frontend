@@ -231,3 +231,25 @@ div #boards-templates-title {
   margin-top: 0px;
   padding-top: 0px;
 }
+
+.boards-templates img:hover {
+  filter: brightness(90%);
+}
+
+.boards-templates #boards-templates-browse {
+  text-decoration: underline;
+  color: black;
+  font-size: 14px;
+  padding-left: 10px !important;
+  padding: 0px;
+  margin: 0px;
+  position: relative;
+  top: -20px;
+}
+
+.boards-templates {
+  border-bottom: 1px lightgray solid;
+  margin-bottom: 25px;
+  padding-bottom: 5px;
+
+}
