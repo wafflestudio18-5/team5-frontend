@@ -5,13 +5,27 @@ function Board({data}) {
   return(
     <div id="Board-wrapper">
         
-      <select name="language" defaultValue="English (US)">
-      <option value="Board">Board</option>
-      <option value="Calendar">Calendar</option>
-      <option value="Map">Map</option>
-      </select>
+      <div id="board-header">
 
-      <h2>{data.board_name}</h2>
+        <div id="board-header-left">
+          <select name="language" defaultValue="English (US)">
+          <option value="Board">Board</option>
+          <option value="Calendar">Calendar</option>
+          <option value="Map">Map</option>
+          </select>
+          <h2>{data.board_name}</h2>
+        </div>
+      
+        <div id="board-header-right">
+          <p>라잇</p>
+          <p>right</p>
+        </div>
+
+      </div>
+
+      <div id="board-lists">
+        Lists
+      </div>
 
     </div>
   )
