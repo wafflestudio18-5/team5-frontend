@@ -93,7 +93,7 @@ function Boards(props) {
           </div>
         </div>
         <ul className="boards-boards" id="recently">
-          {temp_recent.map((item, i) => <BoardThumbnail key={i} history={props.history} item={item}/>)}
+          {temp_recent.map((item, i) => <BoardThumbnail key={i} item={item}/>)}
         </ul>
 
         <div className="boards-desc" id="personal">
@@ -103,7 +103,7 @@ function Boards(props) {
           </div>
         </div>
         <ul className="boards-boards" id="personal">
-          {temp_personal.map((item, i) => <BoardThumbnail key={i} history={props.history} item={item}/>)}
+          {temp_personal.map((item, i) => <BoardThumbnail key={i} item={item}/>)}
           <li className="board-wrapper create">Create new board</li>
         </ul>
 
@@ -136,7 +136,7 @@ function Boards(props) {
           </nav>
         </div>
         <ul className="boards-boards" id="workspace">
-          {temp_workspace.map((item, i) => <BoardThumbnail key={i} history={props.history} item={item}/>)}
+          {temp_workspace.map((item, i) => <BoardThumbnail key={i} item={item}/>)}
           <li className="board-wrapper create">Create new board</li>
         </ul>
         <br/><br/>

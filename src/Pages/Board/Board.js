@@ -1,4 +1,3 @@
-import Header from '../Header/Header';
 import { Board } from '../../Components';
 
 //  Board: { path: '/b/:board_code/:board_name', component: Board }
@@ -21,7 +20,6 @@ function BoardPage({ history, match }) {
 
   return(
     <>
-      <Header user_data={user_data} history={history}/>
       <Board data={board_data}/>
     </>
   )

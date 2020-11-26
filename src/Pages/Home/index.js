@@ -1,13 +1,14 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import { routes } from '../../Routes'
+import React from "react";
+import { Redirect, Route } from "react-router-dom";
+import { routes } from "../../Routes";
 
 const HomePage = () => {
-    return (
-        <>
-            <Route exact path={routes.Home.path} component={routes.Home.component} />
-        </>
-    )
-}
+  return (
+    <>
+      <Route exact path={routes.Home.path} component={routes.Home.component} />
+      <Redirect to="/" />
+    </>
+  );
+};
 
 export default HomePage;

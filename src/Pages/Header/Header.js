@@ -1,12 +1,11 @@
 import { Header } from '../../Components';
+import { useUserContext } from '../../Contexts/User';
 
-function HeaderPage({user_data, history}) {
-  const display_data = {
-    name: user_data.name,
-    // TODO 프사
-  }
+function HeaderPage() {
+  const { user } = useUserContext();
+
   return (
-    <Header user_data={display_data} history={history}/> 
+    <Header user_data={user}/> 
   )
 }
 
