@@ -15,6 +15,11 @@
 #board-header {
   display: flex; 
   justify-content: space-between;
+  width: 100vw;
+  padding: 5px;
+  position: sticky;
+  top: 40px;
+  background-color: royalblue;
 }
 
 #board-header-left {
@@ -26,15 +31,49 @@
   width: 100px;
 }
 
-#board-lists {
-  background-color: skyblue;
-}
-
-#board-header-star {
+#board-header button {
   background-color: #35a7ee;
-  width: 30px !important;
   height: 30px;
   border: 1px transparent solid;
   color: white;
-  font-size: 20px;
+  margin: 5px;
+  align-content: center;
+  border: 1px transparent solid;
+  border-radius: 3px;
+  padding-top: 3px;
+}
+
+#board-header button span {
+  margin-left: 5px;
+  font-size: 10px;
+  background-color: #5dc0fd;
+  padding: 5px;
+  height: 20px;
+  border: transparent 1px solid;
+  border-radius: 12px;
+  align-self: center;
+}
+
+.board-header-vertical-line {
+  border-left: 1px lightgray solid;
+  width: 0px;
+  margin: 3px;
+  height: 30px;
+}
+
+#board-lists {
+  background-color: skyblue;
+  display: flex;
+  flex-direction: row;
+}
+
+.board-list {
+  background-color: #EBECF0;
+  color: black;
+  margin: 10px;
+}
+
+.board-card {
+  background-color: white;
+  margin: 10px;
 }
