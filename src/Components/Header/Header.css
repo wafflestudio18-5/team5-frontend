@@ -2,6 +2,8 @@
 /* ------------------------------ 일반 파트 --------------------------------- */
 /* ------------------------------------------------------------------------ */
 header.logged_header {
+  position: sticky;
+  top: 0px;
   height: 40px;
   width: 100%;
   display: flex;
@@ -203,7 +205,7 @@ div.Notifications-Wrapper {
   width: 28px;
   height: 28px;
   padding: 2px;
-  background-color: hsla(0, 0%, 100%, .3);
+  background-color: #EB5A46;
 }
 
 div.Notifications-Wrapper svg {
@@ -212,7 +214,7 @@ div.Notifications-Wrapper svg {
 
 div.Notifications-Wrapper:hover {
   position: relative;
-  background-color: hsla(0, 0%, 100%, .15);
+  background-color: #CF513D;
 }
 
 div.Profile-Wrapper {

@@ -1,5 +1,5 @@
 body {
-  background-color: #eeeeee;
+  background-color: #FAFBFC;
 }
 
 ul, li {
@@ -12,20 +12,20 @@ li.left-button-wrapper {
   height: 32px;
   line-height: 32px;
   border-radius: 4px;
-  background-color: #eeeeee;
+  background-color: #FAFBFC;
   margin-bottom: 4px;
   padding-left: 8px;
   color: #0f0f0f;
 }
 
 li.left-button-wrapper:hover {
-  background-color: #dddddd;
+  background-color: #F0F2F5;
   color: black;
 }
 
 li.left-button-wrapper.active {
-  background-color: #bdd3fe;
-  color: #073faf;
+  background-color: rgb(228, 240, 246);
+  color: rgb(0, 121, 191);
 }
 
 .boards-desc {
@@ -80,8 +80,8 @@ section.left-buttons {
 div.main-wrapper {
   display: flex;
   padding-top: 40px;
-  padding-left: 150px;
-  padding-right: 150px;
+  padding-left: 170px;
+  padding-right: 170px;
 }
 
 section.main-boards {
@@ -93,7 +93,7 @@ section.main-boards {
 ul li.board-wrapper {
   height: 80px;
   padding: 8px;
-  width: 150px;
+  width: 170px;
   margin: 8px;
   border-radius: 4px;
   background-color: rgb(0, 121, 191);
@@ -104,7 +104,6 @@ ul li.board-wrapper {
 ul li.board-wrapper:hover {
   height: 80px;
   padding: 8px;
-  width: 150px;
   margin: 8px;
   border-radius: 4px;
   background-color: rgb(0, 101, 171);
@@ -120,7 +119,7 @@ ul.boards-boards {
 }
 
 li.board-wrapper.create {
-  background-color: #dddddd;
+  background-color: #F0F2F5;
   text-align: center;
   line-height: 80px;
   color: black;
@@ -128,7 +127,7 @@ li.board-wrapper.create {
 }
 
 li.board-wrapper.create:hover {
-  background-color: #cccccc;
+  background-color: #E7E9ED;
   text-align: center;
   line-height: 80px;
   color: black;
@@ -160,19 +159,19 @@ li.board-wrapper.create:hover {
 }
 
 .boards-desc nav a {
-  background-color: #dddddd;
+  background-color: #F0F2F5;
 }
 
 .boards-desc nav p {
-  background-color: pink;
+  background-color: rgb(237, 219, 244);
 }
 
 .boards-desc nav a:hover {
-  background-color: #cccccc;
+  background-color: #E7E9ED;
 }
 
 .boards-desc nav p:hover {
-  background-color: hotpink;
+  background-color: rgb(223, 192, 235);
 }
 
 svg.tw_icon {
@@ -187,5 +186,69 @@ ul.Teams li {
 }
 
 ul.Teams li:hover {
-  background-color: #cccccc;
+  background-color: #E7E9ED;
+}
+
+#boards-upgrade-icon {
+  background-color: rgb(137, 96, 158);
+  color: white;
+  padding: 3px !important;
+  margin: 0px;
+  border-radius: 3px;
+  position: relative;
+  top: 3px;
+  margin-right: 5px;
+
+}
+
+#boards-teams-add {
+  font-size: 27px !important;
+  position: relative;
+  top: -20px;
+  margin-bottom: 0px!important;
+  color: #42526E;
+}
+
+.boards-templates img {
+  max-width: 186px !important;
+  margin: 8px;
+  margin-bottom: 30px;
+}
+
+div #boards-templates-title {
+  display: flex;
+}
+
+#boards-template-icon {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.boards-templates p {
+  font-size: 14px;
+  margin-left: 10px;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+.boards-templates img:hover {
+  filter: brightness(90%);
+}
+
+.boards-templates #boards-templates-browse {
+  text-decoration: underline;
+  color: black;
+  font-size: 14px;
+  padding-left: 10px !important;
+  padding: 0px;
+  margin: 0px;
+  position: relative;
+  top: -20px;
+}
+
+.boards-templates {
+  border-bottom: 1px lightgray solid;
+  margin-bottom: 25px;
+  padding-bottom: 5px;
+
 }

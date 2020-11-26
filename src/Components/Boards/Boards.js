@@ -13,6 +13,12 @@ import {
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import BoardThumbnail from './BoardThumbnail';
 
+/* --------------------------template images----------------------------*/
+import template1 from './Boards-Template Images/Template 1 Project Management.png';
+import template2 from './Boards-Template Images/Template 2 Kanban Template.png';
+import template3 from './Boards-Template Images/Template 3 Simple Project Board.png';
+import template4 from './Boards-Template Images/Template 4 Remote Team Hub.png';
+
 /* ----------------------------temp datas------------------------------ */
 const temp_board1 = {
   title: "Waffle-18.5-toyproject-team5",
@@ -58,7 +64,7 @@ function Boards(props) {
         </ul>
         <div className="Teams-hdr">
           <p>T E A M S</p>
-          <p>+</p>
+          <p id="boards-teams-add">+</p>
         </div>
         <ul className="Teams">
           <li>
@@ -68,6 +74,18 @@ function Boards(props) {
         </ul>
       </section>
       <section className="main-boards">
+        <div className="boards-templates">
+          <div id="boards-templates-title">
+            <h3><FontAwesomeIcon icon={faTrello} id="boards-template-icon"/>
+            Most popular templates</h3><br/>
+          </div>
+          <p>Get going faster with a template from the Trello community!</p>
+          <a href="https://trello.com/b/1x4Uql2u/project-management"><img alt="Template-Project Management" src={template1}/></a>
+          <a href="https://trello.com/b/LGHXvZNL/kanban-template"><img alt="Template-Kanban Template" src={template2}/></a>
+          <a href="https://trello.com/b/6QW0Ciu8/simple-project-board"><img alt="Template-Simple Project Board" src={template3}/></a>
+          <a href="https://trello.com/b/E4uILULn/remote-team-hub"><img alt="Template-Remote Team Hub" src={template4}/></a>
+          <br></br><a id="boards-templates-browse" href="https://trello.com/templates">Browse the full template gallery</a>
+        </div>
         <div className="boards-desc" id="recently">
           <div>
             <FontAwesomeIcon icon={faClock} />
@@ -112,7 +130,7 @@ function Boards(props) {
               Settings
             </Link>
             <p  className="tw_p">
-              <FontAwesomeIcon className="tw_icon" icon={faBriefcase} />
+              <FontAwesomeIcon className="tw_icon" icon={faTrello} id="boards-upgrade-icon" />
               Upgrade
             </p>
           </nav>
@@ -121,6 +139,7 @@ function Boards(props) {
           {temp_workspace.map((item, i) => <BoardThumbnail key={i} history={props.history} item={item}/>)}
           <li className="board-wrapper create">Create new board</li>
         </ul>
+        <br/><br/>
       </section>
     </div>
   );
