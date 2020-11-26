@@ -9,5 +9,3 @@ function Card({card}) {
 }
 
 export default Card;
-
-// {card_name: '카드하나'}

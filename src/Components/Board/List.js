@@ -13,6 +13,3 @@ function List({listname, list}) {
 }
 
 export default List;
-
-// {list_name: '첫번째리스트',
-//      cards: [{card_name: '카드하나'}, {card_name: '카드둘'}]}

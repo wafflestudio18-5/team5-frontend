@@ -19,8 +19,6 @@ function BoardPage({ history, match }) {
   const board_data = get_board_data(board_code, board_name);
   const user_data = {name: "yujin"}; // TODO
 
-  console.log("board_data from page board is ", board_data);
-
   return(
     <>
       <Header user_data={user_data} history={history}/>

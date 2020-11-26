@@ -4,8 +4,6 @@ import List from './List.js';
 function Board({data}) { // TODO: 테스트 위해 아래에 임의로 DATA를 만들것임
   // TODO: props는 data를 가지고 있어야 하며 이 data object에 lists라는 array가 있다고 가정.
   // TODO: lists의 안에 [[card, card, card], [card, card]] 와 같이 여러 개의 card로 구성된 list들이 있다고 가정
-  console.log("data is ", data);
-
 
   const DATA = {
     board_name: data.board_name,
