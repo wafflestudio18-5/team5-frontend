@@ -201,3 +201,7 @@
 #board-header button:hover {
   filter: brightness(105%);
 }
+
+#Board-wrapper select:hover {
+  filter: brightness(110%);
+}
