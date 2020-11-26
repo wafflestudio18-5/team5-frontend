@@ -86,6 +86,22 @@
   padding-right: 10px;
 }
 
+#board-lists::-webkit-scrollbar {
+  background-color: transparent;
+  border-radius: 10px;
+  margin: 10px;
+  margin-top: 0px;
+}
+#board-lists::-webkit-scrollbar-thumb {
+  background-color: #5dc0fd;
+  height: 10px !important;
+  border-radius: 10px;
+}
+#board-lists::-webkit-scrollbar-track {
+  background-color: #026aa7;
+  border-radius: 10px;
+}
+
 .board-list {
   background-color: #EBECF0;
   width: 250px !important;
@@ -104,9 +120,23 @@
   overflow-y: auto;
 }
 
+.board-cards::-webkit-scrollbar {
+  background-color: transparent;
+}
+.board-cards::-webkit-slider-thumb {
+  background-color: #afb4bd;
+  border-radius: 5px;
+}
+.board-cards::-webkit-scrollbar-track {
+  background-color: #DADBE2;
+  border-radius: 5px;
+}
+
+
 #board-name {
   align-self: center;
   margin-left: 10px;
+  margin-top: 10px;
 }
 
 .board-card {
