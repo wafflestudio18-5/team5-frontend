@@ -114,7 +114,7 @@
 }
 
 .board-cards {
-  max-height: calc(100vh - 175px) !important;
+  max-height: calc(100vh - 210px) !important;
   overflow-y: auto;
 }
 
