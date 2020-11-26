@@ -85,7 +85,7 @@
 
 .board-list {
   background-color: #EBECF0;
-  width: 270px !important;
+  width: 250px !important;
   color: black;
   margin-left: 10px;
   border: 1px transparent solid;
@@ -104,8 +104,8 @@
 }
 
 #board-lists button#board-addlist {
-  height: 30px;
-  width: 270px !important;
+  height: 40px;
+  width: 250px !important;
   border: 1px transparent solid;
   color: white;
   margin-left: 10px;
@@ -113,7 +113,7 @@
   border: 1px transparent solid;
   border-radius: 3px;
   padding-top: 3px;
-  color: black;
+  background-color: #35a7ee;
 }
 
 #board-list button {
