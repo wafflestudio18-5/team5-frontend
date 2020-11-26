@@ -88,16 +88,16 @@
 
 #board-lists::-webkit-scrollbar {
   background-color: transparent;
-  height: 10px !important;
-  border-radius: 10px;
+  height: 12px !important;
+  border-radius: 12px;
 }
 #board-lists::-webkit-scrollbar-thumb {
   background-color: #5dc0fd;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 #board-lists::-webkit-scrollbar-track {
   background-color: #026aa7;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 .board-list {
@@ -114,7 +114,7 @@
 }
 
 .board-cards {
-  max-height: calc(100vh - 170px) !important;
+  max-height: calc(100vh - 175px) !important;
   overflow-y: auto;
 }
 
@@ -122,6 +122,8 @@
   background-color: transparent;
   width: 10px !important;
   border-radius: 10px;
+  position: relative !important;
+  left: 5px !important;
 }
 .board-cards::-webkit-scrollbar-thumb {
   background-color: #bebebe;
