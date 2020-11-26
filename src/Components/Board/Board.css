@@ -95,7 +95,7 @@
 }
 
 .board-cards {
-  max-height: calc(100vh - 165px) !important;
+  max-height: calc(100vh - 170px) !important;
   overflow-y: auto;
 }
 
@@ -107,6 +107,9 @@
 .board-card {
   background-color: white;
   padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px lightgray;
 }
 
 #board-lists button#board-addlist {
@@ -124,20 +127,33 @@
   flex-shrink: 0;
 }
 
-#board-list button {
+.board-list button {
   height: 30px;
-  border: 1px transparent solid;
-  color: white;
-  margin: 5px;
+  width: 250px;
+  color: rgb(100, 100, 100);
   align-content: center;
-  border: 1px red solid !important;
+  border: 1px transparent solid;
   border-radius: 3px;
   padding-top: 3px;
-  color: black;
 }
+
+.board-list button:hover {
+  background-color: #DADBE2;
+}
+
 
 #board-profile-images {
   margin-left: 10px;
   margin-right: 10px;
   align-self: center;
+}
+
+#Board-wrapper h1, h2, h3, h4, h5, h6 {
+  margin: 5px;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+#Board-wrapper p {
+  margin: 5px;
 }
