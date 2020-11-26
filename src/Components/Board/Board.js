@@ -11,12 +11,12 @@ function Board({data}) { // TODO: 테스트 위해 아래에 임의로 DATA를 �
     board_name: data.board_name,
     board_code: data.board_code,
 
+    listnames: ['첫번째리스트', '두번째리스트', '세번째리스트'],
+
     lists: [
       [{card_name: '카드하나'}, {card_name: '카드둘'}],
       [{card_name: '카드1번째'}, {card_name: '카드두번쨰'}],
-      [{card_name: '카드하나'}, {card_name: '카드둘'}],
-
-      
+      [{card_name: '카드하나'}, {card_name: '카드둘'}], 
     ]
   };
   
@@ -51,7 +51,7 @@ function Board({data}) { // TODO: 테스트 위해 아래에 임의로 DATA를 �
       </div>
 
       <div id="board-main"><div id="board-lists">
-        {DATA.lists.map(list => (<List listname="리스트네임" list={list} />))}
+        {DATA.lists.map((list, index) => (<List listname={DATA.listnames[0]} list={list} key={index} />))}
         <button id="board-addlist"><span id="board-addlist-plus">+</span>Add another list</button>
       </div></div>
 

@@ -6,7 +6,7 @@ function List({listname, list}) {
     return (
         <div className="board-list">
         <h3>{listname}</h3>
-            {list.map(card => (<Card card={card} />))}
+            {list.map((card, index) => (<Card card={card} key={index} />))}
         <button><span id="board-addcard-plus">+</span>Add another card</button>
         </div>
     )
