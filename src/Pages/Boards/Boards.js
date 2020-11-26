@@ -1,4 +1,3 @@
-import Header from '../Header/Header';
 import { Boards } from '../../Components';
 
 const get_user_data = (user_name) => {
@@ -16,7 +15,6 @@ function BoardsPage(props) {
   
   return(
     <>
-      <Header user_data={user_data} history={history}/>
       <Boards user_data={user_data} history={history}/>
     </>
   )
