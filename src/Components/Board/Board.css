@@ -10,16 +10,18 @@
   padding: 0px;
   background-color: #35a7ee;
   color: white;
+  align-self: center;
 }
 
 #board-header {
   display: flex; 
   justify-content: space-between;
   width: 100vw;
+  height: 40px;
   padding: 5px;
   position: sticky;
   top: 40px;
-  background-color: royalblue;
+  left: 0px;
 }
 
 #board-header-left {
@@ -41,6 +43,7 @@
   border: 1px transparent solid;
   border-radius: 3px;
   padding-top: 3px;
+  align-self: center;
 }
 
 #board-header button span {
@@ -58,11 +61,11 @@
   border-left: 1px lightgray solid;
   width: 0px;
   margin: 3px;
-  height: 30px;
+  height: 20px;
+  align-self: center;
 }
 
 #board-lists {
-  background-color: skyblue;
   display: flex;
   flex-direction: row;
 }
@@ -70,10 +73,44 @@
 .board-list {
   background-color: #EBECF0;
   color: black;
-  margin: 10px;
+  margin-left: 10px;
+}
+
+#board-name {
+  align-self: center;
 }
 
 .board-card {
   background-color: white;
   margin: 10px;
+}
+
+#board-lists button#board-addlist {
+  height: 30px;
+  border: 1px transparent solid;
+  color: white;
+  margin-left: 10px;
+  align-content: center;
+  border: 1px transparent solid;
+  border-radius: 3px;
+  padding-top: 3px;
+  color: black;
+}
+
+#board-list button {
+  height: 30px;
+  border: 1px transparent solid;
+  color: white;
+  margin: 5px;
+  align-content: center;
+  border: 1px red solid !important;
+  border-radius: 3px;
+  padding-top: 3px;
+  color: black;
+}
+
+#board-profile-images {
+  margin-left: 10px;
+  margin-right: 10px;
+  align-self: center;
 }

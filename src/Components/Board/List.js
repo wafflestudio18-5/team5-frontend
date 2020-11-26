@@ -7,7 +7,7 @@ function List({listname, list}) {
         <div className="board-list">
         <h3>{listname}</h3>
             {list.map(card => (<Card card={card} />))}
-        <p>addCard</p>
+        <button><span id="board-addcard-plus">+</span>Add another card</button>
         </div>
     )
 }

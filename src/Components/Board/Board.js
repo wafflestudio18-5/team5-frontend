@@ -28,14 +28,14 @@ function Board({data}) { // TODO: 테스트 위해 아래에 임의로 DATA를 �
           <option value="Calendar">Calendar</option>
           <option value="Map">Map</option>
           </select>
-          <h3>{data.board_name}</h3>
+          <h3 id="board-name">{data.board_name}</h3>
           <button id="board-header-star">☆</button>
           <div className="board-header-vertical-line"/>
           <button>{data.board_name}<span id="board-header-freeboard">Free</span></button>
           <div className="board-header-vertical-line"/>
           <button>Private</button>
           <div className="board-header-vertical-line"/>
-          <p>프사들동글동글</p>
+          <div id="board-profile-images"><p>프사들동글동글</p></div>
           <button>Invite</button>
         </div>
       
@@ -49,7 +49,7 @@ function Board({data}) { // TODO: 테스트 위해 아래에 임의로 DATA를 �
 
       <div id="board-lists">
         {DATA.lists.map(list => (<List listname="리스트네임" list={list} />))}
-        <p>addList</p>
+        <button id="board-addlist"><span id="board-addlist-plus">+</span>Add another list</button>
       </div>
 
     </div>
