@@ -91,10 +91,11 @@
   border-radius: 3px;
   padding: 10px;
   flex-shrink: 0;
+  margin-bottom: 10px;
 }
 
 .board-cards {
-  max-height: calc(100vh - 170px) !important;
+  max-height: calc(100vh - 165px) !important;
   overflow-y: auto;
 }
 
