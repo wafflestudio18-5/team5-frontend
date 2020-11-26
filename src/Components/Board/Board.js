@@ -16,7 +16,7 @@ function Board({data}) { // TODO: 테스트 위해 아래에 임의로 DATA를 �
       [{card_name: 'Board'}, {card_name: 'Boards'}, {card_name: 'login'}, {card_name: 'signup'}, {card_name: 'root'}, {card_name: '+templates'}, {card_name: '+settings'}, {card_name: '+members'},  {card_name: '???'},  {card_name: '와플조아'},  {card_name: '와플조아'},  {card_name: '와플조아'}],
       [{card_name: '카드예시'}, {card_name: '다다르게할수있답니당'}, {card_name: '갑자기 카드이름이 아주아주 길어지면 어떻게될지 궁금해졌다'}, {card_name: '별 문제가 없는 것으로 판명되었다'}, {card_name: '룰룰루'}, {card_name: '와플조아'}, {card_name: '와플최고'}, {card_name: '와플와플와플'},  {card_name: '와플조아'}], 
       [{card_name: '우현민(프론트엔드)'}, {card_name: '정민수(서버)'}, {card_name: '정대용(서버)'}, {card_name: '이세원(서버)'}, {card_name: '김유진(프론트엔드)'}],
-      [{card_name: '프론트엔드'}, {card_name: '백엔드'}],
+      [{card_name: '와'}, {card_name: '플'}],
       [{card_name: '카드1번째'}, {card_name: '카드두번쨰'}, {card_name: '카드3번째'}, {card_name: '카드4번쨰'}, {card_name: '카드5번째'}, {card_name: '카드6번쨰'}, {card_name: '카드7번째'}, {card_name: '카드8번쨰'}],
       [{card_name: '카드하나'}, {card_name: '카드둘'}, {card_name: '와플조아'}], 
       [{card_name: '카드하나'}, {card_name: '카드둘'}],
