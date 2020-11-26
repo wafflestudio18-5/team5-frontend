@@ -76,11 +76,12 @@
 #board-lists {
   display: flex;
   flex-direction: row;
+  overflow-x: visible;
 }
 
 .board-list {
   background-color: #EBECF0;
-  width: 270px;
+  width: 270px !important;
   color: black;
   margin-left: 10px;
   border: 1px transparent solid;
