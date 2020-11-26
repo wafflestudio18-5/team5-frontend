@@ -11,6 +11,7 @@
   background-color: #35a7ee;
   color: white;
   align-self: center;
+  margin: 5px !important;
 }
 
 #board-header {
@@ -55,10 +56,12 @@
   font-size: 10px;
   background-color: #5dc0fd;
   padding: 5px;
-  height: 20px;
+  height: min-content;
   border: transparent 1px solid;
   border-radius: 12px;
   align-self: center;
+  position: relative;
+  top: -2px;
 }
 
 .board-header-vertical-line {
@@ -92,6 +95,7 @@
 
 #board-name {
   align-self: center;
+  margin-left: 10px;
 }
 
 .board-card {
@@ -101,6 +105,7 @@
 
 #board-lists button#board-addlist {
   height: 30px;
+  width: 270px !important;
   border: 1px transparent solid;
   color: white;
   margin-left: 10px;
