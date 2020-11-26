@@ -1,8 +1,7 @@
 .main-wrapper {
   margin-top: 40px;
   background-color: #FAFBFC;
-  min-height: calc(100vh - 40px);
-  max-height: calc(100vh - 40px);
+  height: calc(100vh - 60px);
   overflow-y: auto;
 }
 
