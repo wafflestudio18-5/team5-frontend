@@ -47,10 +47,10 @@ function Board({data}) { // TODO: 테스트 위해 아래에 임의로 DATA를 �
 
       </div>
 
-      <div id="board-lists">
+      <div id="board-main"><div id="board-lists">
         {DATA.lists.map(list => (<List listname="리스트네임" list={list} />))}
         <button id="board-addlist"><span id="board-addlist-plus">+</span>Add another list</button>
-      </div>
+      </div></div>
 
     </div>
   )
