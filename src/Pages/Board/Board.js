@@ -6,8 +6,8 @@ import { Board } from '../../Components';
 const get_board_data = (board_code, board_name) => {
   // TODO: 백에서 board code와 board name을 이용해 board 데이터를 불러와야 한다.
   return {
-    name: board_name,
-    code: board_code,
+    board_name: board_name,
+    board_code: board_code,
     // TODO
   }
 }
