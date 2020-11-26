@@ -1,14 +1,15 @@
 #Board-wrapper {
   background-color: #0f86cf;
   min-height: calc(100vh - 40px);
+  color: white;
 }
 
 
-select {
+#Board-wrapper select {
   border: 1px transparent solid;
-  padding: 10px;
-  padding-right: 20px;
+  padding: 0px;
   background-color: #35a7ee;
+  color: white;
 }
 
 #board-header {
@@ -18,15 +19,22 @@ select {
 
 #board-header-left {
   display: flex;
-  color: pink;
 }
 
 #board-header-right {
   display: flex;
   width: 100px;
-  color: red;
 }
 
 #board-lists {
   background-color: skyblue;
+}
+
+#board-header-star {
+  background-color: #35a7ee;
+  width: 30px !important;
+  height: 30px;
+  border: 1px transparent solid;
+  color: white;
+  font-size: 20px;
 }
