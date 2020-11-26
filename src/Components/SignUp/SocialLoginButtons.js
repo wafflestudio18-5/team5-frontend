@@ -6,8 +6,6 @@ import apple from './logo/apple.jpg';
 
 function SocialLoginButtons({ login }) {
 
-    console.log(login ? "Social Login - LOGIN MODE" : "Social Login - SIGNUP MODE");
-
     function googleClick(e) {
         if (login) {
             console.log("LOGIN with GOOGLE!");

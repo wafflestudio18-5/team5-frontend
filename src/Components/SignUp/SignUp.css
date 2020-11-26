@@ -80,7 +80,7 @@ a:hover {
     margin-bottom: 10px;
 }
 
-div button {
+.SignUpPage div button {
     direction: flex;
     height: 40px; 
     margin: 5px;
