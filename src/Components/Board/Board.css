@@ -38,6 +38,7 @@
 #board-header button {
   background-color: #35a7ee;
   height: 30px;
+  width: max-content;
   border: 1px transparent solid;
   color: white;
   margin: 5px;
@@ -124,4 +125,8 @@
   margin-left: 10px;
   margin-right: 10px;
   align-self: center;
+}
+
+#board-header-right button {
+  width: fit-content;
 }
