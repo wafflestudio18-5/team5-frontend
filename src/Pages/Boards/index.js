@@ -1,13 +1,18 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import { routes } from '../../Routes'
+import React from "react";
+import { Redirect, Route } from "react-router-dom";
+import { useUserContext } from "../../Contexts/User";
+import { routes } from "../../Routes";
 
 const BoardsPage = () => {
-    return (
-        <>
-            <Route exact path={routes.Boards.path} component={routes.Boards.component} />
-        </>
-    )
-}
+  const { user } = useUserContext();
+  const path = `/${user.name}/boards/`;
+  console.log(path);
+  return (
+    <>
+      <Route exact path={path} component={routes.Boards.component} />
+      <Redirect to={path} />
+    </>
+  );
+};
 
 export default BoardsPage;

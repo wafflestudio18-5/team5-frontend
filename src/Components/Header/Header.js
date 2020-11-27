@@ -4,7 +4,7 @@ import { svg_hl_1, svg_hl_2, svg_hl_3, svg_hr_1, svg_hr_2, svg_hr_3, logo } from
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import { faWindowClose } from "@fortawesome/free-regular-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // button macros
 const bm = {
@@ -26,7 +26,9 @@ const modal1 = (
 function Header(props) {
   const [serkey, setSerkey] = useState("");
   const [serFocused, setSerFocused] = useState(false);
-  const { user_data, history } = props;
+  const { user_data } = props;
+  const history = useHistory();
+
 
   const onSerChange = (e) => {
     setSerkey(e.target.value);

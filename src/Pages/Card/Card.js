@@ -1,9 +1,12 @@
-function CardPage() {
+import React from 'react';
+
+function CardPage(props) {
   return(
     <div>
-      Login
+      Card
     </div>
   )
 }
 
 export default CardPage;
+

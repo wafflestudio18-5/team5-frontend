@@ -1,13 +1,18 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import { routes } from '../../Routes'
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import { routes } from "../../Routes";
 
 const LoginPage = () => {
-    return (
-        <>
-            <Route exact path={routes.Login.path} component={routes.Login.component} />
-        </>
-    )
-}
+  return (
+    <>
+      <Route
+        exact
+        path={routes.Login.path}
+        component={routes.Login.component}
+      />
+      <Redirect to="/login/" />
+    </>
+  );
+};
 
 export default LoginPage;
