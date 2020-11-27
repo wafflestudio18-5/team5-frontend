@@ -89,16 +89,16 @@
 
 #board-lists::-webkit-scrollbar {
   background-color: transparent;
-  height: 12px !important;
-  border-radius: 10px;
+  height: 14px !important;
+  border-radius: 5px;
 }
 #board-lists::-webkit-scrollbar-thumb {
-  background-color: #5dc0fd;
-  border-radius: 10px;
+  background-color: #4eb2f0;
+  border-radius: 5px;
 }
 #board-lists::-webkit-scrollbar-track {
   background-color: #026aa7;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 #board-lists::-webkit-scrollbar-button {
   background-color: #0f86cf;
@@ -114,12 +114,13 @@
   border: 1px transparent solid;
   border-radius: 3px;
   padding: 10px;
+  padding-right: 5px;
   flex-shrink: 0;
   margin-bottom: 10px;
 }
 
 .board-cards {
-  max-height: calc(100vh - 210px) !important;
+  max-height: calc(100vh - 215px) !important;
   overflow-y: auto;
 }
 
@@ -127,16 +128,16 @@
   background-color: transparent;
   width: 10px !important;
   border-radius: 10px;
-  position: relative !important;
-  left: 5px !important;
 }
 .board-cards::-webkit-scrollbar-thumb {
   background-color: #c5c5c5;
   border-radius: 10px;
+  width: 10px !important;
 }
 .board-cards::-webkit-scrollbar-track {
   background-color: #DADBE2;
   border-radius: 10px;
+  width: 10px !important;
 }
 
 
@@ -149,7 +150,7 @@
 .board-card {
   background-color: white;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-right: 5px;
   border-radius: 3px;
   box-shadow: 0px 2px 2px lightgray;
 }
@@ -215,4 +216,14 @@
   background-color: red;
   width: 30px;
   height: 30px;
+}
+
+#board-addcard {
+  margin-top: 10px;
+  height: 25px;
+}
+
+#board-temp {
+  display: flex;
+  padding-right: 10px;
 }

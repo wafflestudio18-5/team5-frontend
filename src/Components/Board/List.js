@@ -7,8 +7,8 @@ function List({listname, list}) {
         <div className="board-list">
             <h4>{listname}</h4>
         <div className="board-cards">
-            {list.map((card, index) => (<Card card={card} key={index} />))}</div>
-        <button><span id="board-addcard-plus">十 </span>Add another card</button>
+            {list.map((card, index) => <Card card={card} key={index} index={index}/>)}</div>
+        <button id="board-addcard"><span id="board-addcard-plus">十 </span>Add another card</button>
         </div>
     )
 }
