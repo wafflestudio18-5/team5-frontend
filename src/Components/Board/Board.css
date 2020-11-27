@@ -222,3 +222,8 @@
   margin-top: 10px;
   height: 25px;
 }
+
+#board-temp {
+  display: flex;
+  padding-right: 10px;
+}
