@@ -16,7 +16,6 @@ function BoardPage({ history, match }) {
   const board_code = match.params.board_code;
   const board_name = match.params.board_name;
   const board_data = get_board_data(board_code, board_name);
-  const user_data = {name: "yujin"}; // TODO
 
   return(
     <>
