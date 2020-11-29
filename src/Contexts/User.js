@@ -1,5 +1,18 @@
 import React, { createContext, useState, useContext } from "react";
 
+/* TODO: 백엔드 연동하고 나면 이걸로 바꿔야 함
+const defaultUser = {
+  // variable used for giving id to each team informations
+  logged_in: false,
+  user: {
+    name: ''
+  },
+  login_req: () => {},
+  logout_req: () => {},
+  fetch_info: () => {}
+};
+*/
+
 const defaultUser = {
   // variable used for giving id to each team informations
   logged_in: true,
