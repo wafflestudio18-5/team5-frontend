@@ -21,8 +21,8 @@ const defaultBoardList = {
       members: [1],
     },
   ],
-  get_recent_boards = () => {},
-  get_starred_boards = () => {}
+  get_recent_boards: () => {},
+  get_starred_boards: () => {}
 };
 
 const BoardListContext = createContext(defaultBoardList);

@@ -49,7 +49,7 @@ const defaultListList = {
       cards: []
     }
   ],
-  get_lists_from_id_array = (id_arr) => {},
+  get_lists_from_id_array: (id_arr) => {},
 };
 
 const ListListContext = createContext(defaultListList);
@@ -57,7 +57,7 @@ const ListListContext = createContext(defaultListList);
 const ListListProvider = (props) => {
   const { children } = props;
 
-  get_lists_from_id_array = (id_arr) => {
+  const get_lists_from_id_array = (id_arr) => {
     // 나중에 구현
   };
 

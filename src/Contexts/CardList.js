@@ -87,7 +87,7 @@ const defaultCardList = {
       members: [],
     },
   ],
-  get_cards_from_id_array = () => {}
+  get_cards_from_id_array: () => {}
 };
 
 const CardListContext = createContext(defaultCardList);
