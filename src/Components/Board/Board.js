@@ -27,7 +27,6 @@ function Board({board_data, lists_data}) {
           <button>Butler</button>
           <button>Show Menu</button>
         </div>
-
       </div>
 
       <div id="board-main">

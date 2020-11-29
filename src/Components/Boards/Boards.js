@@ -9,7 +9,7 @@ import {
   faUserFriends,
   faCog
 } from "@fortawesome/free-solid-svg-icons";
-import { faClock } from "@fortawesome/free-regular-svg-icons";
+import { faStar, faClock } from "@fortawesome/free-regular-svg-icons";
 import BoardThumbnail from './BoardThumbnail';
 
 /* --------------------------template images----------------------------*/
@@ -17,11 +17,6 @@ import template1 from './Boards-Template Images/Template 1 Project Management.pn
 import template2 from './Boards-Template Images/Template 2 Kanban Template.png';
 import template3 from './Boards-Template Images/Template 3 Simple Project Board.png';
 import template4 from './Boards-Template Images/Template 4 Remote Team Hub.png';
-
-/* ----------------------------temp datas------------------------------ */
-
-
-/* --------------------------------------------------------------------- */
 
 function Boards(props) {
   const [active, setActive] = useState(1);
@@ -86,8 +81,8 @@ function Boards(props) {
 
         <div className="boards-desc" id="personal">
           <div>
-            <FontAwesomeIcon icon={faUser} />
-            <h4>Personal Boards</h4>
+            <FontAwesomeIcon icon={faStar} />
+            <h4>Starred Boards</h4>
           </div>
         </div>
         <ul className="boards-boards" id="personal">
@@ -98,7 +93,7 @@ function Boards(props) {
         <div className="boards-desc" id="workspace">
           <div>
             <FontAwesomeIcon icon={faUserFriends} />
-            <h4>Trello workspace</h4>
+            <h4>Personal Boards</h4>
           </div>
           <nav>
             <Link className="tw_link" to={`https://trello.com/userworkspace${"유저 고유번호"}`}>

@@ -2,7 +2,7 @@ function Card() {
 
   return(
     <div>
-      Card
+      Card - Not implemented yet
     </div>
   )
 }
