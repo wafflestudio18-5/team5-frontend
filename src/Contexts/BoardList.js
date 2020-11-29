@@ -7,7 +7,7 @@ const defaultBoardList = {
       id: 1,
       key: 'QWERTY',
       name: "Waffle-18.5-toyproject-team5",
-      lists: []
+      lists: [1, 2, 3, 4, 5, 6, 7, 8, 9]
     },
     {
       id: 2,
