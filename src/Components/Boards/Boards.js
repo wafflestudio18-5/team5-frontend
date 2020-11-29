@@ -20,19 +20,7 @@ import template3 from './Boards-Template Images/Template 3 Simple Project Board.
 import template4 from './Boards-Template Images/Template 4 Remote Team Hub.png';
 
 /* ----------------------------temp datas------------------------------ */
-const temp_board1 = {
-  title: "Waffle-18.5-toyproject-team5",
-};
 
-const temp_board2 = {
-  title: "temporary board",
-};
-
-const temp_recent = [temp_board1, temp_board2];
-
-const temp_personal = [temp_board1];
-
-const temp_workspace = [temp_board2];
 
 /* --------------------------------------------------------------------- */
 
