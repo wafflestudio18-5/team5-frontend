@@ -96,7 +96,7 @@ const CardListProvider = (props) => {
   const { children } = props;
 
   const get_cards_from_id_array = (id_arr) => {
-    // 나중에 구현
+    return state.cardList.filter(item => id_arr.includes(item.id));
   }
 
   const cardListState = {

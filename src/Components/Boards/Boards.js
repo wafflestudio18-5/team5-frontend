@@ -7,8 +7,7 @@ import {
   faUser,
   faHome,
   faUserFriends,
-  faCog,
-  faBriefcase,
+  faCog
 } from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import BoardThumbnail from './BoardThumbnail';
@@ -26,6 +25,7 @@ import template4 from './Boards-Template Images/Template 4 Remote Team Hub.png';
 
 function Boards(props) {
   const [active, setActive] = useState(1);
+  const { user_data, personal, recent, starred } = props;
   
   return (
     <div className="main-wrapper">
@@ -81,7 +81,7 @@ function Boards(props) {
           </div>
         </div>
         <ul className="boards-boards" id="recently">
-          {temp_recent.map((item, i) => <BoardThumbnail key={i} item={item}/>)}
+          {recent.map((item, i) => <BoardThumbnail key={i} item={item}/>)}
         </ul>
 
         <div className="boards-desc" id="personal">
@@ -91,7 +91,7 @@ function Boards(props) {
           </div>
         </div>
         <ul className="boards-boards" id="personal">
-          {temp_personal.map((item, i) => <BoardThumbnail key={i} item={item}/>)}
+          {starred.map((item, i) => <BoardThumbnail key={i} item={item}/>)}
           <li className="board-wrapper create">Create new board</li>
         </ul>
 
@@ -124,7 +124,7 @@ function Boards(props) {
           </nav>
         </div>
         <ul className="boards-boards" id="workspace">
-          {temp_workspace.map((item, i) => <BoardThumbnail key={i} item={item}/>)}
+          {personal.map((item, i) => <BoardThumbnail key={i} item={item}/>)}
           <li className="board-wrapper create">Create new board</li>
         </ul>
         <br/><br/>

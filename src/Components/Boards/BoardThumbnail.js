@@ -12,7 +12,9 @@ const BoardThumbnail = ({ item }) => {
   const history = useHistory();
   
   const goToBoard = (item) => {
-    history.push("/b/temporary/url");
+    const key = item.key;
+    const name = item.name.replaceAll(' ', '-').toLowerCase();
+    history.push(`/b/${key}/${name}`);
   };
 
   return (
@@ -22,7 +24,7 @@ const BoardThumbnail = ({ item }) => {
       onMouseEnter={() => setEnter(true)}
       onMouseLeave={() => setEnter(false)}
     >
-      {item.title}
+      {item.name}
       <FontAwesomeIcon
         className={`starIcon ${enter}${over}`}
         onMouseEnter={() => setOver(true)}

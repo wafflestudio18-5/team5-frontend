@@ -58,7 +58,7 @@ const ListListProvider = (props) => {
   const { children } = props;
 
   const get_lists_from_id_array = (id_arr) => {
-    // 나중에 구현
+    return state.listList.filter(item => id_arr.includes(item.id));
   };
 
   const listListState = {
