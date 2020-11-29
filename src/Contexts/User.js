@@ -17,7 +17,12 @@ const defaultUser = {
   // variable used for giving id to each team informations
   logged_in: true,
   user: {
-    name: 'mina',
+    id: 1,
+    username: 'mina',
+    email: '123456789@snu.ac.kr',
+    firstname: null,
+    lastname: null,
+    access_type: 'OAUTH'
   },
   login_req: () => {},
   logout_req: () => {},

@@ -1,19 +1,24 @@
 import React, { createContext, useState, useContext } from "react";
 
 const defaultBoardList = {
-  // variable used for giving id to each team informations
   boardList: [
     {
       id: 1,
       key: 'QWERTY',
       name: "Waffle-18.5-toyproject-team5",
-      lists: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+      lists: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      // 접속 시간,
+      // 스타 여부,
+      members: [1],
     },
     {
       id: 2,
       key: 'ASDFGH',
       title: "temporary board",
-      lists: []
+      lists: [],
+      // 접속 시간,
+      // 스타 여부,
+      members: [1],
     },
   ],
   get_recent_boards = () => {},
