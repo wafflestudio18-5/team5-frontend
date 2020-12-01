@@ -1,7 +1,8 @@
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { UserProvider, useUserContext } from "./Contexts/User";
+import { contexts, AppProvider, useUserContext } from "./Contexts";
 import { routes } from "./Routes";
 import { HeaderPage } from "./Pages";
+
 
 function App() {
   // TODO: 실행 전에 login되어 있는지 먼저 확인해야 함
@@ -9,7 +10,7 @@ function App() {
 
   if (logged_in) {
     return (
-      <UserProvider>
+      <AppProvider contexts={contexts}>
         <BrowserRouter>
           <HeaderPage user_data={logged_user_data} />
           <Switch>
@@ -25,11 +26,11 @@ function App() {
             <Redirect to='/username/boards'/>
           </Switch>
         </BrowserRouter>
-      </UserProvider>
+        </AppProvider>
     );
   } else {
     return (
-      <UserProvider>
+      <AppProvider contexts = {contexts}>
         <BrowserRouter>
           <Switch>
             <Route
@@ -43,7 +44,7 @@ function App() {
             <Route path={routes.HomePage.path} component={routes.HomePage.component} />
           </Switch>
         </BrowserRouter>
-      </UserProvider>
+      </AppProvider>
     );
   }
 }
