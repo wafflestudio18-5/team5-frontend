@@ -63,7 +63,7 @@ const ListListProvider = (props) => {
 
   const listListState = {
     ...defaultListList,
-    get_lists_from_id_array
+    get_lists_by_id_array
   };
 
   const [state, setState] = useState(listListState);
