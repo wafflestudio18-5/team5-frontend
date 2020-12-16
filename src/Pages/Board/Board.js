@@ -12,7 +12,7 @@ function BoardPage({ match }) {
 
   const lists_id = board_data.lists;
   const lists_data = get_lists_from_id_array(lists_id);
-
+  
   return (
     <>
       <Board board_data={board_data} lists_data={lists_data} />

@@ -1,7 +1,7 @@
 import { Boards } from '../../Components';
 import { useBoardListContext, useUserContext } from '../../Contexts';
 
-function BoardsPage() {
+function BoardsPage({history}) {
   const { user } = useUserContext();
   const { get_personal_boards, get_recent_boards, get_starred_boards } = useBoardListContext();
   

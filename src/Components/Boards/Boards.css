@@ -1,6 +1,8 @@
 .main-wrapper {
+  margin-top: 40px;
   background-color: #FAFBFC;
-  min-height: calc(100vh - 40px);
+  height: calc(100vh - 60px);
+  overflow-y: auto;
 }
 
 ul, li {
@@ -89,6 +91,7 @@ section.main-boards {
   padding-left: 16px;
   padding-right: 16px;
   width: calc(100% - 272px - 32px);
+
 }
 
 ul li.board-wrapper {
@@ -252,4 +255,13 @@ div #boards-templates-title {
   margin-bottom: 25px;
   padding-bottom: 5px;
 
+}
+
+#pageBoardPage {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+.left-buttons ul {
+  margin-top: 0px !important;
 }
