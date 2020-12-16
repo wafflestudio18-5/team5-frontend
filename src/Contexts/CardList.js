@@ -87,7 +87,7 @@ const defaultCardList = {
       members: [],
     },
   ],
-  get_cards_from_id_array: () => {}
+  getCardsByIdArray: () => {}
 };
 
 const CardListContext = createContext(defaultCardList);
@@ -95,13 +95,13 @@ const CardListContext = createContext(defaultCardList);
 const CardListProvider = (props) => {
   const { children } = props;
 
-  const get_cards_from_id_array = (id_arr) => {
+  const getCardsByIdArray = (id_arr) => {
     return state.cardList.filter(item => id_arr.includes(item.id));
   }
 
   const cardListState = {
     ...defaultCardList,
-    get_cards_from_id_array
+    getCardsByIdArray
   };
 
   const [state, setState] = useState(cardListState);

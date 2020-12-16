@@ -5,13 +5,13 @@ import { useBoardListContext, useListListContext } from '../../Contexts';
 //  Board: { path: '/b/:board_code/:board_name', component: Board }
 
 function BoardPage({ match }) {
-  const { get_board_from_key } = useBoardListContext();
-  const { get_lists_by_id_array } = useListListContext();
+  const { getBoardByKey } = useBoardListContext();
+  const { getListsByIdArray } = useListListContext();
   const board_key = match.params.board_key;
-  const board_data = get_board_from_key(board_key);
+  const board_data = getBoardByKey(board_key);
 
   const lists_id = board_data.lists;
-  const lists_data = get_lists_by_id_array(lists_id);
+  const lists_data = getListsByIdArray(lists_id);
   
   return (
     <>

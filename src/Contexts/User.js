@@ -7,9 +7,9 @@ const defaultUser = {
   user: {
     name: ''
   },
-  login_req: () => {},
-  logout_req: () => {},
-  fetch_info: () => {}
+  loginRequest: () => {},
+  logoutRequest: () => {},
+  fetchInformation: () => {}
 };
 */
 
@@ -24,9 +24,9 @@ const defaultUser = {
     lastname: null,
     access_type: 'OAUTH'
   },
-  login_req: () => {},
-  logout_req: () => {},
-  fetch_info: () => {}
+  loginRequest: () => {},
+  logoutRequest: () => {},
+  fetchInformation: () => {}
 };
 
 const UserContext = createContext(defaultUser);
@@ -34,7 +34,7 @@ const UserContext = createContext(defaultUser);
 const UserProvider = (props) => {
   const { children } = props;
 
-  const login_req = () => {
+  const loginRequest = () => {
     setState((state) => {
       return {
 
@@ -42,7 +42,7 @@ const UserProvider = (props) => {
     });
   };
 
-  const logout_req = () => {
+  const logoutRequest = () => {
     setState((state) => {
       return {
 
@@ -50,7 +50,7 @@ const UserProvider = (props) => {
     });
   };
 
-  const fetch_info = () => {
+  const fetchInformation = () => {
     setState((state) => {
       return {
         
@@ -60,9 +60,9 @@ const UserProvider = (props) => {
 
   const userState = {
     ...defaultUser,
-    login_req,
-    logout_req,
-    fetch_info
+    loginRequest,
+    logoutRequest,
+    fetchInformation
   };
 
   const [state, setState] = useState(userState);

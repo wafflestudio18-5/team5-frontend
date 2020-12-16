@@ -5,9 +5,9 @@ import { routes } from '../../Routes'
 
 const BoardPage = () => {
     const match = useRouteMatch();
-    const { get_board_from_key } = useBoardListContext();
+    const { getBoardByKey } = useBoardListContext();
     const board_key = match.params.board_key;
-    const board_data = get_board_from_key(board_key);
+    const board_data = getBoardByKey(board_key);
     if(board_data) {
         return (
             <>

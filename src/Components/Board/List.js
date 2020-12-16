@@ -6,8 +6,8 @@ import "./Board.css";
 function List({ data }) {
   // 지금은 Card에서 get하는데 나중에는 옮겨야됨
   console.log(data.cards);
-  const { get_cards_from_id_array } = useCardListContext();
-  const cardList = get_cards_from_id_array(data.cards);
+  const { getCardsByIdArray: getCardsByIdArray } = useCardListContext();
+  const cardList = getCardsByIdArray(data.cards);
 
   return (
     <div className="board-list">
