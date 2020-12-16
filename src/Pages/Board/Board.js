@@ -1,27 +1,23 @@
-import { Board } from '../../Components';
+import { Board } from "../../Components";
+import React from 'react';
+import { useBoardListContext, useListListContext } from '../../Contexts';
 
 //  Board: { path: '/b/:board_code/:board_name', component: Board }
 
-const get_board_data = (board_code, board_name) => {
-  // TODO: 백에서 board code와 board name을 이용해 board 데이터를 불러와야 한다.
-  return {
-    board_name: board_name,
-    board_code: board_code,
-    // TODO
-  }
-}
+function BoardPage({ match }) {
+  const { get_board_from_key } = useBoardListContext();
+  const { get_lists_from_id_array } = useListListContext();
+  const board_key = match.params.board_key;
+  const board_data = get_board_from_key(board_key);
 
-function BoardPage({ history, match }) {
-
-  const board_code = match.params.board_code;
-  const board_name = match.params.board_name;
-  const board_data = get_board_data(board_code, board_name);
-
-  return(
+  const lists_id = board_data.lists;
+  const lists_data = get_lists_from_id_array(lists_id);
+  
+  return (
     <>
-      <Board data={board_data}/>
+      <Board board_data={board_data} lists_data={lists_data} />
     </>
-  )
+  );
 }
 
 export default BoardPage;

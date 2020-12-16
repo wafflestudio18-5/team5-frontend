@@ -1,16 +1,18 @@
 import { Boards } from '../../Components';
-import { useUserContext } from '../../Contexts/User';
-import { Header } from '../../Components/Header';
+import { useBoardListContext, useUserContext } from '../../Contexts';
 
 function BoardsPage({history}) {
   const { user } = useUserContext();
-  const user_data = user.user_data;
+  const { get_personal_boards, get_recent_boards, get_starred_boards } = useBoardListContext();
   
+  const personal = get_personal_boards();
+  const recent = get_recent_boards();
+  const starred = get_starred_boards();
+
   return(
-    <div id="pageBoardPage">
-      <Header user_data={user_data}/>
-      <Boards user_data={user_data} history={history}/>
-    </div>
+    <>
+      <Boards user_data={user} personal={personal} starred={starred} recent={recent}/>
+    </>
   )
 }
 
