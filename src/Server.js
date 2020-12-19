@@ -1,5 +1,6 @@
 // 백엔드 연동하기 전까지 백엔드 역할을 해 주고,
 // 백엔드 연동하고 나서는 백엔드와 프론트 사이 인터페이스가 될 파일
+// 이야 진짜 끔찍하다 코드
 
 import axios from "axios";
 const host = 'http://localhost:4000';
@@ -15,7 +16,13 @@ export const get = async (uri, data) => {
       response = await axios.get(`${host}/boards`);
       return response.data;
     case '/api/v1/board':
-      response = await axios.get(`${host}/boards/${data.id}`);
+      let id = data.id;
+      console.log(data);
+      if(data.key) {
+        id = await get('/api/v1/board/boardlist', null);
+        id = id.find((item) => item.key === data.key).id;
+      }
+      response = await axios.get(`${host}/boards/${id}`);
       return response.data;
     default:
       console.log('wrong uri');

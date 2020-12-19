@@ -4,7 +4,7 @@ import { get } from '../Server';
 const defaultBoard = {
   board: null,
   getBoardData: () => {},
-  fetchBoard: () => {}
+  fetchBoard: async (data) => {}
 };
 
 const BoardContext = createContext(defaultBoard);
@@ -14,15 +14,14 @@ const BoardProvider = (props) => {
 
   const getBoardData = () => state.board;
 
-  const fetchBoard = async (id) => {
-    setState(async (state) => {
-      const board = await get('/api/v1/board', {id: id});
+  const fetchBoard = async (data) => {
+    const board = await get('/api/v1/board', data);
+    setState((state) => {
       return {
         ...state,
         board: board
       }
     });
-    console.log(state);
   }
 
   const boardState = {

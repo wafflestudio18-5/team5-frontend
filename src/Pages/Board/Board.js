@@ -1,12 +1,20 @@
 import { Board } from "../../Components";
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useBoardContext } from '../../Contexts';
 
 //  Board: { path: '/b/:board_code/:board_name', component: Board }
 
 function BoardPage({ match }) {
-  const { board } = useBoardContext();
-  console.log(board);
+  const { board, fetchBoard } = useBoardContext();
+  console.log(fetchBoard);
+
+  const fetch = async (match) => {
+    fetchBoard({key: match.params.board_key});
+  }
+
+  useEffect(() => {
+    fetch(match);
+  }, []);
 
   return (
     <>

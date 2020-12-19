@@ -13,10 +13,9 @@ const BoardThumbnail = ({ item }) => {
   const { fetchBoard } = useBoardContext();
   const history = useHistory();
   
-  const goToBoard = async (item) => {
+  const goToBoard = (item) => {
     const key = item.key;
     const name = item.name.replaceAll(' ', '-').toLowerCase();
-    await fetchBoard(item.id);
     console.log(item.id);
     history.push(`/b/${key}/${name}`);
   };
