@@ -1,7 +1,8 @@
 import './Board.css';
 import List from './List.js';
 
-function Board({board_data, lists_data}) {
+function Board({board}) {
+  if(!board) return <div>Loading...</div>
   return(
     <div id="Board-wrapper">
       <div id="board-header">
@@ -11,10 +12,10 @@ function Board({board_data, lists_data}) {
           <option value="Calendar">Calendar</option>
           <option value="Map">Map</option>
           </select>
-          <h3 id="board-name">{board_data.name}</h3>
+          <h3 id="board-name">{board.name}</h3>
           <button id="board-header-star">☆</button>
           <div className="board-header-vertical-line"/>
-          <button>{board_data.name}<span id="board-header-freeboard">Free</span></button>
+          <button>{board.name}<span id="board-header-freeboard">Free</span></button>
           <div className="board-header-vertical-line"/>
           <button>Private</button>
           <div className="board-header-vertical-line"/>
@@ -32,7 +33,7 @@ function Board({board_data, lists_data}) {
       <div id="board-main">
         <div id="board-lists">
           <div id="board-temp">
-          {lists_data.map((data, index) => (<List data={data} key={index} />))}
+          {board.lists.map((data, index) => (<List data={data} key={index} />))}
         <button id="board-addlist">
           <span id="board-addlist-plus">+</span>Add another list
         </button>

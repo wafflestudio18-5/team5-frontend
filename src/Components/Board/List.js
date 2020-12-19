@@ -1,12 +1,12 @@
 import React from "react";
 import Card from "./Card.js";
-import { useCardListContext } from "../../Contexts";
+import { useBoardContext } from "../../Contexts";
 import "./Board.css";
 
 function List({ data }) {
   // 지금은 Card에서 get하는데 나중에는 옮겨야됨
   console.log(data.cards);
-  const { getCardsByIdArray: getCardsByIdArray } = useCardListContext();
+  const { getCardsByIdArray: getCardsByIdArray } = useBoardContext();
   const cardList = getCardsByIdArray(data.cards);
 
   return (

@@ -1,25 +1,14 @@
 import React from 'react';
-import { useActivityListContext, ActivityListProvider } from './ActivityList';
-import { useBoardListContext, BoardListProvider } from './BoardList';
-import { useCardListContext, CardListProvider } from './CardList';
-import { useListListContext, ListListProvider } from './ListList';
+import { useBoardContext, BoardProvider } from './Board';
 import { useUserContext, UserProvider } from './User';
-import { useUserListContext, UserListProvider } from './UserList';
 
-export {useActivityListContext, ActivityListProvider, 
-  useBoardListContext, BoardListProvider,
-  useCardListContext, CardListProvider,
-  useListListContext, ListListProvider,
+export {
+  useBoardContext, BoardProvider,
   useUserContext, UserProvider,
-  useUserListContext, UserListProvider
 }
 
 export const contexts = [
-  ActivityListProvider,
-  BoardListProvider,
-  CardListProvider,
-  ListListProvider,
-  UserListProvider,
+  BoardProvider,
   UserProvider
 ]
 

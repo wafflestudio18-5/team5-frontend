@@ -1,13 +1,21 @@
+import { useState } from 'react';
 import { Boards } from '../../Components';
-import { useBoardListContext, useUserContext } from '../../Contexts';
+import { useUserContext } from '../../Contexts';
+import { get } from '../../Server';
 
 function BoardsPage({history}) {
   const { user } = useUserContext();
-  const { getPersonalBoards, getRecentBoards, getStarredBoards } = useBoardListContext();
+  const [ boards, setBoards ] = useState([]);
+
+  const fetchBoards = async () => {
+    const brds = await get('/api/v1/board/boardlist');
+    setBoards(brds);
+  }
   
-  const personal = getPersonalBoards();
-  const recent = getRecentBoards();
-  const starred = getStarredBoards();
+  fetchBoards();
+  const personal = boards;
+  const starred = boards;
+  const recent = boards;
 
   return(
     <>
