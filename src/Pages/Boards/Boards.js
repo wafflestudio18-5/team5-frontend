@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Boards } from '../../Components';
 import { useUserContext } from '../../Contexts';
 import { get } from '../../Server';
@@ -12,7 +12,10 @@ function BoardsPage({history}) {
     setBoards(brds);
   }
   
-  fetchBoards();
+  useEffect(() => {
+    fetchBoards();
+  }, [])
+  
   const personal = boards;
   const starred = boards;
   const recent = boards;
