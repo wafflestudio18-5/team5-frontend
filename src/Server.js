@@ -17,7 +17,6 @@ export const get = async (uri, data) => {
       return response.data;
     case "/api/v1/board":
       let id = data.id;
-      console.log(data);
       if (data.key) {
         id = await get("/api/v1/board/boardlist", null);
         id = id.find((item) => item.key === data.key).id;
@@ -36,20 +35,43 @@ export const put = async (uri, data) => {
 
 export const post = async (uri, data) => {
   let response;
+  let ids;
   switch (uri) {
     case "/api/v1/board":
-      const boards = await get("/api/v1/board/boardlist", null);
+
       response = await axios.get(`${host}/ids`);
-      const ids = response.data;
+      ids = response.data;
       ids.nboards++;
+      await axios.put(`${host}/ids`, ids);
+
       const newBoard = {
         key: `boardkey${ids.nboards}`,
         name: data.name,
         lists: [],
       };
-      await axios.put(`${host}/ids`, ids);
       await axios.post(`${host}/boards`, newBoard);
       break;
+    case '/api/v1/list':
+      
+      response = await axios.get(`${host}/ids`);
+      ids = response.data;
+      ids.nlists++;
+      await axios.put(`${host}/ids`, ids);
+
+      response = await axios.get(`${host}/boards/${data.board_id}`);
+      const board = response.data;
+      console.log(board);
+      board.lists = [
+        ...board.lists,
+        {
+          id: ids.nlists,
+          name: data.name,
+          cards: []
+        }
+      ]
+      await axios.put(`${host}/boards/${data.board_id}`, board);
+
+      console.log(board);
     default:
       break;
   }

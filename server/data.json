@@ -2,7 +2,7 @@
   "ids": {
     "nusers": 1,
     "nboards": 2,
-    "nlists": 1,
+    "nlists": 5,
     "ncards": 1,
     "nactivities": 0
   },
@@ -33,13 +33,34 @@
               "activities": []
             }
           ]
+        },
+        {
+          "id": 2,
+          "name": "list2",
+          "cards": []
         }
       ]
     },
     {
       "key": "boardkey2",
       "name": "b2",
-      "lists": [],
+      "lists": [
+        {
+          "id": 3,
+          "name": "제발 돼라",
+          "cards": []
+        },
+        {
+          "id": 4,
+          "name": "아 된다ㅠㅠㅠ",
+          "cards": []
+        },
+        {
+          "id": 5,
+          "name": "룰루",
+          "cards": []
+        }
+      ],
       "id": 2
     }
   ]
