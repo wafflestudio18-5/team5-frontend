@@ -1,5 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 
+// TODO: 결국에는 Context 없애고 그때그때 불러오는 걸로 바꿔야 함
+
 const defaultActivityList = {
   // variable used for giving id to each team informations
   activityList: [

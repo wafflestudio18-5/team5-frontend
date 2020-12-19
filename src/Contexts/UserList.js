@@ -3,9 +3,16 @@ import React, { createContext, useState, useContext } from "react";
 const defaultUserList = {
   // variable used for giving id to each team informations
   userList: [
-    
+    {
+      id: 1,
+      username: 'mina',
+      email: '123456789@snu.ac.kr',
+      firstname: null,
+      lastname: null,
+      access_type: 'OAUTH'
+    },
   ],
-  get_users_from_list: (id_arr) => { }
+  getUsersById: (id_arr) => { }
 };
 
 const UserListContext = createContext(defaultUserList);
@@ -13,13 +20,13 @@ const UserListContext = createContext(defaultUserList);
 const UserListProvider = (props) => {
   const { children } = props;
 
-  const get_users_from_list = (id_arr) => {
+  const getUsersById = (id_arr) => {
     // 나중에 구현
   }
 
   const userListState = {
     ...defaultUserList,
-    get_users_from_list
+    getUsersById
   };
 
   const [state, setState] = useState(userListState);

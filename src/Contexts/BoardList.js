@@ -21,10 +21,10 @@ const defaultBoardList = {
       members: [1],
     },
   ],
-  get_board_from_key: () => {},
-  get_personal_boards: () => {},
-  get_recent_boards: () => {},
-  get_starred_boards: () => {}
+  getBoardByKey: () => {},
+  getPersonalBoards: () => {},
+  getRecentBoards: () => {},
+  getStarredBoards: () => {}
 };
 
 const BoardListContext = createContext(defaultBoardList);
@@ -32,30 +32,30 @@ const BoardListContext = createContext(defaultBoardList);
 const BoardListProvider = (props) => {
   const { children } = props;
 
-  const get_board_from_key = (key) => {
+  const getBoardByKey = (key) => {
     return state.boardList.find(item => item.key === key);
   }
 
-  const get_personal_boards = () => {
+  const getPersonalBoards = () => {
     return state.boardList;
   }
 
-  const get_recent_boards = () => {
+  const getRecentBoards = () => {
     // 백에서 API에 시간 필드 추가해주면 구현. 일단 전부 리턴
     return state.boardList;
   }
 
-  const get_starred_boards = () => {
+  const getStarredBoards = () => {
     // 백에서 API에 스타 필드 추가해주면 구현. 일단 전부 리턴
     return state.boardList;
   }
 
   const boardListState = {
     ...defaultBoardList,
-    get_board_from_key,
-    get_personal_boards,
-    get_recent_boards,
-    get_starred_boards
+    getBoardByKey,
+    getPersonalBoards,
+    getRecentBoards,
+    getStarredBoards
   };
 
   const [state, setState] = useState(boardListState);
