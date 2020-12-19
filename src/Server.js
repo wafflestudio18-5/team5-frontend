@@ -36,6 +36,7 @@ export const put = async (uri, data) => {
 export const post = async (uri, data) => {
   let response;
   let ids;
+  let board;
   switch (uri) {
     case "/api/v1/board":
 
@@ -59,7 +60,7 @@ export const post = async (uri, data) => {
       await axios.put(`${host}/ids`, ids);
 
       response = await axios.get(`${host}/boards/${data.board_id}`);
-      const board = response.data;
+      board = response.data;
       console.log(board);
       board.lists = [
         ...board.lists,
@@ -72,6 +73,30 @@ export const post = async (uri, data) => {
       await axios.put(`${host}/boards/${data.board_id}`, board);
 
       console.log(board);
+      break;
+    case '/api/v1/card':
+      response = await axios.get(`${host}/ids`);
+      ids = response.data;
+      ids.ncards++;
+      await axios.put(`${host}/ids`, ids);
+
+      // TODO: activity는 자동으로 추가해 줘야지 (아니면 백엔드에서 해주거나)  
+      const newCard = {
+        id: ids.ncards,
+        name: data.name,
+        description: '',
+        due_date: null,
+        members: [],
+        activities: [] 
+      }
+
+      response = await axios.get(`${host}/boards/${data.board_id}`);
+      board = response.data;
+      const cards = board.lists.find((item) => item.id === data.list_id).cards;
+      board.lists.find((item) => item.id === data.list_id).cards = cards.concat(newCard);
+      await axios.put(`${host}/boards/${data.board_id}`, board);
+      console.log(board);
+      break;
     default:
       break;
   }

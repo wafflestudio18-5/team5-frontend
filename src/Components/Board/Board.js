@@ -2,14 +2,13 @@ import "./Board.css";
 import { useState } from "react";
 import List from "./List.js";
 
-function Board({ board, postList }) {
+function Board({ board, postList, postCard }) {
   const [crtList, setCrtList] = useState(false);
-  const [crtCard, setCrtCard] = useState(false);
   const [listInput, setListInput] = useState("");
 
   const createList = () => {
     setCrtList(false);
-    postList(listInput);
+    postList(board.id, listInput);
     setListInput('');
   }
 
@@ -50,7 +49,7 @@ function Board({ board, postList }) {
         <div id="board-lists">
           <div id="board-temp">
             {board.lists.map((data, index) => (
-              <List data={data} key={index} />
+              <List board={board} data={data} key={index} postCard={postCard} />
             ))}
             <button id="board-addlist" onClick={() => setCrtList(true)}>
               {crtList ? (

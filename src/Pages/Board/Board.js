@@ -12,9 +12,17 @@ function BoardPage({ match }) {
     fetchBoard({key: match.params.board_key});
   }
 
-  const postList = async (name) => {
+  const postCard = async (bId, lId, name) => {
+    console.log('adsf');
     if(!name) return;
-    await post('/api/v1/list', {board_id: board.id, name: name});
+    await post('/api/v1/card', {board_id: bId, list_id: lId, name: name});
+
+    fetch(match);
+  }
+
+  const postList = async (bId, name) => {
+    if(!name) return;
+    await post('/api/v1/list', {board_id: bId, name: name});
     fetch(match);
   }
 
@@ -24,7 +32,7 @@ function BoardPage({ match }) {
 
   return (
     <>
-      <Board board={board} postList={postList} />
+      <Board board={board} postList={postList} postCard={postCard} />
     </>
   );
 }

@@ -2,8 +2,8 @@
   "ids": {
     "nusers": 1,
     "nboards": 2,
-    "nlists": 5,
-    "ncards": 1,
+    "nlists": 6,
+    "ncards": 8,
     "nactivities": 0
   },
   "users": [
@@ -31,12 +31,74 @@
               "description": "desc",
               "members": [],
               "activities": []
+            },
+            {
+              "id": 2,
+              "name": "1",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 3,
+              "name": "2",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 4,
+              "name": "2",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 5,
+              "name": "8",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
             }
           ]
         },
         {
           "id": 2,
           "name": "list2",
+          "cards": [
+            {
+              "id": 6,
+              "name": "되냐",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 7,
+              "name": "아 된다 ㅠㅠㅠㅠㅠ",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 8,
+              "name": "카드 띄우는 페이지 만들까 말까",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "리스트 추가하기",
           "cards": []
         }
       ]
