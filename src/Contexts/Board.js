@@ -4,7 +4,7 @@ import { get } from '../Server';
 const defaultBoard = {
   board: null,
   getBoardData: () => {},
-  fetchBoard: async (data) => {}
+  fetchBoard: async (data) => {},
 };
 
 const BoardContext = createContext(defaultBoard);
@@ -27,7 +27,7 @@ const BoardProvider = (props) => {
   const boardState = {
     ...defaultBoard,
     getBoardData,
-    fetchBoard
+    fetchBoard,
   };
 
   const [state, setState] = useState(boardState);
