@@ -12,31 +12,44 @@ function List({ board, data, postCard }) {
     setCardInput('');
   }
 
+  const no_crtCard = () => {
+    setCrtCard(false)
+    setCardInput("")
+  }
+
+  const addCard = () => {
+    setCrtCard(true);
+    //window.scrollTo(0,document.getElementsByClassName("board-cards").scrollHeight, 'smooth');
+    //var objCards = document.getElementsByClassName("board-cards");
+    //objCards.scrollTop = objCards.scrollHeight;
+    var scroll = document.getElementsByClassName('board-cards');
+    scroll.scrollTop = scroll.scrollHeight;
+  }
+
   return (
     <div className="board-list">
       <h4>{data.name}</h4>
-      <div className="board-cards">
+      <div className="board-cards" id={crtCard ? "board-cards-crtCard" : "board-cards-crtCard-x"}>
         {data.cards.map((card, index) => (
           <Card card={card} key={index} index={index} />
         ))}
+          {crtCard? <div className="crtCard">
+            <div id="crtCard_inputWrapper">
+              <input
+                className="addCard"
+                onChange={(e) => setCardInput(e.target.value)}
+                value={cardInput}
+                placeholder="Enter a title for this card..."
+              />
+            </div>
+            <button id="AddCard" onClick={createCard}>Add Card</button>
+            <button id="no_crtList" onClick={no_crtCard}></button>
+          </div> : <div/>}
       </div>
-      <button id="board-addcard" onClick={() => setCrtCard(true)}>
-        {crtCard ? (
-          <>
-            <input
-              className="addCard"
-              onChange={(e) => setCardInput(e.target.value)}
-              value={cardInput}
-              placeholder="name"
-            />
-            <button onClick={createCard}>확인</button>
-          </>
-        ) : (
-          <>
+      {crtCard? <div/> :
+           <button id="board-addcard" onClick={addCard}>
             <span id="board-addcard-plus">十 </span>Add another card
-          </>
-        )}
-      </button>
+          </button>}      
     </div>
   );
 }
