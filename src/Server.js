@@ -42,8 +42,7 @@ export const post = async (uri, data) => {
   let board;
   switch (uri) {
     case '/api/v1/user/login':
-      // 어차피 곧 없어질 거 안짤란다
-      console.log('로그인 하고 싶대요');
+      // ㅠ
       break;
     case "/api/v1/board":
       response = await axios.get(`${host}/ids`);

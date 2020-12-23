@@ -7,7 +7,7 @@ import atlassianLogo from '../SignUp/atlassian-logo-blue.svg';
 import { useUserContext } from '../../Contexts/User';
 
 function Login() {
-  const {loginRequest} = useUserContext();
+  const {loginReqByPW, loginReqBySC} = useUserContext();
   const [email, setEmail] = React.useState("");
   const [pw, setPw] = React.useState("");
 
@@ -28,7 +28,7 @@ function Login() {
   // login button
   function onClick(e) {
     console.log("LOG IN as ", email, pw);
-    loginRequest(email, pw);
+    loginReqByPW(email, pw);
   }
    
   return (

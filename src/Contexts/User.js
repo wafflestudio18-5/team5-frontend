@@ -28,8 +28,9 @@ const defaultUser = {
   users: [
     
   ],
-  loginRequest: () => {},
-  logoutRequest: () => {},
+  loginReqByPW: () => {},
+  loginReqBySC: () => {},
+  logoutReq: () => {},
   fetchUserList: () => {}
 };
 
@@ -38,7 +39,7 @@ const UserContext = createContext(defaultUser);
 const UserProvider = (props) => {
   const { children } = props;
 
-  const loginRequest = async (email, pw) => {
+  const loginReqByPW = async (email, pw) => {
     const response = await post('/api/v1/user/login', {
       grantType: "PASSWORD",
       email: email,
@@ -54,7 +55,23 @@ const UserProvider = (props) => {
     });
   };
 
-  const logoutRequest = () => {
+  const loginReqBySC = async (authProvider, accessToken) => {
+    const response = await post('/api/v1/user/login', {
+      grantType: "OAUTH",
+      authProvider: authProvider,
+      accessToken: accessToken
+    });
+
+    setState((state) => {
+      return {
+        ...state,
+        logged_in: true,
+        user: response.data
+      }
+    });
+  };
+
+  const logoutReq = () => {
     const response = put('/api/v1/user/logout', {});
 
     setState((state) => {
@@ -76,8 +93,9 @@ const UserProvider = (props) => {
 
   const userState = {
     ...defaultUser,
-    loginRequest,
-    logoutRequest,
+    loginReqByPW,
+    loginReqBySC,
+    logoutReq,
     fetchUserList
   };
 
