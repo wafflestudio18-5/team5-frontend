@@ -54,13 +54,14 @@ function Board({ board, postList, postCard }) {
             <button id="board-addlist" onClick={() => setCrtList(true)}>
               {crtList ? (
                 <>
-                  <input
-                    className="crtList"
-                    placeholder="new list name"
-                    onChange={(e) => setListInput(e.target.value)}
-                    value={listInput}
-                  />
-                  <button onClick={createList}>확인</button>
+                  <div className="crtList">
+                    <input
+                      placeholder="Enter list title..."
+                      onChange={(e) => setListInput(e.target.value)}
+                      value={listInput}
+                    />
+                    <button onClick={createList}>Add List</button>
+                  </div>
                 </>
               ) : (
                 <>
