@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from "react";
-import { get, post } from "../Server";
+import { post, put } from "../Server";
 
 /* TODO: 백엔드 연동하고 나면 이걸로 바꿔야 함
 const defaultUser = {
