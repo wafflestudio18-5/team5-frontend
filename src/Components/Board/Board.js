@@ -14,6 +14,7 @@ function Board({ board, postList, postCard }) {
 
   const no_crtList = () => {
     setCrtList(false);
+    setListInput("");
   }
 
   if (!board) return <div>Loading...</div>;

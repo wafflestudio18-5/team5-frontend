@@ -81,6 +81,7 @@
 #board-lists {
   display: flex;
   flex-direction: row;
+  height: calc(100vh - 100px);
   width: calc(100vw - 20px) !important;
   overflow-x: auto;
   padding-right: 10px !important;
@@ -119,8 +120,15 @@
   margin-bottom: 10px;
 }
 
-.board-cards {
+#board-cards-crtCard {
+  max-height: calc(100vh - 180px) !important;
+}
+
+#board-cards-crtCard-x {
   max-height: calc(100vh - 215px) !important;
+}
+
+.board-cards {
   overflow-y: auto;
 }
 
@@ -177,7 +185,7 @@
 
 .board-list button {
   height: 30px;
-  width: 250px;
+  width: 245px;
   color: rgb(100, 100, 100);
   align-content: center;
   border: 1px transparent solid;
@@ -200,6 +208,10 @@
   margin: 5px;
   margin-top: 3px;
   margin-bottom: 10px;
+}
+
+#Board-wrapper button:focus {
+  outline: none;
 }
 
 #Board-wrapper p {
@@ -255,7 +267,7 @@
   margin: 5px;
   margin-top: 0px;
   height: 30px;
-  padding-left: 7px;
+  padding-left: 9px;
   padding-right: 10px;
   background-color:  #0f86cf;
   color: white;
@@ -281,5 +293,46 @@ input.addcard {
 }
 
 #no_crtList:focus {
+  outline: none;
+}
+
+#AddCard {
+  width: auto !important;
+  margin-right: 5px;
+  margin-top: 0px;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color:  #0f86cf !important;
+  color: white;
+  border: 1px transparent solid;
+  border-radius: 3px;
+  width: 
+}
+
+.crtCard button #AddCard:hover {
+  filter: brightness(115%) !important;
+  background-color:  #0f86cf;
+}
+
+.crtCard input {
+  background-color: transparent;
+  border: 1px transparent solid;
+
+}
+
+#crtCard_inputWrapper {
+  background-color: white;
+  padding: 10px;
+  padding-bottom: 30px;
+  margin-top: 10px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  box-shadow: 0px 2px 2px lightgray;
+  border: 1px transparent solid;
+}
+
+.crtCard input:focus {
   outline: none;
 }
