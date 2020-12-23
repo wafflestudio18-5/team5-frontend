@@ -2,8 +2,8 @@
   "ids": {
     "nusers": 1,
     "nboards": 2,
-    "nlists": 6,
-    "ncards": 8,
+    "nlists": 8,
+    "ncards": 14,
     "nactivities": 0
   },
   "users": [
@@ -63,6 +63,30 @@
               "due_date": null,
               "members": [],
               "activities": []
+            },
+            {
+              "id": 12,
+              "name": "호호",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 13,
+              "name": "열",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 14,
+              "name": "룰룰루",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
             }
           ]
         },
@@ -99,6 +123,41 @@
         {
           "id": 6,
           "name": "리스트 추가하기",
+          "cards": [
+            {
+              "id": 9,
+              "name": "리스트쟝",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 10,
+              "name": "멘델스존쟝",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 11,
+              "name": "슈베르츠쟝",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "나는야 리스트",
+          "cards": []
+        },
+        {
+          "id": 8,
+          "name": "호롤로로로",
           "cards": []
         }
       ]

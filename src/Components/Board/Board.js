@@ -51,8 +51,13 @@ function Board({ board, postList, postCard }) {
             {board.lists.map((data, index) => (
               <List board={board} data={data} key={index} postCard={postCard} />
             ))}
-            <button id="board-addlist" onClick={() => setCrtList(true)}>
+
+            <div>
+              <button id="board-addlist" onClick={() => setCrtList(true)}>
+                <span id="board-addlist-plus">+</span>Add another list
+              </button>
               {crtList ? (
+<<<<<<< Updated upstream
                 <>
                   <input
                     className="crtList"
@@ -68,6 +73,23 @@ function Board({ board, postList, postCard }) {
                 </>
               )}
             </button>
+=======
+                  <div className="crtList">
+                      <input
+                        placeholder="Enter list title..."
+                        onChange={(e) => setListInput(e.target.value)}
+                        value={listInput}
+                      />
+                      <button onClick={createList}>Add List</button>
+                  </div>
+                ) : (
+                  <>
+                  </>
+                )
+              }
+            </div>
+
+>>>>>>> Stashed changes
           </div>
         </div>
       </div>
