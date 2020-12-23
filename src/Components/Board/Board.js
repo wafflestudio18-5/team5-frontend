@@ -57,23 +57,7 @@ function Board({ board, postList, postCard }) {
                 <span id="board-addlist-plus">+</span>Add another list
               </button>
               {crtList ? (
-<<<<<<< Updated upstream
-                <>
-                  <input
-                    className="crtList"
-                    placeholder="new list name"
-                    onChange={(e) => setListInput(e.target.value)}
-                    value={listInput}
-                  />
-                  <button onClick={createList}>확인</button>
-                </>
-              ) : (
-                <>
-                  <span id="board-addlist-plus">+</span>Add another list
-                </>
-              )}
-            </button>
-=======
+
                   <div className="crtList">
                       <input
                         placeholder="Enter list title..."
@@ -89,7 +73,6 @@ function Board({ board, postList, postCard }) {
               }
             </div>
 
->>>>>>> Stashed changes
           </div>
         </div>
       </div>
