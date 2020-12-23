@@ -12,6 +12,10 @@ function Board({ board, postList, postCard }) {
     setListInput('');
   }
 
+  const no_crtList = () => {
+    setCrtList(false);
+  }
+
   if (!board) return <div>Loading...</div>;
   return (
     <div id="Board-wrapper">
@@ -65,6 +69,7 @@ function Board({ board, postList, postCard }) {
                         value={listInput}
                       />
                       <button onClick={createList}>Add List</button>
+                      <button id="no_crtList" onClick={no_crtList}></button>
                   </div>
                 ) : (
                   <>

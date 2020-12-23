@@ -2,7 +2,7 @@
   "ids": {
     "nusers": 1,
     "nboards": 2,
-    "nlists": 8,
+    "nlists": 9,
     "ncards": 14,
     "nactivities": 0
   },
@@ -158,6 +158,11 @@
         {
           "id": 8,
           "name": "호롤로로로",
+          "cards": []
+        },
+        {
+          "id": 9,
+          "name": "나나낭",
           "cards": []
         }
       ]

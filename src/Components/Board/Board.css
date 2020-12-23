@@ -167,6 +167,10 @@
   flex-shrink: 0;
 }
 
+#board-addlist:focus {
+  outline: none;
+}
+
 #board-addlist:hover {
   filter: brightness(105%);
 }
@@ -237,11 +241,45 @@
 }
 
 .crtList input {
-  width: 150px;
-  height: 15px;
+  width: 226px;
+  height: 20px;
+  margin: 5px;
+  padding: 5px;
+  margin-bottom: 0px;
+  margin-top: 4px;
+  position: relative;
+  top: 1px;
+}
+
+.crtList button {
+  margin: 5px;
+  margin-top: 0px;
+  height: 30px;
+  padding-left: 7px;
+  padding-right: 10px;
+  background-color:  #0f86cf;
+  color: white;
+  border: 1px transparent solid;
+  border-radius: 3px;
+}
+
+.crtList button:hover {
+  filter: brightness(115%);
 }
 
 input.addcard {
   width: 100px;
   height: 5px;
+}
+
+#no_crtList {
+  background: url('https://api.iconify.design/octicon:x-16.svg') no-repeat center center / contain;
+  width: 25px;
+  margin: 0px;
+  position: relative;
+  top: 8px;
+}
+
+#no_crtList:focus {
+  outline: none;
 }
