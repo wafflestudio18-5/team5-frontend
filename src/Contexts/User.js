@@ -110,7 +110,7 @@ const UserProvider = (props) => {
     window.sessionStorage.clear();
   };
 
-  const fetchUserList = () => {
+  const fetchUserList = async () => {
     const response = await get('api/v1/user/userlist');
     setState((state) => {
       return {
