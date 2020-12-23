@@ -120,11 +120,11 @@
   margin-bottom: 10px;
 }
 
-#board-cards-crtCard {
+.board-cards-crtCard {
   max-height: calc(100vh - 180px) !important;
 }
 
-#board-cards-crtCard-x {
+.board-cards-crtCard-x {
   max-height: calc(100vh - 215px) !important;
 }
 
@@ -311,8 +311,7 @@ input.addcard {
 }
 
 .crtCard button #AddCard:hover {
-  filter: brightness(115%) !important;
-  background-color:  #0f86cf;
+  background-color:  #0f86cf !important;
 }
 
 .crtCard input {

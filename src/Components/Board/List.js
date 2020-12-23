@@ -17,34 +17,37 @@ function List({ board, data, postCard }) {
     setCardInput("")
   }
 
+  const scroll = (id) => {
+    var scroll = document.getElementById(id);
+    scroll.scrollTop = scroll.scrollHeight + 50;
+  }
+
   const addCard = () => {
     setCrtCard(true);
-    //window.scrollTo(0,document.getElementsByClassName("board-cards").scrollHeight, 'smooth');
-    //var objCards = document.getElementsByClassName("board-cards");
-    //objCards.scrollTop = objCards.scrollHeight;
-    var scroll = document.getElementsByClassName('board-cards');
-    scroll.scrollTop = scroll.scrollHeight;
+    scroll(data.id)
   }
 
   return (
     <div className="board-list">
       <h4>{data.name}</h4>
-      <div className="board-cards" id={crtCard ? "board-cards-crtCard" : "board-cards-crtCard-x"}>
-        {data.cards.map((card, index) => (
-          <Card card={card} key={index} index={index} />
-        ))}
-          {crtCard? <div className="crtCard">
-            <div id="crtCard_inputWrapper">
-              <input
-                className="addCard"
-                onChange={(e) => setCardInput(e.target.value)}
-                value={cardInput}
-                placeholder="Enter a title for this card..."
-              />
-            </div>
-            <button id="AddCard" onClick={createCard}>Add Card</button>
-            <button id="no_crtList" onClick={no_crtCard}></button>
-          </div> : <div/>}
+      <div className="board-cards" id={data.id}>
+        <div className={crtCard ? "board-cards-crtCard" : "board-cards-crtCard-x"}>
+          {data.cards.map((card, index) => (
+            <Card card={card} key={index} index={index} />
+          ))}
+            {crtCard? <div className="crtCard">
+              <div id="crtCard_inputWrapper">
+                <input
+                  className="addCard"
+                  onChange={(e) => setCardInput(e.target.value)}
+                  value={cardInput}
+                  placeholder="Enter a title for this card..."
+                />
+              </div>
+              <button id="AddCard" onClick={createCard}>Add Card</button>
+              <button id="no_crtList" onClick={no_crtCard}></button>
+            </div> : <div/>}
+        </div>
       </div>
       {crtCard? <div/> :
            <button id="board-addcard" onClick={addCard}>
