@@ -128,6 +128,7 @@ li.board-wrapper.create {
   line-height: 80px;
   color: black;
   font-weight: normal;
+  display: flex;
 }
 
 li.board-wrapper.create:hover {
@@ -264,4 +265,9 @@ div #boards-templates-title {
 
 .left-buttons ul {
   margin-top: 0px !important;
+}
+
+input.createInput {
+  width: 140px;
+  margin: 0;
 }

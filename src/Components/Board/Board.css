@@ -227,3 +227,13 @@
   display: flex;
   padding-right: 10px;
 }
+
+input.crtList {
+  width: 100px;
+  height: 5px;
+}
+
+input.addcard {
+  width: 100px;
+  height: 5px;
+}

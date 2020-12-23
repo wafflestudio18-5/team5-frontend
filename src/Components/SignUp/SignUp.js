@@ -7,7 +7,6 @@ import atlassianLogo from './atlassian-logo-blue.svg';
 
 
 function SignUp() {
-
   const [email, setEmail] = React.useState("");
   const [style, setStyle] = React.useState({gray: {color: 'black'}, green: {display: 'none'}, social: {color: 'black'}, whiteBox: {height: 460}});
   const [account, setAccount] = React.useState(false);
