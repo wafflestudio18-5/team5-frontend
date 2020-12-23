@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext } from "react";
+import { get, post } from "../Server";
 
 /* TODO: 백엔드 연동하고 나면 이걸로 바꿔야 함
 const defaultUser = {
@@ -15,7 +16,7 @@ const defaultUser = {
 
 const defaultUser = {
   // variable used for giving id to each team informations
-  logged_in: true,
+  logged_in: false,
   user: {
     id: 1,
     username: 'mina',
@@ -24,9 +25,12 @@ const defaultUser = {
     lastname: null,
     access_type: 'OAUTH'
   },
+  users: [
+    
+  ],
   loginRequest: () => {},
   logoutRequest: () => {},
-  fetchInformation: () => {}
+  fetchUserList: () => {}
 };
 
 const UserContext = createContext(defaultUser);
@@ -34,23 +38,35 @@ const UserContext = createContext(defaultUser);
 const UserProvider = (props) => {
   const { children } = props;
 
-  const loginRequest = () => {
+  const loginRequest = async (email, pw) => {
+    const response = await post('/api/v1/user/login', {
+      grantType: "PASSWORD",
+      email: email,
+      password: pw
+    });
+
     setState((state) => {
       return {
-
+        ...state,
+        logged_in: true,
+        user: response.data
       }
     });
   };
 
   const logoutRequest = () => {
+    const response = put('/api/v1/user/logout', {});
+
     setState((state) => {
       return {
-
+        ...state,
+        user: {},
+        logged_in: false
       }
     });
   };
 
-  const fetchInformation = () => {
+  const fetchUserList = () => {
     setState((state) => {
       return {
         
@@ -62,7 +78,7 @@ const UserProvider = (props) => {
     ...defaultUser,
     loginRequest,
     logoutRequest,
-    fetchInformation
+    fetchUserList
   };
 
   const [state, setState] = useState(userState);
