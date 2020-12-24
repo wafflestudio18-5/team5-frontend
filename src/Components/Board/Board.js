@@ -12,6 +12,11 @@ function Board({ board, postList, postCard }) {
     setListInput('');
   }
 
+  const no_crtList = () => {
+    setCrtList(false);
+    setListInput("");
+  }
+
   if (!board) return <div>Loading...</div>;
   return (
     <div id="Board-wrapper">
@@ -51,24 +56,27 @@ function Board({ board, postList, postCard }) {
             {board.lists.map((data, index) => (
               <List board={board} data={data} key={index} postCard={postCard} />
             ))}
-            <button id="board-addlist" onClick={() => setCrtList(true)}>
+
+            <div>
+              <button id="board-addlist" onClick={() => setCrtList(true)}>
+                <span id="board-addlist-plus">+</span>Add another list
+              </button>
               {crtList ? (
-                <>
                   <div className="crtList">
-                    <input
-                      placeholder="Enter list title..."
-                      onChange={(e) => setListInput(e.target.value)}
-                      value={listInput}
-                    />
-                    <button onClick={createList}>Add List</button>
+                      <input
+                        placeholder="Enter list title..."
+                        onChange={(e) => setListInput(e.target.value)}
+                        value={listInput}
+                      />
+                      <button onClick={createList}>Add List</button>
+                      <button id="no_crtList" onClick={no_crtList}></button>
                   </div>
-                </>
-              ) : (
-                <>
-                  <span id="board-addlist-plus">+</span>Add another list
-                </>
-              )}
-            </button>
+                ) : (
+                  <>
+                  </>
+                )
+              }
+            </div>
           </div>
         </div>
       </div>

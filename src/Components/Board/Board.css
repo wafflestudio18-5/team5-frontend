@@ -83,6 +83,7 @@
 #board-lists {
   display: flex;
   flex-direction: row;
+  height: calc(100vh - 100px);
   width: calc(100vw - 20px) !important;
   height: calc(100vh - 100px);
   overflow-x: auto;
@@ -124,8 +125,15 @@
   margin-bottom: 10px;
 }
 
-.board-cards {
+.board-cards-crtCard {
+  max-height: calc(100vh - 180px) !important;
+}
+
+.board-cards-crtCard-x {
   max-height: calc(100vh - 215px) !important;
+}
+
+.board-cards {
   overflow-y: auto;
 }
 
@@ -166,11 +174,14 @@
   border: 1px transparent solid;
   color: white;
   align-content: center;
-  border: 1px transparent solid;
   border-radius: 3px;
   padding-top: 3px;
   background-color: #35a7ee;
   flex-shrink: 0;
+}
+
+#board-addlist:focus {
+  outline: none;
 }
 
 #board-addlist:hover {
@@ -179,7 +190,7 @@
 
 .board-list button {
   height: 30px;
-  width: 250px;
+  width: 245px;
   color: rgb(100, 100, 100);
   align-content: center;
   border: 1px transparent solid;
@@ -204,6 +215,10 @@
   margin-bottom: 10px;
   max-width: 100vw;
   max-height: 100vh;
+}
+
+#Board-wrapper button:focus {
+  outline: none;
 }
 
 #Board-wrapper p {
@@ -237,15 +252,94 @@
 
 .crtList {
   background-color: #EBECF0;
-  margin: 0px;
+  position: relative;
+  top: -40px;
+  width: 250px !important;
+  border: 1px transparent solid;
+  border-radius: 3px;
 }
 
 .crtList input {
-  width: 100px;
-  height: 5px;
+  width: 226px;
+  height: 20px;
+  margin: 5px;
+  padding: 5px;
+  margin-bottom: 0px;
+  margin-top: 4px;
+  position: relative;
+  top: 1px;
+}
+
+.crtList button {
+  margin: 5px;
+  margin-top: 0px;
+  height: 30px;
+  padding-left: 9px;
+  padding-right: 10px;
+  background-color:  #0f86cf;
+  color: white;
+  border: 1px transparent solid;
+  border-radius: 3px;
+}
+
+.crtList button:hover {
+  filter: brightness(115%);
 }
 
 input.addcard {
   width: 100px;
   height: 5px;
+}
+
+#no_crtList {
+  background: url('https://api.iconify.design/octicon:x-16.svg') no-repeat center center / contain;
+  width: 25px;
+  margin: 0px;
+  position: relative;
+  top: 8px;
+}
+
+#no_crtList:focus {
+  outline: none;
+}
+
+#AddCard {
+  width: auto !important;
+  margin-right: 5px;
+  margin-top: 0px;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color:  #0f86cf !important;
+  color: white;
+  border: 1px transparent solid;
+  border-radius: 3px;
+  width: 
+}
+
+.crtCard button #AddCard:hover {
+  background-color:  #0f86cf !important;
+  filter: brightness(110%) !important;
+}
+
+.crtCard input {
+  background-color: transparent;
+  border: 1px transparent solid;
+
+}
+
+#crtCard_inputWrapper {
+  background-color: white;
+  padding: 10px;
+  padding-bottom: 30px;
+  margin-top: 10px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  box-shadow: 0px 2px 2px lightgray;
+  border: 1px transparent solid;
+}
+
+.crtCard input:focus {
+  outline: none;
 }
