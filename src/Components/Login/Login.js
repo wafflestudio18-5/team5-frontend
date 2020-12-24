@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import SocialLoginButtons from '../SignUp/SocialLoginButtons.js';
 import trelloLogo from '../SignUp/trello-logo-blue.svg';
 import atlassianLogo from '../SignUp/atlassian-logo-blue.svg';
+import { useUserContext } from '../../Contexts/User';
 
 function Login() {
-
+  const {loginReqByPW, loginReqBySC} = useUserContext();
   const [email, setEmail] = React.useState("");
   const [pw, setPw] = React.useState("");
 
@@ -24,8 +25,10 @@ function Login() {
     setPw(e.target.value);
   }
 
+  // login button
   function onClick(e) {
     console.log("LOG IN as ", email, pw);
+    loginReqByPW(email, pw);
   }
    
   return (

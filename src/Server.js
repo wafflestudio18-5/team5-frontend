@@ -30,6 +30,9 @@ export const get = async (uri, data) => {
 
 export const put = async (uri, data) => {
   switch (uri) {
+    case '/api/v1/user/logout':
+      console.log('로그아웃 하고 싶대요');
+      break;
   }
 };
 
@@ -38,8 +41,10 @@ export const post = async (uri, data) => {
   let ids;
   let board;
   switch (uri) {
+    case '/api/v1/user/login':
+      // ㅠ
+      break;
     case "/api/v1/board":
-
       response = await axios.get(`${host}/ids`);
       ids = response.data;
       ids.nboards++;

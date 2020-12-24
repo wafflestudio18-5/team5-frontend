@@ -1,41 +1,44 @@
-import React from 'react';
-import './SignUp.css';
-import google from './logo/google.png';
-import microsoft from './logo/microsoft.jpg';
-import apple from './logo/apple.jpg';
+import React from "react";
+import "./SignUp.css";
+import { GoogleLogin } from "react-google-login";
+import { useUserContext } from "../../Contexts/User";
+/*
+import MicrosoftLogin from "react-microsoft-login";
+import AppleLogin from "react-apple-login";
+*/
+
+const googleCID = '260979945174-ma3ulmo5p6mqd1jg5frkvrfpk1jra14v.apps.googleusercontent.com';
 
 function SocialLoginButtons({ login }) {
+    const { loginReqBySC } = useUserContext();
 
-    function googleClick(e) {
-        if (login) {
-            console.log("LOGIN with GOOGLE!");
-        } else {
-            console.log("SIGNUP with GOOGLE!");
-        }
-    }
+  const onGoogleSuccess = (res) =>{
+    loginReqBySC('Google', res.accessToken);
+  }
 
-    function microsoftClick(e) {
-        if (login) {
-            console.log("LOGIN with MICROSOFT!");
-        } else {
-            console.log("SIGNUP with MICROSOFT!");
-        }
-    }
+  const onGoogleFail = (err) => {
+    console.log(err);
+  }
 
-    function appleClick(e) {
-        if (login) {
-            console.log("LOGIN with APPLE!");
-        } else {
-            console.log("SIGNUP with APPLE!");
-        }
-    }
+  return (
+    <>
+      <p id="signup-or" className="center">
+        OR
+      </p>
 
-    return (
-        <><p id="signup-or" className="center">OR</p>
-        <button onClick={googleClick} className="social"><img alt="logo-google" className="logo-google" src={google}/>Continue with Google</button><br/>
-        <button onClick={microsoftClick} className="social"><img alt="logo-microsoft" className="logo-microsoft" src={microsoft}/>Continue with Microsoft</button><br/>
-        <button onClick={appleClick} className="social"><img alt="logo-apple" className="logo-apple" src={apple}/>Continue with Apple</button><br/></>
-)
+      <GoogleLogin
+        clientId={googleCID}
+        buttonText={"Continue with google"}
+        onSuccess={onGoogleSuccess}
+        onFailure={onGoogleFail}
+      />
+      {
+        // 얘네 넣기 너무 복잡해서 일단 좀만 뒤로 미루겠습니다ㅠㅠ
+        // <MicrosoftLogin clientId={"YOUR_CLIENT_ID"} authCallback={authHandler} />
+        // <AppleLogin />
+      }
+    </>
+  );
 }
 
 export default SocialLoginButtons;
