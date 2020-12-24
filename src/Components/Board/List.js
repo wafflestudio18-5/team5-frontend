@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Card from "./Card.js";
 import "./Board.css";
 
 function List({ board, data, postCard }) {
+  const newCardButton = useRef();
+  const newCardInput = useRef();
   const [crtCard, setCrtCard] = useState(false);
   const [cardInput, setCardInput] = useState("");
 
@@ -19,12 +21,18 @@ function List({ board, data, postCard }) {
 
   const scroll = (id) => {
     var scroll = document.getElementById(id);
-    scroll.scrollTop = scroll.scrollHeight + 50;
+    //scroll.scrollTop = scroll.scrollHeight + 500000;
+    scroll.scrollTo({
+      top: scroll.scrollHeight,
+      behavior: 'smooth', // or can get `auto` variable
+    });
   }
 
   const addCard = () => {
     setCrtCard(true);
-    scroll(data.id)
+    scroll(data.id);
+    newCardButton.current.focus({preventScroll:false});
+    newCardInput.current.focus({preventScroll:false});
   }
 
   return (
@@ -35,24 +43,24 @@ function List({ board, data, postCard }) {
           {data.cards.map((card, index) => (
             <Card card={card} key={index} index={index} />
           ))}
-            {crtCard? <div className="crtCard">
+            <div className="crtCard" style={crtCard? {} : {display: 'none'}}>
               <div id="crtCard_inputWrapper">
                 <input
                   className="addCard"
                   onChange={(e) => setCardInput(e.target.value)}
                   value={cardInput}
+                  ref={newCardInput}
                   placeholder="Enter a title for this card..."
                 />
               </div>
-              <button id="AddCard" onClick={createCard}>Add Card</button>
+              <button id="AddCard" ref={newCardButton} onClick={createCard}>Add Card</button>
               <button id="no_crtList" onClick={no_crtCard}></button>
-            </div> : <div/>}
+            </div>
         </div>
       </div>
-      {crtCard? <div/> :
-           <button id="board-addcard" onClick={addCard}>
+          <button style={crtCard? {display: 'none'} : {}} id="board-addcard" onClick={addCard}>
             <span id="board-addcard-plus">十 </span>Add another card
-          </button>}      
+          </button> 
     </div>
   );
 }
