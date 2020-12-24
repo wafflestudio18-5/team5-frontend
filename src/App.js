@@ -2,11 +2,17 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { contexts, AppProvider, useUserContext } from "./Contexts";
 import { routes } from "./Routes";
 import { HeaderPage } from "./Pages";
+import { useEffect } from "react";
 
 
 function App() {
-  // TODO: 실행 전에 login되어 있는지 먼저 확인해야 함
-  const { logged_in, logged_user_data } = useUserContext();
+  const { logged_in, logged_user_data, loadLoginInfo } = useUserContext();
+
+
+  useEffect(() => {
+    loadLoginInfo();
+  }, []);
+
 
   if (logged_in) {
     return (

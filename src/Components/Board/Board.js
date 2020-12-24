@@ -77,7 +77,6 @@ function Board({ board, postList, postCard }) {
                 )
               }
             </div>
-
           </div>
         </div>
       </div>
