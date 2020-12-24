@@ -62,7 +62,6 @@ function Board({ board, postList, postCard }) {
                 <span id="board-addlist-plus">+</span>Add another list
               </button>
               {crtList ? (
-
                   <div className="crtList">
                       <input
                         placeholder="Enter list title..."

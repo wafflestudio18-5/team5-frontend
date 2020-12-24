@@ -312,6 +312,7 @@ input.addcard {
 
 .crtCard button #AddCard:hover {
   background-color:  #0f86cf !important;
+  filter: brightness(110%) !important;
 }
 
 .crtCard input {
