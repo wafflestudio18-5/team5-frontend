@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 
 function App() {
-  const { logged_in, logged_user_data, loadLoginInfo } = useUserContext();
+  const { logged, logged_user_data, loadLoginInfo } = useUserContext();
 
 
   useEffect(() => {
@@ -14,7 +14,7 @@ function App() {
   }, []);
 
 
-  if (logged_in) {
+  if (logged) {
     return (
       <AppProvider contexts={contexts}>
         <BrowserRouter>
