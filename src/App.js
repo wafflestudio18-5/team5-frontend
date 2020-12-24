@@ -1,24 +1,23 @@
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { contexts, AppProvider, useUserContext } from "./Contexts";
+import { useUserContext } from "./Contexts";
 import { routes } from "./Routes";
 import { HeaderPage } from "./Pages";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
 
 function App() {
-  const { logged, logged_user_data, loadLoginInfo } = useUserContext();
-
+  const { logged, user, loadLoginInfo } = useUserContext();
 
   useEffect(() => {
     loadLoginInfo();
   }, []);
 
+  console.log("App render");
 
-  if (logged) {
-    return (
-      <AppProvider contexts={contexts}>
-        <BrowserRouter>
-          <HeaderPage user_data={logged_user_data} />
+  return (
+    <BrowserRouter>
+      {logged ? (
+        <>
+          <HeaderPage user_data={user} />
           <Switch>
             <Route
               path={routes.BoardsPage.path}
@@ -28,16 +27,16 @@ function App() {
               path={routes.BoardPage.path}
               component={routes.BoardPage.component}
             />
-            <Route path={routes.CardPage.path} component={routes.CardPage.component} />
-            <Redirect to='/username/boards'/>
-          </Switch>
-        </BrowserRouter>
-        </AppProvider>
-    );
-  } else {
-    return (
-      <AppProvider contexts = {contexts}>
-        <BrowserRouter>
+            <Route
+              path={routes.CardPage.path}
+              component={routes.CardPage.component}
+            />
+            <Redirect to="/username/boards" />
+          </Switch>{" "}
+        </>
+      ) : (
+        <>
+          {" "}
           <Switch>
             <Route
               path={routes.LoginPage.path}
@@ -47,12 +46,15 @@ function App() {
               path={routes.SignUpPage.path}
               component={routes.SignUpPage.component}
             />
-            <Route path={routes.HomePage.path} component={routes.HomePage.component} />
-          </Switch>
-        </BrowserRouter>
-      </AppProvider>
-    );
-  }
+            <Route
+              path={routes.HomePage.path}
+              component={routes.HomePage.component}
+            />
+          </Switch>{" "}
+        </>
+      )}
+    </BrowserRouter>
+  );
 }
 
 export default App;

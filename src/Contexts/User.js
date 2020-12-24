@@ -19,21 +19,20 @@ const defaultUser = {
   logged: false,
   user: {
     id: 1,
-    username: 'mina',
-    email: '123456789@snu.ac.kr',
+    username: "mina",
+    email: "123456789@snu.ac.kr",
     firstname: null,
     lastname: null,
-    access_type: 'OAUTH'
+    access_type: "OAUTH",
   },
-  users: [
-    
-  ],
+  users: [],
   loginReqByPW: () => {},
   loginReqBySC: () => {},
   logoutReq: () => {},
   fetchUserList: () => {},
   saveLoginInfo: () => {},
-  loadLoginInfo: () => {}
+  loadLoginInfo: () => {},
+  setLog: () => {}, // TODO: 개발을 위한 함수, 최종 단계에서는 삭제해야 함.
 };
 
 const UserContext = createContext(defaultUser);
@@ -45,78 +44,88 @@ const UserProvider = (props) => {
     const loginInfo = {
       grantType: "PASSWORD",
       email: email,
-      password: pw
+      password: pw,
     };
-    const response = await post('/api/v1/user/login', loginInfo);
+    const response = await post("/api/v1/user/login", loginInfo);
 
     setState((state) => {
       return {
         ...state,
         logged: true,
-        user: response.data
-      }
+        user: response.data,
+      };
     });
 
     saveLoginInfo(response.data);
   };
 
   const saveLoginInfo = (loginInfo) => {
-    window.localStorage.setItem('loginInfo', loginInfo);
-  }
-  
+    window.localStorage.setItem("loginInfo", loginInfo);
+  };
+
+  const setLog = (log) => {
+    setState((state) => {
+      console.log(`set logged from ${state.logged} to ${log}`);
+      return {
+        ...state,
+        logged: log,
+      };
+    });
+  };
+
   const loadLoginInfo = () => {
-    const info = window.localStorage.getItem('loginInfo');
-    if(info) {
-      setState(state => ({
+    const info = window.localStorage.getItem("loginInfo");
+    if (info) {
+      setState((state) => ({
         ...state,
         logged: true,
-        user: info
+        user: info,
       }));
     } else {
       logoutReq();
     }
-  }
+  };
 
   const loginReqBySC = async (authProvider, accessToken) => {
     const loginInfo = {
       grantType: "OAUTH",
       authProvider: authProvider,
-      accessToken: accessToken
+      accessToken: accessToken,
     };
-    const response = await post('/api/v1/user/login', loginInfo);
+    const response = await post("/api/v1/user/login", loginInfo);
 
     setState((state) => {
       return {
         ...state,
         logged: true,
-        user: response.data
-      }
+        user: response.data,
+      };
     });
 
     saveLoginInfo(response.data);
   };
 
   const logoutReq = () => {
-    const response = put('/api/v1/user/logout', {});
+    const response = put("/api/v1/user/logout", {});
 
     setState((state) => {
       return {
         ...state,
         user: {},
-        logged: false
-      }
+        logged: false,
+      };
     });
 
     window.sessionStorage.clear();
   };
 
   const fetchUserList = async () => {
-    const response = await get('api/v1/user/userlist');
+    const response = await get("api/v1/user/userlist");
     setState((state) => {
       return {
         ...state,
-        users: response.data
-      }
+        users: response.data,
+      };
     });
   };
 
@@ -127,7 +136,8 @@ const UserProvider = (props) => {
     logoutReq,
     fetchUserList,
     saveLoginInfo,
-    loadLoginInfo
+    loadLoginInfo,
+    setLog,
   };
 
   const [state, setState] = useState(userState);
