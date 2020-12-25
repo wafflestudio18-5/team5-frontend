@@ -10,12 +10,7 @@ function CardPage(props) {
   const name = id_and_name.replace(id + "-", "").replaceAll("-", " ");
 
   return(
-    <><BoardPage/>
-      <Route
-        path={routes.CardPage.path}
-        component={routes.CardPage.component}
-      />
-    <Card/></>
+    <><h1>Page Card Card.js</h1></>
   );
 }
 
