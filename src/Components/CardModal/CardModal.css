@@ -17,7 +17,7 @@
     background: transparent;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
     overflow-y: auto;
@@ -42,7 +42,7 @@
 .blank-for-card-modal {
     background-color: transparent;
     width: 650px !important;
-    height: 50px !important;
+    height: 500px !important;
 }
 
 #card-modal-top {
@@ -93,9 +93,6 @@
   background: url('https://api.iconify.design/octicon:x-16.svg') no-repeat center center / contain;
   width: 25px;
   margin: 0px;
-  position: relative;
-  top: 3px;
-  left: 360px;
 }
 
 #card-modal-x:focus {
