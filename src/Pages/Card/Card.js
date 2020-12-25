@@ -9,6 +9,8 @@ function CardPage(props) {
   const id = parseInt(id_and_name.split("-")[0]);
   const name = id_and_name.replace(id + "-", "").replaceAll("-", " ");
 
+  /*TODO 이 페이지 지워도 되지 않나?*/
+
   return(
     <><h1>Page Card Card.js</h1></>
   );

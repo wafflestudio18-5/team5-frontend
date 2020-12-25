@@ -1,0 +1,23 @@
+#card-modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
+    padding-top: 100px;
+}
+
+#card-modal {
+    background-color: #F4F5F7;
+    border: 1px transparent solid;
+    border-radius: 3px;
+    padding: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 650px;
+}

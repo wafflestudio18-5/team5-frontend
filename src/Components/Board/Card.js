@@ -8,7 +8,7 @@ function Card({ card, index }) {
     const [cardPage, setCardPage] = useState(false);
 
     /*TODO key = card.key */
-    const key = "keyBeforeBackendSetting";
+    const key = "def4u1tKey";
     const dashedName = card.name.replaceAll(" ", "-");
     const cardPath = "/c/" + key + "/" + String(card.id) + "-" + dashedName; 
 
@@ -25,7 +25,7 @@ function Card({ card, index }) {
           style={index === 0 ? { marginTop: 0 } : { marginTop: 10 }}>
           <p style={{wordBreak: "break-all", color: 'black'}}>{card.name}</p>
         </div>
-        {cardPage? <CardModal/> : <></>}
+        {cardPage? <CardModal card_key={key} card_id={card.id} card_name={card.name}/> : <></>}
       </>
     );
 }
