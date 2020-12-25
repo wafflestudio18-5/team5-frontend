@@ -17,7 +17,7 @@ function CardModal({card_key, card_id, card_name, exit}) {
         <div id="card-modal" onClick={console.log("modal!")}>
 
           <div id="card-modal-top">
-            <h3>Card named {card_name} <br/><br/><button id="card-modal-x">X</button></h3>
+            <h3>{card_name}<br/><br/><button id="card-modal-x">X</button></h3>
             <p>in list /*TODO listname*/</p>
           </div>
 
@@ -34,7 +34,7 @@ function CardModal({card_key, card_id, card_name, exit}) {
 
 export default CardModal;
 
-/*
+
           <div id="card-modal-bottom">
               <div id="card-modal-left" style={{columnWidth: 400}}>
                 <h4>Description</h4>
@@ -70,4 +70,3 @@ export default CardModal;
                   <button>Share</button>
               </div>
             </div>
-            */

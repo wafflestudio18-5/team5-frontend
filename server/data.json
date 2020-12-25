@@ -2,8 +2,8 @@
   "ids": {
     "nusers": 1,
     "nboards": 3,
-    "nlists": 11,
-    "ncards": 37,
+    "nlists": 14,
+    "ncards": 39,
     "nactivities": 0
   },
   "users": [
@@ -341,7 +341,16 @@
         {
           "id": 9,
           "name": "나나낭",
-          "cards": []
+          "cards": [
+            {
+              "id": 38,
+              "name": "꺄르륵",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            }
+          ]
         },
         {
           "id": 11,
@@ -389,7 +398,32 @@
     {
       "key": "boardkey3",
       "name": "board",
-      "lists": [],
+      "lists": [
+        {
+          "id": 12,
+          "name": "뀨? 리스트",
+          "cards": [
+            {
+              "id": 39,
+              "name": "카드카드 뀨뀨뀨",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "name": "리스트",
+          "cards": []
+        },
+        {
+          "id": 14,
+          "name": "리스트",
+          "cards": []
+        }
+      ],
       "id": 3
     }
   ]
