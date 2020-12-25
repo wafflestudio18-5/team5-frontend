@@ -168,6 +168,10 @@
   box-shadow: 0px 2px 2px lightgray;
 }
 
+.board-card:hover {
+  filter: brightness(97%);
+}
+
 #board-lists button#board-addlist {
   height: 40px;
   width: 250px !important;

@@ -1,28 +1,26 @@
 import React, { useState } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import "./Board.css";
 import { routes } from "../../Routes";
 
 function Card({ card, index }) {
 
-  const [cardPage, setCardPage] = useState(false);
+    /*TODO key = card.key */
+    const key = "keyBeforeBackendSetting";
+    const dashedName = card.name.replaceAll(" ", "-");
 
-  const cardClick = () => {
-    console.log("cardclick");
-    setCardPage(true);
-  }
+    const cardPath = "/c/" + key + "/" + String(card.id) + "-" + dashedName; 
+
     return (
       <>
-        <div className="board-card" 
-        onClick={cardClick}
-        style={index === 0 ? { marginTop: 0 } : { marginTop: 10 }}>
-          <p style={{wordBreak: "break-all"}}>{card.name}</p>
-        </div>
-        {cardPage? <Route path={routes.CardPage.path} component={routes.CardPage.component} /> : <div/>}
+        <Link to={cardPath} style={{ textDecoration: 'none' }}>
+          <div className="board-card" 
+          style={index === 0 ? { marginTop: 0 } : { marginTop: 10 }}>
+            <p style={{wordBreak: "break-all", color: 'black'}}>{card.name}</p>
+          </div>
+        </Link>
       </>
     );
 }
 
 export default Card;
-
-//        
