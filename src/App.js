@@ -27,10 +27,6 @@ function App() {
               path={routes.BoardPage.path}
               component={routes.BoardPage.component}
             />
-            <Route
-              path={routes.CardPage.path}
-              component={routes.CardPage.component}
-            />
             <Redirect to="/username/boards" />
           </Switch>{" "}
         </>
