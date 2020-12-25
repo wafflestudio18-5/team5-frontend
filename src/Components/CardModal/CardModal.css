@@ -16,7 +16,8 @@
     max-height: 100vh !important;
     background: transparent;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     overflow-y: auto;
@@ -27,7 +28,7 @@
     background-color: #F4F5F7;
     border: 1px transparent solid;
     border-radius: 3px;
-    padding: 20px;
+    padding: 15px;
     width: 650px;
     display: flex;
     flex-direction: column;
@@ -37,7 +38,7 @@
 .blank-for-card-modal {
     background-color: transparent;
     width: 650px !important;
-    height: 7000px !important;
+    height: 70px !important;
 }
 
 #card-modal-top {
@@ -53,11 +54,32 @@
 #card-modal-left {
     display: flex;
     flex-direction: column;
-    width: 400px;
-    margin-right: 20px;
+    width: 500px !important;
+    margin-right: 15px;
 }
 
 #card-modal-right {
     display: flex;
+    width: 140px !important;
     flex-direction: column;
+}
+
+#card-modal-right button {
+    width: 140px !important;
+    align-items: flex-start;
+    margin: 3px;
+}
+
+#card-modal-right button:hover {
+    filter: brightness(105%) !important;
+}
+
+#card-comment {
+    outline: none !important;
+    padding: 7px;
+    border: 1px lightgray solid;
+}
+
+#card-modal p {
+    font-size: 12px;
 }
