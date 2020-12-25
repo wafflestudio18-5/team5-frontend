@@ -14,6 +14,8 @@ function SocialLoginButtons({ login }) {
 
   const onGoogleSuccess = (res) =>{
     loginReqBySC('Google', res.accessToken);
+    console.log('Google response: ');
+    console.log(res);
   }
 
   const onGoogleFail = (err) => {
