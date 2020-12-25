@@ -21,19 +21,6 @@ function CardModal({card_key, card_id, card_name, exit}) {
             <p>in list /*TODO listname*/</p>
           </div>
 
-          <div id="card-modal-bottom"/>        
-
-        </div>
-        
-        <div className="blank-for-card-modal"/>
-
-      </div>
-    </div>
-  )
-}
-
-export default CardModal;
-
 
           <div id="card-modal-bottom">
               <div id="card-modal-left" style={{columnWidth: 400}}>
@@ -70,3 +57,13 @@ export default CardModal;
                   <button>Share</button>
               </div>
             </div>
+        </div>
+        
+        <div className="blank-for-card-modal"/>
+
+      </div>
+    </div>
+  )
+}
+
+export default CardModal;
