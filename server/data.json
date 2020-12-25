@@ -3,7 +3,7 @@
     "nusers": 1,
     "nboards": 3,
     "nlists": 11,
-    "ncards": 36,
+    "ncards": 37,
     "nactivities": 0
   },
   "users": [
@@ -357,7 +357,16 @@
         {
           "id": 3,
           "name": "제발 돼라",
-          "cards": []
+          "cards": [
+            {
+              "id": 37,
+              "name": "카드쟝",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            }
+          ]
         },
         {
           "id": 4,

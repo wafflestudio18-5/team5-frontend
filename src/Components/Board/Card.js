@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { Route, Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import "./Board.css";
-import { routes } from "../../Routes";
 
 function Card({ card, index }) {
 

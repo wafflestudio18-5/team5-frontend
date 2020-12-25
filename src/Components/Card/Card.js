@@ -1,8 +1,8 @@
 function Card() {
 
   return(
-    <div>
-      Card - Not implemented yet
+    <div id="Card-wrapper">
+      <br/><br/><br/>Card - Not implemented yet
     </div>
   )
 }
