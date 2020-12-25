@@ -18,15 +18,15 @@ function CardModal({card_key, card_id, card_name, exit}) {
 
           <div id="card-modal-top">
             <h3>{card_name}<button id="card-modal-x"/></h3>
-            <p>in list /*TODO listname*/</p>
+            <p id="card-modal-listname">in list /*TODO listname*/</p>
           </div>
 
 
           <div id="card-modal-bottom">
               <div id="card-modal-left" style={{columnWidth: 400}}>
-                <h4>Description</h4>
-                <button>Add a more detailed description...</button>
-                <h4>Activity</h4>
+                <p className="title">Description</p>
+                <button id="card-modal-add-descrip">Add a more detailed description...</button>
+                <p className="title"><br/>Activity</p>
                 <button>Hide Details</button>
                 <p>TODO PIC</p>
                 <input id="card-comment" placeholder="Write a comment..."/>

@@ -29,11 +29,14 @@
     border: 1px transparent solid;
     border-radius: 3px;
     padding: 15px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 30px;
     width: 650px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    z-index: 999;
+    z-index: 999 !important;
 }
 
 .blank-for-card-modal {
@@ -61,12 +64,13 @@
 
 #card-modal-right {
     display: flex;
-    width: 140px !important;
+    margin-top: 15px;
+    width: 135px !important;
     flex-direction: column;
 }
 
 #card-modal-right button {
-    width: 140px !important;
+    width: 135px !important;
     align-items: flex-start;
     margin: 3px;
 }
@@ -90,9 +94,21 @@
   width: 25px;
   margin: 0px;
   position: relative;
-  top: 8px;
+  top: 3px;
+  left: 360px;
 }
 
 #card-modal-x:focus {
   outline: none;
+}
+
+#card-modal p.title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+#card-modal-listname {
+    position: relative;
+    top: -7px;
 }
