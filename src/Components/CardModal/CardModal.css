@@ -4,12 +4,23 @@
     left: 0;
     width: 100vw !important;
     height: 100vh !important;
-    background: transparent;
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px transparent solid;
+}
+
+#card-modal-wrapper-2 {
+    width: 100vw !important;
+    max-height: 100vh !important;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     overflow-y: scroll;
-    padding-top: 100px;
+    border: 1px transparent solid;
 }
 
 #card-modal {
@@ -17,7 +28,36 @@
     border: 1px transparent solid;
     border-radius: 3px;
     padding: 20px;
-    margin-top: 50px;
-    margin-bottom: 50px;
     width: 650px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.blank-for-card-modal {
+    background-color: transparent;
+    width: 650px !important;
+    height: 7000px !important;
+}
+
+#card-modal-top {
+    display: flex;
+    flex-direction: column;
+}
+
+#card-modal-bottom {
+    display: flex;
+    flex-direction: row;
+}
+
+#card-modal-left {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin-right: 20px;
+}
+
+#card-modal-right {
+    display: flex;
+    flex-direction: column;
 }
