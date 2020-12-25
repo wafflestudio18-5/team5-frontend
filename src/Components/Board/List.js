@@ -53,7 +53,7 @@ function List({ board, data, postCard }) {
                 />
               </div>
               <button id="AddCard" ref={newCardButton} onClick={createCard}>Add Card</button>
-              <button id="no_crtList" onClick={no_crtCard}></button>
+              <button id="no_crtCard" onClick={no_crtCard}></button>
             </div>
         </div>
       </div>
