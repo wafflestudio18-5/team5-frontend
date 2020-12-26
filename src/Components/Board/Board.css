@@ -168,6 +168,10 @@
   box-shadow: 0px 2px 2px lightgray;
 }
 
+.board-card:hover {
+  filter: brightness(97%);
+}
+
 #board-lists button#board-addlist {
   height: 40px;
   width: 250px !important;
@@ -297,9 +301,23 @@ input.addcard {
   margin: 0px;
   position: relative;
   top: 8px;
+  z-index: 0 !important;
 }
 
 #no_crtList:focus {
+  outline: none;
+}
+
+#no_crtCard {
+  background: url('https://api.iconify.design/octicon:x-16.svg') no-repeat center center / contain;
+  width: 25px;
+  margin: 0px;
+  position: relative;
+  top: 8px;
+  z-index: 0 !important;
+}
+
+#no_crtCard:focus {
   outline: none;
 }
 

@@ -3,5 +3,5 @@ export { Login } from './Login';
 export { SignUp } from './SignUp';
 export { Board } from './Board';
 export { Boards } from './Boards';
-export { Card } from './Card';
+export { CardModal } from './CardModal';
 export { Header } from './Header';

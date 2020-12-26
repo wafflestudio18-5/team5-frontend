@@ -1,0 +1,117 @@
+#card-modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px transparent solid;
+}
+
+#card-modal-wrapper-2 {
+    width: 100vw !important;
+    max-height: 100vh !important;
+    background: transparent;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    border: 1px transparent solid;
+}
+
+#card-modal {
+    background-color: #F4F5F7;
+    border: 1px transparent solid;
+    border-radius: 3px;
+    padding: 15px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    width: 650px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 999 !important;
+}
+
+.blank-for-card-modal {
+    background-color: transparent;
+    width: 650px !important;
+    height: 500px !important;
+}
+
+#card-modal-top {
+    display: flex;
+    flex-direction: column;
+}
+
+#card-modal-bottom {
+    display: flex;
+    flex-direction: row;
+}
+
+#card-modal-left {
+    display: flex;
+    flex-direction: column;
+    width: 500px !important;
+    margin-right: 15px;
+}
+
+#card-modal-right {
+    display: flex;
+    margin-top: 15px;
+    width: 135px !important;
+    flex-direction: column;
+}
+
+#card-modal-right button {
+    width: 135px !important;
+    align-items: flex-start;
+    margin: 3px;
+}
+
+#card-modal-right button:hover {
+    filter: brightness(105%) !important;
+}
+
+#card-comment {
+    outline: none !important;
+    padding: 7px;
+    border: 1px lightgray solid;
+}
+
+#card-modal p {
+    font-size: 12px;
+}
+
+#card-modal-x {
+  background: url('https://api.iconify.design/octicon:x-16.svg') no-repeat center center / contain;
+  width: 25px;
+  margin: 0px;
+}
+
+#card-modal-x:focus {
+  outline: none;
+}
+
+#card-modal p.title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+#card-modal-listname {
+    position: relative;
+    top: -7px;
+}
+
+#card-modal-setting {
+    background: url('https://api.iconify.design/octicon:gear-24.svg') no-repeat center center / contain;
+    width: 20px;
+    height: 20px;
+}

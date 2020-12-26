@@ -40,7 +40,7 @@ function List({ board, data, postCard }) {
       <div className="board-cards" id={data.id} ref={scrollRef}>
         <div className={crtCard ? "board-cards-crtCard" : "board-cards-crtCard-x"}>
           {data.cards.map((card, index) => (
-            <Card card={card} key={index} index={index} />
+            <Card card={card} key={index} index={index} board_key={board.key} board_name={board.name}/>
           ))}
             <div className="crtCard" style={crtCard? {} : {display: 'none'}}>
               <div id="crtCard_inputWrapper">
@@ -53,7 +53,7 @@ function List({ board, data, postCard }) {
                 />
               </div>
               <button id="AddCard" ref={newCardButton} onClick={createCard}>Add Card</button>
-              <button id="no_crtList" onClick={no_crtCard}></button>
+              <button id="no_crtCard" onClick={no_crtCard}></button>
             </div>
         </div>
       </div>
