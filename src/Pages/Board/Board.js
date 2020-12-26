@@ -1,12 +1,13 @@
 import { Board } from "../../Components";
 import React, { useEffect } from 'react';
-import { useBoardContext } from '../../Contexts';
+import { useBoardContext, useUserContext } from '../../Contexts';
 import { post } from "../../Server";
 
 //  Board: { path: '/b/:board_code/:board_name', component: Board }
 
 function BoardPage({ match }) {
   const { board, fetchBoard } = useBoardContext();
+  const { users, fetchUserList } = useUserContext();
 
   const fetch = async (match) => {
     fetchBoard({key: match.params.board_key});
@@ -32,7 +33,7 @@ function BoardPage({ match }) {
 
   return (
     <>
-      <Board board={board} postList={postList} postCard={postCard} />
+      <Board board={board} postList={postList} postCard={postCard} users={users} />
     </>
   );
 }

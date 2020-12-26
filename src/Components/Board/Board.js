@@ -1,26 +1,36 @@
 import "./Board.css";
 import { useState } from "react";
 import List from "./List.js";
+import { post } from "../../Server";
 
-function Board({ board, postList, postCard }) {
+function Board({ users, board, postList, postCard }) {
   const [crtList, setCrtList] = useState(false);
   const [listInput, setListInput] = useState("");
+  const [invite, setInvite] = useState(false);
+
+  const toggleInvite = () => {
+    setInvite(true);
+  };
+
+  const inviteMember = (id, username) => {
+    post("/api/v1/board/invite", { id: id, username: username });
+  };
 
   const createList = () => {
     setCrtList(false);
     postList(board.id, listInput);
-    setListInput('');
-  }
+    setListInput("");
+  };
 
   const no_crtList = () => {
     setCrtList(false);
     setListInput("");
-  }
+  };
 
   if (!board) return <div>Loading...</div>;
   return (
     <div id="Board-wrapper">
-      <div id="board-header">
+      <header id="board-header">
         <div id="board-header-left">
           <select name="language" defaultValue="English (US)">
             <option value="Board">Board</option>
@@ -40,7 +50,26 @@ function Board({ board, postList, postCard }) {
           <div id="board-profile-images">
             <p>프사들동글동글</p>
           </div>
-          <button>Invite</button>
+          <div className="invite-wrapper">
+            <button className="inviteButton" onClick={toggleInvite}>
+              Invite
+            </button>
+            {invite ? (
+              <div className="invite-modal">
+                <h3>Invite to Board</h3>
+                <hr />
+                {users.map((item, index) => (
+                  <h4
+                    key={index}
+                    onClick={() => inviteMember(board.id, item.username)}
+                  >
+                    {" "}
+                    {item.username}{" "}
+                  </h4>
+                ))}
+              </div>
+            ) : null}
+          </div>
         </div>
 
         <div id="board-header-right">
@@ -48,7 +77,7 @@ function Board({ board, postList, postCard }) {
           <button>Butler</button>
           <button>Show Menu</button>
         </div>
-      </div>
+      </header>
 
       <div id="board-main">
         <div id="board-lists">
@@ -62,20 +91,18 @@ function Board({ board, postList, postCard }) {
                 <span id="board-addlist-plus">+</span>Add another list
               </button>
               {crtList ? (
-                  <div className="crtList">
-                      <input
-                        placeholder="Enter list title..."
-                        onChange={(e) => setListInput(e.target.value)}
-                        value={listInput}
-                      />
-                      <button onClick={createList}>Add List</button>
-                      <button id="no_crtList" onClick={no_crtList}></button>
-                  </div>
-                ) : (
-                  <>
-                  </>
-                )
-              }
+                <div className="crtList">
+                  <input
+                    placeholder="Enter list title..."
+                    onChange={(e) => setListInput(e.target.value)}
+                    value={listInput}
+                  />
+                  <button onClick={createList}>Add List</button>
+                  <button id="no_crtList" onClick={no_crtList}></button>
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </div>

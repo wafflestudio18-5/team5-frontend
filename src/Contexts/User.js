@@ -120,11 +120,12 @@ const UserProvider = (props) => {
   };
 
   const fetchUserList = async () => {
-    const response = await get("api/v1/user/userlist");
+    const response = await get("/api/v1/user/userlist");
+    
     setState((state) => {
       return {
         ...state,
-        users: response.data,
+        users: response,
       };
     });
   };
