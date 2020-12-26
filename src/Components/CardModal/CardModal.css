@@ -109,3 +109,9 @@
     position: relative;
     top: -7px;
 }
+
+#card-modal-setting {
+    background: url('https://api.iconify.design/octicon:gear-24.svg') no-repeat center center / contain;
+    width: 20px;
+    height: 20px;
+}

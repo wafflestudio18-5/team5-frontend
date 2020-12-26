@@ -34,8 +34,7 @@ function CardModal({card_key, card_id, card_name, exit}) {
               </div>
 
               <div id="card-modal-right" style={{columnWidth: 200}}>
-                <p>SUGGESTED</p>
-                  <button>톱니TODO</button>
+                <p>SUGGESTED <button id="card-modal-setting"></button></p>
                 <p><br/>ADD TO CARD</p>
                   <button>Members</button>
                   <button>Labels</button>
