@@ -1,7 +1,7 @@
 {
   "ids": {
     "nusers": 1,
-    "nboards": 3,
+    "nboards": 4,
     "nlists": 14,
     "ncards": 39,
     "nactivities": 0
@@ -425,6 +425,12 @@
         }
       ],
       "id": 3
+    },
+    {
+      "key": "boardkey4",
+      "name": "fdjksafk",
+      "lists": [],
+      "id": 4
     }
   ]
 }

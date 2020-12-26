@@ -48,13 +48,10 @@ function CardModal({card_key, card_id, card_name, exit}) {
                   <button>Upgrade Team</button>
                 <p><br/>BUTLER <span>NEW</span> <span>TODO</span></p>
                   <button>+ Add Card Button</button>
-                <p><br/>ACTIONS</p>
-                  <button>Move</button>
-                  <button>Copy</button>
-                  <button>Make Template</button>
-                  <button>Watch</button>
-                  <button>Archive</button>
-                  <button>Share</button>
+
+
+
+
               </div>
             </div>
         </div>
@@ -67,3 +64,14 @@ function CardModal({card_key, card_id, card_name, exit}) {
 }
 
 export default CardModal;
+
+
+/*
+                <p><br/>ACTIONS</p>
+                  <button>Move</button>
+                  <button>Copy</button>
+                  <button>Make Template</button>
+                  <button>Watch</button>
+                  <button>Archive</button>
+                  <button>Share</button>
+                  */
