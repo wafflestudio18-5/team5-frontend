@@ -34,27 +34,22 @@ function CardModal({card_key, card_id, card_name, exit}) {
               </div>
 
               <div id="card-modal-right" style={{columnWidth: 200}}>
-                <p>SUGGESTED <button id="card-modal-setting"></button></p>
+                <p>SUGGESTED</p>
                 <p><br/>ADD TO CARD</p>
                   <button>Members</button>
                   <button>Labels</button>
                   <button>Checklist</button>
                   <button>Due Date</button>
-                  <button>Attachment</button>
-                  <button>Cover</button>
                 <p><br/>POWER-UPS</p>
                   <button>+ Add Power-Ups</button>
                   <p>Get unlimited Power-Ups, plus much more.</p>
                   <button>Upgrade Team</button>
                 <p><br/>BUTLER <span>NEW</span> <span>TODO</span></p>
                   <button>+ Add Card Button</button>
-                <p><br/>ACTIONS</p>
-                  <button>Move</button>
-                  <button>Copy</button>
-                  <button>Make Template</button>
-                  <button>Watch</button>
-                  <button>Archive</button>
-                  <button>Share</button>
+
+
+
+
               </div>
             </div>
         </div>
@@ -67,3 +62,14 @@ function CardModal({card_key, card_id, card_name, exit}) {
 }
 
 export default CardModal;
+
+
+/*
+                <p><br/>ACTIONS</p>
+                  <button>Move</button>
+                  <button>Copy</button>
+                  <button>Make Template</button>
+                  <button>Watch</button>
+                  <button>Archive</button>
+                  <button>Share</button>
+                  */
