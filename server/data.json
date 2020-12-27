@@ -12,7 +12,24 @@
       "username": "mina",
       "email": "123456789@snu.ac.kr",
       "firstname": "twice",
-      "lastname": "once"
+      "lastname": "once",
+      "access_type": "OAUTH"
+    },
+    {
+      "id": 2,
+      "username": "minb",
+      "email": "123456789@snu.ac.kr",
+      "firstname": null,
+      "lastname": null,
+      "access_type": "PASSWORD"
+    },
+    {
+      "id": 3,
+      "username": "minc",
+      "email": "123456789@snu.ac.kr",
+      "firstname": null,
+      "lastname": null,
+      "access_type": "PASSWORD"
     }
   ],
   "boards": [

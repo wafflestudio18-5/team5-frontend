@@ -5,10 +5,11 @@ import { HeaderPage } from "./Pages";
 import { useEffect, useState } from "react";
 
 function App() {
-  const { logged, user, loadLoginInfo } = useUserContext();
+  const { logged, user, loadLoginInfo, fetchUserList } = useUserContext();
 
   useEffect(() => {
     loadLoginInfo();
+    fetchUserList();
   }, []);
 
   console.log("App render");
