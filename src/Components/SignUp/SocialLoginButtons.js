@@ -2,24 +2,28 @@ import React from "react";
 import "./SignUp.css";
 import { GoogleLogin } from "react-google-login";
 import { useUserContext } from "../../Contexts/User";
-/*
-import MicrosoftLogin from "react-microsoft-login";
-import AppleLogin from "react-apple-login";
-*/
+import FacebookLogin from "react-facebook-login";
 
-const googleCID = '260979945174-ma3ulmo5p6mqd1jg5frkvrfpk1jra14v.apps.googleusercontent.com';
+const googleCID =
+  "260979945174-ma3ulmo5p6mqd1jg5frkvrfpk1jra14v.apps.googleusercontent.com";
 
 function SocialLoginButtons({ login }) {
-    const { loginReqBySC } = useUserContext();
+  const { loginReqBySC } = useUserContext();
 
-  const onGoogleSuccess = (res) =>{
-    loginReqBySC('Google', res.accessToken);
-    console.log('Google response: ');
+  const onGoogleSuccess = (res) => {
+    loginReqBySC("Google", res.tokenObj.id_token);
+    console.log("[debug] Google response: ");
     console.log(res);
-  }
+  };
 
   const onGoogleFail = (err) => {
     console.log(err);
+  };
+
+  const onFacebook = (res) => {
+    loginReqBySC("Facebook", res.email);
+    console.log("[debug] Facebook response: ")
+    console.log(res);
   }
 
   return (
@@ -27,18 +31,20 @@ function SocialLoginButtons({ login }) {
       <p id="signup-or" className="center">
         OR
       </p>
-
       <GoogleLogin
+        cssClass="google-login-button"
         clientId={googleCID}
         buttonText={"Continue with google"}
         onSuccess={onGoogleSuccess}
         onFailure={onGoogleFail}
       />
-      {
-        // 얘네 넣기 너무 복잡해서 일단 좀만 뒤로 미루겠습니다ㅠㅠ
-        // <MicrosoftLogin clientId={"YOUR_CLIENT_ID"} authCallback={authHandler} />
-        // <AppleLogin />
-      }
+      <FacebookLogin
+        appId="516891145898254"
+        autoLoad={false}
+        fields="name,email,picture"
+        callback={onFacebook}
+        cssClass="fb-login-button"
+      />
     </>
   );
 }
