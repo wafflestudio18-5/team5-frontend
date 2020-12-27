@@ -81,8 +81,10 @@
 
 #card-comment {
     outline: none !important;
-    padding: 7px;
-    border: 1px lightgray solid;
+    border: 1px transparent solid;
+    background: transparent !important;
+    margin-bottom: 3px;
+    width: 470px;
 }
 
 #card-modal p {
@@ -114,4 +116,20 @@
     background: url('https://api.iconify.design/octicon:gear-24.svg') no-repeat center center / contain;
     width: 20px;
     height: 20px;
+}
+
+#card-comment-save {
+    width: 45px;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+#card-comment-box {
+    background-color: white;
+    border: 1px lightgray solid;
+    border-radius: 3px;
+    box-shadow: 0 2px 10px lightgray;
+    padding: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
 }

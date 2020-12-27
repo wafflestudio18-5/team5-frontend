@@ -1,7 +1,7 @@
 import React from 'react';
 import './CardModal.css';
 
-function CardModal({card_key, card_id, card_name, exit}) {
+function CardModal({card_key, card_id, card_name, exit, postComment}) {
 
   const exitIfNotModal = (e) => {
     if (e.target.id.includes("card-modal-wrapper") || e.target.className === "blank-for-card-modal" || e.target.id === "card-modal-x") {
@@ -9,12 +9,33 @@ function CardModal({card_key, card_id, card_name, exit}) {
     }
   }
 
+  const [button, setButton] = React.useState(false);
+  const [greenButton, setGreenButton] = React.useState(false);
+  const [comment, setComment] = React.useState("");
+
+  const commentChange = (e) => {
+    setComment(e.target.value);
+    if (e.target.value === "") {
+      setGreenButton(false);
+    } else {
+      setButton(true);
+      setGreenButton(true);
+    }
+  }
+
+  const saveComment = () => {
+    postComment(card_key, card_id, comment);
+    setComment('');
+    setButton(false);
+    setGreenButton(false);
+  }
+
   return(
     <div id="card-modal-wrapper" onClick={exitIfNotModal}>
       <div id="card-modal-wrapper-2">
         <div className="blank-for-card-modal"/>
 
-        <div id="card-modal" onClick={console.log("modal!")}>
+        <div id="card-modal">
 
           <div id="card-modal-top">
             <h3>{card_name}<button id="card-modal-x"/></h3>
@@ -29,8 +50,18 @@ function CardModal({card_key, card_id, card_name, exit}) {
                 <p className="title"><br/>Activity</p>
                 <button>Hide Details</button>
                 <p>TODO PIC</p>
-                <input id="card-comment" placeholder="Write a comment..."/>
-                <p>TODO 댓글목록 ul li ...</p>
+                <div id="card-comment-box">
+                  <input id="card-comment" onFocus={(e) => setButton(true)} onBlur={(e) => (e.target.value === "")? setButton(false) : {}} placeholder="Write a comment..." value={comment} onChange={commentChange}/>
+                    <br/>
+                  <button 
+                  style={button? greenButton? {backgroundColor: '#5AAC44', color: 'white'} : {color: 'gray'} : {display: 'none'}} 
+                  id="card-comment-save" 
+                  onClick={saveComment}>Save</button>
+                </div>
+
+                <div id="card-comments">
+                </div>
+
               </div>
 
               <div id="card-modal-right" style={{columnWidth: 200}}>

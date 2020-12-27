@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import "./Board.css";
 import CardModal from '../CardModal/CardModal';
 
-function Card({ card, index, board_key, board_name }) {
+function Card({ card, index, board_key, board_name, postComment }) {
 
     const [cardPage, setCardPage] = useState(false);
 
@@ -22,7 +22,6 @@ function Card({ card, index, board_key, board_name }) {
       setCardPage(false);
       window.history.pushState({data: '바뀐 주소와 함께 저장할 데이터 객체가 이 첫 번째 파라미터. 바뀔 페이지의 정보들을 담아두고 클라이언트에서 정보를 활용해 새로운 페이지를 렌더링하면 된다. 정보는 history.state로 접근하면 된다.'}, '바꿀 제목', boardPath); // 바꿀 주소 앞에 점 찍으면 상대 주소 됨. 우리는 해당 사항 없음
     }
-
     /*TODO history 없이 띡 /c/로 시작하는 url이 입력됐다면 어떻게 할 지 결정할 것!*/
     return (
       <>
@@ -31,7 +30,7 @@ function Card({ card, index, board_key, board_name }) {
           style={{ marginTop: (index === 0 ? 0 : 10)}}>
           <p style={{wordBreak: "break-all", color: 'black'}}>{card.name}</p>
         </div>
-        {cardPage? <CardModal card_key={key} card_id={card.id} card_name={card.name} exit={exitModal}/> : <></>}
+        {cardPage? <CardModal card_key={key} card_id={card.id} card_name={card.name} exit={exitModal} postComment={postComment}/> : <></>}
       </>
     );
 }

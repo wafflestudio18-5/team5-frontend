@@ -2,7 +2,7 @@ import "./Board.css";
 import { useState } from "react";
 import List from "./List.js";
 
-function Board({ board, postList, postCard }) {
+function Board({ board, postList, postCard, postComment }) {
   const [crtList, setCrtList] = useState(false);
   const [listInput, setListInput] = useState("");
 
@@ -54,7 +54,7 @@ function Board({ board, postList, postCard }) {
         <div id="board-lists">
           <div id="board-temp">
             {board.lists.map((data, index) => (
-              <List board={board} data={data} key={index} postCard={postCard} />
+              <List board={board} data={data} key={index} postCard={postCard} postComment={postComment}/>
             ))}
 
             <div>

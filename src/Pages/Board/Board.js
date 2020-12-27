@@ -12,6 +12,12 @@ function BoardPage({ match }) {
     fetchBoard({key: match.params.board_key});
   }
 
+  const postComment = async(card_id, comment, activity_id) => {
+    if (!comment) return;
+    await post('/api/v1/activity', {card_id: card_id, content: comment});
+    fetch(match);
+  }
+
   const postCard = async (bId, lId, name) => {
     console.log('adsf');
     if(!name) return;
@@ -32,7 +38,7 @@ function BoardPage({ match }) {
 
   return (
     <>
-      <Board board={board} postList={postList} postCard={postCard} />
+      <Board board={board} postList={postList} postCard={postCard} postComment={postComment}/>
     </>
   );
 }
