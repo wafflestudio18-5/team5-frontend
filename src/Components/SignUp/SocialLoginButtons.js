@@ -6,6 +6,7 @@ import FacebookLogin from "react-facebook-login";
 
 const googleCID =
   "260979945174-ma3ulmo5p6mqd1jg5frkvrfpk1jra14v.apps.googleusercontent.com";
+const facebookAID = '154979056051485';
 
 function SocialLoginButtons({ login }) {
   const { loginReqBySC } = useUserContext();
@@ -39,7 +40,7 @@ function SocialLoginButtons({ login }) {
         onFailure={onGoogleFail}
       />
       <FacebookLogin
-        appId="516891145898254"
+        appId={facebookAID}
         autoLoad={false}
         fields="name,email,picture"
         callback={onFacebook}
