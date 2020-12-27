@@ -11,7 +11,7 @@ function SocialLoginButtons({ login }) {
   const { loginReqBySC } = useUserContext();
 
   const onGoogleSuccess = (res) => {
-    loginReqBySC("Google", res.accessToken);
+    loginReqBySC("Google", res.tokenObj.id_token);
     console.log("[debug] Google response: ");
     console.log(res);
   };
