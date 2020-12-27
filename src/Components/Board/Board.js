@@ -7,9 +7,10 @@ function Board({ users, board, postList, postCard }) {
   const [crtList, setCrtList] = useState(false);
   const [listInput, setListInput] = useState("");
   const [invite, setInvite] = useState(false);
+  const [inviteInput, setInviteInput] = useState("");
 
   const toggleInvite = () => {
-    setInvite(true);
+    setInvite(!invite);
   };
 
   const inviteMember = (id, username) => {
@@ -22,12 +23,19 @@ function Board({ users, board, postList, postCard }) {
     setListInput("");
   };
 
+  const inviteOnChange = (e) => {
+    setInviteInput(e.target.value);
+  };
+
   const no_crtList = () => {
     setCrtList(false);
     setListInput("");
   };
 
   if (!board) return <div>Loading...</div>;
+
+  const tUsers = inviteInput? users.filter(item => item.username.includes(inviteInput)) : users;
+
   return (
     <div id="Board-wrapper">
       <header id="board-header">
@@ -56,9 +64,22 @@ function Board({ users, board, postList, postCard }) {
             </button>
             {invite ? (
               <div className="invite-modal">
-                <h3>Invite to Board</h3>
+                <div className="im-header">
+                  <span>Invite to Board</span>
+                </div>
+
                 <hr />
-                {users.map((item, index) => (
+
+                <div className="im-input-wrapper">
+                  <input
+                    className="im-input"
+                    value={inviteInput}
+                    placeholder="Enter name here"
+                    onChange={inviteOnChange}
+                  />
+                </div>
+
+                {tUsers.map((item, index) => (
                   <h4
                     key={index}
                     onClick={() => inviteMember(board.id, item.username)}

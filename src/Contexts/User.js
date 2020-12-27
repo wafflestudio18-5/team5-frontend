@@ -16,7 +16,7 @@ const defaultUser = {
 
 const defaultUser = {
   // variable used for giving id to each team informations
-  logged: true,
+  logged: false,
   user: {
     id: 1,
     username: "mina",
