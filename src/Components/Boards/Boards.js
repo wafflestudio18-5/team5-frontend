@@ -1,6 +1,6 @@
 import "./Boards.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrello } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -19,11 +19,15 @@ import template3 from "./Boards-Template Images/Template 3 Simple Project Board.
 import template4 from "./Boards-Template Images/Template 4 Remote Team Hub.png";
 import { useBoardContext } from "../../Contexts";
 
+const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+
 function Boards(props) {
   const [active, setActive] = useState(1);
   const [create, setCreate] = useState(false);
   const [newName, setNewName] = useState("");
-  const { user_data, postBoard, personal, recent, starred } = props;
+  const history = useHistory();
+  const [anime, setAnime] = useState(false);
+  const { postBoard, personal, recent, starred } = props;
   
   const createBoard = () => {
     setCreate(false);
@@ -37,6 +41,16 @@ function Boards(props) {
 
   const onInputChange = (e) => {
     setNewName(e.target.value);
+  };
+
+  const goToBoard = async (item) => {
+    setAnime(true);
+    await _sleep(200000);
+
+    const key = item.key;
+    const name = item.name.replaceAll(" ", "-").toLowerCase();
+    console.log(item.id);
+    history.push(`/b/${key}/${name}`);
   };
 
   return (
@@ -123,7 +137,7 @@ function Boards(props) {
         </div>
         <ul className="boards-boards" id="recently">
           {recent.map((item, i) => (
-            <BoardThumbnail key={i} item={item} />
+            <BoardThumbnail key={i} item={item} goToBoard={goToBoard} />
           ))}
         </ul>
 
@@ -135,7 +149,7 @@ function Boards(props) {
         </div>
         <ul className="boards-boards" id="personal">
           {starred.map((item, i) => (
-            <BoardThumbnail key={i} item={item} />
+            <BoardThumbnail key={i} item={item} goToBoard={goToBoard} />
           ))}
         </ul>
 
@@ -178,7 +192,7 @@ function Boards(props) {
         </div>
         <ul className="boards-boards" id="workspace">
           {personal.map((item, i) => (
-            <BoardThumbnail key={i} item={item} />
+            <BoardThumbnail key={i} item={item} goToBoard={goToBoard} />
           ))}
           <li className="board-wrapper create" onClick={toggleCreate}>
             {create ? (
