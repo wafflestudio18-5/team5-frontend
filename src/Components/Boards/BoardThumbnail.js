@@ -5,15 +5,20 @@ import "./BoardThumbnail.css";
 import { useHistory } from "react-router-dom";
 import { useBoardContext } from "../../Contexts";
 
-// 별 누르면 중요표시 되는 기능은 백엔드랑 협의해서 구현하거나 안하거나
+const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 const BoardThumbnail = ({ item }) => {
   const history = useHistory();
   const [star, setStar] = useState(false);
+  const [anime, setAnime] = useState(false);
   
-  const goToBoard = (item) => {
+  const goToBoard = async (item) => {
     console.log(star);
     if(star) return;
+
+    setAnime(true);
+    await _sleep(3000); // 1 sec
+
     const key = item.key;
     const name = item.name.replaceAll(' ', '-').toLowerCase();
     console.log(item.id);
@@ -26,7 +31,7 @@ const BoardThumbnail = ({ item }) => {
 
   return (
     <li
-      className="board-wrapper"
+      className={`board-wrapper ${anime}`}
       onClick={() => goToBoard(item)}
     >
       {item.name}
