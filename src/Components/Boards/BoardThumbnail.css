@@ -30,15 +30,15 @@
 }
 
 .starIcon path {
-  stroke-width: 10;
+  stroke-width: 30;
   stroke: rgb(0, 181, 251);
-  fill: rgb(0, 181, 251);
-  stroke-dasharray: 1560;
+  fill: none;
+  stroke-dasharray: 1830;
   stroke-dashoffset: 0;
 }
 
 .starIcon:hover path {
-  animation: animate-star 0.7s linear forwards
+  animation: animate-star 0.5s linear forwards
 }
 
 @keyframes animate-star {
@@ -46,15 +46,12 @@
     stroke-dashoffset: 0;
     fill: transparent;
   }
-  40% {
-    stroke-dashoffset: 905;
-  }
   80% {
-    stroke-dashoffset: 1810;
+    stroke-dashoffset: 1830;
     fill: transparent;
   }
   100% {
-    stroke-dashoffset: 1810;
+    stroke-dashoffset: 1830;
     fill:rgb(0, 181, 251);
   }
 }

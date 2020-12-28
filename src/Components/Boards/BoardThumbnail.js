@@ -9,13 +9,20 @@ import { useBoardContext } from "../../Contexts";
 
 const BoardThumbnail = ({ item }) => {
   const history = useHistory();
+  const [star, setStar] = useState(false);
   
   const goToBoard = (item) => {
+    console.log(star);
+    if(star) return;
     const key = item.key;
     const name = item.name.replaceAll(' ', '-').toLowerCase();
     console.log(item.id);
     history.push(`/b/${key}/${name}`);
   };
+
+  const starren = () => {
+    console.log('[미구현 기능] star 요청');
+  }
 
   return (
     <li
@@ -26,6 +33,9 @@ const BoardThumbnail = ({ item }) => {
       <FontAwesomeIcon
         className={`starIcon`}
         icon={faStar}
+        onMouseEnter={() => setStar(true)}
+        onMouseLeave={() => setStar(false)}
+        onClick={() => starren()}
       />
     </li>
   );
