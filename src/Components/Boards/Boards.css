@@ -1,7 +1,9 @@
-.main-wrapper {
-  position: fixed;
-  margin-top: 40px;
+body {
   background-color: #FAFBFC;
+}
+
+.main-wrapper {
+  margin-top: 40px;
   height: 100vh;
   width: calc(100% - 340px);
   overflow-y: auto;
@@ -94,27 +96,6 @@ section.main-boards {
   width: calc(1043px - 272px - 32px);
   position: absolute;
   right: calc(50vw - 521px);
-}
-
-ul li.board-wrapper {
-  height: 80px;
-  padding: 8px;
-  width: 170px;
-  margin: 8px;
-  border-radius: 4px;
-  background-color: rgb(0, 121, 191);
-  font-weight: bolder;
-  color: white;
-}
-
-ul li.board-wrapper:hover {
-  height: 80px;
-  padding: 8px;
-  margin: 8px;
-  border-radius: 4px;
-  background-color: rgb(0, 101, 171);
-  font-weight: bolder;
-  color: white;
 }
 
 ul.boards-boards {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-regular-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import "./BoardThumbnail.css";
 import { useHistory } from "react-router-dom";
 import { useBoardContext } from "../../Contexts";
@@ -8,9 +8,6 @@ import { useBoardContext } from "../../Contexts";
 // 별 누르면 중요표시 되는 기능은 백엔드랑 협의해서 구현하거나 안하거나
 
 const BoardThumbnail = ({ item }) => {
-  const [enter, setEnter] = useState(false);
-  const [over, setOver] = useState(false);
-  const { fetchBoard } = useBoardContext();
   const history = useHistory();
   
   const goToBoard = (item) => {
@@ -24,14 +21,10 @@ const BoardThumbnail = ({ item }) => {
     <li
       className="board-wrapper"
       onClick={() => goToBoard(item)}
-      onMouseEnter={() => setEnter(true)}
-      onMouseLeave={() => setEnter(false)}
     >
       {item.name}
       <FontAwesomeIcon
-        className={`starIcon ${enter}${over}`}
-        onMouseEnter={() => setOver(true)}
-        onMouseLeave={() => setOver(false)}
+        className={`starIcon`}
         icon={faStar}
       />
     </li>
