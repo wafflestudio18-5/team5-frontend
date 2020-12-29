@@ -9,12 +9,14 @@
 
 + Facebook의 Web Framework인 ReactJS를 이용합니다.
 
+<br>
 --------
 ### **서비스 이용하기**
 --------
 + [AWS S3](http://wrtrellofrontwhm.s3-website.ap-northeast-2.amazonaws.com/)
 + [AWS CF](https://d8ntc1x3tplcn.cloudfront.net/)
 
+<br>
 --------
 ### **서비스 소개**
 --------
@@ -29,12 +31,14 @@
 + 리스트를 생성, 수정, 삭제할 수 있습니다.
 + 카드를 생성, 수정, 삭제할 수 있습니다. 단, label 기능은 지원하지 않습니다.
 
+<br>
 --------
 ### **이용 약관**
 --------
 + [개인정보 처리 방침](https://github.com/wafflestudio18-5/team5-frontend/issues/72)
 + [데이터 삭제 요청 가이드](https://github.com/wafflestudio18-5/team5-frontend/issues/73)
 
+<br>
 --------
 ### **개발 로그**
 --------
