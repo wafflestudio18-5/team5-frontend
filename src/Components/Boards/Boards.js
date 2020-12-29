@@ -84,7 +84,7 @@ function Boards(props) {
         <ul className="Teams">
           <li>
             <FontAwesomeIcon icon={faUserFriends} />
-            <b> Trello Workspace</b>
+            <b data-text="Trello Workspace">Trello Workspace</b>
           </li>
         </ul>
       </section>
