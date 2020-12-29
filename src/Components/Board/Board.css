@@ -17,7 +17,7 @@ div.board-wrapper {
 div.board-wrapper.anime {
   top: -110vh;
   transition-duration: 0.4s;
-  transition-delay: 0.3s;
+  transition-delay: 0.1s;
 }
 
 /* 원래 있던 거 */

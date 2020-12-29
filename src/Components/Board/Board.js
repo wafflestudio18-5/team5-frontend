@@ -18,7 +18,7 @@ function Board({ users, board, postList, postCard }) {
   };
 
   useEffect(() => {
-    wait(700);
+    wait(500);
   }, []);
 
   const toggleInvite = () => {
