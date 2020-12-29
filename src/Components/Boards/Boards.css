@@ -105,23 +105,6 @@ ul.boards-boards {
   padding: 0px;
 }
 
-li.board-wrapper.create {
-  background-color: #F0F2F5;
-  text-align: center;
-  line-height: 80px;
-  color: black;
-  font-weight: normal;
-  display: flex;
-}
-
-li.board-wrapper.create:hover {
-  background-color: #E7E9ED;
-  text-align: center;
-  line-height: 80px;
-  color: black;
-  font-weight: normal;
-}
-
 .left-buttons div.Teams-hdr {
   display: flex;
   justify-content: space-between;
@@ -249,11 +232,6 @@ div #boards-templates-title {
   margin-top: 0px !important;
 }
 
-input.createInput {
-  width: 140px;
-  margin: 0;
-}
-
 /* 심심해서 만들어보는거 */
 
 ul.Teams li b {
@@ -283,4 +261,33 @@ ul.Teams:hover li b:before {
   100% {
     width: 134.267px;
   }
+}
+
+/* board create 관련 css */
+
+li.board-wrapper.create {
+  background-color: #F0F2F5;
+  text-align: center;
+  line-height: 80px;
+  color: black;
+  font-weight: normal;
+  display: flex;
+}
+
+li.board-wrapper.create:hover {
+  background-color: #E7E9ED;
+}
+
+input.createInput {
+  width: 170px;
+  border: none;
+  margin: 0;
+  text-align: center;
+  background: none;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+input.createInput:focus {
+  outline: none;
 }
