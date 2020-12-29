@@ -11,37 +11,36 @@ const BoardThumbnail = ({ item }) => {
   const history = useHistory();
   const [star, setStar] = useState(false);
   const [anime, setAnime] = useState(false);
-  
+
   const goToBoard = async (item) => {
     console.log(star);
-    if(star) return;
+    if (star) return;
 
     setAnime(true);
-    await _sleep(3000); // 1 sec
+    await _sleep(400); // 1 sec
 
     const key = item.key;
-    const name = item.name.replaceAll(' ', '-').toLowerCase();
+    const name = item.name.replaceAll(" ", "-").toLowerCase();
     console.log(item.id);
     history.push(`/b/${key}/${name}`);
   };
 
   const starren = () => {
-    console.log('[미구현 기능] star 요청');
-  }
+    console.log("[미구현 기능] star 요청");
+  };
 
   return (
-    <li
-      className={`board-wrapper ${anime}`}
-      onClick={() => goToBoard(item)}
-    >
-      {item.name}
-      <FontAwesomeIcon
-        className={`starIcon`}
-        icon={faStar}
-        onMouseEnter={() => setStar(true)}
-        onMouseLeave={() => setStar(false)}
-        onClick={() => starren()}
-      />
+    <li className={`board-wrapper ${anime}`} onClick={() => goToBoard(item)}>
+      {anime ? "Loading..." : item.name}
+      {anime ? null : (
+        <FontAwesomeIcon
+          className={`starIcon`}
+          icon={faStar}
+          onMouseEnter={() => setStar(true)}
+          onMouseLeave={() => setStar(false)}
+          onClick={() => starren()}
+        />
+      )}
     </li>
   );
 };
