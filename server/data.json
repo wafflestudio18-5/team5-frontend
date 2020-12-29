@@ -1,9 +1,9 @@
 {
   "ids": {
     "nusers": 1,
-    "nboards": 7,
-    "nlists": 20,
-    "ncards": 56,
+    "nboards": 4,
+    "nlists": 27,
+    "ncards": 39,
     "nactivities": 0
   },
   "users": [
@@ -12,7 +12,24 @@
       "username": "mina",
       "email": "123456789@snu.ac.kr",
       "firstname": "twice",
-      "lastname": "once"
+      "lastname": "once",
+      "access_type": "OAUTH"
+    },
+    {
+      "id": 2,
+      "username": "minb",
+      "email": "123456789@snu.ac.kr",
+      "firstname": null,
+      "lastname": null,
+      "access_type": "PASSWORD"
+    },
+    {
+      "id": 3,
+      "username": "minc",
+      "email": "123456789@snu.ac.kr",
+      "firstname": null,
+      "lastname": null,
+      "access_type": "PASSWORD"
     }
   ],
   "boards": [
@@ -356,6 +373,71 @@
           "id": 11,
           "name": "kdjfksjdfkjksdjafkasjfkjsadkjfksdjfkjdskfjksdjfksdjfksdf",
           "cards": []
+        },
+        {
+          "id": 15,
+          "name": "dsajdh=fdsjadskfjsdkfjsd",
+          "cards": []
+        },
+        {
+          "id": 16,
+          "name": "9",
+          "cards": []
+        },
+        {
+          "id": 17,
+          "name": "10",
+          "cards": []
+        },
+        {
+          "id": 18,
+          "name": "11",
+          "cards": []
+        },
+        {
+          "id": 19,
+          "name": "12",
+          "cards": []
+        },
+        {
+          "id": 20,
+          "name": "13",
+          "cards": []
+        },
+        {
+          "id": 21,
+          "name": "14",
+          "cards": []
+        },
+        {
+          "id": 22,
+          "name": "15",
+          "cards": []
+        },
+        {
+          "id": 23,
+          "name": "16",
+          "cards": []
+        },
+        {
+          "id": 24,
+          "name": "17",
+          "cards": []
+        },
+        {
+          "id": 25,
+          "name": "18",
+          "cards": []
+        },
+        {
+          "id": 26,
+          "name": "19",
+          "cards": []
+        },
+        {
+          "id": 27,
+          "name": "20",
+          "cards": []
         }
       ]
     },
@@ -431,197 +513,6 @@
       "name": "fdjksafk",
       "lists": [],
       "id": 4
-    },
-    {
-      "key": "boardkey5",
-      "name": "와플 중간발표를 위한 보드",
-      "lists": [
-        {
-          "id": 15,
-          "name": "첫 번째 카드",
-          "cards": [
-            {
-              "id": 40,
-              "name": "ㄴ 카드가 아니라 리스트!!",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            },
-            {
-              "id": 41,
-              "name": "카드의 제목을 추가할 수 있어요",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            }
-          ]
-        }
-      ],
-      "id": 5
-    },
-    {
-      "key": "boardkey6",
-      "name": "와플 중간발표",
-      "lists": [
-        {
-          "id": 16,
-          "name": "첫 번째 리스트",
-          "cards": [
-            {
-              "id": 42,
-              "name": "카드 첫번째",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            },
-            {
-              "id": 43,
-              "name": "카드 두번째 카드카드",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            },
-            {
-              "id": 44,
-              "name": "카드가 이렇게 여러 줄이어도 괜찮답니다! 카드 카드카드 카드카드카드",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            },
-            {
-              "id": 45,
-              "name": "카드가 여러개면 스크롤바가 생겨요",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            },
-            {
-              "id": 46,
-              "name": "카~드~",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            },
-            {
-              "id": 47,
-              "name": "카드카드~ 트렐로~",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            },
-            {
-              "id": 48,
-              "name": "카~~드~",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            },
-            {
-              "id": 56,
-              "name": "sdkfjskdfksjadfjskd",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            }
-          ]
-        },
-        {
-          "id": 17,
-          "name": "두 번째 리스트",
-          "cards": [
-            {
-              "id": 49,
-              "name": "Trello",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            }
-          ]
-        },
-        {
-          "id": 18,
-          "name": "세 번째 리스트",
-          "cards": [
-            {
-              "id": 50,
-              "name": "333",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            },
-            {
-              "id": 52,
-              "name": "와플 중간발표 12/26",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            },
-            {
-              "id": 53,
-              "name": "와플 스프린트4 회의 12/27",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            },
-            {
-              "id": 54,
-              "name": "와플스튜디오 토이프로젝트 스프린트4 종료",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            }
-          ]
-        },
-        {
-          "id": 19,
-          "name": "리스트가 여러개면 이번에는 가로 스크롤바가 생겨요",
-          "cards": [
-            {
-              "id": 51,
-              "name": "카드 길이가 짧아도 스크롤바가 최하단에 위치하도록 버그 수정도 진행했었습니다",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            },
-            {
-              "id": 55,
-              "name": "ksfdlakdflksldf",
-              "description": "",
-              "due_date": null,
-              "members": [],
-              "activities": []
-            }
-          ]
-        },
-        {
-          "id": 20,
-          "name": "sdfksdjfkdkfjksdjf",
-          "cards": []
-        }
-      ],
-      "id": 6
-    },
-    {
-      "key": "boardkey7",
-      "name": "dfjkdjfksj",
-      "lists": [],
-      "id": 7
     }
   ]
 }

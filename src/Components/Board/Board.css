@@ -301,7 +301,6 @@ input.addcard {
   margin: 0px;
   position: relative;
   top: 8px;
-  z-index: 0 !important;
 }
 
 #no_crtList:focus {
@@ -314,7 +313,6 @@ input.addcard {
   margin: 0px;
   position: relative;
   top: 8px;
-  z-index: 0 !important;
 }
 
 #no_crtCard:focus {

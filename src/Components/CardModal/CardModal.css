@@ -36,7 +36,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    z-index: 999 !important;
 }
 
 .blank-for-card-modal {
