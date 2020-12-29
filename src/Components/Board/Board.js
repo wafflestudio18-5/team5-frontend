@@ -1,5 +1,5 @@
 import "./Board.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import List from "./List.js";
 
 function Board({ board, postList, postCard, postComment }) {
@@ -16,6 +16,24 @@ function Board({ board, postList, postCard, postComment }) {
     setCrtList(false);
     setListInput("");
   }
+
+
+  var InfiniteScroll = require('infinite-scroll');
+  var infScroll = new InfiniteScroll( '#board-lists', {
+    path: '/b/abcdqwer/Board1name/{{#}}',
+    append: '.List',
+    checkLastPage: '.List',
+    //prefill: true,
+    onInit: function() {
+      this.on('load', function() {
+        console.log("Infinite Scroll load. This function is called on initialization.")
+      });
+    },
+    elementScroll: true,
+    history: false,
+    debug: true,
+  });
+
 
   if (!board) return <div>Loading...</div>;
   return (
@@ -54,7 +72,7 @@ function Board({ board, postList, postCard, postComment }) {
         <div id="board-lists">
           <div id="board-temp">
             {board.lists.map((data, index) => (
-              <List board={board} data={data} key={index} postCard={postCard} postComment={postComment}/>
+              <List className="List" board={board} data={data} key={index} postCard={postCard} postComment={postComment}/>
             ))}
 
             <div>
