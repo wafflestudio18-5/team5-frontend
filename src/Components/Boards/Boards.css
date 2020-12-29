@@ -1,8 +1,16 @@
+body {
+  background-color: #FAFBFC;
+}
+
 .main-wrapper {
   margin-top: 40px;
-  background-color: #FAFBFC;
-  height: calc(100vh - 60px);
+  height: 100vh;
+  width: calc(100% - 340px);
   overflow-y: auto;
+  display: flex;
+  padding-top: 40px;
+  padding-left: 170px;
+  padding-right: 170px;
 }
 
 ul, li {
@@ -78,41 +86,16 @@ section.left-buttons {
   width: 240px;
   padding-left: 16px;
   padding-right: 16px;
-}
-
-div.main-wrapper {
-  display: flex;
-  padding-top: 40px;
-  padding-left: 170px;
-  padding-right: 170px;
+  position: fixed;
+  left: calc(50vw - 521px);
 }
 
 section.main-boards {
   padding-left: 16px;
   padding-right: 16px;
-  width: calc(100% - 272px - 32px);
-
-}
-
-ul li.board-wrapper {
-  height: 80px;
-  padding: 8px;
-  width: 170px;
-  margin: 8px;
-  border-radius: 4px;
-  background-color: rgb(0, 121, 191);
-  font-weight: bolder;
-  color: white;
-}
-
-ul li.board-wrapper:hover {
-  height: 80px;
-  padding: 8px;
-  margin: 8px;
-  border-radius: 4px;
-  background-color: rgb(0, 101, 171);
-  font-weight: bolder;
-  color: white;
+  width: calc(1043px - 272px - 32px);
+  position: absolute;
+  right: calc(50vw - 521px);
 }
 
 ul.boards-boards {
@@ -186,12 +169,11 @@ svg.tw_icon {
 ul.Teams li {
   width: 240px;
   height: 32px;
-  line-height: 32px;
   border-radius: 4px;
 }
 
-ul.Teams li:hover {
-  background-color: #E7E9ED;
+ul.Teams li svg {
+  margin-right: 8px;
 }
 
 #boards-upgrade-icon {
@@ -270,4 +252,35 @@ div #boards-templates-title {
 input.createInput {
   width: 140px;
   margin: 0;
+}
+
+/* 심심해서 만들어보는거 */
+
+ul.Teams li b {
+  position: relative;
+  text-decoration: none;
+  color: rgb(0, 0, 0, 0.3);
+} 
+
+ul.Teams li b:before {
+  content: attr(data-text);
+  color: black;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0px;
+} 
+
+ul.Teams:hover li b:before {
+  animation: tw-animate 0.5s steps(16) forwards;
+}
+
+@keyframes tw-animate {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 134.267px;
+  }
 }

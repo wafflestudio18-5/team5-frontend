@@ -1,3 +1,26 @@
+/* 화면 열릴 때 애니메이션 관련 */
+
+div.board-wrapper {
+  position: fixed;
+  background-color: rgb(0, 101, 171);
+  margin: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  font-size: 5em;
+  line-height: 100vh;
+  text-align: center;
+}
+
+div.board-wrapper.anime {
+  top: -110vh;
+  transition-duration: 0.4s;
+  transition-delay: 0.1s;
+}
+
+/* 원래 있던 거 */
 #Board-wrapper {
   background-color: #0f86cf;
   height: 100vh;
