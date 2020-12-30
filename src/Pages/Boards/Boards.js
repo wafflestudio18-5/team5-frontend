@@ -12,7 +12,7 @@ const bComparator = (board1, board2) => {
 }
 
 function BoardsPage({history}) {
-  const { user } = useUserContext();
+  const { user, fetchUserList } = useUserContext();
   const [ boards, setBoards ] = useState([]);
 
   const fetchBoards = async () => {
@@ -28,6 +28,7 @@ function BoardsPage({history}) {
   
   useEffect(() => {
     fetchBoards();
+    fetchUserList();
   }, [])
   
   const personal = boards;

@@ -2,6 +2,7 @@
 // 백엔드 연동하고 나서는 백엔드와 프론트 사이 인터페이스가 될 파일
 // 이야 진짜 끔찍하다 코드
 
+/*
 import axios from "axios";
 const host = "http://localhost:4000";
 
@@ -110,3 +111,4 @@ export const post = async (uri, data) => {
       break;
   }
 };
+*/

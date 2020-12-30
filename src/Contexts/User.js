@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from "react";
-import { get, post, put } from "../Server";
+import axios from "axios";
 
 /* TODO: 백엔드 연동하고 나면 이걸로 바꿔야 함
 const defaultUser = {
@@ -26,6 +26,7 @@ const defaultUser = {
     access_type: "OAUTH",
   },
   users: [],
+  signUpReq: () => {},
   loginReqByPW: () => {},
   loginReqBySC: () => {},
   logoutReq: () => {},
@@ -40,23 +41,40 @@ const UserContext = createContext(defaultUser);
 const UserProvider = (props) => {
   const { children } = props;
 
+  const signUpReq = (email, username, password) => {
+    axios
+      .post("/api/v1/user/", {
+        grantType: "PASSWORD",
+        email: email,
+        password: password,
+        username: username
+      })
+      .then((response) => {
+        console.log("로그인 성공");
+        console.log(response.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   const loginReqByPW = async (email, pw) => {
     const loginInfo = {
       grantType: "PASSWORD",
       email: email,
       password: pw,
     };
-    const response = await post("/api/v1/user/login", loginInfo);
-
-    setState((state) => {
-      return {
-        ...state,
-        logged: true,
-        user: response.data,
-      };
+    
+    axios.post("/api/v1/user/login/", loginInfo).then(response => {
+      setState((state) => {
+        return {
+          ...state,
+          logged: true,
+          user: response.data,
+        };
+      });
+      saveLoginInfo(response.data);
+    }).catch(err => {
+      console.log(err);
     });
-
-    saveLoginInfo(response.data);
   };
 
   const saveLoginInfo = (loginInfo) => {
@@ -82,7 +100,7 @@ const UserProvider = (props) => {
         user: info,
       }));
     } else {
-      logoutReq();
+      // logoutReq();
     }
   };
 
@@ -92,7 +110,7 @@ const UserProvider = (props) => {
       authProvider: authProvider,
       accessToken: accessToken,
     };
-    const response = await post("/api/v1/user/login", loginInfo);
+    const response = await axios.post("/api/v1/user/login/", loginInfo);
 
     setState((state) => {
       return {
@@ -106,7 +124,7 @@ const UserProvider = (props) => {
   };
 
   const logoutReq = () => {
-    const response = put("/api/v1/user/logout", {});
+    const response = axios.put("/api/v1/user/logout/", {});
 
     setState((state) => {
       return {
@@ -120,18 +138,19 @@ const UserProvider = (props) => {
   };
 
   const fetchUserList = async () => {
-    const response = await get("/api/v1/user/userlist");
-    
+    const response = await axios.get("/api/v1/user/list/");
+
     setState((state) => {
       return {
         ...state,
-        users: response,
+        users: response.data,
       };
     });
   };
 
   const userState = {
     ...defaultUser,
+    signUpReq,
     loginReqByPW,
     loginReqBySC,
     logoutReq,

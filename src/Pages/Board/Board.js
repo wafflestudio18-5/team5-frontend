@@ -7,7 +7,7 @@ import { post } from "../../Server";
 
 function BoardPage({ match }) {
   const { board, fetchBoard } = useBoardContext();
-  const { users, fetchUserList } = useUserContext();
+  const { users } = useUserContext();
 
   const fetch = async (match) => {
     fetchBoard({key: match.params.board_key});
