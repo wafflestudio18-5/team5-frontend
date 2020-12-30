@@ -31,6 +31,12 @@ function Boards(props) {
     setNewName('');
   }
 
+  const onKeyPress = (e) => {
+    if(e.key == 'Enter') {
+      createBoard();
+    }
+  }
+
   const toggleCreate = () => {
     setCreate(true);
   };
@@ -84,7 +90,7 @@ function Boards(props) {
         <ul className="Teams">
           <li>
             <FontAwesomeIcon icon={faUserFriends} />
-            <b> Trello Workspace</b>
+            <b data-text="Trello Workspace">Trello Workspace</b>
           </li>
         </ul>
       </section>
@@ -186,9 +192,9 @@ function Boards(props) {
                 <input
                   className="createInput"
                   onChange={onInputChange}
-                  placeholder="name:"
+                  onKeyPress={onKeyPress}
+                  placeholder="Add Board Title"
                 />
-                <button onClick={createBoard}>확인</button>
               </>
             ) : (
               "Create new board"

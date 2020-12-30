@@ -5,6 +5,7 @@ import { routes } from "../../Routes";
 
 const BoardsPage = () => {
   const { user } = useUserContext();
+  if(!user) return null;
   const path = `/${user.username}/boards/`;
   console.log(path);
   return (
