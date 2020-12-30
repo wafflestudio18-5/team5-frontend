@@ -17,14 +17,7 @@ const defaultUser = {
 const defaultUser = {
   // variable used for giving id to each team informations
   logged: false,
-  user: {
-    id: 1,
-    username: "mina",
-    email: "123456789@snu.ac.kr",
-    firstname: null,
-    lastname: null,
-    access_type: "OAUTH",
-  },
+  user: {},
   users: [],
   signUpReq: () => {},
   loginReqByPW: () => {},
@@ -47,7 +40,7 @@ const UserProvider = (props) => {
         grantType: "PASSWORD",
         email: email,
         password: password,
-        username: username
+        username: username,
       })
       .then((response) => {
         console.log("로그인 성공");
@@ -62,23 +55,39 @@ const UserProvider = (props) => {
       email: email,
       password: pw,
     };
-    
-    axios.post("/api/v1/user/login/", loginInfo).then(response => {
-      setState((state) => {
-        return {
-          ...state,
-          logged: true,
-          user: response.data,
-        };
+
+    axios
+      .put("/api/v1/user/login/", loginInfo)
+      .then((response) => {
+        axios.defaults.xsrfCookieName = "csrftoken";
+        axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Token ${response.data.token}`;
+        setState((state) => {
+          return {
+            ...state,
+            logged: true,
+            user: response.data,
+          };
+        });
+        saveLoginInfo(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      saveLoginInfo(response.data);
-    }).catch(err => {
-      console.log(err);
-    });
   };
 
   const saveLoginInfo = (loginInfo) => {
-    window.localStorage.setItem("loginInfo", loginInfo);
+    console.log('save login info:');
+    console.log(loginInfo);
+    window.localStorage.setItem("id", loginInfo.id);
+    window.localStorage.setItem("username", loginInfo.username);
+    window.localStorage.setItem("email", loginInfo.email);
+    window.localStorage.setItem("first_name", loginInfo.first_name);
+    window.localStorage.setItem("last_name", loginInfo.last_name);
+    window.localStorage.setItem("token", loginInfo.token);
+
   };
 
   const setLog = (log) => {
@@ -92,15 +101,28 @@ const UserProvider = (props) => {
   };
 
   const loadLoginInfo = () => {
-    const info = window.localStorage.getItem("loginInfo");
-    if (info) {
+    const id = window.localStorage.getItem("id");
+    const username = window.localStorage.getItem("username");
+    const email = window.localStorage.getItem("email");
+    const first_name = window.localStorage.getItem("first_name");
+    const last_name = window.localStorage.getItem("last_name");
+    const token = window.localStorage.getItem("token");
+    const user = {
+      id, username, email, first_name, last_name, token
+    }
+    if (id) {
+      console.log(token);
+      axios.defaults.xsrfCookieName = "csrftoken";
+      axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+      axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+
       setState((state) => ({
         ...state,
         logged: true,
-        user: info,
+        user: user,
       }));
     } else {
-      // logoutReq();
+      logoutReq();
     }
   };
 
@@ -124,8 +146,7 @@ const UserProvider = (props) => {
   };
 
   const logoutReq = () => {
-    const response = axios.put("/api/v1/user/logout/", {});
-
+    window.localStorage.clear();
     setState((state) => {
       return {
         ...state,
@@ -134,18 +155,23 @@ const UserProvider = (props) => {
       };
     });
 
-    window.sessionStorage.clear();
+    axios
+      .put("/api/v1/user/logout/", {})
+      .catch((err) => console.log(err));
   };
 
   const fetchUserList = async () => {
-    const response = await axios.get("/api/v1/user/list/");
-
-    setState((state) => {
-      return {
-        ...state,
-        users: response.data,
-      };
-    });
+    axios
+      .get("/api/v1/user/list/")
+      .then((response) => {
+        setState((state) => {
+          return {
+            ...state,
+            users: response.data,
+          };
+        });
+      })
+      .catch((err) => console.log(err));
   };
 
   const userState = {

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import { faWindowClose } from "@fortawesome/free-regular-svg-icons";
 import { Link, useHistory } from "react-router-dom";
+import { useUserContext } from "../../Contexts";
 
 // button macros
 const bm = {
@@ -26,6 +27,7 @@ const modal1 = (
 function Header(props) {
   const [serkey, setSerkey] = useState("");
   const [serFocused, setSerFocused] = useState(false);
+  const { logoutReq } = useUserContext();
   const { user_data } = props;
   const history = useHistory();
 
@@ -67,7 +69,7 @@ function Header(props) {
         <div className="Add-Wrapper">{svg_hr_1}</div>
         <div className="Info-Wrapper">{svg_hr_2}</div>
         <div className="Notifications-Wrapper">{svg_hr_3}</div>
-        <div className="Profile-Wrapper">O</div>
+        <div className="Profile-Wrapper" onClick={logoutReq}>O</div>
       </div>
     </header>
   );
