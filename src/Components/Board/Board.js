@@ -1,7 +1,8 @@
 import "./Board.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import List from "./List.js";
 import { post } from "../../Server";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -48,6 +49,10 @@ function Board({ users, board, postList, postCard }) {
     ? users.filter((item) => item.username.includes(inviteInput))
     : users;
 
+  const boardTemp = useRef();
+  
+
+  
   if(!board) return <div className="board-wrapper">Loading...</div>;
 
   return (
@@ -122,16 +127,13 @@ function Board({ users, board, postList, postCard }) {
 
         <div id="board-main">
           <div id="board-lists">
-            <div id="board-temp">
-              {board.lists.map((data, index) => (
-                <List
-                  board={board}
-                  data={data}
-                  key={index}
-                  postCard={postCard}
-                />
-              ))}
 
+          <InfiniteScroll
+            dataLength={board.lists.length} //This is important field to render the next data
+            next={fetchData}
+            hasMore={true}
+            loader={<h4>Loading...</h4>}
+            endMessage={
               <div>
                 <button id="board-addlist" onClick={() => setCrtList(true)}>
                   <span id="board-addlist-plus">+</span>Add another list
@@ -150,7 +152,31 @@ function Board({ users, board, postList, postCard }) {
                   <></>
                 )}
               </div>
-            </div>
+            }
+            // below props only if you need pull down functionality
+            refreshFunction={this.refresh}
+            pullDownToRefresh
+            pullDownToRefreshThreshold={50}
+            pullDownToRefreshContent={
+              <h3 style={{ textAlign: 'center' }}>&#8595; Pull down to refresh</h3>
+            }
+            releaseToRefreshContent={
+              <h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>
+            }
+            scrollableTarget={boardTemp}
+          >
+            {<div id="board-temp" ref={boardTemp}>
+              {board.lists.map((data, index) => (
+                <List
+                  board={board}
+                  data={data}
+                  key={index}
+                  postCard={postCard}
+                />
+              ))}
+            </div>}
+          </InfiniteScroll>
+
           </div>
         </div>
       </div>
