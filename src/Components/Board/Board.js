@@ -48,7 +48,7 @@ function Board({ users, board, postList, postCard }) {
     ? users.filter((item) => item.username.includes(inviteInput))
     : users;
 
-  if(!board) return <></>;
+  if(!board) return <div className="board-wrapper">Loading...</div>;
 
   return (
     <>
