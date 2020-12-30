@@ -18,12 +18,12 @@ import template2 from "./Boards-Template Images/Template 2 Kanban Template.png";
 import template3 from "./Boards-Template Images/Template 3 Simple Project Board.png";
 import template4 from "./Boards-Template Images/Template 4 Remote Team Hub.png";
 import { useBoardContext } from "../../Contexts";
+import axios from 'axios';
 
-function Boards(props) {
+function Boards({ user_data, postBoard, personal, recent, starred, refreshBoards }) {
   const [active, setActive] = useState(1);
   const [create, setCreate] = useState(false);
   const [newName, setNewName] = useState("");
-  const { user_data, postBoard, personal, recent, starred } = props;
   
   const createBoard = () => {
     setCreate(false);
@@ -129,7 +129,7 @@ function Boards(props) {
         </div>
         <ul className="boards-boards" id="recently">
           {recent.map((item, i) => (
-            <BoardThumbnail key={i} item={item} />
+            <BoardThumbnail key={i} id={item.id} name={item.name} key={item.key} star={item.star} refreshBoards={refreshBoards} />
           ))}
         </ul>
 
@@ -141,7 +141,7 @@ function Boards(props) {
         </div>
         <ul className="boards-boards" id="personal">
           {starred.map((item, i) => (
-            <BoardThumbnail key={i} item={item} />
+            <BoardThumbnail key={i} id={item.id} name={item.name} key={item.key} star={item.star} refreshBoards={refreshBoards} />
           ))}
         </ul>
 
@@ -184,7 +184,7 @@ function Boards(props) {
         </div>
         <ul className="boards-boards" id="workspace">
           {personal.map((item, i) => (
-            <BoardThumbnail key={i} item={item} />
+            <BoardThumbnail key={i} id={item.id} name={item.name} key={item.key} star={item.star} refreshBoards={refreshBoards} />
           ))}
           <li className="board-wrapper create" onClick={toggleCreate}>
             {create ? (

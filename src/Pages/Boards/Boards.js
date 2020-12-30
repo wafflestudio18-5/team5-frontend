@@ -15,10 +15,10 @@ function BoardsPage({ history }) {
   const { user, fetchUserList } = useUserContext();
   const [boards, setBoards] = useState([]);
 
-  const fetchBoards = async () => {
+  const fetchBoards = () => {
     axios
       .get("/api/v1/board/boardlist/")
-      .then((response) => setBoards(response.data))
+      .then((response) => { setBoards(response.data); console.log(response.data) })
       .catch((err) => console.log(err));
   };
 
@@ -45,6 +45,7 @@ function BoardsPage({ history }) {
         starred={starred}
         recent={recent}
         postBoard={postBoard}
+        refreshBoards={fetchBoards}
       />
     </>
   );
