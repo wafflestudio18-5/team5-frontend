@@ -128,54 +128,44 @@ function Board({ users, board, postList, postCard }) {
         <div id="board-main">
           <div id="board-lists">
 
-          <InfiniteScroll
-            dataLength={board.lists.length} //This is important field to render the next data
-            next={fetchData}
-            hasMore={true}
-            loader={<h4>Loading...</h4>}
-            endMessage={
-              <div>
-                <button id="board-addlist" onClick={() => setCrtList(true)}>
-                  <span id="board-addlist-plus">+</span>Add another list
-                </button>
-                {crtList ? (
-                  <div className="crtList">
-                    <input
-                      placeholder="Enter list title..."
-                      onChange={(e) => setListInput(e.target.value)}
-                      value={listInput}
-                    />
-                    <button onClick={createList}>Add List</button>
-                    <button id="no_crtList" onClick={no_crtList}></button>
-                  </div>
-                ) : (
-                  <></>
-                )}
-              </div>
-            }
-            // below props only if you need pull down functionality
-            refreshFunction={this.refresh}
-            pullDownToRefresh
-            pullDownToRefreshThreshold={50}
-            pullDownToRefreshContent={
-              <h3 style={{ textAlign: 'center' }}>&#8595; Pull down to refresh</h3>
-            }
-            releaseToRefreshContent={
-              <h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>
-            }
-            scrollableTarget={boardTemp}
-          >
-            {<div id="board-temp" ref={boardTemp}>
-              {board.lists.map((data, index) => (
-                <List
-                  board={board}
-                  data={data}
-                  key={index}
-                  postCard={postCard}
-                />
-              ))}
-            </div>}
-          </InfiniteScroll>
+          <div id="board-temp" ref={boardTemp}>
+            <InfiniteScroll
+              dataLength={board.lists.length} //This is important field to render the next data
+              next={fetchData}
+              hasMore={true}
+              loader={<h4>Loading...</h4>}
+              endMessage={
+                <div>
+                  <button id="board-addlist" onClick={() => setCrtList(true)}>
+                    <span id="board-addlist-plus">+</span>Add another list
+                  </button>
+                  {crtList ? (
+                    <div className="crtList">
+                      <input
+                        placeholder="Enter list title..."
+                        onChange={(e) => setListInput(e.target.value)}
+                        value={listInput}
+                      />
+                      <button onClick={createList}>Add List</button>
+                      <button id="no_crtList" onClick={no_crtList}></button>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              }
+              scrollableTarget={boardTemp}
+            >
+                {board.lists.map((data, index) => (
+                  <List
+                    board={board}
+                    data={data}
+                    key={index}
+                    postCard={postCard}
+                  />
+                ))}
+            </InfiniteScroll>
+          </div>
 
           </div>
         </div>
