@@ -10,7 +10,6 @@ header.logged_header {
   display: flex;
   justify-content: space-between;
   background-color: #026aa7;
-  z-index: 9999;
   /* background-color의 경우 추후 테마 설정 기능이 추가되면 업데이트되어야 함 */
 }
 

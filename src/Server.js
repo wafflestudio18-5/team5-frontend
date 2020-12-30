@@ -10,8 +10,8 @@ export const get = async (uri, data) => {
   switch (uri) {
     case "/api/v1/user":
     case "/api/v1/user/userlist":
-      response = await axios.get(`${host}/users`);
-      return response.data;
+      // 유저는 로그인이 연결돼있다보니까 json-server로는 한계가 있군요.. 포기
+      break;
     case "/api/v1/board/boardlist":
       response = await axios.get(`${host}/boards`);
       return response.data;
@@ -41,10 +41,6 @@ export const post = async (uri, data) => {
   let ids;
   let board;
   switch (uri) {
-    case '/api/v1/board/invite':
-      console.log('보드로 유저 초대');
-      console.log(data);
-      break;
     case '/api/v1/user/login':
       // ㅠ
       break;

@@ -1,46 +1,39 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-regular-svg-icons";
 import "./BoardThumbnail.css";
 import { useHistory } from "react-router-dom";
 import { useBoardContext } from "../../Contexts";
 
-const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+// 별 누르면 중요표시 되는 기능은 백엔드랑 협의해서 구현하거나 안하거나
 
 const BoardThumbnail = ({ item }) => {
+  const [enter, setEnter] = useState(false);
+  const [over, setOver] = useState(false);
+  const { fetchBoard } = useBoardContext();
   const history = useHistory();
-  const [star, setStar] = useState(false);
-  const [anime, setAnime] = useState(false);
-
-  const goToBoard = async (item) => {
-    console.log(star);
-    if (star) return;
-
-    setAnime(true);
-    await _sleep(400); // 1 sec
-
+  
+  const goToBoard = (item) => {
     const key = item.key;
-    const name = item.name.replaceAll(" ", "-").toLowerCase();
+    const name = item.name.replaceAll(' ', '-').toLowerCase();
     console.log(item.id);
     history.push(`/b/${key}/${name}`);
   };
 
-  const starren = () => {
-    console.log("[미구현 기능] star 요청");
-  };
-
   return (
-    <li className={`board-wrapper ${anime}`} onClick={() => goToBoard(item)}>
-      {anime ? "Loading..." : item.name}
-      {anime ? null : (
-        <FontAwesomeIcon
-          className={`starIcon`}
-          icon={faStar}
-          onMouseEnter={() => setStar(true)}
-          onMouseLeave={() => setStar(false)}
-          onClick={() => starren()}
-        />
-      )}
+    <li
+      className="board-wrapper"
+      onClick={() => goToBoard(item)}
+      onMouseEnter={() => setEnter(true)}
+      onMouseLeave={() => setEnter(false)}
+    >
+      {item.name}
+      <FontAwesomeIcon
+        className={`starIcon ${enter}${over}`}
+        onMouseEnter={() => setOver(true)}
+        onMouseLeave={() => setOver(false)}
+        icon={faStar}
+      />
     </li>
   );
 };

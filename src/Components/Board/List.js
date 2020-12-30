@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import Card from "./Card.js";
-import "./List.css";
+import "./Board.css";
 
 function List({ board, data, postCard, postComment }) {
   const newCardButton = useRef();

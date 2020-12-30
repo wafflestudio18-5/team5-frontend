@@ -16,7 +16,7 @@ const defaultUser = {
 
 const defaultUser = {
   // variable used for giving id to each team informations
-  logged: false,
+  logged: true,
   user: {
     id: 1,
     username: "mina",
@@ -120,12 +120,11 @@ const UserProvider = (props) => {
   };
 
   const fetchUserList = async () => {
-    const response = await get("/api/v1/user/userlist");
-    
+    const response = await get("api/v1/user/userlist");
     setState((state) => {
       return {
         ...state,
-        users: response,
+        users: response.data,
       };
     });
   };

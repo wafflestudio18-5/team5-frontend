@@ -1,31 +1,9 @@
-/* 화면 열릴 때 애니메이션 관련 */
-
-div.board-wrapper {
-  position: fixed;
-  background-color: rgb(0, 101, 171);
-  margin: 0;
-  z-index: 9999;
-  width: 100vw;
-  height: 100vh;
-  top: 0px;
-  left: 0px;
-  font-size: 5em;
-  line-height: 100vh;
-  text-align: center;
-}
-
-div.board-wrapper.anime {
-  top: -110vh;
-  transition-duration: 0.4s;
-  transition-delay: 0.1s;
-}
-
-/* 원래 있던 거 */
 #Board-wrapper {
   background-color: #0f86cf;
   height: 100vh;
   color: white;
 }
+
 
 #Board-wrapper select {
   border: 1px transparent solid;
@@ -50,7 +28,6 @@ div.board-wrapper.anime {
   position: fixed;
   top: 40px;
   left: 0px;
-  z-index: 2;
 }
 
 #board-header-left {
@@ -100,8 +77,7 @@ div.board-wrapper.anime {
   position: relative;
   top: 90px;
   height: calc(100vh - 90px);
-  width: 100vw;
-  z-index: 1;
+  width: 100vw
 }
 
 #board-lists {
@@ -113,8 +89,6 @@ div.board-wrapper.anime {
   overflow-x: auto;
   padding-right: 10px !important;
   padding-left: 10px !important;
-  position: relative;
-  z-index: 1;
 }
 
 #board-lists::-webkit-scrollbar {
@@ -124,21 +98,61 @@ div.board-wrapper.anime {
   height: 14px !important;
   border-radius: 5px;
 }
-
 #board-lists::-webkit-scrollbar-thumb {
   background-color: #4eb2f0;
   border-radius: 5px;
 }
-
 #board-lists::-webkit-scrollbar-track {
   background-color: #026aa7;
   border-radius: 5px;
 }
-
 #board-lists::-webkit-scrollbar-button {
   background-color: #0f86cf;
   width: 5px;
 }
+
+.board-list {
+  background-color: #EBECF0;
+  width: 250px !important;
+  height: fit-content;
+  color: black;
+  margin-right: 10px;
+  border: 1px transparent solid;
+  border-radius: 3px;
+  padding: 10px;
+  padding-right: 5px;
+  flex-shrink: 0;
+  margin-bottom: 10px;
+}
+
+.board-cards-crtCard {
+  max-height: calc(100vh - 180px) !important;
+}
+
+.board-cards-crtCard-x {
+  max-height: calc(100vh - 215px) !important;
+}
+
+.board-cards {
+  overflow-y: auto;
+}
+
+.board-cards::-webkit-scrollbar {
+  background-color: transparent;
+  width: 10px !important;
+  border-radius: 10px;
+}
+.board-cards::-webkit-scrollbar-thumb {
+  background-color: #c5c5c5;
+  border-radius: 10px;
+  width: 10px !important;
+}
+.board-cards::-webkit-scrollbar-track {
+  background-color: #DADBE2;
+  border-radius: 10px;
+  width: 10px !important;
+}
+
 
 #board-name {
   align-self: center;
@@ -148,12 +162,10 @@ div.board-wrapper.anime {
 
 .board-card {
   background-color: white;
-  position: relative;
   padding: 10px;
   margin-right: 5px;
   border-radius: 3px;
   box-shadow: 0px 2px 2px lightgray;
-  z-index: 0;
 }
 
 .board-card:hover {
@@ -179,6 +191,21 @@ div.board-wrapper.anime {
 #board-addlist:hover {
   filter: brightness(105%);
 }
+
+.board-list button {
+  height: 30px;
+  width: 245px;
+  color: rgb(100, 100, 100);
+  align-content: center;
+  border: 1px transparent solid;
+  border-radius: 3px;
+  padding-top: 3px;
+}
+
+.board-list button:hover {
+  background-color: #DADBE2;
+}
+
 
 #board-profile-images {
   margin-left: 10px;
@@ -217,10 +244,14 @@ div.board-wrapper.anime {
   height: 30px;
 }
 
+#board-addcard {
+  margin-top: 10px;
+  height: 25px;
+}
+
 #board-temp {
   display: flex;
   padding-right: 10px;
-  position: relative;
 }
 
 .crtList {
@@ -259,6 +290,11 @@ div.board-wrapper.anime {
   filter: brightness(115%);
 }
 
+input.addcard {
+  width: 100px;
+  height: 5px;
+}
+
 #no_crtList {
   background: url('https://api.iconify.design/octicon:x-16.svg') no-repeat center center / contain;
   width: 25px;
@@ -271,76 +307,55 @@ div.board-wrapper.anime {
   outline: none;
 }
 
-.crtCard input {
-  background-color: transparent;
-  border: 1px transparent solid;
-}
-
-/*--------------------------------------------------*/
-/*-about invite button & modal----------------------*/
-/*--------------------------------------------------*/
-
-button.inviteButton {
+#no_crtCard {
+  background: url('https://api.iconify.design/octicon:x-16.svg') no-repeat center center / contain;
+  width: 25px;
+  margin: 0px;
   position: relative;
   top: 8px;
 }
-div.invite-wrapper {
-  position: relative;
-}
 
-div.invite-modal {
-  position: absolute;
-  z-index: 70 !important;
-  background-color: white;
-  padding: 12px;
-  top: 40px;
-  left: 5px;
-  width: 280px;
-  height: 384px;
-  display: block;
-  border-radius: 5px;
-  color: black;
-  border: 1px solid lightslategray;
-  box-shadow: 3px 3px 3px gray;
-}
-
-div.im-header span{
-  line-height: 24px;
-  font-size: 0.8em;
-  height: 24px;
-  width: 304px;
-  text-align: center;
-  display: block;
-}
-
-div.invite-modal h4{
-  line-height: 32px;
-  height: 32px;
-  border: lightgray 1px solid;
-  margin: 2px 0;
-  border-radius: 4px;
-  text-align: center;
-}
-
-div.invite-modal h4:hover{
-  background-color: lightgray;
-}
-
-div.invite-modal hr {
-  margin-top: 8px;
-}
-
-div.im-input-wrapper {
-  height: 42px;
-  margin: 16px auto;
-}
-
-input.im-input {
-  height: 30px;
-  width: 260px;
-  border: 2px lightgray solid;
-  border-radius: 4px;
+#no_crtCard:focus {
   outline: none;
-  padding-inline-start: 8px;
-  padding-inline-end: 8px;
+}
+
+#AddCard {
+  width: auto !important;
+  margin-right: 5px;
+  margin-top: 0px;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color:  #0f86cf !important;
+  color: white;
+  border: 1px transparent solid;
+  border-radius: 3px;
+  width: 
+}
+
+.crtCard button #AddCard:hover {
+  background-color:  #0f86cf !important;
+  filter: brightness(110%) !important;
+}
+
+.crtCard input {
+  background-color: transparent;
+  border: 1px transparent solid;
+
+}
+
+#crtCard_inputWrapper {
+  background-color: white;
+  padding: 10px;
+  padding-bottom: 30px;
+  margin-top: 10px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  box-shadow: 0px 2px 2px lightgray;
+  border: 1px transparent solid;
+}
+
+.crtCard input:focus {
+  outline: none;
 }
