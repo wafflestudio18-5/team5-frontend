@@ -50,6 +50,20 @@ function Board({ users, board, postList, postCard }) {
     : users;
 
   const boardTemp = useRef();
+
+  const [miniList, setMiniList] = useState(board.lists.slice(0, 10));
+
+  const fetchData = () => {
+    // a fake async api call like which sends
+    // 20 more records in 1.5 secs
+    setTimeout(() => {
+      this.setState({
+        items: board.lists.concat(Array.from({ length: 20 }))
+      });
+
+      
+    }, 1500);
+  };
   
 
   
@@ -156,7 +170,7 @@ function Board({ users, board, postList, postCard }) {
               }
               scrollableTarget={boardTemp}
             >
-                {board.lists.map((data, index) => (
+                {miniList.map((data, index) => (
                   <List
                     board={board}
                     data={data}
