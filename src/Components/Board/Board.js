@@ -1,7 +1,8 @@
 import "./Board.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import List from "./List.js";
 import { post } from "../../Server";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -48,8 +49,96 @@ function Board({ users, board, postList, postCard }) {
     ? users.filter((item) => item.username.includes(inviteInput))
     : users;
 
+  const boardTemp = useRef();
+  const [miniList, setMiniList] = useState(        {
+          "id": 1,
+          "name": "list1",
+          "cards": [
+            {
+              "id": 1,
+              "name": "cardname",
+              "description": "desc",
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 2,
+              "name": "1",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 3,
+              "name": "2",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 4,
+              "name": "2",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 5,
+              "name": "8",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 12,
+              "name": "호호",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 13,
+              "name": "열",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 14,
+              "name": "룰룰루",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            },
+            {
+              "id": 36,
+              "name": "스크롤이 어렵넹",
+              "description": "",
+              "due_date": null,
+              "members": [],
+              "activities": []
+            }
+          ]
+        });
   if(!board) return <div className="board-wrapper">Loading...</div>;
 
+  let fetchCount = 0;
+  const fetchData = () => {
+    // a fake async api call
+      fetchCount += 1;
+      console.log("fetch data!");
+      setTimeout(() => {
+      setMiniList(board.lists.slice(0, (fetchCount * 10 + 10 <= board.lists.length)? fetchCount * 10 + 10 : board.lists.length));
+    }, 1500);
+  };
+  
   return (
     <>
       {loading ? (
@@ -122,35 +211,44 @@ function Board({ users, board, postList, postCard }) {
 
         <div id="board-main">
           <div id="board-lists">
-            <div id="board-temp">
-              {board.lists.map((data, index) => (
-                <List
-                  board={board}
-                  data={data}
-                  key={index}
-                  postCard={postCard}
-                />
-              ))}
 
-              <div>
-                <button id="board-addlist" onClick={() => setCrtList(true)}>
-                  <span id="board-addlist-plus">+</span>Add another list
-                </button>
-                {crtList ? (
-                  <div className="crtList">
-                    <input
-                      placeholder="Enter list title..."
-                      onChange={(e) => setListInput(e.target.value)}
-                      value={listInput}
-                    />
-                    <button onClick={createList}>Add List</button>
-                    <button id="no_crtList" onClick={no_crtList}></button>
-                  </div>
-                ) : (
-                  <></>
-                )}
+            <InfiniteScroll
+              dataLength={board.lists.length} //This is important field to render the next data
+              next={fetchData}
+              endMessage={
+                <div>
+                  <button id="board-addlist" onClick={() => setCrtList(true)}>
+                    <span id="board-addlist-plus">+</span>Add another list
+                  </button>
+                  {crtList ? (
+                    <div className="crtList">
+                      <input
+                        placeholder="Enter list title..."
+                        onChange={(e) => setListInput(e.target.value)}
+                        value={listInput}
+                      />
+                      <button onClick={createList}>Add List</button>
+                      <button id="no_crtList" onClick={no_crtList}></button>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              }
+              scrollableTarget={boardTemp}
+            >
+              <div id="board-temp" ref={boardTemp}>
+                {board.lists.map((data, index) => (
+                  <List
+                    board={board}
+                    data={data}
+                    key={index}
+                    postCard={postCard}
+                  />
+                ))}
               </div>
-            </div>
+            </InfiniteScroll>
+
           </div>
         </div>
       </div>
