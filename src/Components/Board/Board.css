@@ -4,7 +4,7 @@ div.board-wrapper {
   position: fixed;
   background-color: rgb(0, 101, 171);
   margin: 0;
-  z-index: 9999;
+  z-index: 9000;
   width: 100vw;
   height: 100vh;
   top: 0px;
@@ -265,7 +265,7 @@ div.board-wrapper.anime {
   margin: 0px;
   position: relative;
   top: 8px;
-  z-index: 0 !important;
+  z-index: 0;
 }
 
 #no_crtList:focus {
@@ -291,7 +291,7 @@ div.invite-wrapper {
 
 div.invite-modal {
   position: absolute;
-  z-index: 70 !important;
+  z-index: 70;
   background-color: white;
   padding: 12px;
   top: 40px;
@@ -344,4 +344,10 @@ input.im-input {
   outline: none;
   padding-inline-start: 8px;
   padding-inline-end: 8px;
+}
+
+
+#board-addlist-row {
+  display: flex;
+  flex-direction: column;
 }

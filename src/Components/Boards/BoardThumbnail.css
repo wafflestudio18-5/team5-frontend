@@ -32,7 +32,7 @@
     position: fixed;
     background-color: rgb(0, 101, 171);
     margin: 0;
-    z-index: 9999;
+    z-index: 9000;
     top: -100vh;
     left: 0px;
   }
@@ -40,7 +40,7 @@
     position: fixed;
     background-color: rgb(0, 101, 171);
     margin: 0;
-    z-index: 9999;
+    z-index: 9000;
     width: 100vw;
     height: 100vh;
     top: 0px;

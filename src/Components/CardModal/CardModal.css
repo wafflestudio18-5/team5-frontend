@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: center;
     border: 1px transparent solid;
+    z-index: 90009 !important;
 }
 
 #card-modal-wrapper-2 {
@@ -36,7 +37,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    z-index: 999 !important;
+    z-index: 90009 !important;
 }
 
 .blank-for-card-modal {
