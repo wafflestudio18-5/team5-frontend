@@ -213,10 +213,14 @@ function Board({ users, board, postList, postCard }) {
           <div id="board-lists">
 
             <InfiniteScroll
+              style={{display: 'flex',
+              flexDirection: 'row'}}
               dataLength={board.lists.length} //This is important field to render the next data
               next={fetchData}
               endMessage={
-                <div>
+                <div
+                style={{display: 'flex',
+                flexDirection: 'row'}}>
                   <button id="board-addlist" onClick={() => setCrtList(true)}>
                     <span id="board-addlist-plus">+</span>Add another list
                   </button>

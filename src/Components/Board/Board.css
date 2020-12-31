@@ -170,6 +170,7 @@ div.board-wrapper.anime {
   padding-top: 3px;
   background-color: #35a7ee;
   flex-shrink: 0;
+  margin-right: 10px;
 }
 
 #board-addlist:focus {
@@ -219,7 +220,6 @@ div.board-wrapper.anime {
 
 #board-temp {
   display: flex;
-  padding-right: 10px;
   position: relative;
 }
 
