@@ -9,7 +9,6 @@ function App() {
 
   useEffect(() => {
     loadLoginInfo();
-    fetchUserList();
   }, []);
 
   console.log("App render");

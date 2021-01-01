@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import SocialLoginButtons from './SocialLoginButtons.js';
 import trelloLogo from './trello-logo-blue.svg';
 import atlassianLogo from './atlassian-logo-blue.svg';
+import { useUserContext } from '../../Contexts/User';
 
 
 function SignUp() {
@@ -12,6 +13,8 @@ function SignUp() {
   const [account, setAccount] = React.useState(false);
   const [fn, setFn] = React.useState("");
   const [pw, setPw] = React.useState("");
+
+  const { signUpReq } = useUserContext();
 
   function onChange(e) {
     setEmail(e.target.value);
@@ -41,6 +44,7 @@ function SignUp() {
 
   function blueClick(e) {
     console.log("SIGN UP as ", email, fn, pw);
+    signUpReq(email, fn, pw);
   }
     
   if (!account) {

@@ -57,7 +57,13 @@
   font-size: 1.3em;
 }
 
-.starIcon path {
+.starIcon.true path {
+  stroke-width: 30;
+  stroke: rgb(0, 181, 251);
+  fill:rgb(0, 181, 251);
+}
+
+.starIcon.false path {
   stroke-width: 30;
   stroke: rgb(0, 181, 251);
   fill: none;
@@ -65,7 +71,7 @@
   stroke-dashoffset: 0;
 }
 
-.starIcon:hover path {
+.starIcon.false:hover path {
   animation: animate-star 0.5s linear forwards
 }
 

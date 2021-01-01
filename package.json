@@ -12,6 +12,8 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.0",
+    "cors": "^2.8.5",
+    "http-proxy-middleware": "^1.0.6",
     "json-server": "^0.16.3",
     "react": "^17.0.1",
     "react-apple-login": "^1.1.2",
@@ -48,5 +50,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://ec2-15-164-222-199.ap-northeast-2.compute.amazonaws.com/"
 }
