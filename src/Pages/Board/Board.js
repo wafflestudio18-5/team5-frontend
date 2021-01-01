@@ -12,6 +12,14 @@ function BoardPage({ match }) {
     fetchBoard({ key: match.params.board_key });
   };
 
+  const postActivity = (cId, content) => {
+    if (!content) return;
+    axios
+      .post("/api/v1/activity/", { card_id: cId, content: content })
+      .then((response) => fetch(match))
+      .catch((err) => console.log(err));
+  };
+
   const postCard = (bId, lId, name) => {
     if (!name) return;
     axios
