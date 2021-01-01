@@ -1,7 +1,7 @@
 import "./Board.css";
 import { useEffect, useState } from "react";
 import List from "./List.js";
-import { post } from "../../Server";
+import axios from "axios";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -26,7 +26,10 @@ function Board({ users, board, postList, postCard }) {
   };
 
   const inviteMember = (id, username) => {
-    post("/api/v1/board/invite", { id: id, username: username });
+    axios
+      .post("/api/v1/board/invite/", { id: id, username: username })
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
   };
 
   const createList = () => {
@@ -48,7 +51,7 @@ function Board({ users, board, postList, postCard }) {
     ? users.filter((item) => item.username.includes(inviteInput))
     : users;
 
-  if(!board) return <div className="board-wrapper">Loading...</div>;
+  if (!board) return <div className="board-wrapper">Loading...</div>;
 
   return (
     <>

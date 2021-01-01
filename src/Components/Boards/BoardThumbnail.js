@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
-const BoardThumbnail = ({ id, name, key, star, refreshBoards }) => {
+const BoardThumbnail = ({ id, name, boardKey, star, refreshBoards }) => {
   const history = useHistory();
   const [enter, setEnter] = useState(false);
   const [anime, setAnime] = useState(false);
@@ -27,7 +27,7 @@ const BoardThumbnail = ({ id, name, key, star, refreshBoards }) => {
 
     const newName = name.replaceAll(" ", "-").toLowerCase();
     console.log(id);
-    history.push(`/b/${key}/${newName}`);
+    history.push(`/b/${boardKey}/${newName}`);
   };
 
   const toggleStar = (id, st) => {

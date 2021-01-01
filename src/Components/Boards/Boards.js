@@ -129,7 +129,7 @@ function Boards({ user_data, postBoard, personal, recent, starred, refreshBoards
         </div>
         <ul className="boards-boards" id="recently">
           {recent.map((item, i) => (
-            <BoardThumbnail key={i} id={item.id} name={item.name} key={item.key} star={item.star} refreshBoards={refreshBoards} />
+            <BoardThumbnail key={i} id={item.id} name={item.name} boardKey={item.key} star={item.star} refreshBoards={refreshBoards} />
           ))}
         </ul>
 
@@ -141,7 +141,7 @@ function Boards({ user_data, postBoard, personal, recent, starred, refreshBoards
         </div>
         <ul className="boards-boards" id="personal">
           {starred.map((item, i) => (
-            <BoardThumbnail key={i} id={item.id} name={item.name} key={item.key} star={item.star} refreshBoards={refreshBoards} />
+            <BoardThumbnail key={i} id={item.id} name={item.name} boardKey={item.key} star={item.star} refreshBoards={refreshBoards} />
           ))}
         </ul>
 
@@ -184,7 +184,7 @@ function Boards({ user_data, postBoard, personal, recent, starred, refreshBoards
         </div>
         <ul className="boards-boards" id="workspace">
           {personal.map((item, i) => (
-            <BoardThumbnail key={i} id={item.id} name={item.name} key={item.key} star={item.star} refreshBoards={refreshBoards} />
+            <BoardThumbnail key={i} id={item.id} name={item.name} boardKey={item.key} star={item.star} refreshBoards={refreshBoards} />
           ))}
           <li className="board-wrapper create" onClick={toggleCreate}>
             {create ? (

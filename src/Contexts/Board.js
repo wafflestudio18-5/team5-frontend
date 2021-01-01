@@ -15,7 +15,11 @@ const BoardProvider = (props) => {
   const getBoardData = () => state.board;
 
   const fetchBoard = async (data) => {
-    axios.get("/api/v1/board", data)
+    axios({
+      url: '/api/v1/board/',
+      method: 'get',
+      params: data
+    })
       .then((response) => {
         setState((state) => {
           return {
