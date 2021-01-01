@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './CardModal.css';
 import Activity from './Activity.js';
 
@@ -34,6 +34,22 @@ function CardModal({card_key, card, exit, board_id}) {
     exit();
   }
 
+  //카드의 제목 바꾸기
+  const [nameState, setNameState] = useState({name: card.name, edit: false});
+  const changeName = (card_id, name) => {
+    /*TODO PUT /api/v1/card/ */
+  }
+  //Description 추가 및 변경하기
+  const [description, setDescription] = useState({exist: false, content: "", edit: false});
+  // 멤버 추가하기
+  const addMember = () => {
+    console.log("addmember TODO");
+  }
+  // Due Date 추가하기
+  const addDuedate = () => {
+    console.log("ADDDUDATE TODO");
+  }
+
 
   return(
     <div id="card-modal-wrapper" onClick={exitIfNotModal}>
@@ -43,7 +59,11 @@ function CardModal({card_key, card, exit, board_id}) {
         <div id="card-modal" onClick={console.log("modal!")}>
 
           <div id="card-modal-top">
-            <h3>{card.name}<button id="card-modal-x"/></h3>
+            {nameState.edit? <h3 
+            onClick={() => setNameState({...nameState, edit: true})}>
+              <br/><br/><br/>{card.name}
+            </h3> : <input value={nameState.name} onChange={(e) => setNameState({...nameState, name: e.target.value})} onBlur={changeName(card.id, nameState.name)}/>}
+            <button id="card-modal-x"/>
             <p id="card-modal-listname">in list /*TODO listname*/</p>
           </div>
 
@@ -51,7 +71,11 @@ function CardModal({card_key, card, exit, board_id}) {
           <div id="card-modal-bottom">
               <div id="card-modal-left" style={{columnWidth: 400}}>
                 <p className="title">Description</p>
-                <button id="card-modal-add-descrip">Add a more detailed description...</button>
+                {description.exist?                 
+                description.edit?
+                  <input value={description.content} onChange={(e) => setDescription({...description, content: e.target.value})}/>
+                  : <p onClick={() => setDescription({...description, edit: false})}>{description.content}</p>
+                : <button onClick={() => setDescription({...description, edit: true})} id="card-modal-add-descrip">Add a more detailed description...</button>}
                 <p className="title"><br/>Activity</p>
                 <button>Hide Details</button>
                 <p>TODO PIC</p>
@@ -80,10 +104,10 @@ function CardModal({card_key, card, exit, board_id}) {
               <div id="card-modal-right" style={{columnWidth: 200}}>
                 <p>SUGGESTED</p>
                 <p><br/>ADD TO CARD</p>
-                  <button>Members</button>
+                  <button onClick={addMember}>Members</button>
                   <button>Labels</button>
                   <button>Checklist</button>
-                  <button>Due Date</button>
+                  <button onClick={addDuedate}>Due Date</button>
                 <p><br/>POWER-UPS</p>
                   <button>+ Add Power-Ups</button>
                   <p>Get unlimited Power-Ups, plus much more.</p>
