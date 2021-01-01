@@ -18,11 +18,12 @@ function CardModal({card_key, card, exit, board_id}) {
   }
 
   /*postComment 가져와야함*/
-  const postComment = ({board_id, card_id, comment}) => {
-    console.log("Post comment " + String(comment) + "  CARD ID : " + String(card_id) + "BOARD ID : " + String(board_id));
+  const postComment = ({card_id, comment}) => {
+    //POST/api/v1/activity/
+    console.log("Post comment " + String(comment) + "  CARD ID : " + String(card_id));
   }
   const saveComment = () => {
-    postComment(board_id, card.id, comment);
+    postComment(card.id, comment);
     setComment("");
     setButton({display: false, green: false});
   }
@@ -64,7 +65,7 @@ function CardModal({card_key, card, exit, board_id}) {
                 </button>
                 <p>TODO 댓글목록 ul li ...</p>
                 {card.activities.map((data, index) => (
-                  <><Activity data={data} key={index}/>
+                  <><Activity data={data} key={index} board_id={board_id} card_id={card.id}/>
                   <br/></>
                  ))}
               </div>

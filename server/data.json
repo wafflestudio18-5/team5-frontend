@@ -53,6 +53,20 @@
                 "created_at": null,
                 "content": "첫 번째 댓글",
                 "is_comment": true
+                },
+                {
+                "id": 2,
+                "creator": "mina",
+                "created_at": null,
+                "content": "두 번째 댓글이고 내용은 쏼라쏼라",
+                "is_comment": true
+                },
+                {
+                "id": 3,
+                "creator": "mina",
+                "created_at": null,
+                "content": "세 번째 댓글이당 랄랄라",
+                "is_comment": true
                 }
               ]
             },
