@@ -46,6 +46,7 @@ function BoardPage({ match }) {
         board={board}
         postList={postList}
         postCard={postCard}
+        postActivity={postActivity}
         users={users}
       />
     </>
