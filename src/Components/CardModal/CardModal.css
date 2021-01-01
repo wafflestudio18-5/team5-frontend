@@ -115,3 +115,15 @@
     width: 20px;
     height: 20px;
 }
+
+.ActivityCommentModify {
+    background-color: transparent !important;
+    text-decoration: underline;
+    width: fit-content !important;
+    height: fit-content !important;
+    padding: 0!important;
+}
+.ActivityCommentModify:hover {
+    background: transparent !important;
+    cursor: pointer;
+}

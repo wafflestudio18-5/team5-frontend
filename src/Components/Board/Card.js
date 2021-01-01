@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import "./Board.css";
 import CardModal from '../CardModal/CardModal';
 
-function Card({ card, index, board_key, board_name }) {
+function Card({ card, index, board_key, board_name, board_id }) {
 
     const [cardPage, setCardPage] = useState(false);
 
@@ -31,7 +31,7 @@ function Card({ card, index, board_key, board_name }) {
           style={{ marginTop: (index === 0 ? 0 : 10)}}>
           <p style={{wordBreak: "break-all", color: 'black'}}>{card.name}</p>
         </div>
-        {cardPage? <CardModal card_key={key} card_id={card.id} card_name={card.name} exit={exitModal}/> : <></>}
+        {cardPage? <CardModal card_key={key} card={card} exit={exitModal} board_id={board_id}/> : <></>}
       </>
     );
 }
