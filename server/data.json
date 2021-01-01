@@ -47,7 +47,14 @@
               "name": "cardname",
               "description": "desc",
               "members": [],
-              "activities": []
+              "activities": [{
+                "id": 1,
+                "creator": "mina",
+                "created_at": null,
+                "content": "첫 번째 댓글",
+                "is_comment": true
+                }
+              ]
             },
             {
               "id": 2,

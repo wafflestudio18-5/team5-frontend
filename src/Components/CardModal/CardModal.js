@@ -1,5 +1,6 @@
 import React from 'react';
 import './CardModal.css';
+import Activity from './Activity.js';
 
 function CardModal({card_key, card, exit, board_id}) {
 
@@ -17,8 +18,8 @@ function CardModal({card_key, card, exit, board_id}) {
   }
 
   /*postComment 가져와야함*/
-  const postComment = ({board_id, card.id, comment}) => {
-    console.log("Post comment " + String(comment) + "  CARD ID : " + String(card.id) + "BOARD ID : " + String(board_id));
+  const postComment = ({board_id, card_id, comment}) => {
+    console.log("Post comment " + String(comment) + "  CARD ID : " + String(card_id) + "BOARD ID : " + String(board_id));
   }
   const saveComment = () => {
     postComment(board_id, card.id, comment);
@@ -62,8 +63,9 @@ function CardModal({card_key, card, exit, board_id}) {
                   Save
                 </button>
                 <p>TODO 댓글목록 ul li ...</p>
-                {card.activity.map((data, index) => (
-                  <Activity data={data} key={index}/>
+                {card.activities.map((data, index) => (
+                  <><Activity data={data} key={index}/>
+                  <br/></>
                  ))}
               </div>
 
