@@ -26,7 +26,6 @@ const defaultUser = {
   fetchUserList: () => {},
   saveLoginInfo: () => {},
   loadLoginInfo: () => {},
-  setLog: () => {}, // TODO: 개발을 위한 함수, 최종 단계에서는 삭제해야 함.
 };
 
 const UserContext = createContext(defaultUser);
@@ -88,16 +87,6 @@ const UserProvider = (props) => {
     window.localStorage.setItem("last_name", loginInfo.last_name);
     window.localStorage.setItem("token", loginInfo.token);
 
-  };
-
-  const setLog = (log) => {
-    setState((state) => {
-      console.log(`set logged from ${state.logged} to ${log}`);
-      return {
-        ...state,
-        logged: log,
-      };
-    });
   };
 
   const loadLoginInfo = () => {
@@ -183,7 +172,6 @@ const UserProvider = (props) => {
     fetchUserList,
     saveLoginInfo,
     loadLoginInfo,
-    setLog,
   };
 
   const [state, setState] = useState(userState);
