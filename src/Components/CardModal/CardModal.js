@@ -28,6 +28,12 @@ function CardModal({card_key, card, exit, board_id}) {
     setButton({display: false, green: false});
   }
 
+  function deleteCard(card_id) {
+    /*TODO DELETE  /api/v1/card/ */
+    console.log("Delete Card");
+    exit();
+  }
+
 
   return(
     <div id="card-modal-wrapper" onClick={exitIfNotModal}>
@@ -68,6 +74,7 @@ function CardModal({card_key, card, exit, board_id}) {
                   <><Activity data={data} key={index} board_id={board_id} card_id={card.id}/>
                   <br/></>
                  ))}
+                <button onClick={() => deleteCard(card.id)}>Delete Card</button>
               </div>
 
               <div id="card-modal-right" style={{columnWidth: 200}}>
