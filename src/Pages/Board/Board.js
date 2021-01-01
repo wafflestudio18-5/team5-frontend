@@ -1,7 +1,6 @@
 import { Board } from "../../Components";
 import React, { useEffect } from "react";
 import { useBoardContext, useUserContext } from "../../Contexts";
-import { post } from "../../Server";
 import axios from "axios";
 
 function BoardPage({ match }) {

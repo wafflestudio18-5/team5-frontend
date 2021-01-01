@@ -1,6 +1,5 @@
 import React from 'react';
-import { Route, useRouteMatch, Redirect } from 'react-router-dom';
-import { useBoardContext } from '../../Contexts';
+import { Route, Redirect } from 'react-router-dom';
 import { routes } from '../../Routes'
 
 const BoardPage = () => {

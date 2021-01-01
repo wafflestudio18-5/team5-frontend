@@ -50,7 +50,6 @@ function CardModal({card_key, card, exit, board_id}) {
     console.log("ADDDUDATE TODO");
   }
 
-
   return(
     <div id="card-modal-wrapper" onClick={exitIfNotModal}>
       <div id="card-modal-wrapper-2">
