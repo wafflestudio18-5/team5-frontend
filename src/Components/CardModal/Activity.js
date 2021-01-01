@@ -44,7 +44,7 @@ function Activity({data, board_id, card_id}) {
                     <input
                     value={changedComment}
                     onChange={commentChange}
-                    onBlur={(e) => (e.target.value === "" || e.targtet.value === data.content) ? setButton({editMode: false, green: false}) : null}
+                    onBlur={(e) => (e.target.value === "" || e.target.value === data.content) ? setButton({editMode: false, green: false}) : null}
                     id="card-comment"
                     placeholder="Edit your comment..."/>
 
