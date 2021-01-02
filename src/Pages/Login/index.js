@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { routes } from "../../Routes";
+import { routes } from "../../Library/Routes";
 
 const LoginPage = () => {
   return (
