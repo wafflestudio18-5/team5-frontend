@@ -1,18 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
 import axios from "axios";
-
-/* TODO: 백엔드 연동하고 나면 이걸로 바꿔야 함
-const defaultUser = {
-  // variable used for giving id to each team informations
-  logged: false,
-  user: {
-    name: ''
-  },
-  loginRequest: () => {},
-  logoutRequest: () => {},
-  fetchInformation: () => {}
-};
-*/
+import apis from "../Library/Apis";
 
 const defaultUser = {
   // variable used for giving id to each team informations
@@ -34,15 +22,10 @@ const UserProvider = (props) => {
   const { children } = props;
 
   const signUpReq = (email, username, password) => {
-    axios
-      .post("/api/v1/user/", {
-        grantType: "PASSWORD",
-        email: email,
-        password: password,
-        username: username,
-      })
+    apis.user
+      .pwSignUp({ email, username, password })
       .then((response) => {
-        console.log("로그인 성공");
+        console.log("회원가입 성공");
         console.log(response.data);
       })
       .catch((err) => console.log(err));
@@ -50,13 +33,12 @@ const UserProvider = (props) => {
 
   const loginReqByPW = async (email, pw) => {
     const loginInfo = {
-      grantType: "PASSWORD",
       email: email,
       password: pw,
     };
 
-    axios
-      .put("/api/v1/user/login/", loginInfo)
+    apis.user
+      .pwLogIn(loginInfo)
       .then((response) => {
         axios.defaults.xsrfCookieName = "csrftoken";
         axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
@@ -78,7 +60,7 @@ const UserProvider = (props) => {
   };
 
   const saveLoginInfo = (loginInfo) => {
-    console.log('save login info:');
+    console.log("save login info:");
     console.log(loginInfo);
     window.localStorage.setItem("id", loginInfo.id);
     window.localStorage.setItem("username", loginInfo.username);
@@ -86,7 +68,6 @@ const UserProvider = (props) => {
     window.localStorage.setItem("first_name", loginInfo.first_name);
     window.localStorage.setItem("last_name", loginInfo.last_name);
     window.localStorage.setItem("token", loginInfo.token);
-
   };
 
   const loadLoginInfo = () => {
@@ -97,8 +78,13 @@ const UserProvider = (props) => {
     const last_name = window.localStorage.getItem("last_name");
     const token = window.localStorage.getItem("token");
     const user = {
-      id, username, email, first_name, last_name, token
-    }
+      id,
+      username,
+      email,
+      first_name,
+      last_name,
+      token,
+    };
     if (id) {
       console.log(token);
       axios.defaults.xsrfCookieName = "csrftoken";
@@ -121,37 +107,41 @@ const UserProvider = (props) => {
       authProvider: authProvider,
       accessToken: accessToken,
     };
-    const response = await axios.post("/api/v1/user/login/", loginInfo);
 
-    setState((state) => {
-      return {
-        ...state,
-        logged: true,
-        user: response.data,
-      };
-    });
+    apis.user
+      .scLogIn(loginInfo)
+      .then((response) => {
+        setState((state) => {
+          return {
+            ...state,
+            logged: true,
+            user: response.data,
+          };
+        });
 
-    saveLoginInfo(response.data);
+        saveLoginInfo(response.data);
+      })
+      .catch((err) => console.log(err));
   };
 
   const logoutReq = () => {
     window.localStorage.clear();
-    setState((state) => {
-      return {
-        ...state,
-        user: {},
-        logged: false,
-      };
-    });
-
-    axios
-      .put("/api/v1/user/logout/", {})
+    apis.user
+      .logout()
+      .then((response) => {
+        setState((state) => {
+          return {
+            ...state,
+            user: {},
+            logged: false,
+          };
+        });
+      })
       .catch((err) => console.log(err));
   };
 
   const fetchUserList = async () => {
-    axios
-      .get("/api/v1/user/list/")
+    apis.user.getAll
       .then((response) => {
         setState((state) => {
           return {

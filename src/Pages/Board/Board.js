@@ -1,7 +1,7 @@
 import { Board } from "../../Components";
 import React, { useEffect } from "react";
 import { useBoardContext, useUserContext } from "../../Contexts";
-import axios from "axios";
+import apis from '../../Library/Apis';
 
 function BoardPage({ match }) {
   const { board, fetchBoard } = useBoardContext();
@@ -13,16 +13,14 @@ function BoardPage({ match }) {
 
   const postCard = (bId, lId, name) => {
     if (!name) return;
-    axios
-      .post("/api/v1/card/", { board_id: bId, list_id: lId, name: name })
+    apis.card.post({ board_id: bId, list_id: lId, name: name })
       .then((response) => fetch(match))
       .catch((err) => console.log(err));
   };
 
   const postList = (bId, name) => {
     if (!name) return;
-    axios
-      .post("/api/v1/list/", { board_id: bId, name: name })
+    apis.list.post({ board_id: bId, name: name })
       .then((response) => fetch(match))
       .catch((err) => console.log(err));
   };
