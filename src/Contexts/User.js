@@ -43,10 +43,40 @@ const UserProvider = (props) => {
         username: username,
       })
       .then((response) => {
-        console.log("로그인 성공");
+        console.log("회원가입 성공");
         console.log(response.data);
       })
       .catch((err) => console.log(err));
+  };
+
+  const loginReqBySC = async (authProvider, accessToken) => {
+    const loginInfo = {
+      grantType: "OAUTH",
+      authProvider: authProvider,
+      token: accessToken,
+    };
+    axios
+      .put("/api/v1/user/login", loginInfo)
+      .then((response) => {
+        setState((state) => {
+          return {
+            ...state,
+            logged: true,
+            user: response.data,
+          };
+        });
+        console.log("소셜 로그인 실패: 회원가입으로 넘어감");
+        saveLoginInfo(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        axios
+          .post("/api/v1/user/", loginInfo)
+          .then((response) => {
+            console.log("소셜 회원가입 성공");
+          })
+          .catch((err) => console.log("여긴 어케 온거임 대체"));
+      });
   };
 
   const loginReqByPW = async (email, pw) => {
@@ -79,7 +109,7 @@ const UserProvider = (props) => {
   };
 
   const saveLoginInfo = (loginInfo) => {
-    console.log('save login info:');
+    console.log("save login info:");
     console.log(loginInfo);
     window.localStorage.setItem("id", loginInfo.id);
     window.localStorage.setItem("username", loginInfo.username);
@@ -87,7 +117,6 @@ const UserProvider = (props) => {
     window.localStorage.setItem("first_name", loginInfo.first_name);
     window.localStorage.setItem("last_name", loginInfo.last_name);
     window.localStorage.setItem("token", loginInfo.token);
-
   };
 
   const setLog = (log) => {
@@ -108,8 +137,13 @@ const UserProvider = (props) => {
     const last_name = window.localStorage.getItem("last_name");
     const token = window.localStorage.getItem("token");
     const user = {
-      id, username, email, first_name, last_name, token
-    }
+      id,
+      username,
+      email,
+      first_name,
+      last_name,
+      token,
+    };
     if (id) {
       console.log(token);
       axios.defaults.xsrfCookieName = "csrftoken";
@@ -126,25 +160,6 @@ const UserProvider = (props) => {
     }
   };
 
-  const loginReqBySC = async (authProvider, accessToken) => {
-    const loginInfo = {
-      grantType: "OAUTH",
-      authProvider: authProvider,
-      accessToken: accessToken,
-    };
-    const response = await axios.post("/api/v1/user/login/", loginInfo);
-
-    setState((state) => {
-      return {
-        ...state,
-        logged: true,
-        user: response.data,
-      };
-    });
-
-    saveLoginInfo(response.data);
-  };
-
   const logoutReq = () => {
     window.localStorage.clear();
     setState((state) => {
@@ -155,9 +170,7 @@ const UserProvider = (props) => {
       };
     });
 
-    axios
-      .put("/api/v1/user/logout/", {})
-      .catch((err) => console.log(err));
+    axios.put("/api/v1/user/logout/", {}).catch((err) => console.log(err));
   };
 
   const fetchUserList = async () => {
