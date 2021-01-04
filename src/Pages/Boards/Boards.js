@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Boards } from "../../Components";
 import { useUserContext } from "../../Contexts";
-import axios from "axios";
+import apis from "../../Library/Apis";
 
 const RECENT_BOARDS = 3;
 
@@ -16,16 +16,23 @@ function BoardsPage({ history }) {
   const [boards, setBoards] = useState([]);
 
   const fetchBoards = () => {
-    axios
-      .get("/api/v1/board/boardlist/")
-      .then((response) => { setBoards(response.data); console.log(response.data) })
+    apis.board
+      .getAll()
+      .then((response) => {
+        setBoards(response.data);
+        console.log(response.data);
+      })
       .catch((err) => console.log(err));
   };
 
   const postBoard = async (name) => {
     if (!name) return;
-    await axios.post("/api/v1/board/", { name: name }).catch(err => console.log(err));
-    fetchBoards();
+    apis.board
+      .post({ name })
+      .then((response) => {
+        fetchBoards();
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {

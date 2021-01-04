@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import "./Board.css";
 import CardModal from '../CardModal/CardModal';
 

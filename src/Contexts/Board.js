@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from "react";
-import axios from 'axios';
+import apis from "../Library/Apis";
 
 const defaultBoard = {
   board: null,
@@ -15,11 +15,8 @@ const BoardProvider = (props) => {
   const getBoardData = () => state.board;
 
   const fetchBoard = async (data) => {
-    axios({
-      url: '/api/v1/board/',
-      method: 'get',
-      params: data
-    })
+    apis.board
+      .get(data)
       .then((response) => {
         setState((state) => {
           return {

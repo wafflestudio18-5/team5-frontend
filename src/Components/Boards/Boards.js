@@ -17,8 +17,6 @@ import template1 from "./Boards-Template Images/Template 1 Project Management.pn
 import template2 from "./Boards-Template Images/Template 2 Kanban Template.png";
 import template3 from "./Boards-Template Images/Template 3 Simple Project Board.png";
 import template4 from "./Boards-Template Images/Template 4 Remote Team Hub.png";
-import { useBoardContext } from "../../Contexts";
-import axios from 'axios';
 
 function Boards({ user_data, postBoard, personal, recent, starred, refreshBoards }) {
   const [active, setActive] = useState(1);

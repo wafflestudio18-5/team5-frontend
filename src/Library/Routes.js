@@ -1,10 +1,10 @@
-import { HomePage, LoginPage, SignUpPage, BoardPage, CardPage, BoardsPage } from './Pages';
-import Home from './Pages/Home/Home';
-import Login from './Pages/Login/Login';
-import SignUp from './Pages/SignUp/SignUp';
-import Board from './Pages/Board/Board';
-import Boards from './Pages/Boards/Boards';
-import Card from './Pages/Card/Card';
+import { HomePage, LoginPage, SignUpPage, BoardPage, CardPage, BoardsPage } from '../Pages';
+import Home from '../Pages/Home/Home';
+import Login from '../Pages/Login/Login';
+import SignUp from '../Pages/SignUp/SignUp';
+import Board from '../Pages/Board/Board';
+import Boards from '../Pages/Boards/Boards';
+import Card from '../Pages/Card/Card';
 
 const routes = {
   Home: { path: '/', component: Home },
