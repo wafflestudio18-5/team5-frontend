@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
 import axios from 'axios';
 
-function Activity({data}) {
+function Activity({data, refresh, setRefresh}) {
 
     const inputRef = useRef();
 
@@ -9,7 +9,12 @@ function Activity({data}) {
     const [button, setButton] = useState({editMode: false, green: true})
 
     const deleteActivity = (id) => {
-        axios.delete("/api/v1/activity/", { id: String(id) })
+        axios.delete('/api/v1/activity/', {
+        data: { // 서버에서 req.body.{} 로 확인할 수 있다.
+          id: String(id)
+        },
+        //withCredentials: true,
+      })
         .then(function(response) {
             console.log("댓글 지우기 성공");
         })
@@ -50,9 +55,14 @@ function Activity({data}) {
     }
     const putComment = () => {
         setButton({...button, editMode: false})
+        if (!button.green) {
+            setChangedComment(data.content);
+            return;
+        }
         axios.put("/api/v1/activity/", { content: changedComment, id: String(data.id) })
         .then(function(response) {
             console.log("댓글 수정 성공");
+            setRefresh(!refresh);
         })
         .catch(function (error) {
         if (error.response) {
@@ -75,18 +85,23 @@ function Activity({data}) {
     });
     }
 
+    const inputBlur = (e) => {
+        if (e.target.value === "" || e.target.value === data.content) {
+            setButton({...button, editMode: false});
+            setChangedComment(data.content);
+        }
+    }
+
     return (
         <div className="Activity">
             <img src="" alt={String(data.id)}/> {/*TODO 프사설정*/}
-            <nobr/>
             {data.is_comment ? <>
                 <div style={button.editMode? null : {display: 'none'}}>
                     <input
                     ref={inputRef}
                     value={changedComment}
                     onChange={commentChange}
-                    onBlur={(e) => (e.target.value === "" || e.target.value === data.content) ? setButton({...button, editMode: false}) : null}
-                    id="card-comment"
+                    onBlur={inputBlur}
                     placeholder="Edit your comment..."/>
 
                     <button
@@ -94,7 +109,9 @@ function Activity({data}) {
                     style={{backgroundColor: button.green? 'green' : 'lightgray', color: button.green? 'white' : 'gray'}}>
                     Save
                     </button></div>
-                <div style={button.editMode? {display: 'none'} :null}><p>{data.content}</p>
+
+                <div style={button.editMode? {display: 'none'} :null}>
+                <p>{data.is_comment ? changedComment : data.content}</p>
                 <button className="ActivityCommentModify" onClick={editCommentClick}>edit</button>
                 <button className="ActivityCommentModify" onClick={() => deleteActivity(data.id)}>delete</button>
             </div>
