@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 import "./Board.css";
 import CardModal from '../CardModal/CardModal';
 
-function Card({ card, index, board_key, board_name, board_id }) {
+function Card({ card, index, list_name, board_key, board_name, board_id, deleteCard, postActivity, putActivity, deleteActivity }) {
 
     const [cardPage, setCardPage] = useState(false);
 
-    /*TODO key = card.key */
-    const key = "def4u1tKey";
+    const key = card.key;
     const dashedName = card.name.replaceAll(" ", "-");
     const cardPath = "/c/" + key + "/" + String(card.id) + "-" + dashedName;
     const boardPath = "/b/" + board_key + "/" + board_name;
+
+    const [cardName, setCardName] = useState(card.name);
 
     const cardClick = () => {
       setCardPage(true);
@@ -29,9 +30,10 @@ function Card({ card, index, board_key, board_name, board_id }) {
         <div className="board-card" 
           onClick={cardClick}
           style={{ marginTop: (index === 0 ? 0 : 10)}}>
-          <p style={{wordBreak: "break-all", color: 'black'}}>{card.name}</p>
+          <p style={{wordBreak: "break-all", color: 'black'}}>{cardName}</p>
         </div>
-        {cardPage? <CardModal card_key={key} card={card} exit={exitModal} board_id={board_id}/> : <></>}
+        {cardPage? <CardModal setCardName={setCardName} card_key={key} card={card} exit={exitModal} list_name={list_name} board_id={board_id} deleteCard={deleteCard}
+        postActivity={postActivity} putActivity={putActivity} deleteActivity={deleteActivity}/> : <></>}
       </>
     );
 }
