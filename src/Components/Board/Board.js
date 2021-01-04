@@ -54,10 +54,12 @@ function Board({ users, board, postList, postCard, deleteCard, postActivity, put
     : users;
 
   const deleteBoard = () => {
-    axios.delete("/api/v1/board/", { id: board.id })
-    .then(function(response) {
-        console.log("보드 삭제하기 성공");
-    })
+      axios.delete('/api/v1/board/', {
+        data: { // 서버에서 req.body.{} 로 확인할 수 있다.
+          id: board.id
+        }
+        //withCredentials: true,
+      })
     .catch(function (error) {
     if (error.response) {
       console.log("// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.");
