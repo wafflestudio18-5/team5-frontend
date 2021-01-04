@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "./Board.css";
 import CardModal from '../CardModal/CardModal';
+import axios from 'axios';
 
-function Card({ card, index, list_name, board_key, board_name, board_id, deleteCard, postActivity, putActivity, deleteActivity }) {
+function Card({ card, index, list_name, board_key, board_name, board_id, postActivity, putActivity, deleteActivity }) {
 
     const [cardPage, setCardPage] = useState(false);
 
@@ -13,6 +14,38 @@ function Card({ card, index, list_name, board_key, board_name, board_id, deleteC
     const boardPath = "/b/" + board_key + "/" + board_name;
 
     const [cardName, setCardName] = useState(card.name);
+
+  const deleteCard = () => {
+
+    axios.delete('/api/v1/card/', {
+        data: { // 서버에서 req.body.{} 로 확인할 수 있다.
+          id: String(card.id)
+        },
+        //withCredentials: true,
+      })
+    .then(function(response) {
+        console.log("카드 삭제하기 성공");
+    })
+    .catch(function (error) {
+    if (error.response) {
+      console.log("// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.");
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    }
+    else if (error.request) {
+      console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+      // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+      // Node.js의 http.ClientRequest 인스턴스입니다.
+      console.log(error.request);
+    }
+    else {
+      console.log("// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.");
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
+  }
 
     const cardClick = () => {
       setCardPage(true);
