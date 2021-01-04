@@ -36,7 +36,13 @@ function List({ board, data, postCard, deleteCard, postActivity, putActivity, de
   }
 
   const deleteList = () => {
-    axios.delete("/api/v1/list/", { id: String(data.id) })
+
+    axios.delete('/api/v1/list/', {
+        data: { // 서버에서 req.body.{} 로 확인할 수 있다.
+          id: String(data.id)
+        },
+        //withCredentials: true,
+      });
     .then(function(response) {
         console.log("리스트 삭제하기 성공");
     })
