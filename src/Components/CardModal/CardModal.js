@@ -3,7 +3,7 @@ import './CardModal.css';
 import Activity from './Activity.js';
 import axios from "axios";
 
-function CardModal({setCardName, card_key, exit, list_name, board_id}) {
+function CardModal({cardName, setCardName, card_key, exit, list_name, board_id}) {
 
   const getCard = (key) => {
     axios.get("/api/v1/card/?key=" + key)
@@ -112,7 +112,7 @@ function CardModal({setCardName, card_key, exit, list_name, board_id}) {
   }
 
   //카드의 제목 바꾸기
-  const [nameState, setNameState] = useState({name: card.name, edit: false});
+  const [nameState, setNameState] = useState({name: cardName, edit: false});
   const cardNameChange = (e) => {
     setNameState({...nameState, name: e.target.value});
   }
@@ -199,11 +199,11 @@ function CardModal({setCardName, card_key, exit, list_name, board_id}) {
                   Save
                 </button>
                 <p>TODO 댓글목록 ul li ...</p>
-                {/*카드 액티비티가 undefined라고 뜸 콘솔띄워도 안 뜸 엉엉엉 (card.activities !== [])? card.activities.map((data, index) => (
+                {getCard(card_key).activities.map((data, index) => (
                   <><Activity data={data} key={index}
                   />
                   <br/></>
-                 )) : null*/}
+                 ))}
                 <button onClick={() => deleteCardClick(card.id)}>Delete Card</button>
               </div>
 
