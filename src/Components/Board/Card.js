@@ -4,7 +4,7 @@ import "./Board.css";
 import CardModal from '../CardModal/CardModal';
 import axios from 'axios';
 
-function Card({ card, index, list_name, board_key, board_name, board_id, postActivity, putActivity, deleteActivity }) {
+function Card({ card, index, list_name, board_key, board_name, board_id }) {
 
     const [cardPage, setCardPage] = useState(false);
 
@@ -65,8 +65,7 @@ function Card({ card, index, list_name, board_key, board_name, board_id, postAct
           style={{ marginTop: (index === 0 ? 0 : 10)}}>
           <p style={{wordBreak: "break-all", color: 'black'}}>{cardName}</p>
         </div>
-        {cardPage? <CardModal cardName={cardName} setCardName={setCardName} card_key={key} card={card} exit={exitModal} list_name={list_name} board_id={board_id} deleteCard={deleteCard}
-        postActivity={postActivity} putActivity={putActivity} deleteActivity={deleteActivity}/> : <></>}
+        {cardPage? <CardModal cardName={cardName} setCardName={setCardName} card_key={key} card={card} exit={exitModal} list_name={list_name} board_id={board_id} deleteCard={deleteCard} /> : null }
       </>
     );
 }

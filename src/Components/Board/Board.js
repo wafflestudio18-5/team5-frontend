@@ -7,7 +7,7 @@ import { Redirect } from "react-router-dom";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
-function Board({ users, board, postList, postCard, deleteCard, postActivity, putActivity, deleteActivity }) {
+function Board({ users, board, postList, postCard }) {
   const [crtList, setCrtList] = useState(false);
   const [listInput, setListInput] = useState("");
   const [invite, setInvite] = useState(false);
@@ -38,6 +38,7 @@ function Board({ users, board, postList, postCard, deleteCard, postActivity, put
     setCrtList(false);
     postList(board.id, listInput);
     setListInput("");
+    console.log("created list");
   };
 
   const inviteOnChange = (e) => {
@@ -52,7 +53,7 @@ function Board({ users, board, postList, postCard, deleteCard, postActivity, put
   const tUsers = inviteInput
     ? users.filter((item) => item.username.includes(inviteInput))
     : users;
-
+  
   const deleteBoard = () => {
       axios.delete('/api/v1/board/', {
         data: { // 서버에서 req.body.{} 로 확인할 수 있다.
@@ -164,10 +165,6 @@ function Board({ users, board, postList, postCard, deleteCard, postActivity, put
                   data={data}
                   key={index}
                   postCard={postCard}
-                  deleteCard={deleteCard}
-                  postActivity={postActivity}
-                  putActivity={putActivity}
-                  deleteActivity={deleteActivity}
                 />
               ))}
 
