@@ -3,10 +3,25 @@ import './CardModal.css';
 import Activity from './Activity.js';
 import axios from "axios";
 
-function CardModal({cardName, setCardName, card_key, exit, list_name, board_id}) {
+function CardModal({setCardName, card_key, exit, list_name, board_id}) {
 
-  const getCard = (key) => {
-    axios.get("/api/v1/card/?key=" + key)
+  const getCard = async () => {
+    try {
+        const resp = await axios.get("/api/v1/card/?key=" + card_key);
+        console.log("카드 GET 성공!");
+        console.log(resp.data);
+    } catch (err) {
+        // Handle Error Here
+        console.error(err);
+    }
+  };
+
+  getCard();
+  card = resp.data;
+
+
+  /*const getCard = async (key) => {
+    await axios.get("/api/v1/card/?key=" + key)
     .then(function(response) {
         console.log("카드 정보 받아오기 성공");
         console.log(response.data);
@@ -31,9 +46,10 @@ function CardModal({cardName, setCardName, card_key, exit, list_name, board_id})
     }
     console.log(error.config);
   });
-  }
-
-  const card = getCard(card_key);
+  }*/
+  //const card = getCard(card_key);
+  //console.log(card);
+  const [nameState, setNameState] = useState({name: card['name'], edit: false});
   
   const exitIfNotModal = (e) => {
     if (e.target.id.includes("card-modal-wrapper") || e.target.className === "blank-for-card-modal" || e.target.id === "card-modal-x") {
@@ -50,9 +66,7 @@ function CardModal({cardName, setCardName, card_key, exit, list_name, board_id})
 
   //댓글 달고 저장하기 TODO 안 뜸 아놔
   const saveComment = () => {
-    //postActivity(card.id, comment);
-
-    axios.post("/api/v1/activity/", { card_id: String(card.id), content: comment })
+    axios.post("/api/v1/activity/", { card_id: String(card['id']), content: comment })
     .then(function(response) {
         console.log("댓글 달기 성공");
         console.log(response);
@@ -112,7 +126,6 @@ function CardModal({cardName, setCardName, card_key, exit, list_name, board_id})
   }
 
   //카드의 제목 바꾸기
-  const [nameState, setNameState] = useState({name: cardName, edit: false});
   const cardNameChange = (e) => {
     setNameState({...nameState, name: e.target.value});
   }
@@ -167,7 +180,7 @@ function CardModal({cardName, setCardName, card_key, exit, list_name, board_id})
             {!(nameState.edit)? <p style={{fontWeight: 700, fontSize: 20}}
             onClick={() => setNameState({...nameState, edit: true})}>
               <br/><br/><br/><br/><br/><br/>{nameState.name}
-            </p> : <><br/><br/><br/><br/><br/><br/><input style={{fontWeight: 700, fontSize: 20}} value={nameState.name} onChange={cardNameChange} onBlur={() => nameState.edit? changeName(card.id, nameState.name) : null}/></>}
+            </p> : <><br/><br/><br/><br/><br/><br/><input style={{fontWeight: 700, fontSize: 20}} value={nameState.name} onChange={cardNameChange} onBlur={() => nameState.edit? changeName(card["id"], nameState.name) : null}/></>}
             <button id="card-modal-x"/>
             <p id="card-modal-listname">in list <span style={{textDecoration: 'underline'}}>{list_name}</span></p>
           </div>
@@ -199,12 +212,12 @@ function CardModal({cardName, setCardName, card_key, exit, list_name, board_id})
                   Save
                 </button>
                 <p>TODO 댓글목록 ul li ...</p>
-                {getCard(card_key).activities.map((data, index) => (
+                {card["activities"].map((data, index) => (
                   <><Activity data={data} key={index}
                   />
                   <br/></>
                  ))}
-                <button onClick={() => deleteCardClick(card.id)}>Delete Card</button>
+                <button onClick={() => deleteCardClick(card["id"])}>Delete Card</button>
               </div>
 
               <div id="card-modal-right" style={{columnWidth: 200}}>
