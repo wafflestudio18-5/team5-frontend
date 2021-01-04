@@ -42,7 +42,7 @@ function List({ board, data, postCard, deleteCard, postActivity, putActivity, de
           id: String(data.id)
         },
         //withCredentials: true,
-      });
+      })
     .then(function(response) {
         console.log("리스트 삭제하기 성공");
     })
