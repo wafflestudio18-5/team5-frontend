@@ -17,7 +17,7 @@ function CardModal({setCardName, card_key, exit, list_name, board_id}) {
   };
 
   getCard();
-  card = resp.data;
+  const card = resp.data;
 
 
   /*const getCard = async (key) => {
