@@ -10,14 +10,14 @@ function CardModal({setCardName, card_key, exit, list_name, board_id}) {
         const resp = await axios.get("/api/v1/card/?key=" + card_key);
         console.log("카드 GET 성공!");
         console.log(resp.data);
+        return resp.data;
     } catch (err) {
         // Handle Error Here
         console.error(err);
     }
   };
 
-  getCard();
-  const card = resp.data;
+  const card = getCard();
 
 
   /*const getCard = async (key) => {
