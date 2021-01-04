@@ -37,21 +37,21 @@ const apis = {
     },
     // 로그인, pw
     pwLogIn: ({email, password}) => {
-      return requester.put('user/login', {
+      return requester.put('user/login/', {
         grantType: "PASSWORD",
         email, password
       })
     },
     // 로그인, sc
     scLogIn: ({authProvider, token}) => {
-      return requester.put('user/login', {
+      return requester.put('user/login/', {
         grantType: "OAUTH",
         authProvider, token
       })
     },
     // 로그아웃
     logout: () => {
-      return requester.put('user/logout')
+      return requester.put('user/logout/')
     },
 	},
 	board: {
