@@ -3,8 +3,38 @@ import './CardModal.css';
 import Activity from './Activity.js';
 import axios from "axios";
 
-function CardModal({setCardName, card_key, card, exit, list_name, board_id, postActivity, putActivity, deleteActivity, deleteCard}) {
+function CardModal({setCardName, card_key, exit, list_name, board_id}) {
 
+  const getCard = (key) => {
+    axios.get("/api/v1/card/?key=" + key)
+    .then(function(response) {
+        console.log("카드 정보 받아오기 성공");
+        console.log(response.data);
+        return response.data;
+    })
+    .catch(function (error) {
+    if (error.response) {
+      console.log("// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.");
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    }
+    else if (error.request) {
+      console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+      // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+      // Node.js의 http.ClientRequest 인스턴스입니다.
+      console.log(error.request);
+    }
+    else {
+      console.log("// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.");
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
+  }
+
+  const card = getCard(card_key);
+  
   const exitIfNotModal = (e) => {
     if (e.target.id.includes("card-modal-wrapper") || e.target.className === "blank-for-card-modal" || e.target.id === "card-modal-x") {
       exit();
@@ -125,8 +155,6 @@ function CardModal({setCardName, card_key, card, exit, list_name, board_id, post
   const addDuedate = () => {
     alert("[ERROR] NO ACTIVITY PREPARED EXCEPT COMMENTS\n(Failed to add Due Date)");
   }
-
-  console.log(card);
 
   return(
     <div id="card-modal-wrapper" onClick={exitIfNotModal}>
