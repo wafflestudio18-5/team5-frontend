@@ -2,10 +2,12 @@ import "./Board.css";
 import { useEffect, useState } from "react";
 import List from "./List.js";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
+
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
-function Board({ users, board, postList, postCard }) {
+function Board({ users, board, postList, postCard, deleteCard, postActivity, putActivity, deleteActivity }) {
   const [crtList, setCrtList] = useState(false);
   const [listInput, setListInput] = useState("");
   const [invite, setInvite] = useState(false);
@@ -50,6 +52,33 @@ function Board({ users, board, postList, postCard }) {
   const tUsers = inviteInput
     ? users.filter((item) => item.username.includes(inviteInput))
     : users;
+
+  const deleteBoard = () => {
+    axios.delete("/api/v1/board/", { id: board.id })
+    .then(function(response) {
+        console.log("보드 삭제하기 성공");
+    })
+    .catch(function (error) {
+    if (error.response) {
+      console.log("// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.");
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    }
+    else if (error.request) {
+      console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+      // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+      // Node.js의 http.ClientRequest 인스턴스입니다.
+      console.log(error.request);
+    }
+    else {
+      console.log("// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.");
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
+    return (<Redirect to="/username/boards" />);
+  }
 
   if (!board) return <div className="board-wrapper">Loading...</div>;
 
@@ -120,6 +149,7 @@ function Board({ users, board, postList, postCard }) {
             <button>Calendar</button>
             <button>Butler</button>
             <button>Show Menu</button>
+            <button onClick={deleteBoard}>DELETE</button>
           </div>
         </header>
 
@@ -132,6 +162,10 @@ function Board({ users, board, postList, postCard }) {
                   data={data}
                   key={index}
                   postCard={postCard}
+                  deleteCard={deleteCard}
+                  postActivity={postActivity}
+                  putActivity={putActivity}
+                  deleteActivity={deleteActivity}
                 />
               ))}
 
