@@ -113,3 +113,10 @@ input.addcard {
   margin-top: 10px;
   height: 25px;
 }
+
+#board-list-delete {
+  width: 70px !important;
+  height: 25px !important;
+  position: sticky;
+  right: 10px;
+}
