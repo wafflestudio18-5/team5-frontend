@@ -145,7 +145,7 @@ const UserProvider = (props) => {
   };
 
   const fetchUserList = async () => {
-    apis.user.getAll
+    apis.user.getAll()
       .then((response) => {
         setState((state) => {
           return {

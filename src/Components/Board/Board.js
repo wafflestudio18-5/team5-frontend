@@ -1,10 +1,10 @@
 import "./Board.css";
 import { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 import List from "./List.js";
 import axios from "axios";
 import apis from "../../Library/Apis";
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
-import { Redirect } from "react-router-dom";
 
 function Board({ users, board, postList, postCard }) {
   const [crtList, setCrtList] = useState(false);
