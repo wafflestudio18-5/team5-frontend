@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import Card from "./Card.js";
+import apis from '../../Library/Apis';
 import "./List.css";
-import axios from 'axios';
 
 function List({ board, data, postCard }) {
   const newCardButton = useRef();
@@ -46,7 +46,7 @@ function List({ board, data, postCard }) {
 
     console.log("delete");
 
-    axios.delete('/api/v1/list/', {
+    apis.list.delete( {
         data: { // 서버에서 req.body.{} 로 확인할 수 있다.
           id: String(data.id)
         },

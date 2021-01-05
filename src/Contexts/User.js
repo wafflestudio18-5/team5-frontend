@@ -1,5 +1,4 @@
 import React, { createContext, useState, useContext } from "react";
-import axios from "axios";
 import apis from "../Library/Apis";
 
 const defaultUser = {
@@ -31,14 +30,13 @@ const UserProvider = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const loginReqBySC = async (authProvider, accessToken) => {
+  const loginReqBySC = (authProvider, accessToken) => {
     const loginInfo = {
       grantType: "OAUTH",
       authProvider: authProvider,
       token: accessToken,
     };
-    axios
-      .put("/api/v1/user/login", loginInfo)
+    apis.user.scLogIn(loginInfo)
       .then((response) => {
         setState((state) => {
           return {
@@ -47,13 +45,13 @@ const UserProvider = (props) => {
             user: response.data,
           };
         });
-        console.log("소셜 로그인 실패: 회원가입으로 넘어감");
+        console.log("소셜 로그인 성공");
         saveLoginInfo(response.data);
       })
       .catch((err) => {
         console.log(err);
-        axios
-          .post("/api/v1/user/", loginInfo)
+        console.log("소셜 로그인 실패: 회원가입으로 넘어감");
+        apis.user.scSignUP(loginInfo)
           .then((response) => {
             console.log("소셜 회원가입 성공");
           })
@@ -61,7 +59,7 @@ const UserProvider = (props) => {
       });
   };
 
-  const loginReqByPW = async (email, pw) => {
+  const loginReqByPW = (email, pw) => {
     const loginInfo = {
       email: email,
       password: pw,
@@ -70,11 +68,8 @@ const UserProvider = (props) => {
     apis.user
       .pwLogIn(loginInfo)
       .then((response) => {
-        axios.defaults.xsrfCookieName = "csrftoken";
-        axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-        axios.defaults.headers.common[
-          "Authorization"
-        ] = `Token ${response.data.token}`;
+        apis.user.setToken(response.data.token);
+        console.log("비밀번호로 로그인 성공");
         setState((state) => {
           return {
             ...state,
@@ -90,8 +85,6 @@ const UserProvider = (props) => {
   };
 
   const saveLoginInfo = (loginInfo) => {
-    console.log("save login info:");
-    console.log(loginInfo);
     window.localStorage.setItem("id", loginInfo.id);
     window.localStorage.setItem("username", loginInfo.username);
     window.localStorage.setItem("email", loginInfo.email);
@@ -116,10 +109,8 @@ const UserProvider = (props) => {
       token,
     };
     if (id) {
-      console.log(token);
-      axios.defaults.xsrfCookieName = "csrftoken";
-      axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-      axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+      console.log('토큰 저장: ' + token);
+      apis.user.setToken(token);
 
       setState((state) => ({
         ...state,
@@ -141,7 +132,7 @@ const UserProvider = (props) => {
       };
     });
 
-    axios.put("/api/v1/user/logout/", {}).catch((err) => console.log(err));
+    apis.user.logout().catch((err) => console.log(err));
   };
 
   const fetchUserList = async () => {
