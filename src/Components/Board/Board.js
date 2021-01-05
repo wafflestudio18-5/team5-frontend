@@ -33,11 +33,11 @@ function Board({ users, modal, board, postList, postCard }) {
       .catch((err) => console.log(err));
   };
 
-const createListEnter = (e) => {
-    if(e.key == 'Enter') {
+  const createListEnter = (e) => {
+    if (e.key == "Enter") {
       createList();
     }
-  }
+  };
 
   const createList = () => {
     setCrtList(false);
@@ -166,7 +166,7 @@ const createListEnter = (e) => {
           </div>
         </header>
 
-        <div className={`board-main ${modal? "up":""}`}>
+        <div className={`board-main ${modal ? "up" : ""}`}>
           <div id="board-lists">
             <div id="board-temp">
               {board.lists.map((data, index) => (
@@ -189,7 +189,9 @@ const createListEnter = (e) => {
                       onChange={(e) => setListInput(e.target.value)}
                       value={listInput}
                     />
-                    <button onKeyPress={createListEnter} onClick={createList}>Add List</button>
+                    <button onKeyPress={createListEnter} onClick={createList}>
+                      Add List
+                    </button>
                     <button id="no_crtList" onClick={no_crtList}></button>
                   </div>
                 ) : (

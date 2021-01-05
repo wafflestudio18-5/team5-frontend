@@ -4,15 +4,40 @@ import apis from "../Library/Apis";
 const defaultBoard = {
   board: null,
   modal: false,
+  move: {
+    bool: false,// whether moving or not
+    mode: "",   // "", "card", "list"
+    from: null, // card which is moving
+  },
   setModal: () => {},
+  setMove: () => {},
   getBoardData: () => {},
-  fetchBoard: async (data) => {},
+  fetchBoard: (data) => {},
 };
 
 const BoardContext = createContext(defaultBoard);
 
 const BoardProvider = (props) => {
   const { children } = props;
+
+  const setMove = ({bool, mode, from }) => {
+    if(bool) {
+      setState(state => {
+        return {
+          ...state,
+          move: {bool: true, mode, from }
+        }
+      })
+    } else {
+      setState(state => {
+        return {
+          ...state,
+          move: {bool: true, mode: "", from: null, to: null}
+        }
+      })
+    }
+    
+  }
 
   const setModal = (e) => {
     setState((state) => ({
@@ -23,7 +48,10 @@ const BoardProvider = (props) => {
 
   const getBoardData = () => state.board;
 
-  const fetchBoard = async (data) => {
+  const fetchBoard = (data) => {
+    console.log(apis);
+    console.log(apis.board);
+    console.log(apis.board.get);
     apis.board
       .get(data)
       .then((response) => {
@@ -41,7 +69,8 @@ const BoardProvider = (props) => {
     ...defaultBoard,
     getBoardData,
     fetchBoard,
-    setModal
+    setModal,
+    setMove
   };
 
   const [state, setState] = useState(boardState);

@@ -83,7 +83,7 @@ const apis = {
       return requester.put("board/", { id, name, star });
     },
     delete: ({ id }) => {
-      return requester.delete("board/", { id });
+      return requester.delete("board/", {data: { id }});
     },
 
     // all boards
@@ -107,7 +107,7 @@ const apis = {
       return requester.put("list/", { board_id, list_id, name, prev_id });
     },
     delete: ({ id }) => {
-      return requester.delete("list/", { id });
+      return requester.delete("list/", { data: { id } });
     },
   },
   card: {
@@ -131,7 +131,7 @@ const apis = {
       });
     },
     delete: ({ id }) => {
-      return requester.delete("card/", { id });
+      return requester.delete("card/", {data: { id }});
     },
   },
   activity: {
@@ -142,7 +142,7 @@ const apis = {
       return requester.put("activity/", { id, content });
     },
     delete: ({ id }) => {
-      return requester.delete("activity/", { id });
+      return requester.delete("activity/", {data: { id }});
     },
   },
 };

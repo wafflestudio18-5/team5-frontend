@@ -7,7 +7,7 @@ function BoardPage({ match }) {
   const { board, modal, fetchBoard } = useBoardContext();
   const { users } = useUserContext();
 
-  const fetch = async (match) => {
+  const fetch = (match) => {
     fetchBoard({ key: match.params.board_key });
   };
 
