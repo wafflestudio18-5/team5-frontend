@@ -6,7 +6,6 @@ import img1 from './sec1_img.png';
 import img2 from './sec2_img.png';
 
 function Home({login, signup}) {
-  const { setLog } = useUserContext();
   return (
     <>
       <header className="home_header">
@@ -26,7 +25,6 @@ function Home({login, signup}) {
       </header>
       <img className="home_section1_img" src={img1} alt="img not found"/>
       <img className="home_section2_img" src={img2} alt="img not found"/>
-      <button onClick={() => {setLog(true); console.log('root login')}}>루트 계정으로 로그인</button>
     </>
   );
 }

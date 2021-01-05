@@ -1,5 +1,5 @@
 import { Home } from '../../Components';
-import { routes } from '../../Routes';
+import { routes } from '../../Library/Routes';
 
 function HomePage() {
   return(

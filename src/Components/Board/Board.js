@@ -2,10 +2,9 @@ import "./Board.css";
 import { useEffect, useState } from "react";
 import List from "./List.js";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
-
-
+import apis from "../../Library/Apis";
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+import { Redirect } from "react-router-dom";
 
 function Board({ users, board, postList, postCard }) {
   const [crtList, setCrtList] = useState(false);
@@ -28,8 +27,8 @@ function Board({ users, board, postList, postCard }) {
   };
 
   const inviteMember = (id, username) => {
-    axios
-      .post("/api/v1/board/invite/", { id: id, username: username })
+    apis.board
+      .invite({ id: id, username: username })
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   };
