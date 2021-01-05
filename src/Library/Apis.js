@@ -23,7 +23,7 @@ const apis = {
     },
     // 회원가입, pw
 		pwSignUp: ({email, password, username, first_name, last_name}) => {
-      return requester.post('user', {
+      return requester.post('user/', {
         grantType: "PASSWORD",
         email, password, username, first_name, last_name
       })
