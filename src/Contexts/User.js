@@ -28,7 +28,15 @@ const UserProvider = (props) => {
         console.log("회원가입 성공");
         console.log(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+          console.log("err.response");
+          console.log(err.response.data.values());
+          /* 
+                    console.log(err.response.status); // 400
+                    console.log(err.response.statusText); // Bad Reques
+ */
+        //alert(String(err.response.headers));
+      });
   };
 
   const loginReqByPW = async (email, pw) => {
