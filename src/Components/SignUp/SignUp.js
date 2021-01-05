@@ -93,6 +93,7 @@ function SignUp() {
       <input onChange={onChange} value={email} id="signup-email-input" placeholder="Enter email address"/>
       <input onChange={fnChange} value={fn} id="signup-name-input" placeholder="Enter full name"/>
       <input onChange={pwChange} value={pw} type="password" id="signup-pw-input" placeholder="Create password"/>
+      <input onChange={pwChange} value={pw} id="signup-pw-input" type="password" placeholder="Create password"/>
       </div>
 
       <p id="signup-terms">By signing up, I accept the Atlassian <a href="https://www.atlassian.com/legal/cloud-terms-of-service">Cloud Terms of Service</a> and acknowledge the <a href="https://www.atlassian.com/legal/privacy-policy">Privacy Policy</a>.</p>

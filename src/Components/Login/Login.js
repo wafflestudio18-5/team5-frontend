@@ -40,7 +40,7 @@ function Login() {
       
       <div className="center">
       <input className="loginInput" onChange={emailChange} value={email} id="login-email-input" placeholder="Enter email"/>
-      <input className="loginInput" type="password" onChange={pwChange} value={pw} id="login-pw-input" placeholder="Enter password"/>
+      <input className="loginInput" onChange={pwChange} value={pw} id="login-pw-input" placeholder="Enter password" type="password"/>
       </div>
 
       <div className="center" id="login-login"><button onClick={onClick} className="bold_center" id="login-green">Log in</button></div>

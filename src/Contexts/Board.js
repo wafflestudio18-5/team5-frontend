@@ -3,6 +3,8 @@ import apis from "../Library/Apis";
 
 const defaultBoard = {
   board: null,
+  modal: false,
+  setModal: () => {},
   getBoardData: () => {},
   fetchBoard: async (data) => {},
 };
@@ -11,6 +13,13 @@ const BoardContext = createContext(defaultBoard);
 
 const BoardProvider = (props) => {
   const { children } = props;
+
+  const setModal = (e) => {
+    setState((state) => ({
+      ...state,
+      modal: e,
+    }));
+  };
 
   const getBoardData = () => state.board;
 
@@ -32,6 +41,7 @@ const BoardProvider = (props) => {
     ...defaultBoard,
     getBoardData,
     fetchBoard,
+    setModal
   };
 
   const [state, setState] = useState(boardState);

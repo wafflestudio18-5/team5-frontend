@@ -1,135 +1,371 @@
-import React, {useState} from 'react';
-import './CardModal.css';
-import Activity from './Activity.js';
+import React, { useState, useEffect } from "react";
+import "./CardModal.css";
+import Activity from "./Activity.js";
+import apis from '../../Library/Apis';
 
-function CardModal({card_key, card, exit, board_id}) {
+function CardModal({ setCardName, card_key, exit, list_name, board_id }) {
+  const [card, setCard] = useState(undefined);
+  const [nameState, setNameState] = useState({ name: undefined, edit: false });
+  const [refresh, setRefresh] = useState(false);
 
-  const exitIfNotModal = (e) => {
-    if (e.target.id.includes("card-modal-wrapper") || e.target.className === "blank-for-card-modal" || e.target.id === "card-modal-x") {
-      exit();
-    }
+  function getCard() {
+    apis.card.get({key: card_key})
+      .then(function (response) {
+        console.log("카드 정보 받아오기 성공");
+        console.log(response.data);
+        setCard(response.data);
+        setNameState({ ...nameState, name: response.data.name });
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(
+            "// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다."
+          );
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+          // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+          // Node.js의 http.ClientRequest 인스턴스입니다.
+          console.log(error.request);
+        } else {
+          console.log(
+            "// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다."
+          );
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      });
   }
 
-  const [button, setButton] = React.useState({display: false, green: false});
+  useEffect(() => {
+    getCard();
+  }, [refresh]);
+
+  /*const getCard = async (key) => {
+    await axios.get("/api/v1/card/?key=" + key)
+    .then(function(response) {
+        console.log("카드 정보 받아오기 성공");
+        console.log(response.data);
+        return response.data;
+    })
+    .catch(function (error) {
+    if (error.response) {
+      console.log("// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.");
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    }
+    else if (error.request) {
+      console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+      // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+      // Node.js의 http.ClientRequest 인스턴스입니다.
+      console.log(error.request);
+    }
+    else {
+      console.log("// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.");
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
+  }*/
+  //const card = getCard(card_key);
+  //console.log(card);
+
+  const exitIfNotModal = (e) => {
+    if (
+      e.target.id.includes("card-modal-wrapper") ||
+      e.target.className === "blank-for-card-modal" ||
+      e.target.id === "card-modal-x"
+    ) {
+      exit();
+    }
+  };
+
+  const [button, setButton] = React.useState({ display: false, green: false });
   const [comment, setComment] = React.useState("");
   const changeComment = (e) => {
     setComment(e.target.value);
-    (e.target.value === "") ? setButton({...button, green: false}) : setButton({...button, green: true})
-  }
+    e.target.value === ""
+      ? setButton({ ...button, green: false })
+      : setButton({ ...button, green: true });
+  };
 
-  /*postComment 가져와야함*/
-  const postComment = ({card_id, comment}) => {
-    //POST/api/v1/activity/
-    console.log("Post comment " + String(comment) + "  CARD ID : " + String(card_id));
-  }
+  //댓글 달고 저장하기 TODO 안 뜸 아놔
   const saveComment = () => {
-    postComment(card.id, comment);
-    setComment("");
-    setButton({display: false, green: false});
-  }
+    apis.activity.post( { card_id: String(card.id), content: comment })
+      .then(function (response) {
+        console.log("댓글 달기 성공");
+        console.log(response);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(
+            "// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다."
+          );
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+          // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+          // Node.js의 http.ClientRequest 인스턴스입니다.
+          console.log(error.request);
+        } else {
+          console.log(
+            "// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다."
+          );
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      });
 
-  function deleteCard(card_id) {
-    /*TODO DELETE  /api/v1/card/ */
-    console.log("Delete Card");
+    setComment("");
+    setButton({ display: false, green: false });
+    setRefresh(!refresh);
+  };
+
+  //해당 카드 지우기
+  const deleteCardClick = (card_id) => {
+    apis.card.delete( { id: card_id })
+      .then(function (response) {
+        console.log("카드 삭제 성공");
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(
+            "// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다."
+          );
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+          // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+          // Node.js의 http.ClientRequest 인스턴스입니다.
+          console.log(error.request);
+        } else {
+          console.log(
+            "// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다."
+          );
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      });
+
     exit();
-  }
+  };
 
   //카드의 제목 바꾸기
-  const [nameState, setNameState] = useState({name: card.name, edit: false});
+  const cardNameChange = (e) => {
+    setNameState({ ...nameState, name: e.target.value });
+  };
   const changeName = (card_id, name) => {
-    /*TODO PUT /api/v1/card/ */
-  }
+    apis.card.put( { id: card_id, name })
+      .then(function (response) {
+        console.log("카드 제목 바꾸기 성공");
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(
+            "// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다."
+          );
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+          // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+          // Node.js의 http.ClientRequest 인스턴스입니다.
+          console.log(error.request);
+        } else {
+          console.log(
+            "// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다."
+          );
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      });
+
+    setNameState({ ...nameState, edit: false });
+    setCardName(nameState.name); // 리스트 화면에 보이는 카드 이름 변경
+  };
+
   //Description 추가 및 변경하기
-  const [description, setDescription] = useState({exist: false, content: "", edit: false});
+  const [description, setDescription] = useState({
+    exist: false,
+    content: "",
+    edit: false,
+  });
   // 멤버 추가하기
   const addMember = () => {
-    console.log("addmember TODO");
-  }
+    alert(
+      "[ERROR] NO ACTIVITY PREPARED EXCEPT COMMENTS\n(Failed to add Members)"
+    );
+  };
   // Due Date 추가하기
   const addDuedate = () => {
-    console.log("ADDDUDATE TODO");
-  }
+    alert(
+      "[ERROR] NO ACTIVITY PREPARED EXCEPT COMMENTS\n(Failed to add Due Date)"
+    );
+  };
 
-  return(
+  return (
     <div id="card-modal-wrapper" onClick={exitIfNotModal}>
       <div id="card-modal-wrapper-2">
-        <div className="blank-for-card-modal"/>
+        <div className="blank-for-card-modal" />
 
-        <div id="card-modal" onClick={console.log("modal!")}>
-
+        <div id="card-modal">
           <div id="card-modal-top">
-            {nameState.edit? <h3 
-            onClick={() => setNameState({...nameState, edit: true})}>
-              <br/><br/><br/>{card.name}
-            </h3> : <input value={nameState.name} onChange={(e) => setNameState({...nameState, name: e.target.value})} onBlur={changeName(card.id, nameState.name)}/>}
-            <button id="card-modal-x"/>
-            <p id="card-modal-listname">in list /*TODO listname*/</p>
+            {!nameState.edit ? (
+              <p
+                style={{ fontWeight: 700, fontSize: 20 }}
+                onClick={() => setNameState({ ...nameState, edit: true })}
+              >
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                {nameState.name}
+              </p>
+            ) : (
+              <>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <input
+                  style={{ fontWeight: 700, fontSize: 20 }}
+                  value={nameState.name}
+                  onChange={cardNameChange}
+                  onBlur={() =>
+                    nameState.edit ? changeName(card.id, nameState.name) : null
+                  }
+                />
+              </>
+            )}
+            <button id="card-modal-x" />
+            <p id="card-modal-listname">
+              in list{" "}
+              <span style={{ textDecoration: "underline" }}>{list_name}</span>
+            </p>
           </div>
 
-
           <div id="card-modal-bottom">
-              <div id="card-modal-left" style={{columnWidth: 400}}>
-                <p className="title">Description</p>
-                {description.exist?                 
-                description.edit?
-                  <input value={description.content} onChange={(e) => setDescription({...description, content: e.target.value})}/>
-                  : <p onClick={() => setDescription({...description, edit: false})}>{description.content}</p>
-                : <button onClick={() => setDescription({...description, edit: true})} id="card-modal-add-descrip">Add a more detailed description...</button>}
-                <p className="title"><br/>Activity</p>
-                <button>Hide Details</button>
-                <p>TODO PIC</p>
+            <div id="card-modal-left" style={{ columnWidth: 400 }}>
+              <p className="title">Description</p>
+              {description.exist ? (
+                description.edit ? (
+                  <input
+                    value={description.content}
+                    onChange={(e) =>
+                      setDescription({
+                        ...description,
+                        content: e.target.value,
+                      })
+                    }
+                  />
+                ) : (
+                  <p
+                    onClick={() =>
+                      setDescription({ ...description, edit: false })
+                    }
+                  >
+                    {description.content}
+                  </p>
+                )
+              ) : (
+                <button
+                  onClick={() => setDescription({ ...description, edit: true })}
+                  id="card-modal-add-descrip"
+                >
+                  Add a more detailed description...
+                </button>
+              )}
+              <p className="title">
+                <br />
+                Activity
+              </p>
+              <button>Hide Details</button>
+              <p>TODO PIC</p>
 
-                <input
+              <input
                 value={comment}
                 onChange={changeComment}
-                onFocus={() => setButton({...button, display: true})}
-                onBlur={(e) => (e.target.value === "") ? setButton({display: false, green: false}) : null}
+                onFocus={() => setButton({ ...button, display: true })}
+                onBlur={(e) =>
+                  e.target.value === ""
+                    ? setButton({ display: false, green: false })
+                    : null
+                }
                 id="card-comment"
-                placeholder="Write a comment..."/>
+                placeholder="Write a comment..."
+              />
 
-                <button
+              <button
                 onClick={saveComment}
-                style={{display: button.display? null : 'none', backgroundColor: button.green? 'green' : 'lightgray', color: button.green? 'white' : 'gray'}}>
-                  Save
-                </button>
-                <p>TODO 댓글목록 ul li ...</p>
-                {card.activities.map((data, index) => (
-                  <><Activity data={data} key={index} board_id={board_id} card_id={card.id}/>
-                  <br/></>
-                 ))}
-                <button onClick={() => deleteCard(card.id)}>Delete Card</button>
-              </div>
-
-              <div id="card-modal-right" style={{columnWidth: 200}}>
-                <p>SUGGESTED</p>
-                <p><br/>ADD TO CARD</p>
-                  <button onClick={addMember}>Members</button>
-                  <button>Labels</button>
-                  <button>Checklist</button>
-                  <button onClick={addDuedate}>Due Date</button>
-                <p><br/>POWER-UPS</p>
-                  <button>+ Add Power-Ups</button>
-                  <p>Get unlimited Power-Ups, plus much more.</p>
-                  <button>Upgrade Team</button>
-                <p><br/>BUTLER <span>NEW</span> <span>TODO</span></p>
-                  <button>+ Add Card Button</button>
-
-
-
-
-              </div>
+                style={{
+                  display: button.display ? null : "none",
+                  backgroundColor: button.green ? "green" : "lightgray",
+                  color: button.green ? "white" : "gray",
+                }}
+              >
+                Save
+              </button>
+              <p>TODO 댓글목록 ul li ...</p>
+              {card !== undefined
+                ? card.activities.map((data, index) => (
+                    <Activity
+                      data={data}
+                      refresh={refresh}
+                      setRefresh={setRefresh}
+                      key={index}
+                    />
+                  ))
+                : null}
+              <button onClick={() => deleteCardClick(card.id)}>
+                Delete Card
+              </button>
             </div>
-        </div>
-        
-        <div className="blank-for-card-modal"/>
 
+            <div id="card-modal-right" style={{ columnWidth: 200 }}>
+              <p>SUGGESTED</p>
+              <p>
+                <br />
+                ADD TO CARD
+              </p>
+              <button onClick={addMember}>Members</button>
+              <button>Labels</button>
+              <button>Checklist</button>
+              <button onClick={addDuedate}>Due Date</button>
+              <p>
+                <br />
+                POWER-UPS
+              </p>
+              <button>+ Add Power-Ups</button>
+              <p>Get unlimited Power-Ups, plus much more.</p>
+              <button>Upgrade Team</button>
+              <p>
+                <br />
+                BUTLER <span>NEW</span> <span>TODO</span>
+              </p>
+              <button>+ Add Card Button</button>
+            </div>
+          </div>
+        </div>
+
+        <div className="blank-for-card-modal" />
       </div>
     </div>
-  )
+  );
 }
 
 export default CardModal;
-
 
 /*
                 <p><br/>ACTIONS</p>

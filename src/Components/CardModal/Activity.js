@@ -1,11 +1,43 @@
 import React, {useState, useRef} from 'react';
+import apis from '../../Library/Apis';
 
-function Activity({data, board_id, card_id}) {
+function Activity({data, refresh, setRefresh}) {
 
     const inputRef = useRef();
 
     const [changedComment, setChangedComment] = useState(data.content);
     const [button, setButton] = useState({editMode: false, green: true})
+
+    const deleteActivity = (id) => {
+        apis.cctivity.delete({
+        data: { // 서버에서 req.body.{} 로 확인할 수 있다.
+          id: String(id)
+        },
+        //withCredentials: true,
+      })
+        .then(function(response) {
+            console.log("댓글 지우기 성공");
+        })
+        .catch(function (error) {
+        if (error.response) {
+        console.log("// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.");
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+        }
+        else if (error.request) {
+        console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+        // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+        // Node.js의 http.ClientRequest 인스턴스입니다.
+        console.log(error.request);
+        }
+        else {
+        console.log("// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.");
+        console.log('Error', error.message);
+        }
+        console.log(error.config);
+    });
+    }
 
     const commentChange = (e) => {
         setChangedComment(e.target.value);
@@ -17,51 +49,72 @@ function Activity({data, board_id, card_id}) {
         }
     }
 
-    /*TODO*/
-    function putComment(content, id) {
-        //PUT /api/v1/activity/
-        console.log("PUT");
-    }
-    /* TODO */
-    function deleteComment(id) {
-        // DELETE /api/v1/activity/
-        console.log("DELETE");
-    }
-
     const editCommentClick = () => {
         setButton({...button, editMode: true});
         inputRef.current.focus();
     }
-    const putCommentClick = () => {
+    
+    const putComment = () => {
         setButton({...button, editMode: false})
-        putComment(changedComment, data.id)
+        if (!button.green) {
+            setChangedComment(data.content);
+            return;
+        }
+        apis.activity.put( { content: changedComment, id: String(data.id) })
+        .then(function(response) {
+            console.log("댓글 수정 성공");
+            setRefresh(!refresh);
+        })
+        .catch(function (error) {
+        if (error.response) {
+        console.log("// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.");
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+        }
+        else if (error.request) {
+        console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+        // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+        // Node.js의 http.ClientRequest 인스턴스입니다.
+        console.log(error.request);
+        }
+        else {
+        console.log("// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.");
+        console.log('Error', error.message);
+        }
+        console.log(error.config);
+    });
     }
 
-    const deleteCommentClick = () => {
-        deleteComment(data.id);
+    const inputBlur = (e) => {
+        if (e.target.value === "" || e.target.value === data.content) {
+            setButton({...button, editMode: false});
+            setChangedComment(data.content);
+        }
     }
+
     return (
         <div className="Activity">
             <img src="" alt={String(data.id)}/> {/*TODO 프사설정*/}
-            <nobr/>
             {data.is_comment ? <>
                 <div style={button.editMode? null : {display: 'none'}}>
                     <input
                     ref={inputRef}
                     value={changedComment}
                     onChange={commentChange}
-                    onBlur={(e) => (e.target.value === "" || e.target.value === data.content) ? setButton({...button, editMode: false}) : null}
-                    id="card-comment"
+                    onBlur={inputBlur}
                     placeholder="Edit your comment..."/>
 
                     <button
-                    onClick={putCommentClick}
+                    onClick={putComment}
                     style={{backgroundColor: button.green? 'green' : 'lightgray', color: button.green? 'white' : 'gray'}}>
                     Save
                     </button></div>
-                <div style={button.editMode? {display: 'none'} :null}><p>{data.content}</p>
+
+                <div style={button.editMode? {display: 'none'} :null}>
+                <p>{data.is_comment ? changedComment : data.content}</p>
                 <button className="ActivityCommentModify" onClick={editCommentClick}>edit</button>
-                <button className="ActivityCommentModify" onClick={deleteCommentClick}>delete</button>
+                <button className="ActivityCommentModify" onClick={() => deleteActivity(data.id)}>delete</button>
             </div>
             </> : null}
             {/* TODO 댓글이 아닐 경우 다른 방식으로... */}
