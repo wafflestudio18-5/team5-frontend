@@ -4,7 +4,7 @@ import { useBoardContext, useUserContext } from "../../Contexts";
 import apis from '../../Library/Apis';
 
 function BoardPage({ match }) {
-  const { board, fetchBoard } = useBoardContext();
+  const { board, modal, fetchBoard } = useBoardContext();
   const { users } = useUserContext();
 
   const fetch = async (match) => {
@@ -59,6 +59,7 @@ function BoardPage({ match }) {
     <>
       <Board
         board={board}
+        modal={modal}
         postList={postList}
         postCard={postCard}
         deleteCard={deleteCard}

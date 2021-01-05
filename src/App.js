@@ -8,7 +8,7 @@ function App() {
   const { logged, user, loadLoginInfo } = useUserContext();
 
   useEffect(() => {
-    //loadLoginInfo();
+    loadLoginInfo();
   }, []);
 
   console.log("App render");

@@ -96,12 +96,16 @@ div.board-wrapper.anime {
   align-self: center;
 }
 
-#board-main {
-  position: relative;
+.board-main {
+  position: absolute;
   top: 90px;
   height: calc(100vh - 90px);
   width: 100vw;
   z-index: 1;
+}
+
+.board-main.up {
+  z-index: 3;
 }
 
 #board-lists {
