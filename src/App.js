@@ -2,13 +2,13 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { useUserContext } from "./Contexts";
 import { routes } from "./Library/Routes";
 import { HeaderPage } from "./Pages";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function App() {
-  const { logged, user, loadLoginInfo, fetchUserList } = useUserContext();
+  const { logged, user, loadLoginInfo } = useUserContext();
 
   useEffect(() => {
-    loadLoginInfo();
+    //loadLoginInfo();
   }, []);
 
   console.log("App render");

@@ -53,6 +53,7 @@ function Activity({data, refresh, setRefresh}) {
         setButton({...button, editMode: true});
         inputRef.current.focus();
     }
+    
     const putComment = () => {
         setButton({...button, editMode: false})
         if (!button.green) {

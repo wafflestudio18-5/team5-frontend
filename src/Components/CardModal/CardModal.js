@@ -9,7 +9,7 @@ function CardModal({ setCardName, card_key, exit, list_name, board_id }) {
   const [refresh, setRefresh] = useState(false);
 
   function getCard() {
-    apis.get({key: key})
+    apis.get({key: card_key})
       .then(function (response) {
         console.log("카드 정보 받아오기 성공");
         console.log(response.data);

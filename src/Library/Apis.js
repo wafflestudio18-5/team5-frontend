@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-//baseURL 제외한 추가적인 옵션의 경우, 검색해보시면 됩니다.
 const requester = axios.create({
 	baseURL: "http://ec2-15-164-222-199.ap-northeast-2.compute.amazonaws.com/api/v1/"
 })
@@ -59,7 +58,7 @@ const apis = {
     // board
     get: ({id, key}) => {
       if(id && key) return null;
-      if(id) return requester.get(`board/?key=${id}/`)
+      if(id) return requester.get(`board/?id=${id}/`)
       if(key) return requester.get(`board/?key=${key}/`)
     },
 		post: ({name}) => {

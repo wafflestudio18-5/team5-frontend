@@ -31,7 +31,7 @@ const UserProvider = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const loginReqBySC = async (authProvider, accessToken) => {
+  const loginReqBySC = (authProvider, accessToken) => {
     const loginInfo = {
       grantType: "OAUTH",
       authProvider: authProvider,
@@ -60,7 +60,7 @@ const UserProvider = (props) => {
       });
   };
 
-  const loginReqByPW = async (email, pw) => {
+  const loginReqByPW = (email, pw) => {
     const loginInfo = {
       email: email,
       password: pw,
