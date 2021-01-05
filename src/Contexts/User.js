@@ -1,6 +1,5 @@
 import React, { createContext, useState, useContext } from "react";
 import apis from "../Library/Apis";
-import axios from 'axios';
 
 const defaultUser = {
   // variable used for giving id to each team informations
@@ -69,11 +68,7 @@ const UserProvider = (props) => {
     apis.user
       .pwLogIn(loginInfo)
       .then((response) => {
-        axios.defaults.xsrfCookieName = "csrftoken";
-        axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-        axios.defaults.headers.common[
-          "Authorization"
-        ] = `Token ${response.data.token}`;
+        apis.user.setToken(response.data.token);
         console.log("비밀번호로 로그인 성공");
         setState((state) => {
           return {
@@ -114,10 +109,8 @@ const UserProvider = (props) => {
       token,
     };
     if (id) {
-      console.log(token);
-      axios.defaults.xsrfCookieName = "csrftoken";
-      axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-      axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+      console.log('토큰 저장: ' + token);
+      apis.user.setToken(token);
 
       setState((state) => ({
         ...state,
