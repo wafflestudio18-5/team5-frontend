@@ -3,12 +3,13 @@ import Card from "./Card.js";
 import "./List.css";
 import axios from 'axios';
 
-function List({ board, data, postCard, deleteCard, postActivity, putActivity, deleteActivity }) {
+function List({ board, data, postCard }) {
   const newCardButton = useRef();
   const newCardInput = useRef();
   const scrollRef = useRef();
   const [crtCard, setCrtCard] = useState(false);
   const [cardInput, setCardInput] = useState("");
+  const [removed, setRemoved] = useState({id: data.id, bool: false});
 
   const createCard = () => {
     postCard(board.id, data.id, cardInput);
@@ -37,6 +38,8 @@ function List({ board, data, postCard, deleteCard, postActivity, putActivity, de
 
   const deleteList = () => {
 
+    console.log("delete");
+
     axios.delete('/api/v1/list/', {
         data: { // 서버에서 req.body.{} 로 확인할 수 있다.
           id: String(data.id)
@@ -45,6 +48,7 @@ function List({ board, data, postCard, deleteCard, postActivity, putActivity, de
       })
     .then(function(response) {
         console.log("리스트 삭제하기 성공");
+        setRemoved({id: data.id, bool: true});
     })
     .catch(function (error) {
     if (error.response) {
@@ -67,14 +71,15 @@ function List({ board, data, postCard, deleteCard, postActivity, putActivity, de
   });
   }
 
+  //if (removed.id === data.id && !(removed.bool)) return null;
+
   return (
     <div className="board-list">
-      <div><h4 style={{wordBreak: "break-all"}}>{data.name}</h4><button style={{position: 'absolute', right: 10}} id="board-list-delete" onClick={deleteList}>DELETE</button></div>
+      <div><h4 style={{wordBreak: "break-all"}}>{data.name}</h4><button id="board-list-delete" onClick={deleteList}>DELETE</button></div>
       <div className="board-cards" id={data.id} ref={scrollRef}>
         <div className={crtCard ? "board-cards-crtCard" : "board-cards-crtCard-x"}>
           {data.cards.map((card, index) => (
-            <Card card={card} key={index} index={index} list_name={data.name} board_key={board.key} board_name={board.name} board_id={board.id} 
-            deleteCard={deleteCard} postActivity={postActivity} putActivity={putActivity} deleteActivity={deleteActivity}/>
+            <Card card={card} key={index} index={index} list_name={data.name} board_key={board.key} board_name={board.name} board_id={board.id} />
           ))}
             <div className="crtCard" style={crtCard? {} : {display: 'none'}}>
               <div id="crtCard_inputWrapper">

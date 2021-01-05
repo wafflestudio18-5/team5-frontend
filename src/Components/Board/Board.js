@@ -34,11 +34,14 @@ function Board({ users, board, postList, postCard }) {
       .catch((err) => console.log(err));
   };
 
+
+
   const createList = () => {
     setCrtList(false);
     postList(board.id, listInput);
     setListInput("");
     console.log("created list");
+    console.log(board);
   };
 
   const inviteOnChange = (e) => {
