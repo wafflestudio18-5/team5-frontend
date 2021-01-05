@@ -6,9 +6,7 @@ import trelloLogo from './trello-logo-blue.svg';
 import atlassianLogo from './atlassian-logo-blue.svg';
 import { useUserContext } from '../../Contexts/User';
 import { routes } from '../../Library/Routes';
-/*             <Link to={routes.Login.path} className="home_header_button" id="hhb_login">
-              Log In
-            </Link>*/
+
 function SignUp() {
   const [email, setEmail] = React.useState("");
   const [style, setStyle] = React.useState({gray: {color: 'black'}, green: {display: 'none'}, social: {color: 'black'}, whiteBox: {height: 460}});
@@ -59,7 +57,7 @@ function SignUp() {
       <p className="bold_center">Sign up for your account</p>
       
       <div className="center">
-      <input onChange={onChange} value={email} id="signup-email-input" placeholder="Enter email"/>
+      <input onKeyPress={(e) => (e.key === 'Enter' && e.target.value.includes("@")) ? greenClick() : null} onChange={onChange} value={email} id="signup-email-input" placeholder="Enter email"/>
       </div>
 
       <p id="signup-terms">By signing up, you confirm that you've read and accepted our <a href="https://trello.com/legal">Terms of Service</a> and <a href="https://trello.com/privacy">Privacy Policy</a>.</p>
@@ -94,11 +92,17 @@ function SignUp() {
       <div className="center">
       <input onChange={onChange} value={email} id="signup-email-input" placeholder="Enter email address"/>
       <input onChange={fnChange} value={fn} id="signup-name-input" placeholder="Enter full name"/>
-      <input onChange={pwChange} value={pw} id="signup-pw-input" placeholder="Create password"/>
+      <input onChange={pwChange} value={pw} type="password" id="signup-pw-input" placeholder="Create password"/>
       </div>
 
       <p id="signup-terms">By signing up, I accept the Atlassian <a href="https://www.atlassian.com/legal/cloud-terms-of-service">Cloud Terms of Service</a> and acknowledge the <a href="https://www.atlassian.com/legal/privacy-policy">Privacy Policy</a>.</p>
-      <div className="center" id="signup-signup"><button onClick={blueClick} className="bold_center" id="signup-blue">Sign up</button></div>
+      <div className="center" id="signup-signup">
+      <Link onClick={blueClick} to={routes.Login.path} className="home_header_button" id="hhb_login">
+        <button className="bold_center" id="signup-blue">
+          Sign Up
+        </button>
+      </Link>
+      </div>
 
       <div className="socialLogin">
       <SocialLoginButtons login={false}/>
