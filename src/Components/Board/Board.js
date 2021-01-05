@@ -33,9 +33,13 @@ function Board({ users, board, postList, postCard }) {
       .catch((err) => console.log(err));
   };
 
+const createListEnter = (e) => {
+    if(e.key == 'Enter') {
+      createList();
+    }
+  }
 
-
-  const createList = () => {
+  const createList = (e) => {
     setCrtList(false);
     postList(board.id, listInput);
     setListInput("");
@@ -181,7 +185,7 @@ function Board({ users, board, postList, postCard }) {
                       onChange={(e) => setListInput(e.target.value)}
                       value={listInput}
                     />
-                    <button onClick={createList}>Add List</button>
+                    <button onKeyPress={createListEnter} onClick={createList}>Add List</button>
                     <button id="no_crtList" onClick={no_crtList}></button>
                   </div>
                 ) : (

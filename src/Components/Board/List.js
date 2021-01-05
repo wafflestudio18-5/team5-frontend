@@ -17,6 +17,12 @@ function List({ board, data, postCard }) {
     setCardInput('');
   }
 
+  const createCardEnter = (e) => {
+    if (e.key === 'Enter') {
+      createCard();
+    }
+  }
+
   const no_crtCard = () => {
     setCrtCard(false)
     setCardInput("")
@@ -89,9 +95,10 @@ function List({ board, data, postCard }) {
                   value={cardInput}
                   ref={newCardInput}
                   placeholder="Enter a title for this card..."
+                  onKeyPress={createCardEnter}
                 />
               </div>
-              <button id="AddCard" ref={newCardButton} onClick={createCard}>Add Card</button>
+              <button id="AddCard" ref={newCardButton} onKeyPress={createCardEnter} onClick={createCard}>Add Card</button>
               <button id="no_crtCard" onClick={no_crtCard}></button>
             </div>
         </div>
