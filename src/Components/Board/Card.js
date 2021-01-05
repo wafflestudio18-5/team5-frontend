@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./Board.css";
 import CardModal from '../CardModal/CardModal';
-import axios from 'axios';
+import apis from '../../Library/Apis';
 
 function Card({ card, index, list_name, board_key, board_name, board_id }) {
 
@@ -16,7 +16,7 @@ function Card({ card, index, list_name, board_key, board_name, board_id }) {
 
   const deleteCard = () => {
 
-    axios.delete('/api/v1/card/', {
+    apis.card.delete({
         data: { // 서버에서 req.body.{} 로 확인할 수 있다.
           id: String(card.id)
         },
