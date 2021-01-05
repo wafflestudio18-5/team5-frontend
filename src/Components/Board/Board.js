@@ -1,8 +1,8 @@
 import "./Board.css";
 import { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 import List from "./List.js";
 import apis from "../../Library/Apis";
-import { Redirect } from "react-router-dom";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -32,6 +32,12 @@ function Board({ users, board, postList, postCard }) {
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   };
+
+const createListEnter = (e) => {
+    if(e.key == 'Enter') {
+      createList();
+    }
+  }
 
   const createList = () => {
     setCrtList(false);
@@ -183,7 +189,7 @@ function Board({ users, board, postList, postCard }) {
                       onChange={(e) => setListInput(e.target.value)}
                       value={listInput}
                     />
-                    <button onClick={createList}>Add List</button>
+                    <button onKeyPress={createListEnter} onClick={createList}>Add List</button>
                     <button id="no_crtList" onClick={no_crtList}></button>
                   </div>
                 ) : (
