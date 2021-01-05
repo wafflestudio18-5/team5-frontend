@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import { faWindowClose } from "@fortawesome/free-regular-svg-icons";
 import { Link, useHistory } from "react-router-dom";
-import { useUserContext } from "../../Contexts";
+import { useBoardContext, useUserContext } from "../../Contexts";
 
 // button macros
 const bm = {
@@ -29,6 +29,7 @@ function Header(props) {
   const [serFocused, setSerFocused] = useState(false);
   const { logoutReq } = useUserContext();
   const { user_data } = props;
+  const { modal } = useBoardContext();
   const history = useHistory();
 
 
@@ -45,7 +46,7 @@ function Header(props) {
   }
   
   return (
-    <header className="logged_header">
+    <header className={`logged_header ${modal? "down" : ""}`}>
       <div className="header-left-wrapper">
         <div className="App-Switcher-Button-Wrapper">{svg_hl_1}</div>
         <div className="Home-Button-Wrapper" onClick={goToBoards}>{svg_hl_2}</div>

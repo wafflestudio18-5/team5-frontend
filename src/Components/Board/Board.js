@@ -6,7 +6,7 @@ import apis from "../../Library/Apis";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
-function Board({ users, board, postList, postCard }) {
+function Board({ users, modal, board, postList, postCard }) {
   const [crtList, setCrtList] = useState(false);
   const [listInput, setListInput] = useState("");
   const [invite, setInvite] = useState(false);
@@ -166,7 +166,7 @@ const createListEnter = (e) => {
           </div>
         </header>
 
-        <div id="board-main">
+        <div className={`board-main ${modal? "up":""}`}>
           <div id="board-lists">
             <div id="board-temp">
               {board.lists.map((data, index) => (

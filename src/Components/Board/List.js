@@ -10,6 +10,8 @@ function List({ board, data, postCard }) {
   const [crtCard, setCrtCard] = useState(false);
   const [cardInput, setCardInput] = useState("");
   const [removed, setRemoved] = useState({id: data.id, bool: false});
+  const [modalMode, setModalMode] = useState(false);
+  
 
   const createCard = () => {
     postCard(board.id, data.id, cardInput);
@@ -80,12 +82,12 @@ function List({ board, data, postCard }) {
   //if (removed.id === data.id && !(removed.bool)) return null;
 
   return (
-    <div className="board-list">
+    <div className={`board-list ${modalMode? "up" : ""}`}>
       <div><h4 style={{wordBreak: "break-all"}}>{data.name}</h4><button id="board-list-delete" onClick={deleteList}>DELETE</button></div>
       <div className="board-cards" id={data.id} ref={scrollRef}>
         <div className={crtCard ? "board-cards-crtCard" : "board-cards-crtCard-x"}>
           {data.cards.map((card, index) => (
-            <Card card={card} key={index} index={index} list_name={data.name} board_key={board.key} board_name={board.name} board_id={board.id} />
+            <Card setModalMode={setModalMode} card={card} key={index} index={index} list_name={data.name} board_key={board.key} board_name={board.name} board_id={board.id} />
           ))}
             <div className="crtCard" style={crtCard? {} : {display: 'none'}}>
               <div id="crtCard_inputWrapper">
