@@ -31,6 +31,36 @@ const UserProvider = (props) => {
       .catch((err) => console.log(err));
   };
 
+  const loginReqBySC = async (authProvider, accessToken) => {
+    const loginInfo = {
+      grantType: "OAUTH",
+      authProvider: authProvider,
+      token: accessToken,
+    };
+    axios
+      .put("/api/v1/user/login", loginInfo)
+      .then((response) => {
+        setState((state) => {
+          return {
+            ...state,
+            logged: true,
+            user: response.data,
+          };
+        });
+        console.log("소셜 로그인 실패: 회원가입으로 넘어감");
+        saveLoginInfo(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        axios
+          .post("/api/v1/user/", loginInfo)
+          .then((response) => {
+            console.log("소셜 회원가입 성공");
+          })
+          .catch((err) => console.log("여긴 어케 온거임 대체"));
+      });
+  };
+
   const loginReqByPW = async (email, pw) => {
     const loginInfo = {
       email: email,
@@ -101,43 +131,17 @@ const UserProvider = (props) => {
     }
   };
 
-  const loginReqBySC = async (authProvider, accessToken) => {
-    const loginInfo = {
-      grantType: "OAUTH",
-      authProvider: authProvider,
-      accessToken: accessToken,
-    };
-
-    apis.user
-      .scLogIn(loginInfo)
-      .then((response) => {
-        setState((state) => {
-          return {
-            ...state,
-            logged: true,
-            user: response.data,
-          };
-        });
-
-        saveLoginInfo(response.data);
-      })
-      .catch((err) => console.log(err));
-  };
-
   const logoutReq = () => {
     window.localStorage.clear();
-    apis.user
-      .logout()
-      .then((response) => {
-        setState((state) => {
-          return {
-            ...state,
-            user: {},
-            logged: false,
-          };
-        });
-      })
-      .catch((err) => console.log(err));
+    setState((state) => {
+      return {
+        ...state,
+        user: {},
+        logged: false,
+      };
+    });
+
+    axios.put("/api/v1/user/logout/", {}).catch((err) => console.log(err));
   };
 
   const fetchUserList = async () => {

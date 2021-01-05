@@ -1,8 +1,88 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './CardModal.css';
 import Activity from './Activity.js';
+import axios from "axios";
 
-function CardModal({card_key, card, exit, board_id}) {
+function CardModal({setCardName, card_key, exit, list_name, board_id}) {
+
+  const [card, setCard] = useState(undefined);
+  const [nameState, setNameState] = useState({name: undefined, edit: false});
+  const [refresh, setRefresh] = useState(false);
+
+  async function getCard() {
+    await axios.get("/api/v1/card/?key=" + card_key)
+    /*try {
+        const resp = axios.get("/api/v1/card/?key=" + card_key);
+        console.log("카드 GET 성공!");
+        console.log(resp.data);
+        setCard(resp.data);
+        setNameState({...nameState, name: resp.data.name})
+    } catch (err) {
+        // Handle Error Here
+        console.error(err);
+    }*/
+
+    /*axios.get("/api/v1/card/?key=" + card_key)*/
+    .then(function(response) {
+        console.log("카드 정보 받아오기 성공");
+        console.log(response.data);
+        setCard(response.data);
+        setNameState({...nameState, name: response.data.name})
+    })
+    .catch(function (error) {
+    if (error.response) {
+      console.log("// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.");
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    }
+    else if (error.request) {
+      console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+      // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+      // Node.js의 http.ClientRequest 인스턴스입니다.
+      console.log(error.request);
+    }
+    else {
+      console.log("// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.");
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
+  };
+
+  useEffect(() => {
+    getCard();
+  }, [refresh])
+
+  /*const getCard = async (key) => {
+    await axios.get("/api/v1/card/?key=" + key)
+    .then(function(response) {
+        console.log("카드 정보 받아오기 성공");
+        console.log(response.data);
+        return response.data;
+    })
+    .catch(function (error) {
+    if (error.response) {
+      console.log("// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.");
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    }
+    else if (error.request) {
+      console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+      // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+      // Node.js의 http.ClientRequest 인스턴스입니다.
+      console.log(error.request);
+    }
+    else {
+      console.log("// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.");
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
+  }*/
+  //const card = getCard(card_key);
+  //console.log(card);
 
   const exitIfNotModal = (e) => {
     if (e.target.id.includes("card-modal-wrapper") || e.target.className === "blank-for-card-modal" || e.target.id === "card-modal-x") {
@@ -17,37 +97,110 @@ function CardModal({card_key, card, exit, board_id}) {
     (e.target.value === "") ? setButton({...button, green: false}) : setButton({...button, green: true})
   }
 
-  /*postComment 가져와야함*/
-  const postComment = ({card_id, comment}) => {
-    //POST/api/v1/activity/
-    console.log("Post comment " + String(comment) + "  CARD ID : " + String(card_id));
-  }
+  //댓글 달고 저장하기 TODO 안 뜸 아놔
   const saveComment = () => {
-    postComment(card.id, comment);
+    axios.post("/api/v1/activity/", { card_id: String(card.id), content: comment })
+    .then(function(response) {
+        console.log("댓글 달기 성공");
+        console.log(response);
+    })
+    .catch(function (error) {
+    if (error.response) {
+      console.log("// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.");
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    }
+    else if (error.request) {
+      console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+      // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+      // Node.js의 http.ClientRequest 인스턴스입니다.
+      console.log(error.request);
+    }
+    else {
+      console.log("// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.");
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
+
     setComment("");
     setButton({display: false, green: false});
+    setRefresh(!refresh);
   }
 
-  function deleteCard(card_id) {
-    /*TODO DELETE  /api/v1/card/ */
-    console.log("Delete Card");
+  //해당 카드 지우기
+  const deleteCardClick = (card_id) => {
+
+    axios.delete("/api/v1/card/", { id: String(card_id) })
+    .then(function(response) {
+        console.log("카드 삭제 성공");
+    })
+    .catch(function (error) {
+    if (error.response) {
+      console.log("// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.");
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    }
+    else if (error.request) {
+      console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+      // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+      // Node.js의 http.ClientRequest 인스턴스입니다.
+      console.log(error.request);
+    }
+    else {
+      console.log("// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.");
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
+
     exit();
   }
 
   //카드의 제목 바꾸기
-  const [nameState, setNameState] = useState({name: card.name, edit: false});
-  const changeName = (card_id, name) => {
-    /*TODO PUT /api/v1/card/ */
+  const cardNameChange = (e) => {
+    setNameState({...nameState, name: e.target.value});
   }
+  const changeName = (card_id, name) => {
+    axios.put("/api/v1/card/", { id: card_id, name: name })
+    .then(function(response) {
+        console.log("카드 제목 바꾸기 성공");
+    })
+    .catch(function (error) {
+    if (error.response) {
+      console.log("// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.");
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    }
+    else if (error.request) {
+      console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+      // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+      // Node.js의 http.ClientRequest 인스턴스입니다.
+      console.log(error.request);
+    }
+    else {
+      console.log("// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.");
+      console.log('Error', error.message);
+    }
+    console.log(error.config);
+  });
+
+  setNameState({...nameState, edit: false});
+  setCardName(nameState.name); // 리스트 화면에 보이는 카드 이름 변경
+  }
+
   //Description 추가 및 변경하기
   const [description, setDescription] = useState({exist: false, content: "", edit: false});
   // 멤버 추가하기
   const addMember = () => {
-    console.log("addmember TODO");
+    alert("[ERROR] NO ACTIVITY PREPARED EXCEPT COMMENTS\n(Failed to add Members)");
   }
   // Due Date 추가하기
   const addDuedate = () => {
-    console.log("ADDDUDATE TODO");
+    alert("[ERROR] NO ACTIVITY PREPARED EXCEPT COMMENTS\n(Failed to add Due Date)");
   }
 
   return(
@@ -55,15 +208,15 @@ function CardModal({card_key, card, exit, board_id}) {
       <div id="card-modal-wrapper-2">
         <div className="blank-for-card-modal"/>
 
-        <div id="card-modal" onClick={console.log("modal!")}>
+        <div id="card-modal">
 
           <div id="card-modal-top">
-            {nameState.edit? <h3 
+            {!(nameState.edit)? <p style={{fontWeight: 700, fontSize: 20}}
             onClick={() => setNameState({...nameState, edit: true})}>
-              <br/><br/><br/>{card.name}
-            </h3> : <input value={nameState.name} onChange={(e) => setNameState({...nameState, name: e.target.value})} onBlur={changeName(card.id, nameState.name)}/>}
+              <br/><br/><br/><br/><br/><br/>{nameState.name}
+            </p> : <><br/><br/><br/><br/><br/><br/><input style={{fontWeight: 700, fontSize: 20}} value={nameState.name} onChange={cardNameChange} onBlur={() => nameState.edit? changeName(card.id, nameState.name) : null}/></>}
             <button id="card-modal-x"/>
-            <p id="card-modal-listname">in list /*TODO listname*/</p>
+            <p id="card-modal-listname">in list <span style={{textDecoration: 'underline'}}>{list_name}</span></p>
           </div>
 
 
@@ -93,11 +246,10 @@ function CardModal({card_key, card, exit, board_id}) {
                   Save
                 </button>
                 <p>TODO 댓글목록 ul li ...</p>
-                {card.activities.map((data, index) => (
-                  <><Activity data={data} key={index} board_id={board_id} card_id={card.id}/>
-                  <br/></>
-                 ))}
-                <button onClick={() => deleteCard(card.id)}>Delete Card</button>
+                {(card !== undefined)? card.activities.map((data, index) => (
+                  <Activity data={data} refresh={refresh} setRefresh={setRefresh} key={index}/>
+                 )) : null}
+                <button onClick={() => deleteCardClick(card.id)}>Delete Card</button>
               </div>
 
               <div id="card-modal-right" style={{columnWidth: 200}}>
