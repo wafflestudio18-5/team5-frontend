@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import axios from 'axios';
+import apis from '../../Library/Apis';
 
 function Activity({data, refresh, setRefresh}) {
 
@@ -9,7 +9,7 @@ function Activity({data, refresh, setRefresh}) {
     const [button, setButton] = useState({editMode: false, green: true})
 
     const deleteActivity = (id) => {
-        axios.delete('/api/v1/activity/', {
+        apis.cctivity.delete({
         data: { // 서버에서 req.body.{} 로 확인할 수 있다.
           id: String(id)
         },
@@ -59,7 +59,7 @@ function Activity({data, refresh, setRefresh}) {
             setChangedComment(data.content);
             return;
         }
-        axios.put("/api/v1/activity/", { content: changedComment, id: String(data.id) })
+        apis.activity.put( { content: changedComment, id: String(data.id) })
         .then(function(response) {
             console.log("댓글 수정 성공");
             setRefresh(!refresh);

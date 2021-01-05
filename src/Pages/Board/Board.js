@@ -13,23 +13,20 @@ function BoardPage({ match }) {
 
   const postActivity = (cId, content) => {
     if (!content) return;
-    axios
-      .post("/api/v1/activity/", { card_id: cId, content: content })
+    apis.activity.post({ card_id: cId, content })
       .then((response) => fetch(match))
       .catch((err) => console.log(err));
   };
 
   const putActivity = (content, aId) => {
     if (!content) return;
-    axios
-      .put("/api/v1/activity/", { id: aId, content: content })
+    apis.activity.put({ id: aId, content })
       .then((response) => fetch(match))
       .catch((err) => console.log(err));
   };
 
   const deleteActivity = (id) => {
-    axios
-      .delete("/api/v1/activity/", { id: id })
+    apis.activity.delete({ id })
       .then((response) => fetch(match))
       .catch((err) => console.log(err));
   };
@@ -42,8 +39,7 @@ function BoardPage({ match }) {
   };
 
   const deleteCard = (card_id) => {
-    axios
-      .delete("/api/v1/card/", { id: card_id })
+    apis.card.delete( { id: card_id })
       .then((response) => fetch(match))
       .catch((err) => console.log(err));
   };
