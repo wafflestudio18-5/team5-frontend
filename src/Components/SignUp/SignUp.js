@@ -5,8 +5,10 @@ import SocialLoginButtons from './SocialLoginButtons.js';
 import trelloLogo from './trello-logo-blue.svg';
 import atlassianLogo from './atlassian-logo-blue.svg';
 import { useUserContext } from '../../Contexts/User';
-
-
+import { routes } from '../../Library/Routes';
+/*             <Link to={routes.Login.path} className="home_header_button" id="hhb_login">
+              Log In
+            </Link>*/
 function SignUp() {
   const [email, setEmail] = React.useState("");
   const [style, setStyle] = React.useState({gray: {color: 'black'}, green: {display: 'none'}, social: {color: 'black'}, whiteBox: {height: 460}});
