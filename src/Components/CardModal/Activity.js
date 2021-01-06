@@ -67,9 +67,8 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
         <div className="Activity" style={{display: 'flex', flexDirection: 'row', marginTop: 5, marginBottom: 5}}>
             <img style={{height: 35, width: 35, borderRadius: '50%', marginRight: 10}} src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" alt={String(data.id)}/> {/*TODO 프사설정*/}
             {data.is_comment ?
-            
-                button.editMode?
-                <>
+        
+                <div style={button.editMode? null : {display: 'none'}}>
                     <input
                     ref={inputRef}
                     value={changedComment}
@@ -82,13 +81,13 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
                     style={{backgroundColor: button.green? 'green' : 'lightgray', color: button.green? 'white' : 'gray'}}>
                     Save
                     </button>
-                </>
+                </div>
                 :
-                <>
+                <div style={button.editMode? {display: 'none'} : null}>
                     <p>{changedComment}</p>
                     <button className="ActivityCommentModify" onClick={editCommentClick}>edit</button>
                     <button className="ActivityCommentModify" onClick={() => deleteActivity(data.id)}>delete</button>
-                </>
+                </div>
 
             : <p>{data.content}</p>}
             {/* TODO 댓글이 아닐 경우 다른 방식으로... */}
