@@ -113,8 +113,8 @@ const apis = {
   card: {
     get: ({ id, key }) => {
       if (id && key) return;
-      if (key) return requester.get('card/?key=${key}/');
-      else return requester.get('card/?id=${id}/');
+      if (key) return requester.get('card/?key=' + String(key));
+      else return requester.get('card/?id=' + String(id));
     },
     post: ({ name, list_id }) => {
       return requester.post("card/", { name, list_id });
