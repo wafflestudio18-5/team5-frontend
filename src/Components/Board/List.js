@@ -45,12 +45,9 @@ function List({ board, data, postCard }) {
   }
 
   const deleteList = () => {
-
-    console.log("delete");
-
     apis.list.delete( {
         data: { // 서버에서 req.body.{} 로 확인할 수 있다.
-          id: String(data.id),
+          id: data.id,
         },
         //withCredentials: true,
       })
