@@ -6,7 +6,7 @@ import apis from "../../Library/Apis";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
-function Board({ users, modal, board, postList, postCard }) {
+function Board({ users, modal, board, postList, postCard, deleteCard, postActivity, putActivity, deleteActivity }) {
   const [crtList, setCrtList] = useState(false);
   const [listInput, setListInput] = useState("");
   const [invite, setInvite] = useState(false);
@@ -69,6 +69,7 @@ function Board({ users, modal, board, postList, postCard }) {
         },
         //withCredentials: true,
       })
+      .then((response) => console.log("아진짜안되네ㅔ"))
       .catch(function (error) {
         if (error.response) {
           console.log(
@@ -175,6 +176,10 @@ function Board({ users, modal, board, postList, postCard }) {
                   data={data}
                   key={index}
                   postCard={postCard}
+                  deleteCard={deleteCard}
+                  postActivity={postActivity}
+                  putActivity={putActivity}
+                  deleteActivity={deleteActivity}
                 />
               ))}
 

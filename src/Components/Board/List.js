@@ -4,7 +4,7 @@ import apis from "../../Library/Apis";
 import "./List.css";
 import { useBoardContext } from "../../Contexts/Board.js";
 
-function List({ board, data, postCard }) {
+function List({ board, data, postCard, deleteCard, postActivity, putActivity, deleteActivity }) {
   const newCardButton = useRef();
   const newCardInput = useRef();
   const scrollRef = useRef();
@@ -46,12 +46,10 @@ function List({ board, data, postCard }) {
   };
 
   const deleteList = () => {
-    console.log("delete");
-
-    apis.list
-      .delete({
-        // 서버에서 req.body.{} 로 확인할 수 있다.
-        id: data.id,
+    apis.list.delete( {
+        data: { // 서버에서 req.body.{} 로 확인할 수 있다.
+          id: data.id,
+        },
         //withCredentials: true,
       })
       .then(function (response) {
@@ -121,15 +119,18 @@ function List({ board, data, postCard }) {
           className={crtCard ? "board-cards-crtCard" : "board-cards-crtCard-x"}
         >
           {data.cards.map((card, index) => (
-            <Card
-              setModalMode={setModalMode}
-              card={card}
-              key={index}
-              index={index}
-              list_name={data.name}
-              board_key={board.key}
-              board_name={board.name}
-              board_id={board.id}
+            <Card setModalMode={setModalMode} 
+            card={card} 
+            key={index} 
+            index={index} 
+            list_name={data.name} 
+            board_key={board.key} 
+            board_name={board.name} 
+            board_id={board.id} 
+            deleteCard={deleteCard}
+            postActivity={postActivity}
+            putActivity={putActivity}
+            deleteActivity={deleteActivity}
             />
           ))}
           <div className="crtCard" style={crtCard ? {} : { display: "none" }}>
