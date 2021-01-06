@@ -9,7 +9,7 @@ function Activity({data, refresh, setRefresh}) {
     const [button, setButton] = useState({editMode: false, green: true})
 
     const deleteActivity = (id) => {
-        apis.cctivity.delete({
+        apis.activity.delete({
         data: { // 서버에서 req.body.{} 로 확인할 수 있다.
           id: String(id)
         },
