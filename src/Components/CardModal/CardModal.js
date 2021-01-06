@@ -167,9 +167,12 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
           <div id="card-modal-bottom">
             <div id="card-modal-left" style={{ columnWidth: 400 }}>
               <p className="title">Description</p>
-              {description.exist ? (
-                description.edit ? (
+              {description.edit ? (
                   <input
+                    onKeyPress={(e) => e.key === "Enter"? 
+                    (e.target.value === ""? setDescription({...description, edit: false}) : setDescription({...description, exist: true, edit: false}))
+                    : null}
+                    onBlur={(e) => e.target.value === ""? setDescription({...description, edit: false}) : setDescription({...description, exist: true, edit: false})}
                     value={description.content}
                     onChange={(e) =>
                       setDescription({
@@ -178,23 +181,23 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                       })
                     }
                   />
-                ) : (
+                ) : (description.content !== "" ? (
                   <p
                     onClick={() =>
-                      setDescription({ ...description, edit: false })
+                      setDescription({ ...description, edit: true })
                     }
                   >
                     {description.content}
                   </p>
                 )
-              ) : (
+               : (
                 <button
                   onClick={() => setDescription({ ...description, edit: true })}
                   id="card-modal-add-descrip"
                 >
                   Add a more detailed description...
                 </button>
-              )}
+              ))}
               <p className="title">
                 <br />
                 Activity
