@@ -41,7 +41,8 @@ const UserProvider = (props) => {
             signUpSuccess: false,
           };
         });
-        alert(Object.values(err.response['data']).join());
+        if (err.response !== undefined) alert(Object.values(err.response['data']).join());
+        else alert("서버가 터졌어요!");
       });
   };
 
