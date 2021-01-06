@@ -91,7 +91,7 @@ function Card({ card, index, list_name, board_key, board_name, board_id, setModa
           cardName={cardName}
           setCardName={setCardName}
           card_key={key}
-          card={card}
+          card_id={card.id}
           exit={exitModal}
           list_name={list_name}
           board_id={board_id}

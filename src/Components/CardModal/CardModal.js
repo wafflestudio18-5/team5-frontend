@@ -3,9 +3,9 @@ import "./CardModal.css";
 import Activity from "./Activity.js";
 import apis from '../../Library/Apis';
 
-function CardModal({ setCardName, card_key, exit, list_name, board_id }) {
+function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, board_id }) {
   const [card, setCard] = useState(undefined);
-  const [nameState, setNameState] = useState({ name: undefined, edit: false });
+  const [nameState, setNameState] = useState({ name: cardName, edit: false });
   const [refresh, setRefresh] = useState(false);
 
   function getCard() {
@@ -43,36 +43,6 @@ function CardModal({ setCardName, card_key, exit, list_name, board_id }) {
     getCard();
   }, [refresh]);
 
-  /*const getCard = async (key) => {
-    await axios.get("/api/v1/card/?key=" + key)
-    .then(function(response) {
-        console.log("카드 정보 받아오기 성공");
-        console.log(response.data);
-        return response.data;
-    })
-    .catch(function (error) {
-    if (error.response) {
-      console.log("// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.");
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
-    }
-    else if (error.request) {
-      console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
-      // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
-      // Node.js의 http.ClientRequest 인스턴스입니다.
-      console.log(error.request);
-    }
-    else {
-      console.log("// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.");
-      console.log('Error', error.message);
-    }
-    console.log(error.config);
-  });
-  }*/
-  //const card = getCard(card_key);
-  //console.log(card);
-
   const exitIfNotModal = (e) => {
     if (
       e.target.id.includes("card-modal-wrapper") ||
@@ -94,10 +64,13 @@ function CardModal({ setCardName, card_key, exit, list_name, board_id }) {
 
   //댓글 달고 저장하기 TODO 안 뜸 아놔
   const saveComment = () => {
-    apis.activity.post( { card_id: String(card.id), content: comment })
+    apis.activity.post( { card_id: String(card_id), content: comment })
       .then(function (response) {
         console.log("댓글 달기 성공");
         console.log(response);
+        setRefresh(!refresh);
+        setComment("");
+        setButton({ display: false, green: false });
       })
       .catch(function (error) {
         if (error.response) {
@@ -120,10 +93,6 @@ function CardModal({ setCardName, card_key, exit, list_name, board_id }) {
         }
         console.log(error.config);
       });
-
-    setComment("");
-    setButton({ display: false, green: false });
-    setRefresh(!refresh);
   };
 
   //해당 카드 지우기
@@ -223,28 +192,16 @@ function CardModal({ setCardName, card_key, exit, list_name, board_id }) {
                 style={{ fontWeight: 700, fontSize: 20 }}
                 onClick={() => setNameState({ ...nameState, edit: true })}
               >
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
                 {nameState.name}
               </p>
             ) : (
               <>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <input
+                  <input
                   style={{ fontWeight: 700, fontSize: 20 }}
                   value={nameState.name}
                   onChange={cardNameChange}
                   onBlur={() =>
-                    nameState.edit ? changeName(card.id, nameState.name) : null
+                    nameState.edit ? changeName(card_id, nameState.name) : null
                   }
                 />
               </>
@@ -294,7 +251,14 @@ function CardModal({ setCardName, card_key, exit, list_name, board_id }) {
               <button>Hide Details</button>
               <p>TODO PIC</p>
 
-              <input
+              <div style={{
+                backgroundColor: 'white', 
+                padding: 5, 
+                border: '1px lightgray solid',
+                boxShadow: '0px 3px 5px lightgray'
+                }}>
+              
+              <div><input
                 value={comment}
                 onChange={changeComment}
                 onFocus={() => setButton({ ...button, display: true })}
@@ -305,18 +269,22 @@ function CardModal({ setCardName, card_key, exit, list_name, board_id }) {
                 }
                 id="card-comment"
                 placeholder="Write a comment..."
-              />
-
-              <button
+              /></div>
+              <div><button
                 onClick={saveComment}
                 style={{
                   display: button.display ? null : "none",
-                  backgroundColor: button.green ? "green" : "lightgray",
+                  backgroundColor: button.green ? "#5AAC44" : "lightgray",
                   color: button.green ? "white" : "gray",
+                  marginTop: 5,
+                  marginLeft: 7,
+                  marginBottom: 5,
+                  width: 50,
+                  height: 30
                 }}
               >
                 Save
-              </button>
+              </button></div></div>
               <p>TODO 댓글목록 ul li ...</p>
               {card !== undefined
                 ? card.activities.map((data, index) => (
@@ -328,7 +296,7 @@ function CardModal({ setCardName, card_key, exit, list_name, board_id }) {
                     />
                   ))
                 : null}
-              <button onClick={() => deleteCardClick(card.id)}>
+              <button onClick={() => deleteCardClick(card_id)}>
                 Delete Card
               </button>
             </div>
@@ -352,7 +320,7 @@ function CardModal({ setCardName, card_key, exit, list_name, board_id }) {
               <button>Upgrade Team</button>
               <p>
                 <br />
-                BUTLER <span>NEW</span> <span>TODO</span>
+                BUTLER <span>NEW</span> <span style={{position: 'relative', top: 2, left: 40, content: "url('https://api.iconify.design/octicon:info-24.svg?height=15')", verticalAlign: '-0.125em'}}/>
               </p>
               <button>+ Add Card Button</button>
             </div>
@@ -366,13 +334,3 @@ function CardModal({ setCardName, card_key, exit, list_name, board_id }) {
 }
 
 export default CardModal;
-
-/*
-                <p><br/>ACTIONS</p>
-                  <button>Move</button>
-                  <button>Copy</button>
-                  <button>Make Template</button>
-                  <button>Watch</button>
-                  <button>Archive</button>
-                  <button>Share</button>
-                  */
