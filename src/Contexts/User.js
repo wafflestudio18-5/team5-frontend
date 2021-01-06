@@ -13,7 +13,6 @@ const defaultUser = {
   fetchUserList: () => {},
   saveLoginInfo: () => {},
   loadLoginInfo: () => {},
-  signUpSuccess: false
 };
 
 const UserContext = createContext(defaultUser);
@@ -27,22 +26,8 @@ const UserProvider = (props) => {
       .then((response) => {
         console.log("회원가입 성공");
         console.log(response.data);
-        setState((state) => {
-          return {
-            ...state,
-            signUpSuccess: true,
-          };
-        });
       })
-      .catch((err) => {
-        setState((state) => {
-          return {
-            ...state,
-            signUpSuccess: false,
-          };
-        });
-        alert(Object.values(err.response['data']).join());
-      });
+      .catch((err) => console.log(err));
   };
 
   const loginReqBySC = (authProvider, accessToken) => {
@@ -96,8 +81,6 @@ const UserProvider = (props) => {
       })
       .catch((err) => {
         console.log(err);
-        if (err.response !== undefined) alert(Object.values(err.response['data']).join());
-        else alert("서버가 터졌어요!");
       });
   };
 

@@ -6,7 +6,7 @@ import apis from "../../Library/Apis";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
-function Board({ users, modal, board, postList, postCard, deleteCard, postActivity, putActivity, deleteActivity }) {
+function Board({ users, modal, board, postList, postCard }) {
   const [crtList, setCrtList] = useState(false);
   const [listInput, setListInput] = useState("");
   const [invite, setInvite] = useState(false);
@@ -33,11 +33,11 @@ function Board({ users, modal, board, postList, postCard, deleteCard, postActivi
       .catch((err) => console.log(err));
   };
 
-const createListEnter = (e) => {
-    if(e.key == 'Enter') {
+  const createListEnter = (e) => {
+    if (e.key == "Enter") {
       createList();
     }
-  }
+  };
 
   const createList = () => {
     setCrtList(false);
@@ -69,7 +69,6 @@ const createListEnter = (e) => {
         },
         //withCredentials: true,
       })
-      .then((response) => console.log("아진짜안되네ㅔ"))
       .catch(function (error) {
         if (error.response) {
           console.log(
@@ -167,7 +166,7 @@ const createListEnter = (e) => {
           </div>
         </header>
 
-        <div className={`board-main ${modal? "up":""}`}>
+        <div className={`board-main ${modal ? "up" : ""}`}>
           <div id="board-lists">
             <div id="board-temp">
               {board.lists.map((data, index) => (
@@ -176,10 +175,6 @@ const createListEnter = (e) => {
                   data={data}
                   key={index}
                   postCard={postCard}
-                  deleteCard={deleteCard}
-                  postActivity={postActivity}
-                  putActivity={putActivity}
-                  deleteActivity={deleteActivity}
                 />
               ))}
 
@@ -194,7 +189,9 @@ const createListEnter = (e) => {
                       onChange={(e) => setListInput(e.target.value)}
                       value={listInput}
                     />
-                    <button onKeyPress={createListEnter} onClick={createList}>Add List</button>
+                    <button onKeyPress={createListEnter} onClick={createList}>
+                      Add List
+                    </button>
                     <button id="no_crtList" onClick={no_crtList}></button>
                   </div>
                 ) : (

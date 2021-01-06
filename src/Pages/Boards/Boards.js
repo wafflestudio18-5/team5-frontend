@@ -19,8 +19,8 @@ function BoardsPage({ history }) {
     apis.board
       .getAll()
       .then((response) => {
+        console.log(response);
         setBoards(response.data.results);
-        console.log(response.data);
       })
       .catch((err) => console.log(err));
   };
