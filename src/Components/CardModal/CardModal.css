@@ -83,7 +83,12 @@
 #card-comment {
     outline: none !important;
     padding: 7px;
-    border: 1px lightgray solid;
+    border: 1px transparent solid;
+    width: 475px;
+}
+#card-comment:hover {
+    filter: brightness(100%) !important;
+    background: white !important;
 }
 
 #card-modal p {
