@@ -5,15 +5,15 @@ const defaultBoard = {
   board: null,
   modal: false,
   move: {
-    bool: false,// whether moving or not
-    mode: "",   // "", "card", "list"
+    bool: false, // whether moving or not
+    mode: "", // "", "card", "list"
     from: null, // card which is moving
   },
   setModal: () => {},
   setMove: () => {},
   getBoardData: () => {},
   fetchBoardById: () => {},
-  fetchBoardByKey: () => {}
+  fetchBoardByKey: () => {},
 };
 
 const BoardContext = createContext(defaultBoard);
@@ -21,24 +21,23 @@ const BoardContext = createContext(defaultBoard);
 const BoardProvider = (props) => {
   const { children } = props;
 
-  const setMove = ({bool, mode, from }) => {
-    if(bool) {
-      setState(state => {
+  const setMove = ({ bool, mode, from }) => {
+    if (bool) {
+      setState((state) => {
         return {
           ...state,
-          move: {bool: true, mode, from }
-        }
-      })
+          move: { bool: true, mode, from },
+        };
+      });
     } else {
-      setState(state => {
+      setState((state) => {
         return {
           ...state,
-          move: {bool: false, mode: "", from: null, to: null}
-        }
-      })
+          move: { bool: false, mode: "", from: null, to: null },
+        };
+      });
     }
-    
-  }
+  };
 
   const setModal = (e) => {
     setState((state) => ({
@@ -49,9 +48,9 @@ const BoardProvider = (props) => {
 
   const getBoardData = () => state.board;
 
-  const fetchBoardById = ({id}) => {
+  const fetchBoardById = ({ id }) => {
     apis.board
-      .getById({id})
+      .getById({ id })
       .then((response) => {
         setState((state) => {
           return {
@@ -63,9 +62,9 @@ const BoardProvider = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const fetchBoardByKey = ({key}) => {
+  const fetchBoardByKey = ({ key }) => {
     apis.board
-      .getByKey({key})
+      .getByKey({ key })
       .then((response) => {
         setState((state) => {
           return {
@@ -83,7 +82,7 @@ const BoardProvider = (props) => {
     fetchBoardById,
     fetchBoardByKey,
     setModal,
-    setMove
+    setMove,
   };
 
   const [state, setState] = useState(boardState);

@@ -102,13 +102,21 @@ function List({
         if (move.bool) {
           // if state is 'moving'
           if (move.mode === "list") {
-            if (move.from.id === data.id) return;
+            if (move.from.id === data.id) {
+              setMove({ bool: false });
+              return;
+            }
+            const tList = board.lists;
+            console.log(tList);
+            let fIndex = tList.findIndex(item => item.id === move.from.id);
+            let tIndex = tList.findIndex(item => item.id === data.id);
+            if(fIndex > tIndex) tIndex--;
             apis.list
               .put({
                 board_id: board.id,
                 list_id: move.from.id,
                 name: move.from.name,
-                prev_id: data.id,
+                prev_id: tList[tIndex].id
               })
               .then((response) => {
                 console.log("debug");
