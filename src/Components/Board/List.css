@@ -11,6 +11,14 @@
   flex-shrink: 0;
   margin-bottom: 10px;
   z-index: 1;
+  position: relative;
+}
+
+button.moveButton {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  width: 50px;
 }
 
 .board-list.up {
@@ -128,3 +136,4 @@ input.addcard {
   position: sticky;
   right: 10px;
 }
+

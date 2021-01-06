@@ -99,16 +99,24 @@ function List({
         }
         const tList = board.lists;
         console.log(tList);
-        let fIndex = tList.findIndex(item => item.id === move.from.id);
-        let tIndex = tList.findIndex(item => item.id === data.id);
-        if(fIndex > tIndex) tIndex--;
+        let fIndex = tList.findIndex((item) => item.id === move.from.id);
+        let tIndex = tList.findIndex((item) => item.id === data.id);
+        if (fIndex > tIndex) tIndex--;
+        const reqBody =
+          tIndex === -1
+            ? {
+                board_id: board.id,
+                list_id: move.from.id,
+                name: move.from.name,
+              }
+            : {
+                board_id: board.id,
+                list_id: move.from.id,
+                name: move.from.name,
+                prev_id: tList[tIndex].id,
+              };
         apis.list
-          .put({
-            board_id: board.id,
-            list_id: move.from.id,
-            name: move.from.name,
-            prev_id: tList[tIndex].id
-          })
+          .put(reqBody)
           .then((response) => {
             console.log("debug");
             console.log(board);
@@ -123,7 +131,7 @@ function List({
       // if state is 'not moving'
       setMove({ bool: true, mode: "list", from: data });
     }
-  }
+  };
 
   return (
     <div
@@ -131,7 +139,9 @@ function List({
         move.from && move.from.id === data.id ? "moving" : ""
       }`}
     >
-      <button className="moveButton" onClick={onMoveButton}>{move.bool? "to here" : "move"}</button>
+      <button className="moveButton" onClick={onMoveButton}>
+        {move.mode === "list" ? "to here" : "move"}
+      </button>
       <div>
         <h4 style={{ wordBreak: "break-all" }}>{data.name}</h4>
         <button id="board-list-delete" onClick={deleteList}>
@@ -144,6 +154,7 @@ function List({
         >
           {data.cards.map((card, index) => (
             <Card
+              list={data}
               setModalMode={setModalMode}
               card={card}
               key={index}
