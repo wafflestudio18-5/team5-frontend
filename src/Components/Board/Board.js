@@ -69,7 +69,7 @@ const createListEnter = (e) => {
         },
         //withCredentials: true,
       })
-      .then((response) => fetch(match))
+      .then((response) => console.log("아진짜안되네ㅔ"))
       .catch(function (error) {
         if (error.response) {
           console.log(

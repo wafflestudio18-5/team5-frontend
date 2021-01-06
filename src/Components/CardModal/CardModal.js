@@ -238,12 +238,15 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
               </button></div></div>
               <p>TODO 댓글목록 ul li ...</p>
               {card !== undefined
-                ? card.activities.map((data, index) => (
+                ? card.activities.reverse().map((data, index) => (
                     <Activity
                       data={data}
                       refresh={refresh}
                       setRefresh={setRefresh}
                       key={index}
+                      postActivity={postActivity}
+                      putActivity={putActivity}
+                      deleteActivity={deleteActivity}
                     />
                   ))
                 : null}
