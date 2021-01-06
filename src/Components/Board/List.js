@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import Card from "./Card.js";
 import apis from "../../Library/Apis";
 import "./List.css";
-import { useBoardContext } from '../../Contexts';
+import { useBoardContext } from "../../Contexts";
 
 function List({
   board,
@@ -89,51 +89,49 @@ function List({
       });
   };
 
-  //if (removed.id === data.id && !(removed.bool)) return null;
+  const onMoveButton = () => {
+    if (move.bool) {
+      // if state is 'moving'
+      if (move.mode === "list") {
+        if (move.from.id === data.id) {
+          setMove({ bool: false });
+          return;
+        }
+        const tList = board.lists;
+        console.log(tList);
+        let fIndex = tList.findIndex(item => item.id === move.from.id);
+        let tIndex = tList.findIndex(item => item.id === data.id);
+        if(fIndex > tIndex) tIndex--;
+        apis.list
+          .put({
+            board_id: board.id,
+            list_id: move.from.id,
+            name: move.from.name,
+            prev_id: tList[tIndex].id
+          })
+          .then((response) => {
+            console.log("debug");
+            console.log(board);
+            fetchBoardById({ id: board.id });
+          })
+          .catch((err) => console.log(err));
+        setMove({ bool: false });
+      } else {
+        setMove({ bool: false });
+      }
+    } else {
+      // if state is 'not moving'
+      setMove({ bool: true, mode: "list", from: data });
+    }
+  }
 
   return (
     <div
-      draggable="true"
       className={`board-list ${modalMode ? "up" : ""} ${
         move.from && move.from.id === data.id ? "moving" : ""
       }`}
-      onDragStart={(e) => console.log(e)}
-      onClick={(e) => {
-        if (move.bool) {
-          // if state is 'moving'
-          if (move.mode === "list") {
-            if (move.from.id === data.id) {
-              setMove({ bool: false });
-              return;
-            }
-            const tList = board.lists;
-            console.log(tList);
-            let fIndex = tList.findIndex(item => item.id === move.from.id);
-            let tIndex = tList.findIndex(item => item.id === data.id);
-            if(fIndex > tIndex) tIndex--;
-            apis.list
-              .put({
-                board_id: board.id,
-                list_id: move.from.id,
-                name: move.from.name,
-                prev_id: tList[tIndex].id
-              })
-              .then((response) => {
-                console.log("debug");
-                console.log(board);
-                fetchBoardById({ id: board.id });
-              })
-              .catch((err) => console.log(err));
-            setMove({ bool: false });
-          } else {
-            setMove({ bool: false });
-          }
-        } else {
-          // if state is 'not moving'
-          setMove({ bool: true, mode: "list", from: data });
-        }
-      }}
     >
+      <button className="moveButton" onClick={onMoveButton}>{move.bool? "to here" : "move"}</button>
       <div>
         <h4 style={{ wordBreak: "break-all" }}>{data.name}</h4>
         <button id="board-list-delete" onClick={deleteList}>
