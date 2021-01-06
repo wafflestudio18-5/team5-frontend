@@ -95,7 +95,7 @@ function Activity({data, refresh, setRefresh}) {
 
     return (
         <div className="Activity">
-            <img src="" alt={String(data.id)}/> {/*TODO 프사설정*/}
+            <img src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" alt={String(data.id)}/> {/*TODO 프사설정*/}
             {data.is_comment ? <>
                 <div style={button.editMode? null : {display: 'none'}}>
                     <input

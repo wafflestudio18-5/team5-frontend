@@ -3,7 +3,7 @@ import Card from "./Card.js";
 import apis from '../../Library/Apis';
 import "./List.css";
 
-function List({ board, data, postCard }) {
+function List({ board, data, postCard, deleteCard, postActivity, putActivity, deleteActivity }) {
   const newCardButton = useRef();
   const newCardInput = useRef();
   const scrollRef = useRef();
@@ -84,7 +84,19 @@ function List({ board, data, postCard }) {
       <div className="board-cards" id={data.id} ref={scrollRef}>
         <div className={crtCard ? "board-cards-crtCard" : "board-cards-crtCard-x"}>
           {data.cards.map((card, index) => (
-            <Card setModalMode={setModalMode} card={card} key={index} index={index} list_name={data.name} board_key={board.key} board_name={board.name} board_id={board.id} />
+            <Card setModalMode={setModalMode} 
+            card={card} 
+            key={index} 
+            index={index} 
+            list_name={data.name} 
+            board_key={board.key} 
+            board_name={board.name} 
+            board_id={board.id} 
+            deleteCard={deleteCard}
+            postActivity={postActivity}
+            putActivity={putActivity}
+            deleteActivity={deleteActivity}
+            />
           ))}
             <div className="crtCard" style={crtCard? {} : {display: 'none'}}>
               <div id="crtCard_inputWrapper">

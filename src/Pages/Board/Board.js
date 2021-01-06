@@ -11,10 +11,13 @@ function BoardPage({ match }) {
     fetchBoard({ key: match.params.board_key });
   };
 
-  const postActivity = (cId, content) => {
+  const postActivity = (cId, content, then) => {
     if (!content) return;
     apis.activity.post({ card_id: cId, content })
-      .then((response) => fetch(match))
+      .then((response) => {
+        fetch(match);
+        then();
+      })
       .catch((err) => console.log(err));
   };
 

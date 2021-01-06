@@ -3,7 +3,7 @@ import "./CardModal.css";
 import Activity from "./Activity.js";
 import apis from '../../Library/Apis';
 
-function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, board_id }) {
+function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, board_id, deleteCard, postActivity, putActivity, deleteActivity }) {
   const [card, setCard] = useState(undefined);
   const [nameState, setNameState] = useState({ name: cardName, edit: false });
   const [refresh, setRefresh] = useState(false);
@@ -64,65 +64,16 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
 
   //댓글 달고 저장하기 TODO 안 뜸 아놔
   const saveComment = () => {
-    apis.activity.post( { card_id: String(card_id), content: comment })
-      .then(function (response) {
-        console.log("댓글 달기 성공");
-        console.log(response);
+    postActivity(String(card_id), comment);/*() => {
         setRefresh(!refresh);
         setComment("");
         setButton({ display: false, green: false });
-      })
-      .catch(function (error) {
-        if (error.response) {
-          console.log(
-            "// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다."
-          );
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
-          // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
-          // Node.js의 http.ClientRequest 인스턴스입니다.
-          console.log(error.request);
-        } else {
-          console.log(
-            "// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다."
-          );
-          console.log("Error", error.message);
-        }
-        console.log(error.config);
-      });
+      });*/
   };
 
   //해당 카드 지우기
-  const deleteCardClick = (card_id) => {
-    apis.card.delete( { id: card_id })
-      .then(function (response) {
-        console.log("카드 삭제 성공");
-      })
-      .catch(function (error) {
-        if (error.response) {
-          console.log(
-            "// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다."
-          );
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
-          // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
-          // Node.js의 http.ClientRequest 인스턴스입니다.
-          console.log(error.request);
-        } else {
-          console.log(
-            "// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다."
-          );
-          console.log("Error", error.message);
-        }
-        console.log(error.config);
-      });
-
+  const deleteCardClick = () => {
+    deleteCard();
     exit();
   };
 
