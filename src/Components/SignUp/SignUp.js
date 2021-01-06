@@ -14,7 +14,7 @@ function SignUp() {
   const [fn, setFn] = React.useState("");
   const [pw, setPw] = React.useState("");
 
-  const { signUpReq } = useUserContext();
+  const { signUpReq, signUpSuccess } = useUserContext();
 
   function onChange(e) {
     setEmail(e.target.value);
@@ -98,7 +98,7 @@ function SignUp() {
 
       <p id="signup-terms">By signing up, I accept the Atlassian <a href="https://www.atlassian.com/legal/cloud-terms-of-service">Cloud Terms of Service</a> and acknowledge the <a href="https://www.atlassian.com/legal/privacy-policy">Privacy Policy</a>.</p>
       <div className="center" id="signup-signup">
-      <Link onClick={blueClick} to={routes.Login.path} className="home_header_button" id="hhb_login">
+      <Link onClick={blueClick} to={location => signUpSuccess ? routes.Login.path : routes.SignUp.path}>
         <button className="bold_center" id="signup-blue">
           Sign Up
         </button>
