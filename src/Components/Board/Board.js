@@ -67,10 +67,10 @@ function Board({
     setListInput("");
   };
 
-  const [boardName, setBoardName] = useState({content: undefined, edit: false, save: false})
+  const [boardName, setBoardName] = useState({content: undefined, edit: false, save: false, id: undefined})
   useEffect(() => {
     apis.board
-    .put({ id: board.id, name: boardName.content })
+    .put({ id: boardName.id, name: boardName.content })
     .then((response) => console.log(response))
     .catch((err) => console.log(err));
   }, [boardName.save])
@@ -131,11 +131,12 @@ function Board({
               <option value="Map">Map</option>
             </select>
             {boardName.edit? 
-            <input value={boardName.content} onChange={(e) => setBoardName({...boardName, content: e.target.value})}
+            <input style={{outline: 'none', fontWeight: 600, fontSize: 20, boxShadow: 'none', width: 'fit-content', borderRadius: 5, padding: 0}}
+              value={boardName.content} onChange={(e) => setBoardName({...boardName, content: e.target.value})}
               onBlur={(e) => setBoardName({...boardName, edit: false, save: !(boardName.save)})}
               onKeyPress={(e) => (e.key === 'Enter')? setBoardName({...boardName, edit: false, save: !(boardName.save)}) : null}
             />: 
-            <h3 onClick={(e) => setBoardName({...boardName, edit: true, content: board.name})} id="board-name">{board.name}</h3>}
+            <h3 onClick={(e) => setBoardName({...boardName, edit: true, content: board.name, id: board.id})} id="board-name">{board.name}</h3>}
             <button id="board-header-star">☆</button>
             <div className="board-header-vertical-line" />
             <button>
