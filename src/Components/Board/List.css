@@ -18,7 +18,7 @@ button.moveButton {
   position: absolute;
   right: 1px;
   top: 1px;
-  width: 50px;
+  width: 50px !important;
 }
 
 .board-list.up {

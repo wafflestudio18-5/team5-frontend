@@ -67,6 +67,7 @@ function Card({
         console.log(tList);
         let fIndex = tList.findIndex((item) => item.id === move.from.id);
         let tIndex = tList.findIndex((item) => item.id === card.id);
+
         if (fIndex > tIndex) tIndex--;
         const reqBody =
           tIndex === -1
@@ -84,8 +85,10 @@ function Card({
           .then((response) => {
             fetchBoardById({ id: board_id });
           })
+          .then(() => {
+            setMove({ bool: false });
+          })
           .catch((err) => console.log(err));
-        setMove({ bool: false });
       } else {
         setMove({ bool: false });
       }
@@ -97,17 +100,17 @@ function Card({
 
   /*TODO history 없이 띡 /c/로 시작하는 url이 입력됐다면 어떻게 할 지 결정할 것!*/
   return (
-    <>
+    <div className="board-card-wrapper">
       <div
         className="board-card"
         onClick={cardClick}
         style={{ marginTop: index === 0 ? 0 : 10 }}
       >
-        <button className="moveButton" onClick={onMoveButton}>
-          {move.mode === "card" ? "T" : "M"}
-        </button>
         <p style={{ wordBreak: "break-all", color: "black" }}>{cardName}</p>
       </div>
+      <button className="moveButton" id="card" onClick={onMoveButton}>
+        {move.mode === "card" ? "T" : "M"}
+      </button>
       {cardPage ? (
         <CardModal
           cardName={cardName}
@@ -123,7 +126,7 @@ function Card({
           deleteActivity={deleteActivity}
         />
       ) : null}
-    </>
+    </div>
   );
 }
 

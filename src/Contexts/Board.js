@@ -3,6 +3,7 @@ import apis from "../Library/Apis";
 
 const defaultBoard = {
   board: null,
+  users: [],
   modal: false,
   move: {
     bool: false, // whether moving or not
@@ -12,6 +13,7 @@ const defaultBoard = {
   setModal: () => {},
   setMove: () => {},
   getBoardData: () => {},
+  fetchUserList: () => {},
   fetchBoardById: () => {},
   fetchBoardByKey: () => {},
 };
@@ -48,6 +50,18 @@ const BoardProvider = (props) => {
 
   const getBoardData = () => state.board;
 
+  const fetchUserList = (id) => {
+    apis.board
+      .getUsers({ board_id: id })
+      .then((response) =>
+        setState((state) => ({
+          ...state,
+          users: response.data.results,
+        }))
+      )
+      .catch((err) => console.log(err));
+  };
+
   const fetchBoardById = ({ id }) => {
     apis.board
       .getById({ id })
@@ -58,6 +72,7 @@ const BoardProvider = (props) => {
             board: response.data,
           };
         });
+        fetchUserList(response.data.id);
       })
       .catch((err) => console.log(err));
   };
@@ -72,6 +87,7 @@ const BoardProvider = (props) => {
             board: response.data,
           };
         });
+        fetchUserList(response.data.id);
       })
       .catch((err) => console.log(err));
   };
@@ -81,6 +97,7 @@ const BoardProvider = (props) => {
     getBoardData,
     fetchBoardById,
     fetchBoardByKey,
+    fetchUserList,
     setModal,
     setMove,
   };

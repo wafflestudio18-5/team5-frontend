@@ -97,7 +97,7 @@ const apis = {
     },
     // get user list in the board
     getUsers: ({ board_id }) => {
-      return requester.get(`board/userlist/?board_id=${board_id}/`);
+      return requester.get(`board/userlist/?board_id=${board_id}`);
     },
   },
   list: {

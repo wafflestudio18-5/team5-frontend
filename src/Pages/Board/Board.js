@@ -4,10 +4,10 @@ import { useBoardContext, useUserContext } from "../../Contexts";
 import apis from '../../Library/Apis';
 
 function BoardPage({ match }) {
-  const { board, modal, fetchBoardByKey } = useBoardContext();
-  const { users } = useUserContext();
+  const { board, users, modal, fetchBoardByKey } = useBoardContext();
+  const { userList } = useUserContext();
 
-  const fetch = (match) => {
+  const fetch = async (match) => {
     fetchBoardByKey({ key: match.params.board_key });
   };
 
@@ -69,6 +69,7 @@ function BoardPage({ match }) {
         putActivity={putActivity}
         deleteActivity={deleteActivity}
         users={users}
+        userList={userList}
       />
     </>
   );

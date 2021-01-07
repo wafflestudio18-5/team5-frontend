@@ -56,10 +56,7 @@ function List({
   const deleteList = () => {
     apis.list
       .delete({
-        data: {
-          // 서버에서 req.body.{} 로 확인할 수 있다.
-          id: data.id,
-        },
+        id: data.id,
         //withCredentials: true,
       })
       .then(function (response) {
@@ -124,7 +121,11 @@ function List({
           })
           .catch((err) => console.log(err));
         setMove({ bool: false });
-      } else {
+      } else if(move.mode === "card") {
+        apis.card.put({
+          list_id: data.id,
+          id: move.from.id
+        }).then(fetchBoardById({id: board.id})).catch(err => console.log(err));
         setMove({ bool: false });
       }
     } else {
@@ -140,7 +141,7 @@ function List({
       }`}
     >
       <button className="moveButton" onClick={onMoveButton}>
-        {move.mode === "list" ? "to here" : "move"}
+        {move.bool ? "to here" : "move"}
       </button>
       <div>
         <h4 style={{ wordBreak: "break-all" }}>{data.name}</h4>

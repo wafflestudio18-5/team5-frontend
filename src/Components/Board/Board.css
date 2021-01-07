@@ -160,8 +160,20 @@ div.board-wrapper.anime {
   z-index: 0;
 }
 
+.board-card-wrapper {
+  position: relative;
+}
+
 .board-card:hover {
   filter: brightness(97%);
+}
+
+button.moveButton#card {
+  position: absolute;
+  right: 10px;
+  width: 30px !important;
+  height: 30px;
+  top: 10px;
 }
 
 #board-lists button#board-addlist {
