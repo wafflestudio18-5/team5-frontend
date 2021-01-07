@@ -82,7 +82,7 @@ function List({ board, data, postCard, putCard, deleteCard, postActivity, putAct
     <div className={`board-list ${modalMode? "up" : ""}`} style={{display: 'flex', flexDirection: 'column'}}>
       <div style={{display: 'float'}}>
       <h4 style={{wordBreak: "break-all", float: 'left'}}>{data.name}</h4>
-      <button style={{float: 'right'}} id="board-list-delete" onClick={deleteList}>DELETE</button>
+      <button style={{float: 'right', marginRight: 5}} id="board-list-delete" onClick={deleteList}>DELETE</button>
       </div>
 
       <div className="board-cards" id={data.id} ref={scrollRef}>
