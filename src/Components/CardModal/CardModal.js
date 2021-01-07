@@ -187,7 +187,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                 </button>
               ))}
 
-              <div style={{display: 'float', background: 'pink', textAlign: 'center'}}>
+              <div style={{display: 'float'}}>
                 <p className="title" style={{float: 'left'}}>
                   Activity
                 </p>
