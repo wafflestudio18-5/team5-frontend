@@ -133,7 +133,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
 
   return (
     <div id="card-modal-wrapper" onClick={exitIfNotModal}>
-      <div id="card-modal-wrapper-2">
+      <div id="card-modal-wrapper-2" style={{display: 'flex', flexDirection: 'column'}}>
         <div className="blank-for-card-modal" />
 
         <div id="card-modal">
