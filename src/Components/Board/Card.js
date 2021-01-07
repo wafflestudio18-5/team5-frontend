@@ -4,7 +4,7 @@ import CardModal from "../CardModal/CardModal";
 import apis from "../../Library/Apis";
 import { useBoardContext } from "../../Contexts";
 
-function Card({ card, index, list_name, board_key, board_name, board_id, setModalMode, deleteCard, postActivity, putActivity, deleteActivity }) {
+function Card({ card, index, list_name, board_key, board_name, board_id, setModalMode, putCard, deleteCard, postActivity, putActivity, deleteActivity }) {
   const [cardPage, setCardPage] = useState(false);
   const key = card.key;
   const dashedName = card.name.replaceAll(" ", "-");
@@ -60,6 +60,7 @@ function Card({ card, index, list_name, board_key, board_name, board_id, setModa
           exit={exitModal}
           list_name={list_name}
           board_id={board_id}
+          putCard={putCard}
           deleteCard={deleteCard}
           postActivity={postActivity}
           putActivity={putActivity}
