@@ -6,7 +6,7 @@ import apis from "../../Library/Apis";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
-function Board({ users, modal, board, postList, postCard, deleteCard, postActivity, putActivity, deleteActivity }) {
+function Board({ users, modal, board, postList, postCard, putCard, deleteCard, postActivity, putActivity, deleteActivity }) {
   const [crtList, setCrtList] = useState(false);
   const [listInput, setListInput] = useState("");
   const [invite, setInvite] = useState(false);
@@ -176,6 +176,7 @@ const createListEnter = (e) => {
                   data={data}
                   key={index}
                   postCard={postCard}
+                  putCard={putCard}
                   deleteCard={deleteCard}
                   postActivity={postActivity}
                   putActivity={putActivity}

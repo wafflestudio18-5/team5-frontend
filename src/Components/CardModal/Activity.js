@@ -65,7 +65,7 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
 
     return (
         <div className="Activity" style={{display: 'flex', flexDirection: 'row', marginTop: 5, marginBottom: 5}}>
-            <img style={{height: 35, width: 35, borderRadius: '50%', marginRight: 10}} src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" alt={String(data.id)}/> {/*TODO 프사설정*/}
+            <img style={{height: 35, width: 35, borderRadius: '50%', marginBottom: 15, marginRight: 10, position: 'relative', top: 10, left: 2}} src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" alt={String(data.id)}/> {/*TODO 프사설정*/}
             {data.is_comment ?
         
                 <><div style={button.editMode? null : {display: 'none'}}>
