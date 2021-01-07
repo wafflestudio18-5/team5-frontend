@@ -129,13 +129,11 @@ function List({ board, data, postCard, putCard, deleteCard, postActivity, putAct
   return (
     <div
       draggable="true"
-      style={{display: 'flex', flexDirection: 'column'}
+      style={{display: 'flex', flexDirection: 'column'}}
       className={`board-list ${modalMode ? "up" : ""} ${
         move.from && move.from.id === data.id ? "moving" : ""
       }`}
     >
-
-
       <button className="moveButton" onClick={onMoveButton}>
         {move.bool ? "to here" : "move"}
       </button>
