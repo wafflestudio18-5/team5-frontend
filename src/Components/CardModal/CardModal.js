@@ -191,7 +191,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                 <p className="title" style={{float: 'left'}}>
                   Activity
                 </p>
-                <button onClick={(e) => setDetail(!detail)} style={{float: 'right', display: 'inline-block', width: 120}}>{detail? "Hide Details" : "Show Details"}</button>
+                <button id="card-modal-detail" onClick={(e) => setDetail(!detail)} style={{float: 'right', display: 'inline-block', width: 100}}>{detail? "Hide Details" : "Show Details"}</button>
               </div>
 
               <div id="card-modal-activities" style={{height: button.display? 242 : 280, maxHeight: button.display? 242 : 280, overflowX: 'auto', marginTop: 20}}>              
