@@ -3,7 +3,7 @@ import "./CardModal.css";
 import Activity from "./Activity.js";
 import apis from '../../Library/Apis';
 
-function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, board_id, deleteCard, postActivity, putActivity, deleteActivity }) {
+function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, board_id, putCard, deleteCard, postActivity, putActivity, deleteActivity }) {
   const [card, setCard] = useState(undefined);
   const [nameState, setNameState] = useState({ name: cardName, edit: false });
   const [refresh, setRefresh] = useState(false);
@@ -15,6 +15,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
         console.log(response.data);
         setCard(response.data);
         setNameState({ ...nameState, name: response.data.name });
+        setDescription({...description, content: response.data.description.content})
       })
       .catch(function (error) {
         if (error.response) {
@@ -73,7 +74,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
 
   //해당 카드 지우기
   const deleteCardClick = () => {
-    deleteCard();
+    deleteCard(String(card_id));
     exit();
   };
 
@@ -118,6 +119,11 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
     content: "",
     edit: false,
   });
+  useEffect(() => {
+    // 서버에 description 변경
+    putCard({cId: card_id, description: description})
+  }, [description.edit && false]);
+
   // 멤버 추가하기
   const addMember = () => {
     alert(
@@ -167,8 +173,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
               {description.edit ? (
                   <input
                     onKeyPress={(e) => e.key === "Enter"? 
-                    (e.target.value === ""? setDescription({...description, edit: false}) : setDescription({...description, exist: true, edit: false}))
-                    : null}
+                    (e.target.value === ""? setDescription({...description, edit: false}) : setDescription({...description, exist: true, edit: false})): null}
                     onBlur={(e) => e.target.value === ""? setDescription({...description, edit: false}) : setDescription({...description, exist: true, edit: false})}
                     value={description.content}
                     onChange={(e) =>
@@ -178,12 +183,8 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                       })
                     }
                   />
-                ) : (description.content !== "" ? (
-                  <p
-                    onClick={() =>
-                      setDescription({ ...description, edit: true })
-                    }
-                  >
+                ) : ((description.content !== "" && description.content !== undefined) ? (
+                  <p onClick={() => setDescription({ ...description, edit: true })}>
                     {description.content}
                   </p>
                 )
@@ -195,11 +196,13 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                   Add a more detailed description...
                 </button>
               ))}
-              <p className="title">
-                <br />
-                Activity
-              </p>
-              <button>Hide Details</button>
+
+              <div style={{display: 'float', background: 'pink', textAlign: 'center'}}>
+                <p className="title" style={{float: 'left'}}>
+                  Activity
+                </p>
+                <button style={{float: 'right', display: 'inline-block'}}>Hide Details</button>
+              </div>
 
               <div id="card-modal-activities" style={{height: button.display? 242 : 280, maxHeight: button.display? 242 : 280, overflowX: 'auto', marginTop: 20}}>              
               <div style={{display: 'flex', flexDirection: 'row'}}>
