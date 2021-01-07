@@ -7,7 +7,6 @@ const BoardsPage = () => {
   const { user } = useUserContext();
   if(!user) return null;
   const path = `/${user.username}/boards/`;
-  console.log(path);
   return (
     <>
       <Route exact path={path} component={routes.Boards.component} />

@@ -25,8 +25,6 @@ const UserProvider = (props) => {
     apis.user
       .pwSignUp({ email, username, password })
       .then((response) => {
-        console.log("회원가입 성공");
-        console.log(response.data);
         setState((state) => {
           return {
             ...state,
@@ -61,17 +59,14 @@ const UserProvider = (props) => {
             user: response.data,
           };
         });
-        console.log("소셜 로그인 성공");
         saveLoginInfo(response.data);
       })
       .catch((err) => {
         console.log(err);
-        console.log("소셜 로그인 실패: 회원가입으로 넘어감");
         apis.user.scSignUP(loginInfo)
           .then((response) => {
-            console.log("소셜 회원가입 성공");
           })
-          .catch((err) => console.log("여긴 어케 온거임 대체"));
+          .catch((err) => alert("Something went wrong. Try again!"));
       });
   };
 
@@ -85,7 +80,6 @@ const UserProvider = (props) => {
       .pwLogIn(loginInfo)
       .then((response) => {
         apis.user.setToken(response.data.token);
-        console.log("비밀번호로 로그인 성공");
         setState((state) => {
           return {
             ...state,
@@ -127,7 +121,6 @@ const UserProvider = (props) => {
       token,
     };
     if (id) {
-      console.log('토큰 저장: ' + token);
       apis.user.setToken(token);
 
       setState((state) => ({
