@@ -85,8 +85,6 @@ function Card({
           .put(reqBody)
           .then((response) => {
             fetchBoardById({ id: board_id });
-          })
-          .then(() => {
             setMove({ bool: false });
           })
           .catch((err) => console.log(err));
