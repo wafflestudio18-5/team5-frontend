@@ -135,12 +135,12 @@ function List({ board, data, postCard, putCard, deleteCard, postActivity, putAct
       }`}
     >
       <button className="moveButton" onClick={onMoveButton}>
-        {move.bool ? "to here" : "move"}
+        {move.bool ? "TO" : "MOVE"}
       </button>
       <div style={{display: 'float'}}>
         <h4 style={{wordBreak: "break-all", float: 'left'}}>{data.name}</h4>
-        <button style={{float: 'right', marginRight: 5}} id="board-list-delete" onClick={deleteList}>
-          DELETE
+        <button style={{position: 'absolute', float: 'right', right: '50px', width: '30px'}} id="board-list-delete" onClick={deleteList}>
+          DEL
         </button>
       </div>
       <div className="board-cards" id={data.id} ref={scrollRef}>
