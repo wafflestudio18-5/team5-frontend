@@ -4,15 +4,7 @@ import apis from "../../Library/Apis";
 import "./List.css";
 import { useBoardContext } from "../../Contexts";
 
-function List({
-  board,
-  data,
-  postCard,
-  deleteCard,
-  postActivity,
-  putActivity,
-  deleteActivity,
-}) {
+function List({ board, data, postCard, putCard, deleteCard, postActivity, putActivity, deleteActivity }) {
   const newCardButton = useRef();
   const newCardInput = useRef();
   const scrollRef = useRef();
@@ -136,16 +128,20 @@ function List({
 
   return (
     <div
+      draggable="true"
+      style={{display: 'flex', flexDirection: 'column'}
       className={`board-list ${modalMode ? "up" : ""} ${
         move.from && move.from.id === data.id ? "moving" : ""
       }`}
     >
+
+
       <button className="moveButton" onClick={onMoveButton}>
         {move.bool ? "to here" : "move"}
       </button>
-      <div>
-        <h4 style={{ wordBreak: "break-all" }}>{data.name}</h4>
-        <button id="board-list-delete" onClick={deleteList}>
+      <div style={{display: 'float'}}>
+        <h4 style={{wordBreak: "break-all", float: 'left'}}>{data.name}</h4>
+        <button style={{float: 'right', marginRight: 5}} id="board-list-delete" onClick={deleteList}>
           DELETE
         </button>
       </div>
@@ -165,9 +161,11 @@ function List({
               board_name={board.name}
               board_id={board.id}
               deleteCard={deleteCard}
+              putCard={putCard}
               postActivity={postActivity}
               putActivity={putActivity}
               deleteActivity={deleteActivity}
+
             />
           ))}
           <div className="crtCard" style={crtCard ? {} : { display: "none" }}>

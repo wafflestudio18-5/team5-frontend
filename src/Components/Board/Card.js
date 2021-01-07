@@ -12,6 +12,7 @@ function Card({
   board_key,
   board_name,
   board_id,
+  putCard,
   setModalMode,
   deleteCard,
   postActivity,
@@ -120,6 +121,7 @@ function Card({
           exit={exitModal}
           list_name={list_name}
           board_id={board_id}
+          putCard={putCard}
           deleteCard={deleteCard}
           postActivity={postActivity}
           putActivity={putActivity}

@@ -6,6 +6,7 @@ import apis from "../../Library/Apis";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
+
 function Board({
   users,
   userList,
@@ -13,6 +14,7 @@ function Board({
   board,
   postList,
   postCard,
+  putCard,
   deleteCard,
   postActivity,
   putActivity,
@@ -192,6 +194,7 @@ function Board({
                   data={data}
                   key={index}
                   postCard={postCard}
+                  putCard={putCard}
                   deleteCard={deleteCard}
                   postActivity={postActivity}
                   putActivity={putActivity}

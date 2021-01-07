@@ -28,7 +28,7 @@ function BoardPage({ match }) {
   };
 
   const deleteActivity = (id) => {
-    apis.activity.delete({ id })
+    apis.activity.delete({ id: id })
       .then((response) => fetch(match))
       .catch((err) => console.log(err));
   };
@@ -38,6 +38,17 @@ function BoardPage({ match }) {
     apis.card.post({ board_id: bId, list_id: lId, name: name })
       .then((response) => fetch(match))
       .catch((err) => console.log(err));
+  };
+
+  const putCard = ({cId, member=null, name=null, description=null, due_date=null, prev_id=null, list_id=null}) => {
+    if (!cId) return;
+    (member !== null) ? apis.card.put({ id: cId, member: member }) :
+    (name !== null) ? apis.card.put({ id: cId, name: name }) :
+    (description !== null) ? apis.card.put({ id: cId, description: description }) :
+    (due_date !== null) ? apis.card.put({ id: cId, due_date: due_date }) :
+    apis.card.put({ id: cId, list_id: list_id, prev_id: prev_id})
+      .then((response) => fetch(match))
+      .catch((err) => console.log(err))
   };
 
   const deleteCard = (card_id) => {
@@ -64,6 +75,7 @@ function BoardPage({ match }) {
         modal={modal}
         postList={postList}
         postCard={postCard}
+        putCard={putCard}
         deleteCard={deleteCard}
         postActivity={postActivity}
         putActivity={putActivity}

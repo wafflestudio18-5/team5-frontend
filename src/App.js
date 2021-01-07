@@ -31,7 +31,7 @@ function App() {
               path={routes.CardPage.path}
               component={routes.CardPage.component}
             />
-            <Redirect to="/username/boards" />
+            <Redirect to={`/${user.name}/boards`} />
           </Switch>{" "}
         </>
       ) : (
