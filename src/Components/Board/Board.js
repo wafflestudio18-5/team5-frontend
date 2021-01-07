@@ -6,7 +6,20 @@ import apis from "../../Library/Apis";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
-function Board({ users, modal, board, postList, postCard, putCard, deleteCard, postActivity, putActivity, deleteActivity }) {
+
+function Board({
+  users,
+  userList,
+  modal,
+  board,
+  postList,
+  postCard,
+  putCard,
+  deleteCard,
+  postActivity,
+  putActivity,
+  deleteActivity,
+}) {
   const [crtList, setCrtList] = useState(false);
   const [listInput, setListInput] = useState("");
   const [invite, setInvite] = useState(false);
@@ -33,11 +46,11 @@ function Board({ users, modal, board, postList, postCard, putCard, deleteCard, p
       .catch((err) => console.log(err));
   };
 
-const createListEnter = (e) => {
-    if(e.key == 'Enter') {
+  const createListEnter = (e) => {
+    if (e.key == "Enter") {
       createList();
     }
-  }
+  };
 
   const createList = () => {
     setCrtList(false);
@@ -56,17 +69,21 @@ const createListEnter = (e) => {
     setListInput("");
   };
 
+  const eUsers = inviteInput
+  ? userList.filter(item => !users.find(it => it.id === item.id)).filter((item) => item.username.includes(inviteInput)).slice(0, 7)
+  : userList.filter(item => !users.find(it => it.id === item.id)).slice(0, 7);
+
   const tUsers = inviteInput
-    ? users.filter((item) => item.username.includes(inviteInput))
-    : users;
+    ? userList.filter((item) => item.username.includes(inviteInput)).slice(0, 7)
+    : userList.slice(0, 7);
+
+  console.log(users);
 
   const deleteBoard = () => {
     apis.board
       .delete({
-        data: {
-          // 서버에서 req.body.{} 로 확인할 수 있다.
-          id: board.id,
-        },
+        // 서버에서 req.body.{} 로 확인할 수 있다.
+        id: board.id,
         //withCredentials: true,
       })
       .then((response) => console.log("아진짜안되네ㅔ"))
@@ -145,15 +162,16 @@ const createListEnter = (e) => {
                     />
                   </div>
 
-                  {tUsers.map((item, index) => (
-                    <h4
-                      key={index}
-                      onClick={() => inviteMember(board.id, item.username)}
-                    >
-                      {" "}
-                      {item.username}{" "}
-                    </h4>
-                  ))}
+                  {eUsers.map((item, index) => {
+                    return (
+                      <h4
+                        key={index}
+                        onClick={() => inviteMember(board.id, item.username)}
+                      >
+                        {item.username}
+                      </h4>
+                    );
+                  })}
                 </div>
               ) : null}
             </div>
@@ -167,7 +185,7 @@ const createListEnter = (e) => {
           </div>
         </header>
 
-        <div className={`board-main ${modal? "up":""}`}>
+        <div className={`board-main ${modal ? "up" : ""}`}>
           <div id="board-lists">
             <div id="board-temp">
               {board.lists.map((data, index) => (
@@ -195,7 +213,9 @@ const createListEnter = (e) => {
                       onChange={(e) => setListInput(e.target.value)}
                       value={listInput}
                     />
-                    <button onKeyPress={createListEnter} onClick={createList}>Add List</button>
+                    <button onKeyPress={createListEnter} onClick={createList}>
+                      Add List
+                    </button>
                     <button id="no_crtList" onClick={no_crtList}></button>
                   </div>
                 ) : (

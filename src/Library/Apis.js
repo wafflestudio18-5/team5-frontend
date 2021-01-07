@@ -97,7 +97,7 @@ const apis = {
     },
     // get user list in the board
     getUsers: ({ board_id }) => {
-      return requester.get(`board/userlist/?board_id=${board_id}/`);
+      return requester.get(`board/userlist/?board_id=${board_id}`);
     },
   },
   list: {
@@ -112,10 +112,11 @@ const apis = {
     },
   },
   card: {
-    get: ({ id, key }) => {
-      if (id && key) return;
-      if (key) return requester.get(`card/?key=${key}/`);
-      else return requester.get(`card/?id=${id}/`);
+    getById: ({ id }) => {
+      return requester.get(`card/?id=${id}`);
+    },
+    getByKey: ({ key }) => {
+      return requester.get(`card/?key=${key}`);
     },
     post: ({ name, list_id }) => {
       return requester.post("card/", { name, list_id });

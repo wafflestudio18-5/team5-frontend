@@ -3,17 +3,19 @@ import apis from "../Library/Apis";
 
 const defaultBoard = {
   board: null,
+  users: [],
   modal: false,
   move: {
-    bool: false,// whether moving or not
-    mode: "",   // "", "card", "list"
+    bool: false, // whether moving or not
+    mode: "", // "", "card", "list"
     from: null, // card which is moving
   },
   setModal: () => {},
   setMove: () => {},
   getBoardData: () => {},
+  fetchUserList: () => {},
   fetchBoardById: () => {},
-  fetchBoardByKey: () => {}
+  fetchBoardByKey: () => {},
 };
 
 const BoardContext = createContext(defaultBoard);
@@ -21,24 +23,23 @@ const BoardContext = createContext(defaultBoard);
 const BoardProvider = (props) => {
   const { children } = props;
 
-  const setMove = ({bool, mode, from }) => {
-    if(bool) {
-      setState(state => {
+  const setMove = ({ bool, mode, from }) => {
+    if (bool) {
+      setState((state) => {
         return {
           ...state,
-          move: {bool: true, mode, from }
-        }
-      })
+          move: { bool: true, mode, from },
+        };
+      });
     } else {
-      setState(state => {
+      setState((state) => {
         return {
           ...state,
-          move: {bool: false, mode: "", from: null, to: null}
-        }
-      })
+          move: { bool: false, mode: "", from: null, to: null },
+        };
+      });
     }
-    
-  }
+  };
 
   const setModal = (e) => {
     setState((state) => ({
@@ -49,9 +50,21 @@ const BoardProvider = (props) => {
 
   const getBoardData = () => state.board;
 
-  const fetchBoardById = ({id}) => {
+  const fetchUserList = (id) => {
     apis.board
-      .getById({id})
+      .getUsers({ board_id: id })
+      .then((response) =>
+        setState((state) => ({
+          ...state,
+          users: response.data.results,
+        }))
+      )
+      .catch((err) => console.log(err));
+  };
+
+  const fetchBoardById = ({ id }) => {
+    apis.board
+      .getById({ id })
       .then((response) => {
         setState((state) => {
           return {
@@ -59,13 +72,14 @@ const BoardProvider = (props) => {
             board: response.data,
           };
         });
+        fetchUserList(response.data.id);
       })
       .catch((err) => console.log(err));
   };
 
-  const fetchBoardByKey = ({key}) => {
+  const fetchBoardByKey = ({ key }) => {
     apis.board
-      .getByKey({key})
+      .getByKey({ key })
       .then((response) => {
         setState((state) => {
           return {
@@ -73,6 +87,7 @@ const BoardProvider = (props) => {
             board: response.data,
           };
         });
+        fetchUserList(response.data.id);
       })
       .catch((err) => console.log(err));
   };
@@ -82,8 +97,9 @@ const BoardProvider = (props) => {
     getBoardData,
     fetchBoardById,
     fetchBoardByKey,
+    fetchUserList,
     setModal,
-    setMove
+    setMove,
   };
 
   const [state, setState] = useState(boardState);

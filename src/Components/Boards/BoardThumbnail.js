@@ -30,7 +30,10 @@ const BoardThumbnail = ({ id, name, boardKey, star, refreshBoards }) => {
   };
 
   const toggleStar = (id, st) => {
-    apis.board.put({ id: id, star: !st }).then((response) => {
+    let targetStar;
+    if(st) targetStar = "False";
+    else targetStar = "True";
+    apis.board.put({ id: id, star: targetStar }).then((response) => {
       console.log(`modify request from ${st} to ${!st}`);
       refreshBoards();
       setSt(response.data.star);

@@ -4,7 +4,21 @@ import CardModal from "../CardModal/CardModal";
 import apis from "../../Library/Apis";
 import { useBoardContext } from "../../Contexts";
 
-function Card({ card, index, list_name, board_key, board_name, board_id, setModalMode, putCard, deleteCard, postActivity, putActivity, deleteActivity }) {
+function Card({
+  card,
+  list,
+  index,
+  list_name,
+  board_key,
+  board_name,
+  board_id,
+  putCard,
+  setModalMode,
+  deleteCard,
+  postActivity,
+  putActivity,
+  deleteActivity,
+}) {
   const [cardPage, setCardPage] = useState(false);
   const key = card.key;
   const dashedName = card.name.replaceAll(" ", "-");
@@ -12,6 +26,7 @@ function Card({ card, index, list_name, board_key, board_name, board_id, setModa
   const boardPath = "/b/" + board_key + "/" + board_name;
   const { setModal } = useBoardContext();
   const [cardName, setCardName] = useState(card.name);
+  const { move, setMove, fetchBoardById } = useBoardContext();
 
   const cardClick = () => {
     setModalMode(true);
@@ -41,9 +56,52 @@ function Card({ card, index, list_name, board_key, board_name, board_id, setModa
     ); // 바꿀 주소 앞에 점 찍으면 상대 주소 됨. 우리는 해당 사항 없음
   };
 
+  const onMoveButton = () => {
+    if (move.bool) {
+      // if state is 'moving'
+      if (move.mode === "card") {
+        if (move.from.id === card.id) {
+          setMove({ bool: false });
+          return;
+        }
+        const tList = list.cards;
+        console.log(tList);
+        let fIndex = tList.findIndex((item) => item.id === move.from.id);
+        let tIndex = tList.findIndex((item) => item.id === card.id);
+
+        if (fIndex > tIndex) tIndex--;
+        const reqBody =
+          tIndex === -1
+            ? {
+                id: move.from.id,
+                list_id: list.id,
+              }
+            : {
+                id: move.from.id,
+                list_id: list.id,
+                prev_id: tList[tIndex].id,
+              };
+        apis.card
+          .put(reqBody)
+          .then((response) => {
+            fetchBoardById({ id: board_id });
+          })
+          .then(() => {
+            setMove({ bool: false });
+          })
+          .catch((err) => console.log(err));
+      } else {
+        setMove({ bool: false });
+      }
+    } else {
+      // if state is 'not moving'
+      setMove({ bool: true, mode: "card", from: card });
+    }
+  };
+
   /*TODO history 없이 띡 /c/로 시작하는 url이 입력됐다면 어떻게 할 지 결정할 것!*/
   return (
-    <>
+    <div className="board-card-wrapper">
       <div
         className="board-card"
         onClick={cardClick}
@@ -51,6 +109,9 @@ function Card({ card, index, list_name, board_key, board_name, board_id, setModa
       >
         <p style={{ wordBreak: "break-all", color: "black" }}>{cardName}</p>
       </div>
+      <button className="moveButton" id="card" onClick={onMoveButton}>
+        {move.mode === "card" ? "T" : "M"}
+      </button>
       {cardPage ? (
         <CardModal
           cardName={cardName}
@@ -67,7 +128,7 @@ function Card({ card, index, list_name, board_key, board_name, board_id, setModa
           deleteActivity={deleteActivity}
         />
       ) : null}
-    </>
+    </div>
   );
 }
 

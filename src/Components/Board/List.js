@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import Card from "./Card.js";
 import apis from "../../Library/Apis";
 import "./List.css";
-import { useBoardContext } from '../../Contexts';
+import { useBoardContext } from "../../Contexts";
 
 function List({ board, data, postCard, putCard, deleteCard, postActivity, putActivity, deleteActivity }) {
   const newCardButton = useRef();
@@ -48,10 +48,7 @@ function List({ board, data, postCard, putCard, deleteCard, postActivity, putAct
   const deleteList = () => {
     apis.list
       .delete({
-        data: {
-          // 서버에서 req.body.{} 로 확인할 수 있다.
-          id: data.id,
-        },
+        id: data.id,
         //withCredentials: true,
       })
       .then(function (response) {
@@ -81,48 +78,69 @@ function List({ board, data, postCard, putCard, deleteCard, postActivity, putAct
       });
   };
 
-  //if (removed.id === data.id && !(removed.bool)) return null;
+  const onMoveButton = () => {
+    if (move.bool) {
+      // if state is 'moving'
+      if (move.mode === "list") {
+        if (move.from.id === data.id) {
+          setMove({ bool: false });
+          return;
+        }
+        const tList = board.lists;
+        console.log(tList);
+        let fIndex = tList.findIndex((item) => item.id === move.from.id);
+        let tIndex = tList.findIndex((item) => item.id === data.id);
+        if (fIndex > tIndex) tIndex--;
+        const reqBody =
+          tIndex === -1
+            ? {
+                board_id: board.id,
+                list_id: move.from.id,
+                name: move.from.name,
+              }
+            : {
+                board_id: board.id,
+                list_id: move.from.id,
+                name: move.from.name,
+                prev_id: tList[tIndex].id,
+              };
+        apis.list
+          .put(reqBody)
+          .then((response) => {
+            console.log("debug");
+            console.log(board);
+            fetchBoardById({ id: board.id });
+          })
+          .catch((err) => console.log(err));
+        setMove({ bool: false });
+      } else if(move.mode === "card") {
+        apis.card.put({
+          list_id: data.id,
+          id: move.from.id
+        }).then(fetchBoardById({id: board.id})).catch(err => console.log(err));
+        setMove({ bool: false });
+      }
+    } else {
+      // if state is 'not moving'
+      setMove({ bool: true, mode: "list", from: data });
+    }
+  };
 
   return (
     <div
       draggable="true"
-      style={{display: 'flex', flexDirection: 'column'}
+      style={{display: 'flex', flexDirection: 'column'}}
       className={`board-list ${modalMode ? "up" : ""} ${
         move.from && move.from.id === data.id ? "moving" : ""
       }`}
-      onDragStart={(e) => console.log(e)}
-      onClick={(e) => {
-        if (move.bool) {
-          // if state is 'moving'
-          if (move.mode === "list") {
-            if (move.from.id === data.id) return;
-            apis.list
-              .put({
-                board_id: board.id,
-                list_id: move.from.id,
-                name: move.from.name,
-                prev_id: data.id,
-              })
-              .then((response) => {
-                console.log("debug");
-                console.log(board);
-                fetchBoardById({ id: board.id });
-              })
-              .catch((err) => console.log(err));
-            setMove({ bool: false });
-          } else {
-            setMove({ bool: false });
-          }
-        } else {
-          // if state is 'not moving'
-          setMove({ bool: true, mode: "list", from: data });
-        }
-      }}
     >
+      <button className="moveButton" onClick={onMoveButton}>
+        {move.bool ? "TO" : "MOVE"}
+      </button>
       <div style={{display: 'float'}}>
         <h4 style={{wordBreak: "break-all", float: 'left'}}>{data.name}</h4>
-        <button style={{float: 'right', marginRight: 5}} id="board-list-delete" onClick={deleteList}>
-          DELETE
+        <button style={{position: 'absolute', float: 'right', right: '50px', width: '30px'}} id="board-list-delete" onClick={deleteList}>
+          DEL
         </button>
       </div>
       <div className="board-cards" id={data.id} ref={scrollRef}>
@@ -130,19 +148,22 @@ function List({ board, data, postCard, putCard, deleteCard, postActivity, putAct
           className={crtCard ? "board-cards-crtCard" : "board-cards-crtCard-x"}
         >
           {data.cards.map((card, index) => (
-            <Card setModalMode={setModalMode} 
-            card={card} 
-            key={index} 
-            index={index} 
-            list_name={data.name} 
-            board_key={board.key} 
-            board_name={board.name} 
-            board_id={board.id} 
-            putCard={putCard}
-            deleteCard={deleteCard}
-            postActivity={postActivity}
-            putActivity={putActivity}
-            deleteActivity={deleteActivity}
+            <Card
+              list={data}
+              setModalMode={setModalMode}
+              card={card}
+              key={index}
+              index={index}
+              list_name={data.name}
+              board_key={board.key}
+              board_name={board.name}
+              board_id={board.id}
+              deleteCard={deleteCard}
+              putCard={putCard}
+              postActivity={postActivity}
+              putActivity={putActivity}
+              deleteActivity={deleteActivity}
+
             />
           ))}
           <div className="crtCard" style={crtCard ? {} : { display: "none" }}>

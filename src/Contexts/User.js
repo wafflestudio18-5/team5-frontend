@@ -5,7 +5,7 @@ const defaultUser = {
   // variable used for giving id to each team informations
   logged: false,
   user: {},
-  users: [],
+  userList: [],
   signUpReq: () => {},
   loginReqByPW: () => {},
   loginReqBySC: () => {},
@@ -159,7 +159,7 @@ const UserProvider = (props) => {
         setState((state) => {
           return {
             ...state,
-            users: response.data,
+            userList: response.data,
           };
         });
       })
