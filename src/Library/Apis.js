@@ -142,7 +142,7 @@ const apis = {
       return requester.put("activity/", { id, content });
     },
     delete: ({ id }) => {
-      return requester.delete("activity/", { id });
+      return requester.delete("activity/", {data: { id: id }});
     },
   },
 };
