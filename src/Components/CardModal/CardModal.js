@@ -200,10 +200,11 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                 Activity
               </p>
               <button>Hide Details</button>
-              
+
+              <div id="card-modal-activities" style={{height: button.display? 242 : 280, maxHeight: button.display? 242 : 280, overflowX: 'auto', marginTop: 20}}>              
               <div style={{display: 'flex', flexDirection: 'row'}}>
                 <img style={{
-                  height: 35, width: 35, borderRadius: '50%', marginBottom: 15, marginRight: 10, position: 'relative', top: 25, left: 2}} 
+                  height: 35, width: 35, borderRadius: '50%', marginBottom: 15, marginRight: 10, position: 'relative', top: 6, left: 2}} 
                   src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" alt={String(cardName)}/> {/*TODO 프사설정*/}
                 <div style={{
                   backgroundColor: 'white', 
@@ -211,7 +212,6 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                   paddingBottom: 10,
                   border: '1px lightgray solid',
                   boxShadow: '0px 3px 3px lightgray',
-                  marginTop: 20,
                   marginBottom: 5
                   }}>
                   <input
@@ -244,7 +244,6 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                 </button></div></div>
               </div>
 
-              <div id="card-modal-activities" style={{height: button.display? 242 : 280, maxHeight: button.display? 242 : 280, overflowX: 'auto'}}>
                 {card !== undefined
                   ? card.activities.reverse().map((data, index) => (
                     <Activity
