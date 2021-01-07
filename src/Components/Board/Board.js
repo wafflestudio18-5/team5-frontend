@@ -67,6 +67,14 @@ function Board({
     setListInput("");
   };
 
+  const [boardName, setBoardName] = useState({content: undefined, edit: false, save: false})
+  useEffect(() => {
+    apis.board
+    .put({ id: board.id, name: boardName.content })
+    .then((response) => console.log(response))
+    .catch((err) => console.log(err));
+  }, [boardName.save])
+
   const eUsers = inviteInput
   ? userList.filter(item => !users.find(it => it.id === item.id)).filter((item) => item.username.includes(inviteInput)).slice(0, 7)
   : userList.filter(item => !users.find(it => it.id === item.id)).slice(0, 7);
@@ -122,7 +130,12 @@ function Board({
               <option value="Calendar">Calendar</option>
               <option value="Map">Map</option>
             </select>
-            <h3 id="board-name">{board.name}</h3>
+            {boardName.edit? 
+            <input value={boardName.content} onChange={(e) => setBoardName({...boardName, content: e.target.value})}
+              onBlur={(e) => setBoardName({...boardName, edit: false, save: !(boardName.save)})}
+              onKeyPress={(e) => (e.key === 'Enter')? setBoardName({...boardName, edit: false, save: !(boardName.save)}) : null}
+            />: 
+            <h3 onClick={(e) => setBoardName({...boardName, edit: true, content: board.name})} id="board-name">{board.name}</h3>}
             <button id="board-header-star">☆</button>
             <div className="board-header-vertical-line" />
             <button>
