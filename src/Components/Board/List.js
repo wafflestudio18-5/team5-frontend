@@ -3,7 +3,7 @@ import Card from "./Card.js";
 import apis from '../../Library/Apis';
 import "./List.css";
 
-function List({ board, data, postCard, deleteCard, postActivity, putActivity, deleteActivity }) {
+function List({ board, data, postCard, putCard, deleteCard, postActivity, putActivity, deleteActivity }) {
   const newCardButton = useRef();
   const newCardInput = useRef();
   const scrollRef = useRef();
@@ -92,6 +92,7 @@ function List({ board, data, postCard, deleteCard, postActivity, putActivity, de
             board_key={board.key} 
             board_name={board.name} 
             board_id={board.id} 
+            putCard={putCard}
             deleteCard={deleteCard}
             postActivity={postActivity}
             putActivity={putActivity}
