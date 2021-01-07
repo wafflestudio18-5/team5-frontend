@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
 import apis from '../../Library/Apis';
 
-function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteActivity}) {
+function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteActivity, detail}) {
 
     const inputRef = useRef();
 
@@ -41,7 +41,7 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
 
     return (
         <div className="Activity" style={{display: 'flex', flexDirection: 'row', marginTop: 5, marginBottom: 5}}>
-            <img style={{height: 35, width: 35, borderRadius: '50%', marginBottom: 15, marginRight: 10, position: 'relative', top: 10, left: 2}} src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" alt={String(data.id)}/> {/*TODO 프사설정*/}
+            {(data.is_comment || detail) ? <img style={{height: 35, width: 35, borderRadius: '50%', marginBottom: 15, marginRight: 10, position: 'relative', top: 10, left: 2}} src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" alt={String(data.id)}/> : null}
             {data.is_comment ?
         
                 <><div style={button.editMode? null : {display: 'none'}}>
@@ -76,14 +76,15 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
                     <button className="ActivityCommentModify" onClick={editCommentClick}>Edit</button>
                     <span> · </span>
                     <button className="ActivityCommentModify" onClick={() => deleteActivity(data.id)}>Delete</button>
-                </div></>
+                </div>
+                </>
 
-            :   <p>
+            :  (detail? <p>
                     <span style={{fontWeight: 600, color: 'black', fontSize: 15, width: 'fit-content'}}>{data.creator} </span>
-                    {data.content}
+                    <span style={{fontSize: 15}}>{data.content}</span>
                     <br/>
-                    <span style={{color: 'gray', fontsize: 12, marginTop: 5}}>    {data.created_at.replace("T", "  ").replace("Z", "")}</span>
-                </p>}
+                    <span style={{color: 'gray', fontsize: 12, marginTop: 10}}>    {data.created_at.replace("T", "  ").replace("Z", "")}</span>
+                </p>:null)}
             {/* TODO 댓글이 아닐 경우 다른 방식으로... */}
         </div>
     )
