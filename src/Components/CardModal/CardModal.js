@@ -248,7 +248,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
               </div>
 
                 {card !== undefined
-                  ? card.activities.reverse().map((data, index) => (
+                  ? card.activities.slice().reverse().map((data, index) => (
                     <Activity
                       data={data}
                       refresh={refresh}
