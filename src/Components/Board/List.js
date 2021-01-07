@@ -79,8 +79,12 @@ function List({ board, data, postCard, putCard, deleteCard, postActivity, putAct
   //if (removed.id === data.id && !(removed.bool)) return null;
 
   return (
-    <div className={`board-list ${modalMode? "up" : ""}`}>
-      <div><h4 style={{wordBreak: "break-all"}}>{data.name}</h4><button id="board-list-delete" onClick={deleteList}>DELETE</button></div>
+    <div className={`board-list ${modalMode? "up" : ""}`} style={{display: 'flex', flexDirection: 'column'}}>
+      <div style={{display: 'float'}}>
+      <h4 style={{wordBreak: "break-all", float: 'left'}}>{data.name}</h4>
+      <button style={{float: 'right'}} id="board-list-delete" onClick={deleteList}>DELETE</button>
+      </div>
+
       <div className="board-cards" id={data.id} ref={scrollRef}>
         <div className={crtCard ? "board-cards-crtCard" : "board-cards-crtCard-x"}>
           {data.cards.map((card, index) => (
