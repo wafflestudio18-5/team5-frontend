@@ -277,10 +277,10 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
               </p>
               <button>+ Add Power-Ups</button>
               <p>Get unlimited Power-Ups, plus much more.</p>
-              <button>Upgrade Team</button>
+              <button style={{background: '#EDDBF4', paddingTop: 3}}><img style={{position: 'relative', top: 2, marginRight: 3}} src='https://api.iconify.design/octicon:heart-24.svg?height=14'/>Upgrade Team</button>
               <p>
                 <br />
-                BUTLER <span>NEW</span> <span style={{position: 'relative', top: 2, left: 40, content: "url('https://api.iconify.design/octicon:info-24.svg?height=15')", verticalAlign: '-0.125em'}}/>
+                BUTLER <span style={{color: 'green', background: '#D6ECD2', marginLeft: 3, padding: 3, paddingLeft: 7, paddingRight: 7, borderRadius: 10}}>NEW</span> <span style={{position: 'relative', top: 2, left: 30, content: "url('https://api.iconify.design/octicon:info-24.svg?height=15')", verticalAlign: '-0.125em'}}/>
               </p>
               <button>+ Add Card Button</button>
               <button style={{marginTop: 15, fontWeight: 600, border: '1px lightgray solid'}} onClick={() => deleteCardClick(card_id)}>
