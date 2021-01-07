@@ -4,11 +4,11 @@ import { useBoardContext, useUserContext } from "../../Contexts";
 import apis from '../../Library/Apis';
 
 function BoardPage({ match }) {
-  const { board, modal, fetchBoard } = useBoardContext();
+  const { board, modal, fetchBoardByKey } = useBoardContext();
   const { users } = useUserContext();
 
-  const fetch = async (match) => {
-    fetchBoard({ key: match.params.board_key });
+  const fetch = (match) => {
+    fetchBoardByKey({ key: match.params.board_key });
   };
 
   const postActivity = (cId, content) => {

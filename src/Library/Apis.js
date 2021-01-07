@@ -71,10 +71,11 @@ const apis = {
   },
   board: {
     // board
-    get: ({ id, key }) => {
-      if (id && key) return null;
-      if (id) return requester.get(`board/?id=${id}`);
-      if (key) return requester.get(`board/?key=${key}`);
+    getById: ({ id }) => {
+      return requester.get(`board/?id=${id}`);
+    },
+    getByKey: ({key}) => {
+      return requester.get(`board/?key=${key}`);
     },
     post: ({ name }) => {
       return requester.post("board/", { name });
@@ -83,7 +84,7 @@ const apis = {
       return requester.put("board/", { id, name, star });
     },
     delete: ({ id }) => {
-      return requester.delete("board/", { id });
+      return requester.delete("board/", {data: { id }});
     },
 
     // all boards
@@ -107,14 +108,14 @@ const apis = {
       return requester.put("list/", { board_id, list_id, name, prev_id });
     },
     delete: ({ id }) => {
-      return requester.delete("list/", { id });
+      return requester.delete("list/", { data: { id } });
     },
   },
   card: {
     get: ({ id, key }) => {
       if (id && key) return;
-      if (key) return requester.get(`card/?key=${key}`);
-      else return requester.get(`card/?id=${id}`);
+      if (key) return requester.get(`card/?key=${key}/`);
+      else return requester.get(`card/?id=${id}/`);
     },
     post: ({ name, list_id }) => {
       return requester.post("card/", { name, list_id });
@@ -131,7 +132,7 @@ const apis = {
       });
     },
     delete: ({ id }) => {
-      return requester.delete("card/", { id });
+      return requester.delete("card/", {data: { id }});
     },
   },
   activity: {
@@ -142,7 +143,7 @@ const apis = {
       return requester.put("activity/", { id, content });
     },
     delete: ({ id }) => {
-      return requester.delete("activity/", {data: { id: id }});
+      return requester.delete("activity/", {data: { id }});
     },
   },
 };
