@@ -51,6 +51,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
   };
 
   const [button, setButton] = React.useState({ display: false, green: false });
+  const [detail, setDetail] = React.useState(true);
   const [comment, setComment] = React.useState("");
   const changeComment = (e) => {
     setComment(e.target.value);
@@ -190,7 +191,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                 <p className="title" style={{float: 'left'}}>
                   Activity
                 </p>
-                <button style={{float: 'right', display: 'inline-block'}}>Hide Details</button>
+                <button onClick={(e) => setDetail(!detail)} style={{float: 'right', display: 'inline-block', width: 120}}>{detail? "Hide Details" : "Show Details"}</button>
               </div>
 
               <div id="card-modal-activities" style={{height: button.display? 242 : 280, maxHeight: button.display? 242 : 280, overflowX: 'auto', marginTop: 20}}>              
@@ -247,6 +248,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                       postActivity={postActivity}
                       putActivity={putActivity}
                       deleteActivity={deleteActivity}
+                      detail={detail}
                     />
                   ))
                 : null}
