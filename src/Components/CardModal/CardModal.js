@@ -138,26 +138,23 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
 
         <div id="card-modal">
           <div id="card-modal-top">
+          <div style={{display: 'float'}}>
             {!nameState.edit ? (
-              <p
-                style={{ fontWeight: 700, fontSize: 20 }}
-                onClick={() => setNameState({ ...nameState, edit: true })}
-              >
+              <p style={{ fontWeight: 700, fontSize: 20, float:'left' }}
+                onClick={() => setNameState({ ...nameState, edit: true })}>
                 {nameState.name}
               </p>
             ) : (
               <>
                   <input
-                  style={{ fontWeight: 700, fontSize: 20 }}
+                  style={{ fontWeight: 700, fontSize: 20, float: 'left' }}
                   value={nameState.name}
                   onChange={cardNameChange}
-                  onBlur={() =>
-                    nameState.edit ? changeName(card_id, nameState.name) : null
-                  }
+                  onBlur={() => nameState.edit ? changeName(card_id, nameState.name) : null}
                 />
               </>
             )}
-            <button id="card-modal-x" />
+            <button style={{ float: 'right', display: 'inline-block' }} id="card-modal-x" /></div>
             <p id="card-modal-listname">
               in list{" "}
               <span style={{ textDecoration: "underline" }}>{list_name}</span>
@@ -203,45 +200,53 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                 Activity
               </p>
               <button>Hide Details</button>
-              <p>TODO PIC</p>
-
-              <div style={{
-                backgroundColor: 'white', 
-                padding: 5, 
-                border: '1px lightgray solid',
-                boxShadow: '0px 3px 5px lightgray'
-                }}>
               
-              <div><input
-                value={comment}
-                onChange={changeComment}
-                onFocus={() => setButton({ ...button, display: true })}
-                onBlur={(e) =>
-                  e.target.value === ""
-                    ? setButton({ display: false, green: false })
-                    : null
-                }
-                id="card-comment"
-                placeholder="Write a comment..."
-              /></div>
-              <div><button
-                onClick={saveComment}
-                style={{
-                  display: button.display ? null : "none",
-                  backgroundColor: button.green ? "#5AAC44" : "lightgray",
-                  color: button.green ? "white" : "gray",
-                  marginTop: 5,
-                  marginLeft: 7,
-                  marginBottom: 5,
-                  width: 50,
-                  height: 30
-                }}
-              >
-                Save
-              </button></div></div>
-              <p>TODO 댓글목록 ul li ...</p>
-              {card !== undefined
-                ? card.activities.reverse().map((data, index) => (
+              <div style={{display: 'flex', flexDirection: 'row'}}>
+                <img style={{
+                  height: 35, width: 35, borderRadius: '50%', marginBottom: 15, marginRight: 10, position: 'relative', top: 25, left: 2}} 
+                  src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" alt={String(cardName)}/> {/*TODO 프사설정*/}
+                <div style={{
+                  backgroundColor: 'white', 
+                  padding: 5, 
+                  paddingBottom: 10,
+                  border: '1px lightgray solid',
+                  boxShadow: '0px 3px 3px lightgray',
+                  marginTop: 20,
+                  marginBottom: 5
+                  }}>
+                  <input
+                    value={comment}
+                    onChange={changeComment}
+                    onFocus={() => setButton({ ...button, display: true })}
+                    onBlur={(e) =>
+                      e.target.value === ""
+                        ? setButton({ display: false, green: false })
+                        : null
+                    }
+                    id="card-comment"
+                    placeholder="Write a comment..."
+                  />
+
+                <div><button
+                  onClick={saveComment}
+                  style={{
+                    display: button.display ? null : "none",
+                    backgroundColor: button.green ? "#5AAC44" : "lightgray",
+                    color: button.green ? "white" : "gray",
+                    marginTop: button.display? 7 : 0,
+                    marginLeft: button.display? 7 : 0,
+                    marginBottom: 0,
+                    width: 50,
+                    height: 30
+                  }}
+                >
+                  Save
+                </button></div></div>
+              </div>
+
+              <div id="card-modal-activities" style={{height: button.display? 242 : 280, maxHeight: button.display? 242 : 280, overflowX: 'auto'}}>
+                {card !== undefined
+                  ? card.activities.reverse().map((data, index) => (
                     <Activity
                       data={data}
                       refresh={refresh}
@@ -253,9 +258,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                     />
                   ))
                 : null}
-              <button onClick={() => deleteCardClick(card_id)}>
-                Delete Card
-              </button>
+              </div>
             </div>
 
             <div id="card-modal-right" style={{ columnWidth: 200 }}>
@@ -280,6 +283,9 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                 BUTLER <span>NEW</span> <span style={{position: 'relative', top: 2, left: 40, content: "url('https://api.iconify.design/octicon:info-24.svg?height=15')", verticalAlign: '-0.125em'}}/>
               </p>
               <button>+ Add Card Button</button>
+              <button style={{marginTop: 15, fontWeight: 600, border: '1px lightgray solid'}} onClick={() => deleteCardClick(card_id)}>
+                Delete Card
+              </button>
             </div>
           </div>
         </div>
