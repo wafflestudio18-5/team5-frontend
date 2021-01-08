@@ -5,17 +5,15 @@ const defaultBoard = {
   board: null,
   users: [],
   modal: false,
-  move: {
-    bool: false, // whether moving or not
-    mode: "", // "", "card", "list"
-    from: null, // card which is moving
-  },
+  move: false,
+  lInd: null,
   setModal: () => {},
   setMove: () => {},
   getBoardData: () => {},
   fetchUserList: () => {},
   fetchBoardById: () => {},
   fetchBoardByKey: () => {},
+  changeListPos: () => {},
 };
 
 const BoardContext = createContext(defaultBoard);
@@ -23,22 +21,11 @@ const BoardContext = createContext(defaultBoard);
 const BoardProvider = (props) => {
   const { children } = props;
 
-  const setMove = ({ bool, mode, from }) => {
-    if (bool) {
-      setState((state) => {
-        return {
-          ...state,
-          move: { bool: true, mode, from },
-        };
-      });
-    } else {
-      setState((state) => {
-        return {
-          ...state,
-          move: { bool: false, mode: "", from: null, to: null },
-        };
-      });
-    }
+  const setMove = (move) => {
+    setState((state) => ({
+      ...state,
+      move,
+    }));
   };
 
   const setModal = (e) => {
@@ -46,6 +33,24 @@ const BoardProvider = (props) => {
       ...state,
       modal: e,
     }));
+  };
+
+  const changeListPos = (i1, i2) => {
+    setState((state) => {
+      let tList = state.board.lists;
+      let temp = tList[i1];
+      tList[i1] = tList[i2];
+      tList[i2] = temp;
+
+      return {
+        ...state,
+        lInd: i2,
+        board: {
+          ...state.board,
+          lists: tList,
+        },
+      };
+    });
   };
 
   const getBoardData = () => state.board;
@@ -100,6 +105,7 @@ const BoardProvider = (props) => {
     fetchUserList,
     setModal,
     setMove,
+    changeListPos,
   };
 
   const [state, setState] = useState(boardState);

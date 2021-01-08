@@ -6,6 +6,8 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import List from "./List.js";
 import apis from "../../Library/Apis";
 import { useBoardContext } from "../../Contexts";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -70,15 +72,24 @@ function Board({
     setListInput("");
   };
 
-  const [boardName, setBoardName] = useState({content: undefined, edit: false, save: false, id: undefined})
+  const [boardName, setBoardName] = useState({
+    content: undefined,
+    edit: false,
+    save: false,
+    id: undefined,
+    dash: undefined,
+  });
+
   const onClickChangeName = () => {
     setBoardName({...boardName, edit: false});
+
     apis.board
-    .put({ id: boardName.id, name: boardName.content })
-    .then((response) => console.log(response))
-    .catch((err) => console.log(err));
+      .put({ id: boardName.id, name: boardName.content })
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
     if (boardName.content !== undefined) {
       window.history.pushState(
+
       {
         data:
           "바뀐 주소와 함께 저장할 데이터 객체가 이 첫 번째 파라미터. 바뀔 페이지의 정보들을 담아두고 클라이언트에서 정보를 활용해 새로운 페이지를 렌더링하면 된다. 정보는 history.state로 접근하면 된다.",
@@ -106,7 +117,8 @@ function Board({
       .then((response) => null)
       .catch(function (error) {
         if (error.response) {
-          console.log("요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다."
+          console.log(
+            "요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다."
           );
           console.log(error.response.data);
           console.log(error.response.status);
@@ -117,7 +129,8 @@ function Board({
           // Node.js의 http.ClientRequest 인스턴스입니다.
           console.log(error.request);
         } else {
-          console.log("오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다."
+          console.log(
+            "오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다."
           );
           console.log("Error", error.message);
         }
@@ -129,7 +142,9 @@ function Board({
   const toggleStar = (target) => {
     apis.board
       .put({ id: board.id, star: target })
-      .then((response) => {fetchBoardById({id: board.id})})
+      .then((response) => {
+        fetchBoardById({ id: board.id });
+      })
       .catch((err) => console.log(err));
   };
 
@@ -158,6 +173,7 @@ function Board({
               onKeyPress={(e) => (e.key === 'Enter')? onClickChangeName() : null}
             />: 
             <h3 style={{cursor: 'default'}} onClick={(e) => setBoardName({...boardName, edit: true, content: boardName.content !== undefined? boardName.content : board.name, id: board.id})} id="board-name">{boardName.content === undefined? board.name : boardName.content}</h3>}
+
             <button
               id="board-header-star"
               onClick={() => {
@@ -215,24 +231,63 @@ function Board({
                     />
                   </div>
 
-                  <div id="inviteUsers" style={{height: 280, background: 'white', overflowX: 'auto', position: 'relative', top: -5, paddingRight: eUsers.length > 4 ? 5 : 0}}>
-                  {eUsers.map((item, index) => {
-                    return (
-                      <>
-                      <div
-                        className="inviteUser"
-                        key={index}
-                        onClick={() => inviteMember(board.id, item.username)}
-                        style={{padding: 10, height: 'fit-content', textAlign: 'left', display: 'flex', flexDirection: 'row', marginTop: (index === 0? 1 : 5), marginBottom: (index === (eUsers.length - 1))? 1 : 5}}
-                      >
-                        <img style={{height: 25, width: 25, borderRadius: '50%', position: 'relative', top: 3, left: 3}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt={"profile"}/> 
-                        <p style={{position: 'relative', top: -7, marginLeft: 15, pontWeight: 300}}>{item.username}</p>
-                      </div>
-                      </>
-                    );
-                  })}
+                  <div
+                    id="inviteUsers"
+                    style={{
+                      height: 280,
+                      background: "white",
+                      overflowX: "auto",
+                      position: "relative",
+                      top: -5,
+                      paddingRight: eUsers.length > 4 ? 5 : 0,
+                    }}
+                  >
+                    {eUsers.map((item, index) => {
+                      return (
+                        <>
+                          <div
+                            className="inviteUser"
+                            key={index}
+                            onClick={() =>
+                              inviteMember(board.id, item.username)
+                            }
+                            style={{
+                              padding: 10,
+                              height: "fit-content",
+                              textAlign: "left",
+                              display: "flex",
+                              flexDirection: "row",
+                              marginTop: index === 0 ? 1 : 5,
+                              marginBottom: index === eUsers.length - 1 ? 1 : 5,
+                            }}
+                          >
+                            <img
+                              style={{
+                                height: 25,
+                                width: 25,
+                                borderRadius: "50%",
+                                position: "relative",
+                                top: 3,
+                                left: 3,
+                              }}
+                              src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png"
+                              alt={"profile"}
+                            />
+                            <p
+                              style={{
+                                position: "relative",
+                                top: -7,
+                                marginLeft: 15,
+                                pontWeight: 300,
+                              }}
+                            >
+                              {item.username}
+                            </p>
+                          </div>
+                        </>
+                      );
+                    })}
                   </div>
-
                 </div>
               ) : null}
             </div>
@@ -249,19 +304,22 @@ function Board({
         <div className={`board-main ${modal ? "up" : ""}`}>
           <div id="board-lists">
             <div id="board-temp">
-              {board.lists.map((data, index) => (
-                <List
-                  board={board}
-                  data={data}
-                  key={index}
-                  postCard={postCard}
-                  putCard={putCard}
-                  deleteCard={deleteCard}
-                  postActivity={postActivity}
-                  putActivity={putActivity}
-                  deleteActivity={deleteActivity}
-                />
-              ))}
+              <DndProvider backend={HTML5Backend}>
+                {board.lists.map((data, index) => (
+                  <List
+                    board={board}
+                    data={data}
+                    index={index}
+                    key={index}
+                    postCard={postCard}
+                    putCard={putCard}
+                    deleteCard={deleteCard}
+                    postActivity={postActivity}
+                    putActivity={putActivity}
+                    deleteActivity={deleteActivity}
+                  />
+                ))}
+              </DndProvider>
 
               <div>
                 <button id="board-addlist" onClick={() => setCrtList(true)}>
