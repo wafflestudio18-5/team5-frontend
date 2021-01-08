@@ -168,6 +168,7 @@ function List({ board, data, postCard, putCard, deleteCard, postActivity, putAct
                 className="addCard"
                 onChange={(e) => setCardInput(e.target.value)}
                 value={cardInput}
+                style={{fontSize: 15}}
                 ref={newCardInput}
                 placeholder="Enter a title for this card..."
                 onKeyPress={createCardEnter}
