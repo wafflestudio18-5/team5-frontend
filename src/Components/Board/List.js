@@ -193,7 +193,7 @@ function List({
     <div
       ref={ref}
       draggable="true"
-      style={{ display: "flex", flexDirection: "column" }}
+      style={{display: 'flex', flexDirection: 'column', cursor: 'pointer'}}
       className={`board-list ${modalMode ? "up" : ""} ${
         move.from && move.from.id === data.id ? "moving" : ""
       }`}
@@ -241,6 +241,7 @@ function List({
                 className="addCard"
                 onChange={(e) => setCardInput(e.target.value)}
                 value={cardInput}
+                style={{fontSize: 15}}
                 ref={newCardInput}
                 placeholder="Enter a title for this card..."
                 onKeyPress={createCardEnter}

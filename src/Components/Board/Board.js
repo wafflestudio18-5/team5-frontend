@@ -79,31 +79,33 @@ function Board({
     id: undefined,
     dash: undefined,
   });
-  useEffect(() => {
+
+  const onClickChangeName = () => {
+    setBoardName({...boardName, edit: false});
+
     apis.board
       .put({ id: boardName.id, name: boardName.content })
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
     if (boardName.content !== undefined) {
       window.history.pushState(
-        {
-          data:
-            "바뀐 주소와 함께 저장할 데이터 객체가 이 첫 번째 파라미터. 바뀔 페이지의 정보들을 담아두고 클라이언트에서 정보를 활용해 새로운 페이지를 렌더링하면 된다. 정보는 history.state로 접근하면 된다.",
-        },
-        "바꿀 제목",
-        boardName.dash
-      ); // 바꿀 주소 앞에 점 찍으면 상대 주소 됨. 우리는 해당 사항 없음
-    }
-  }, [boardName.save]);
+
+      {
+        data:
+          "바뀐 주소와 함께 저장할 데이터 객체가 이 첫 번째 파라미터. 바뀔 페이지의 정보들을 담아두고 클라이언트에서 정보를 활용해 새로운 페이지를 렌더링하면 된다. 정보는 history.state로 접근하면 된다.",
+      },
+      "바꿀 제목",
+      `/b/${String(board.id).padStart(8,'0')}/${boardName.content.replaceAll(" ", "-")}`
+    );
+  }
+}
 
   const eUsers = inviteInput
     ? userList
         .filter((item) => !users.find((it) => it.id === item.id))
         .filter((item) => item.username.includes(inviteInput))
-        .slice(0, 7)
     : userList
         .filter((item) => !users.find((it) => it.id === item.id))
-        .slice(0, 7);
 
   const deleteBoard = () => {
     apis.board
@@ -146,84 +148,32 @@ function Board({
       .catch((err) => console.log(err));
   };
 
-  if (!board) return <div className="board-wrapper">Loading...</div>;
+  if (!board) return <div className="board-wrapper"><img src="https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif"/></div>;
 
   return (
     <>
       {loading ? (
-        <div className="board-wrapper">Loading...</div>
+        <div className="board-wrapper"><img src="https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif"/></div>
       ) : (
-        <div className="board-wrapper anime">Loading...</div>
+        <div className="board-wrapper anime"><img src="https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif"/></div>
       )}
       <div id="Board-wrapper">
         <header id="board-header">
           <div id="board-header-left">
-            <select name="language" defaultValue="English (US)">
-              <option value="Board">Board</option>
-              <option value="Calendar">Calendar</option>
-              <option value="Map">Map</option>
+            <select style={{cursor: 'pointer'}} name="language" defaultValue="English (US)">
+              <option  style={{cursor: 'pointer'}} value="Board">Board</option>
+              <option style={{cursor: 'pointer'}}  value="Calendar">Calendar</option>
+              <option style={{cursor: 'pointer'}}  value="Map">Map</option>
             </select>
 
-            {boardName.edit ? (
-              <input
-                className="noOutline"
-                style={{
-                  paddingLeft: 10,
-                  paddingRight: 10,
-                  backgroundColor: "#35A7EE",
-                  color: "white",
-                  border: "0px transparent solid",
-                  outline: "none",
-                  fontWeight: 600,
-                  fontSize: 20,
-                  boxShadow: "none",
-                  width: "fit-content",
-                  borderRadius: 5,
-                  padding: 0,
-                }}
-                value={boardName.content}
-                onChange={(e) =>
-                  setBoardName({
-                    ...boardName,
-                    content: e.target.value,
-                    dash: e.target.value.replace(" ", "-"),
-                  })
-                }
-                onBlur={(e) =>
-                  setBoardName({
-                    ...boardName,
-                    edit: false,
-                    save: !boardName.save,
-                  })
-                }
-                onKeyPress={(e) =>
-                  e.key === "Enter"
-                    ? setBoardName({
-                        ...boardName,
-                        edit: false,
-                        save: !boardName.save,
-                      })
-                    : null
-                }
-              />
-            ) : (
-              <h3
-                onClick={(e) =>
-                  setBoardName({
-                    ...boardName,
-                    edit: true,
-                    content: board.name,
-                    dash: board.name.replace(" ", "-"),
-                    id: board.id,
-                  })
-                }
-                id="board-name"
-              >
-                {boardName.content === undefined
-                  ? board.name
-                  : boardName.content}
-              </h3>
-            )}
+            {boardName.edit? 
+            <input className="noOutline" style={{paddingLeft:15, fontSize: 16, paddingRight: 10, backgroundColor: '#35A7EE', color: 'white', border: '0px transparent solid', outline: 'none', fontWeight: 600, fontSize: 20, boxShadow: 'none', width: 'fit-content', borderRadius: 5, padding: 0}}
+              value={boardName.content} onChange={(e) => setBoardName({...boardName, content: e.target.value})}
+              onBlur={onClickChangeName}
+              onKeyPress={(e) => (e.key === 'Enter')? onClickChangeName() : null}
+            />: 
+            <h3 style={{cursor: 'default'}} onClick={(e) => setBoardName({...boardName, edit: true, content: boardName.content !== undefined? boardName.content : board.name, id: board.id})} id="board-name">{boardName.content === undefined? board.name : boardName.content}</h3>}
+
             <button
               id="board-header-star"
               onClick={() => {
@@ -234,14 +184,31 @@ function Board({
             </button>
             <div className="board-header-vertical-line" />
             <button>
-              {board.name}
+              {boardName.content !== undefined? boardName.content : board.name}
               <span id="board-header-freeboard">Free</span>
             </button>
             <div className="board-header-vertical-line" />
             <button>Private</button>
             <div className="board-header-vertical-line" />
-            <div id="board-profile-images">
-              <p>프사들동글동글</p>
+
+            <div id="board-profile-images" style={{display: 'flex', flexDirection: 'row', height: 28}}>
+             {eUsers.slice(0, 5).map((item, index) => {
+                    return (<img style={{width: 28, height: 28, borderRadius: '50%'}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt="profile"/>)
+              })}
+            <div style={{
+              display: eUsers.length > 5 ? null : 'none', 
+              width: 'fit-content', 
+              height: 28,
+              borderRadius: '50%',
+              backgroundColor: '#35A7EE',
+              fontSize: 12,
+              paddingLeft: 0,
+              paddingRight: 5,
+              position: 'relative',
+              top: 0
+              }}>
+                <p>+{eUsers.length - 5}</p>
+              </div>
             </div>
             <div className="invite-wrapper">
               <button className="inviteButton" onClick={toggleInvite}>
@@ -362,6 +329,7 @@ function Board({
                   <div className="crtList">
                     <input
                       placeholder="Enter list title..."
+                      style={{fontSize: 15, fontWeight: 600, outline: 'none'}}
                       onChange={(e) => setListInput(e.target.value)}
                       value={listInput}
                     />
