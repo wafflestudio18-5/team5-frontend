@@ -267,6 +267,7 @@ function List({
         />
         </div>
     </div>
+    </div>
   );
 }
 
