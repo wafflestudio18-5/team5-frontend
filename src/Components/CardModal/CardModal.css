@@ -227,9 +227,29 @@ textarea {
 #DUEDATE input {
     outline: none !important;
     border: transparent !important;
+    font-weight: 600;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #DUEDATE div {
     border: transparent !important;
     z-index: 900;
+}
+
+#DUEDATE svg {
+    display: none;
+}
+
+button.react-date-picker__clear-button.react-date-picker__button {
+    display: none;
+}
+
+#NOBUTTON > div > div > button.react-date-picker__calendar-button.react-date-picker__button {
+    display: none;
+}
+
+#DUEDATE select {
+    background-color: #F4F5F7 !important;
+    outline: none !important;
+    color: black !important;
 }
