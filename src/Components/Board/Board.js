@@ -72,7 +72,7 @@ function Board({
 
   const [boardName, setBoardName] = useState({content: undefined, edit: false, save: false, id: undefined})
   const onClickChangeName = () => {
-    setBoardName({...boardName, edit: false);
+    setBoardName({...boardName, edit: false});
     apis.board
     .put({ id: boardName.id, name: boardName.content })
     .then((response) => console.log(response))
@@ -84,7 +84,7 @@ function Board({
           "바뀐 주소와 함께 저장할 데이터 객체가 이 첫 번째 파라미터. 바뀔 페이지의 정보들을 담아두고 클라이언트에서 정보를 활용해 새로운 페이지를 렌더링하면 된다. 정보는 history.state로 접근하면 된다.",
       },
       "바꿀 제목",
-      boardName.content.replaceAll(" ", "-")
+      `/b/${String(board.id).padStart(8,'0')}/${boardName.content.replaceAll(" ", "-")}`
     );
   }
 }
@@ -135,16 +135,16 @@ function Board({
       .catch((err) => console.log(err));
   };
 
-  if (!board) return <div className="board-wrapper">Loading...</div>;
+  if (!board) return <div className="board-wrapper"><img src="https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif"/></div>;
 
   return (
     <>
       {loading ? (
-        <div className="board-wrapper">Loading...</div>
+        <div className="board-wrapper"><img src="https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif"/></div>
       ) : (
-        <div className="board-wrapper anime">Loading...</div>
+        <div className="board-wrapper anime"><img src="https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif"/></div>
       )}
-      <div id="Board-wrapper">
+      <div id="Board-wrapper" style={{cursor: 'hand'}}>
         <header id="board-header">
           <div id="board-header-left">
             <select name="language" defaultValue="English (US)">
@@ -154,12 +154,12 @@ function Board({
             </select>
 
             {boardName.edit? 
-            <input className="noOutline" style={{paddingLeft:10, paddingRight: 10, backgroundColor: '#35A7EE', color: 'white', border: '0px transparent solid', outline: 'none', fontWeight: 600, fontSize: 20, boxShadow: 'none', width: 'fit-content', borderRadius: 5, padding: 0}}
+            <input className="noOutline" style={{paddingLeft:15, fontSize: 16, paddingRight: 10, backgroundColor: '#35A7EE', color: 'white', border: '0px transparent solid', outline: 'none', fontWeight: 600, fontSize: 20, boxShadow: 'none', width: 'fit-content', borderRadius: 5, padding: 0}}
               value={boardName.content} onChange={(e) => setBoardName({...boardName, content: e.target.value})}
-              onBlur={(e) => setBoardName({...boardName, edit: false, save: !(boardName.save)})}
-              onKeyPress={(e) => (e.key === 'Enter')? setBoardName({...boardName, edit: false, save: !(boardName.save)}) : null}
+              onBlur={onClickChangeName}
+              onKeyPress={(e) => (e.key === 'Enter')? onClickChangeName() : null}
             />: 
-            <h3 onClick={(e) => setBoardName({...boardName, edit: true, content: board.name, id: board.id})} id="board-name">{boardName.content === undefined? board.name : boardName.content}</h3>}
+            <h3 style={{cursor: 'default'}} onClick={(e) => setBoardName({...boardName, edit: true, content: boardName.content !== undefined? boardName.content : board.name, id: board.id})} id="board-name">{boardName.content === undefined? board.name : boardName.content}</h3>}
             <button
               id="board-header-star"
               onClick={() => {
@@ -170,7 +170,7 @@ function Board({
             </button>
             <div className="board-header-vertical-line" />
             <button>
-              {board.name}
+              {boardName.content !== undefined? boardName.content : board.name}
               <span id="board-header-freeboard">Free</span>
             </button>
             <div className="board-header-vertical-line" />
