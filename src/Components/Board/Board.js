@@ -145,10 +145,10 @@ function Board({
       <div id="Board-wrapper">
         <header id="board-header">
           <div id="board-header-left">
-            <select style={{cursor: 'pointer'}} name="language" defaultValue="English (US)">
-              <option  style={{cursor: 'pointer'}} value="Board">Board</option>
-              <option style={{cursor: 'pointer'}}  value="Calendar">Calendar</option>
-              <option style={{cursor: 'pointer'}}  value="Map">Map</option>
+            <select style={{cursor: 'pointer', fontSize: 15}} name="language" defaultValue="English (US)">
+              <option  style={{cursor: 'pointer', fontSize: 15, marginTop: 3, marginBottom: 3}} value="Board">Board</option>
+              <option style={{cursor: 'pointer', fontSize: 15, marginTop: 3, marginBottom: 3}}  value="Calendar">Calendar</option>
+              <option style={{cursor: 'pointer', fontSize: 15, marginTop: 3, marginBottom: 3}}  value="Map">Map</option>
             </select>
 
             {boardName.edit? 
@@ -177,9 +177,10 @@ function Board({
 
             <div id="board-profile-images" style={{display: 'flex', flexDirection: 'row', height: 28}}>
              {eUsers.slice(0, 5).map((item, index) => {
-                    return (<img style={{width: 28, height: 28, borderRadius: '50%'}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt="profile"/>)
+                    return (<img style={{width: 28, height: 28, borderRadius: '50%', filter: 'saturate(0%)'}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt="profile"/>)
               })}
             <div style={{
+              cursor: 'default',
               display: eUsers.length > 5 ? null : 'none', 
               width: 'fit-content', 
               height: 28,
