@@ -3,7 +3,13 @@ import "./CardModal.css";
 import Activity from "./Activity.js";
 import apis from '../../Library/Apis';
 import ReactMarkdown from 'react-markdown';
+import TimePicker from 'react-time-picker';
+import DatePicker from 'react-date-picker'
 import { useBoardContext } from "../../Contexts";
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
+import 'react-time-picker/dist/TimePicker.css';
+import 'react-clock/dist/Clock.css';
 
 function CardModal({
   cardName,
@@ -140,6 +146,9 @@ function CardModal({
     );
   };
   // Due Date 추가하기
+  const [due, setDue] = useState({button: false, calendar: false, clock: false});
+  const [date, setDate] = useState(undefined);
+  const [time, setTime] = useState(undefined);
   const addDuedate = () => {
     alert(
       "[ERROR] NO ACTIVITY PREPARED EXCEPT COMMENTS\n(Failed to add Due Date)"
@@ -238,7 +247,7 @@ function CardModal({
                   }
                 />
               ) : description.content ? (
-                  <ReactMarkdown>
+                  <ReactMarkdown onCLick={() => setDescription({...description, edit: false})}>
                     {description.content}
                   </ReactMarkdown> 
               ) : (
@@ -343,17 +352,50 @@ function CardModal({
                 <br />
                 ADD TO CARD
               </p>
-              <button onClick={addMember}>Members</button>
-              <button>Labels</button>
-              <button>Checklist</button>
-              <button onClick={addDuedate}>Due Date</button>
+              <button className="nodt" onClick={addMember}>Members</button>
+              <button className="nodt" >Labels</button>
+              <button className="nodt" >Checklist</button>
+              <button  className="nodt" 
+              onClick={() => setDue({button: true, date: true, clock: false})}
+              style={due.button? {filter: 'brightness(95%)'} : null}
+              >Due Date</button>
+              {due.button? 
+              <div id="DUEDATE" style={{backgroundColor: '#F4F5F7', zIndex: 900, fontSize: 15}}>
+
+              {due.date
+              ?<div style={{display: 'flex', flexDirection: 'column'}}>
+              <div id="NOBUTTON">
+              <DatePicker
+              autoFocus={true}
+              onChange={setDate}
+              value={date}
+              closeCalendar={() => setDue({button: true, date: false, time: true})}
+              /></div>
+              <button onClick={() => setDue({button: true, time: true, date: false})}>OK</button></div>
+
+              :<div style={{display: 'flex', flexDirection: 'column'}}>
+              <div id="NOBUTTON">
+              <TimePicker
+              onChange={setTime}
+              value={time}
+              closeClock={() => setDue({button: true, date: false, time: false})}
+              /></div>
+              <button onClick={() => setDue({button: false, time: false, date: false})}>Save</button>
+              <button onClick={() => setDue({button: false, time: false, date: false})}>Close</button>
+              </div>}
+
+
+              </div> 
+              : null}
+              
+             
               <p>
                 <br />
                 POWER-UPS
               </p>
-              <button>+ Add Power-Ups</button>
+              <button className="nodt" >+ Add Power-Ups</button>
               <p>Get unlimited Power-Ups, plus much more.</p>
-              <button style={{ background: "#EDDBF4", paddingTop: 3 }}>
+              <button className="nodt"  style={{ background: "#EDDBF4", paddingTop: 3 }}>
                 <img
                   style={{ position: "relative", top: 2, marginRight: 3 }}
                   src="https://api.iconify.design/octicon:heart-24.svg?height=14"
@@ -387,8 +429,8 @@ function CardModal({
                   }}
                 />
               </p>
-              <button>+ Add Card Button</button>
-              <button
+              <button className="nodt" >+ Add Card Button</button>
+              <button className="nodt" 
                 style={{
                   marginTop: 15,
                   fontWeight: 600,

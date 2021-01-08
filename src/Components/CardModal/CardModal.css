@@ -70,7 +70,7 @@
     flex-direction: column;
 }
 
-#card-modal-right button {
+#card-modal-right button.nodt {
     width: 135px !important;
     align-items: flex-start;
     position: relative;
@@ -191,4 +191,35 @@ textarea {
   background-color: #DADBE2;
   border-radius: 10px;
   width: 10px !important;
+}
+
+#DateTimePicker {
+    outline: none;
+    border: 1px transparent solid;
+}
+
+#DateTimePicker button {
+    width: 20 !important;
+    height: min-content !important;
+}
+#DateTimePicker button:focus {
+    background-color: aquamarine !important;
+}
+
+#DateTimePicker input {
+    outline: none !important;
+    border: transparent;
+}
+
+#DUEDATE button {
+    width: 0px !important;
+    outline: none !important;
+    border: transparent !important;
+    align-content: center;
+}
+
+#DUEDATE {
+    border: 1px transparent solid;
+    width: 135px !important;
+    outline: none;
 }

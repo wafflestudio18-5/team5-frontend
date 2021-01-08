@@ -266,7 +266,7 @@ function List({
           onClick={deleteList}
         />
         </div>
-    </div>
+    </div></div>
   );
 }
 
