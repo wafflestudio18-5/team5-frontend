@@ -96,14 +96,22 @@
     font-size: 12px;
 }
 
-#card-modal-x {
-  background: url('https://api.iconify.design/octicon:x-16.svg') no-repeat center center / contain;
-  width: 25px;
+.card-modal-x {
+  width: 35px;
+  height: 35px;
   margin: 0px;
+  font-size: 35px;
+  color: black;
+  background: transparent;
 }
 
-#card-modal-x:focus {
+.card-modal-x:focus {
   outline: none;
+}
+
+.card-modal-x:hover {
+    filter: brightness(100%) !important;
+    background: transparent !important;
 }
 
 #card-modal p.title {
