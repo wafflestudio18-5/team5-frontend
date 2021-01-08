@@ -43,34 +43,50 @@ button.moveButton {
   background-color: #DADBE2;
 }
 
-.board-cards {
-  overflow-y: auto;
-}
-
-.board-cards::-webkit-scrollbar {
+.board-cards-crtCard::-webkit-scrollbar {
   background-color: transparent;
   width: 10px !important;
   border-radius: 10px;
 }
 
-.board-cards::-webkit-scrollbar-thumb {
+.board-cards-crtCard::-webkit-scrollbar-thumb {
   background-color: #c5c5c5;
   border-radius: 10px;
   width: 10px !important;
 }
 
-.board-cards::-webkit-scrollbar-track {
+.board-cards-crtCard::-webkit-scrollbar-track {
+  background-color: #DADBE2;
+  border-radius: 10px;
+  width: 10px !important;
+}
+
+.board-cards-crtCard-x::-webkit-scrollbar {
+  background-color: transparent;
+  width: 10px !important;
+  border-radius: 10px;
+}
+
+.board-cards-crtCard-x::-webkit-scrollbar-thumb {
+  background-color: #c5c5c5;
+  border-radius: 10px;
+  width: 10px !important;
+}
+
+.board-cards-crtCard-x::-webkit-scrollbar-track {
   background-color: #DADBE2;
   border-radius: 10px;
   width: 10px !important;
 }
 
 .board-cards-crtCard {
-  max-height: calc(100vh - 180px) !important;
+  max-height: calc(100vh - 302px) !important;
+  overflow-y: auto;
 }
 
 .board-cards-crtCard-x {
-  max-height: calc(100vh - 215px) !important;
+  max-height: calc(100vh - 214px) !important;
+  overflow-y: auto;
 }
 
 .crtCard button #AddCard:hover {
@@ -85,7 +101,6 @@ button.moveButton {
 #crtCard_inputWrapper {
   background-color: white;
   padding: 10px;
-  padding-bottom: 30px;
   margin-top: 10px;
   margin-right: 5px;
   margin-bottom: 5px;
@@ -137,3 +152,17 @@ input.addcard {
   right: 10px;
 }
 
+.crtCard textarea::-webkit-scrollbar {
+  background-color: transparent;
+  width: 0px !important;
+}
+
+.crtCard textarea::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  width: 0px !important;
+}
+
+.crtCard textarea::-webkit-scrollbar-track {
+  background-color: transparent;
+  width: 0px !important;
+}
