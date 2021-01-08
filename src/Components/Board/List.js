@@ -29,9 +29,7 @@ function List({
   const [removed, setRemoved] = useState({ id: data.id, bool: false });
   const [modalMode, setModalMode] = useState(false);
   const {
-    move,
     lInd,
-    setMove,
     fetchBoardById,
     changeListPos,
   } = useBoardContext();
@@ -40,7 +38,6 @@ function List({
   const [, drop] = useDrop({
     accept: "list",
     hover(item, monitor) {
-      if (!move) setMove(true);
       if (!ref.current) return;
 
       const dragIndex = item.index;
@@ -166,9 +163,7 @@ function List({
       ref={ref}
       draggable="true"
       style={{ display: "flex", flexDirection: "column", cursor: "pointer" }}
-      className={`board-list ${modalMode ? "up" : ""} ${
-        move.from && move.from.id === data.id ? "moving" : ""
-      }`}
+      className={`board-list ${modalMode ? "up" : ""}`}
     >
       <div style={{ display: "float" }}>
         <h4 style={{ wordBreak: "break-all", float: "left" }}>{data.name}</h4>
@@ -193,6 +188,7 @@ function List({
             {data.cards.map((card, index) => (
               <Card
                 list={data}
+                listIndex={index}
                 setModalMode={setModalMode}
                 card={card}
                 key={index}
