@@ -232,14 +232,14 @@ function List({
               putActivity={putActivity}
               deleteActivity={deleteActivity}
             />
-          ))}
+          ))}</div>
           <div className="crtCard" style={crtCard ? {cursor: 'text'} : { display: "none" }}>
-            <div id="crtCard_inputWrapper">
-              <input
+            <div id="crtCard_inputWrapper" style={{display: 'flex'}}>
+              <textarea
                 className="addCard"
                 onChange={(e) => setCardInput(e.target.value)}
                 value={cardInput}
-                style={{fontSize: 15}}
+                style={{fontSize: 15, minHeight: 40, height: 'fit-content', overflowY: 'auto', width: 410}}
                 ref={newCardInput}
                 placeholder="Enter a title for this card..."
                 onKeyPress={createCardEnter}
@@ -255,7 +255,6 @@ function List({
             </button>
             <button id="no_crtCard" onClick={no_crtCard}></button>
           </div>
-        </div>
       </div>
       <button
         style={crtCard ? { display: "none" } : {}}
