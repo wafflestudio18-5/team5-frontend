@@ -7,7 +7,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import "./List.css";
 import { useBoardContext } from "../../Contexts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLevelDownAlt, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+import { faLevelDownAlt, faEllipsisV, faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -29,6 +29,7 @@ function List({
   const [cardInput, setCardInput] = useState("");
   const [removed, setRemoved] = useState({ id: data.id, bool: false });
   const [modalMode, setModalMode] = useState(false);
+  const [options, setOptions] = useState(false);
   const {
     move,
     lInd,
@@ -179,6 +180,8 @@ function List({
       className={`board-list ${modalMode ? "up" : ""}`}
     >
       <div className="board-list-headers" style={{ display: "float" }}>
+        <button className={`modify ${options}`}><FontAwesomeIcon icon={faEdit}/></button>
+        <button className={`delete ${options}`}><FontAwesomeIcon icon={faTrash}/></button>
         <button className="list-down" onClick={() => onMoveCardToHere()}>
           <FontAwesomeIcon icon={faLevelDownAlt} />
         </button>
@@ -186,7 +189,8 @@ function List({
           className={`list-down ${
             move.bool && data.cards.length === 0 ? "visible" : "invisible"
           }`}
-        >{move.bool ?null:<FontAwesomeIcon icon={faEllipsisV}/>}</span>
+          onClick={() => setOptions(!options)}
+        >{move.bool ?null:<FontAwesomeIcon className={`optionIcon ${options}`} icon={faEllipsisV}/>}</span>
         <h4 style={{ wordBreak: "break-all", float: "left" }}>{data.name}</h4>
       </div>
       <div className="board-cards" id={data.id} ref={scrollRef}>

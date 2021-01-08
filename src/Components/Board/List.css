@@ -59,8 +59,53 @@ button.moveButton {
   text-align: center;
 }
 
-.board-list span.list-down svg {
+/* 옵션창 관련 */
+
+button.modify {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 5px;
+  transition: 0.3s;
+  background-color: rgb(36, 13, 154);
+  color: white;
+}
+
+button.modify.true {
+  right: 65px;
+}
+
+button.modify.false {
+  right: 5px;
+}
+
+button.delete {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 5px;
+  transition: 0.3s;
+  background-color: rgb(169, 0, 0);
+  color: white;
+}
+
+button.delete.true {
+  right: 35px;
+}
+
+button.delete.false {
+  right: 5px;
+}
+
+.board-list span.list-down svg.optionIcon {
   margin-top: 7px;
+  width: 16px;
+  height: 16px;
+  transition: 0.3s;
+}
+
+.board-list span.list-down svg.optionIcon.true {
+  transform: rotate(-90deg);
 }
 
 .board-list span.list-down.visible {
