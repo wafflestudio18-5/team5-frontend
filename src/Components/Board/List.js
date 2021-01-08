@@ -7,7 +7,12 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import "./List.css";
 import { useBoardContext } from "../../Contexts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLevelDownAlt, faEllipsisV, faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLevelDownAlt,
+  faEllipsisV,
+  faTrash,
+  faEdit,
+} from "@fortawesome/free-solid-svg-icons";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -30,6 +35,8 @@ function List({
   const [removed, setRemoved] = useState({ id: data.id, bool: false });
   const [modalMode, setModalMode] = useState(false);
   const [options, setOptions] = useState(false);
+  const [newName, setNewName] = useState("");
+  const [modifying, setModifying] = useState(false);
   const {
     move,
     lInd,
@@ -172,6 +179,19 @@ function List({
       .catch((err) => console.log(err));
   };
 
+  const modifyList = () => {
+    setOptions(false);
+    setModifying(true);
+    setNewName(data.name);
+  };
+
+  const modifyName = () => {
+    apis.list
+      .put({ list_id: data.id, name: newName })
+      .then(response => {setModifying(false); fetchBoardById({id: board.id})})
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div
       ref={ref}
@@ -180,8 +200,12 @@ function List({
       className={`board-list ${modalMode ? "up" : ""}`}
     >
       <div className="board-list-headers" style={{ display: "float" }}>
-        <button className={`modify ${options}`}><FontAwesomeIcon icon={faEdit}/></button>
-        <button className={`delete ${options}`}><FontAwesomeIcon icon={faTrash}/></button>
+        <button onClick={modifyList} className={`modify ${options}`}>
+          <FontAwesomeIcon icon={faEdit} />
+        </button>
+        <button onClick={deleteList} className={`delete ${options}`}>
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
         <button className="list-down" onClick={() => onMoveCardToHere()}>
           <FontAwesomeIcon icon={faLevelDownAlt} />
         </button>
@@ -189,9 +213,30 @@ function List({
           className={`list-down ${
             move.bool && data.cards.length === 0 ? "visible" : "invisible"
           }`}
-          onClick={() => setOptions(!options)}
-        >{move.bool ?null:<FontAwesomeIcon className={`optionIcon ${options}`} icon={faEllipsisV}/>}</span>
-        <h4 style={{ wordBreak: "break-all", float: "left" }}>{data.name}</h4>
+          onClick={() => {
+            if (!modifying) setOptions(!options);
+          }}
+        >
+          {move.bool ? null : (
+            <FontAwesomeIcon
+              className={`optionIcon ${options}`}
+              icon={faEllipsisV}
+            />
+          )}
+        </span>
+        {modifying ? (
+          <input
+            className="modifyInput"
+            value={newName}
+            placeholder="enter new name"
+            onChange={(e) => setNewName(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") modifyName();
+            }}
+          />
+        ) : (
+          <h4 style={{ wordBreak: "break-all", float: "left" }}>{data.name}</h4>
+        )}
       </div>
       <div className="board-cards" id={data.id} ref={scrollRef}>
         <div
@@ -258,20 +303,6 @@ function List({
           >
             <span id="board-addcard-plus">十 </span>Add another card
           </button>
-          <button
-            style={{
-              float: "right",
-              width: "25px",
-              position: "relative",
-              top: 2,
-              left: -4,
-              border: "pink 1px solid",
-              background:
-                "url('https://api.iconify.design/octicon:trash-24.svg') no-repeat center center",
-            }}
-            id="board-list-delete"
-            onClick={deleteList}
-          />
         </div>
       </div>
     </div>

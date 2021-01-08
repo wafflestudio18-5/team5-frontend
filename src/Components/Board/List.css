@@ -59,6 +59,18 @@ button.moveButton {
   text-align: center;
 }
 
+div.board-list-headers input.modifyInput {
+  background-color: transparent;
+  border: 1px solid lightslategray;
+  border-radius: 5px;
+  padding-inline-start: 8px;
+  width: 200px;
+  height: 20px;
+  line-height: 20px;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
 /* 옵션창 관련 */
 
 button.modify {
@@ -67,7 +79,7 @@ button.modify {
   height: 30px;
   top: 5px;
   transition: 0.3s;
-  background-color: rgb(36, 13, 154);
+  background-color: rgb(62, 39, 174);
   color: white;
 }
 
