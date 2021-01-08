@@ -23,7 +23,7 @@ function Card({
   const key = card.key;
   const dashedName = card.name.replaceAll(" ", "-");
   const cardPath = "/c/" + key + "/" + String(card.id) + "-" + dashedName;
-  const boardPath = "/b/" + board_key + "/" + board_name;
+  const boardPath = `/b/${String(board_id).padStart(8,'0')}/${board_name}`;
   const { setModal } = useBoardContext();
   const [cardName, setCardName] = useState(card.name);
   const { move, setMove, fetchBoardById } = useBoardContext();
