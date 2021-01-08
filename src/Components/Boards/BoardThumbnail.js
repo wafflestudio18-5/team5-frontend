@@ -37,7 +37,7 @@ const BoardThumbnail = ({ id, name, boardKey, star, refreshBoards }) => {
 
   return (
     <li className={`board-wrapper ${anime}`} onClick={goToBoard}>
-      {anime ? "Loading..." : name}
+      {anime ? <img src="https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif"/> : name}
       {anime ? null : (
         <FontAwesomeIcon
           className={`starIcon ${st}`}
