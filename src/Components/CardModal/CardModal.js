@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./CardModal.css";
 import Activity from "./Activity.js";
 import apis from '../../Library/Apis';
+import ReactMarkdown from 'react-markdown';
 
 function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, board_id, putCard, deleteCard, postActivity, putActivity, deleteActivity }) {
   const [card, setCard] = useState(undefined);
@@ -178,12 +179,9 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                   />
                 ) : ((description.content !== "" && description.content !== undefined) ? (
                   
-                  <>
-                  <p >
+                  <ReactMarkdown>
                     {description.content}
-                  </p>
-                  </>
-                
+                  </ReactMarkdown>               
                 )
                : (
                 <button
