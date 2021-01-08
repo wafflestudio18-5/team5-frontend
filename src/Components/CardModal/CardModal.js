@@ -362,7 +362,7 @@ function CardModal({
               <button className="nodt" >Checklist</button>
               
               
-              <div style={{display: 'flex', flexDirection: 'row'}}>
+              <div style={{display: 'flex', flexDirection: 'row'}} onClick={(e) => {console.log(e.target)}}>
               <button  className="nodt" 
               onClick={() => setDue({button: true, date: true, clock: false})}
               style={due.button? {filter: 'brightness(95%)'} : null}
@@ -374,7 +374,6 @@ function CardModal({
               ?<div style={{display: 'flex', flexDirection: 'column'}}>
               <div id="NOBUTTON">
               <DatePicker
-              onClick={(e) => {console.log(e.target)}}
               autoFocus={true}
               onChange={setDate}
               value={date}
