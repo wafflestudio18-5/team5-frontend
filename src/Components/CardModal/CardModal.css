@@ -73,6 +73,7 @@
 #card-modal-right button {
     width: 135px !important;
     align-items: flex-start;
+    position: relative;
     margin: 3px;
 }
 

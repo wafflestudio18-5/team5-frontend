@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./CardModal.css";
 import Activity from "./Activity.js";
 import apis from "../../Library/Apis";
+import { useBoardContext } from "../../Contexts";
 
 function CardModal({
   cardName,
-  setCardName,
   card_key,
   card_id,
   exit,
@@ -20,6 +20,7 @@ function CardModal({
   const [card, setCard] = useState(undefined);
   const [nameState, setNameState] = useState({ name: cardName, edit: false });
   const [refresh, setRefresh] = useState(false);
+  const { fetchBoardById } = useBoardContext();
 
   function getCard() {
     apis.card
@@ -94,7 +95,7 @@ function CardModal({
   const changeName = (card_id, name) => {
     apis.card
       .put({ id: card_id, name })
-      .then(function (response) {})
+      .then((response) => fetchBoardById({id: board_id}))
       .catch(function (error) {
         if (error.response) {
           console.log(
@@ -118,7 +119,6 @@ function CardModal({
       });
 
     setNameState({ ...nameState, edit: false });
-    setCardName(nameState.name); // 리스트 화면에 보이는 카드 이름 변경
   };
 
   //Description 추가 및 변경하기

@@ -150,16 +150,6 @@ div.board-wrapper.anime {
   margin-top: 10px;
 }
 
-.board-card {
-  background-color: white;
-  position: relative;
-  padding: 10px;
-  margin-right: 5px;
-  border-radius: 3px;
-  box-shadow: 0px 2px 2px lightgray;
-  z-index: 0;
-}
-
 svg.star {
   stroke-width: 30;
   stroke: white;
@@ -171,22 +161,6 @@ svg.star.true path {
 
 svg.star.false path {
   fill: none;
-}
-
-.board-card-wrapper {
-  position: relative;
-}
-
-.board-card:hover {
-  filter: brightness(97%);
-}
-
-button.moveButton#card {
-  position: absolute;
-  right: 10px;
-  width: 30px !important;
-  height: 30px;
-  top: 10px;
 }
 
 #board-lists button#board-addlist {
