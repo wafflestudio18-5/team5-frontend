@@ -19,7 +19,13 @@ function CardModal({
 }) {
   const [card, setCard] = useState(undefined);
   const [nameState, setNameState] = useState({ name: cardName, edit: false });
-  const [refresh, setRefresh] = useState(false);
+  
+  //Description 추가 및 변경하기
+  const [description, setDescription] = useState({
+    exist: false,
+    content: undefined,
+    edit: false,
+  });
 
   function getCard() {
     apis.card
@@ -54,7 +60,7 @@ function CardModal({
 
   useEffect(() => {
     getCard();
-  }, [refresh]);
+  }, []);
 
   const exitIfNotModal = (e) => {
     if (
@@ -144,6 +150,14 @@ function CardModal({
       "[ERROR] NO ACTIVITY PREPARED EXCEPT COMMENTS\n(Failed to add Due Date)"
     );
   };
+
+  const activities = useRef();
+
+  const changeDescription = () => {
+      if (description.content === "") setDescription({...description, edit: false});
+      else setDescription({...description, exist: true, edit: false});
+      putCard({cId: card_id, description: description});
+  }
 
   return (
     <div
