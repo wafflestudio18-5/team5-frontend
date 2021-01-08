@@ -44,7 +44,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
     if (
       e.target.id.includes("card-modal-wrapper") ||
       e.target.className === "blank-for-card-modal" ||
-      e.target.id === "card-modal-x"
+      e.target.id === "exit"
     ) {
       exit();
     }
@@ -143,14 +143,14 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
             ) : (
               <>
                   <input
-                  style={{ fontWeight: 700, fontSize: 20, float: 'left' }}
+                  style={{ fontWeight: 700, fontSize: 20, float: 'left', marginBottom: 3 }}
                   value={nameState.name}
                   onChange={cardNameChange}
                   onBlur={() => nameState.edit ? changeName(card_id, nameState.name) : null}
                 />
               </>
             )}
-            <button style={{ float: 'right', display: 'inline-block' }} id="card-modal-x" /></div>
+            <button style={{ float: 'right', display: 'inline-block' }} className="card-modal-x" id="exit">×</button></div>
             <p id="card-modal-listname">
               in list{" "}
               <span style={{ textDecoration: "underline" }}>{list_name}</span>
@@ -221,7 +221,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                     placeholder="Write a comment..."
                   />
 
-                <div><button
+                <button
                   onClick={saveComment}
                   style={{
                     display: button.display ? null : "none",
@@ -229,13 +229,13 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                     color: button.green ? "white" : "gray",
                     marginTop: button.display? 7 : 0,
                     marginLeft: button.display? 7 : 0,
-                    marginBottom: 5,
+                    marginBottom: 10,
                     width: 50,
                     height: 30
                   }}
                 >
                   Save
-                </button></div></div>
+                </button></div>
               </div>
 
                 {card !== undefined
