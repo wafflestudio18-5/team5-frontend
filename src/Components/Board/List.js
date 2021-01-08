@@ -3,6 +3,8 @@ import Card from "./Card.js";
 import apis from "../../Library/Apis";
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import { XYCoord } from "dnd-core";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import "./List.css";
 import { useBoardContext } from "../../Contexts";
 
@@ -28,9 +30,9 @@ function List({
   const [modalMode, setModalMode] = useState(false);
   const {
     move,
+    lInd,
     setMove,
     fetchBoardById,
-    lInd,
     changeListPos,
   } = useBoardContext();
 
@@ -39,51 +41,20 @@ function List({
     accept: "list",
     hover(item, monitor) {
       if (!move) setMove(true);
-      if (!ref.current) {
-        return;
-      }
+      if (!ref.current) return;
+
       const dragIndex = item.index;
       const hoverIndex = index;
 
-      // Don't replace items with themselves
-      if (dragIndex === hoverIndex) {
-        return;
-      }
-
-      // Determine rectangle on screen
+      if (dragIndex === hoverIndex) return;
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
-
-      // Get vertical middle
       const hoverMiddleX =
         (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
-
-      // Determine mouse position
       const clientOffset = monitor.getClientOffset();
-
-      // Get pixels to the top
       const hoverClientX = clientOffset.x - hoverBoundingRect.left;
-
-      // Only perform the move when the mouse has crossed half of the items height
-      // When dragging downwards, only move when the cursor is below 50%
-      // When dragging upwards, only move when the cursor is above 50%
-
-      // Dragging downwards
-      if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) {
-        return;
-      }
-
-      // Dragging upwards
-      if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
-        return;
-      }
-
-      // Time to actually perform the action
+      if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) return;
+      if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) return;
       changeListPos(dragIndex, hoverIndex);
-
-      // Note: we're mutating the monitor item here!
-      // Generally it's better to avoid mutations,
-      // but it's good here for the sake of performance
-      // to avoid expensive index searches.
       item.index = hoverIndex;
     },
   });
@@ -115,9 +86,10 @@ function List({
 
       apis.list
         .put(reqBody)
-        .then(async response => {
+        .then(async (response) => {
           await _sleep(200);
-          fetchBoardById({ id })})
+          fetchBoardById({ id });
+        })
         .catch((err) => console.log(err));
     },
   });
@@ -193,7 +165,7 @@ function List({
     <div
       ref={ref}
       draggable="true"
-      style={{display: 'flex', flexDirection: 'column', cursor: 'pointer'}}
+      style={{ display: "flex", flexDirection: "column", cursor: "pointer" }}
       className={`board-list ${modalMode ? "up" : ""} ${
         move.from && move.from.id === data.id ? "moving" : ""
       }`}
@@ -217,31 +189,33 @@ function List({
         <div
           className={crtCard ? "board-cards-crtCard" : "board-cards-crtCard-x"}
         >
-          {data.cards.map((card, index) => (
-            <Card
-              list={data}
-              setModalMode={setModalMode}
-              card={card}
-              key={index}
-              index={index}
-              list_name={data.name}
-              board_key={board.key}
-              board_name={board.name}
-              board_id={board.id}
-              deleteCard={deleteCard}
-              putCard={putCard}
-              postActivity={postActivity}
-              putActivity={putActivity}
-              deleteActivity={deleteActivity}
-            />
-          ))}
+          <DndProvider backend={HTML5Backend}>
+            {data.cards.map((card, index) => (
+              <Card
+                list={data}
+                setModalMode={setModalMode}
+                card={card}
+                key={index}
+                index={index}
+                list_name={data.name}
+                board_key={board.key}
+                board_name={board.name}
+                board_id={board.id}
+                deleteCard={deleteCard}
+                putCard={putCard}
+                postActivity={postActivity}
+                putActivity={putActivity}
+                deleteActivity={deleteActivity}
+              />
+            ))}
+          </DndProvider>
           <div className="crtCard" style={crtCard ? {} : { display: "none" }}>
             <div id="crtCard_inputWrapper">
               <input
                 className="addCard"
                 onChange={(e) => setCardInput(e.target.value)}
                 value={cardInput}
-                style={{fontSize: 15}}
+                style={{ fontSize: 15 }}
                 ref={newCardInput}
                 placeholder="Enter a title for this card..."
                 onKeyPress={createCardEnter}

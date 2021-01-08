@@ -1,8 +1,12 @@
-import React, { useState } from "react";
 import "./Board.css";
 import CardModal from "../CardModal/CardModal";
 import apis from "../../Library/Apis";
 import { useBoardContext } from "../../Contexts";
+import React, { useState, useRef } from "react";
+import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
+import { XYCoord } from "dnd-core";
+
+const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 function Card({
   card,
@@ -26,7 +30,64 @@ function Card({
   const boardPath = `/b/${String(board_id).padStart(8,'0')}/${board_name}`;
   const { setModal } = useBoardContext();
   const [cardName, setCardName] = useState(card.name);
-  const { move, setMove, fetchBoardById } = useBoardContext();
+  const { cInd, move, changeCardPos, setMove, fetchBoardById } = useBoardContext();
+
+  const ref = useRef(null);
+  const [, drop] = useDrop({
+    accept: "list",
+    hover(item, monitor) {
+      if (!move) setMove(true);
+      if (!ref.current) return;
+      
+      const dragIndex = item.index;
+      const hoverIndex = index;
+
+      if (dragIndex === hoverIndex) return;
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
+      const hoverLimitY = hoverBoundingRect.top + 43;
+      const clientOffset = monitor.getClientOffset();
+      const hoverClientX = clientOffset.x - hoverBoundingRect.left;
+      if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) return;
+      if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) return;
+      changeCardPos(dragIndex, hoverIndex);
+      item.index = hoverIndex;
+    },
+  });
+
+  const [{ isDragging }, drag] = useDrag({
+    item: { type: "card", id: card.id, index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+    end() {
+      console.log(cInd);
+      if (cInd === null) {
+        console.log("변경사항 없음");
+        return;
+      }
+      
+      const reqBody = cInd
+        ? {
+            id: card.id,
+            list_id: list.id,
+            // prev_id: lists[cInd - 1].id,
+          }
+        : {
+            id: card.id,
+            list_id: list.id
+          };
+
+      apis.list
+        .put(reqBody)
+        .then(async response => {
+          await _sleep(200);
+          fetchBoardById({ id: board_id })})
+        .catch((err) => console.log(err));
+    },
+  });
+
+  drag(drop(ref));
 
   const cardClick = () => {
     setModalMode(true);
