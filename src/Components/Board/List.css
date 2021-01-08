@@ -49,23 +49,27 @@ button.moveButton {
   background-color: #a1c3e1;
 }
 
-.board-list span.list-down.visible {
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  right: 35px;
-  top: 5px;
-  transition: 0.3s;
-}
-
-.board-list span.list-down.invisible {
+.board-list span.list-down {
   background-color: #EBECF0;
   width: 30px;
   height: 30px;
   position: absolute;
-  right: 5px;
   top: 5px;
   transition: 0.3s;
+  text-align: center;
+}
+
+.board-list span.list-down svg {
+  margin-top: 7px;
+}
+
+.board-list span.list-down.visible {
+  right: 35px;
+  width: 0px;
+}
+
+.board-list span.list-down.invisible {
+  right: 5px;
 }
 
 .board-list button:hover {

@@ -7,7 +7,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import "./List.css";
 import { useBoardContext } from "../../Contexts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLevelDownAlt } from "@fortawesome/free-solid-svg-icons";
+import { faLevelDownAlt, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -29,7 +29,13 @@ function List({
   const [cardInput, setCardInput] = useState("");
   const [removed, setRemoved] = useState({ id: data.id, bool: false });
   const [modalMode, setModalMode] = useState(false);
-  const { move, lInd, setMove, fetchBoardById, changeListPos } = useBoardContext();
+  const {
+    move,
+    lInd,
+    setMove,
+    fetchBoardById,
+    changeListPos,
+  } = useBoardContext();
 
   const ref = useRef(null);
   const [, drop] = useDrop({
@@ -172,29 +178,16 @@ function List({
       style={{ display: "flex", flexDirection: "column", cursor: "pointer" }}
       className={`board-list ${modalMode ? "up" : ""}`}
     >
-      <button className="list-down" onClick={() => onMoveCardToHere()}>
-        <FontAwesomeIcon icon={faLevelDownAlt} />
-      </button>
-      <span
-        className={`list-down ${
-          move.bool && data.cards.length === 0 ? "visible" : "invisible"
-        }`}
-      />
-
-      <div style={{ display: "float" }}>
-        <h4 style={{ wordBreak: "break-all", float: "left" }}>{data.name}</h4>
-        <button
-          style={{
-            position: "absolute",
-            float: "right",
-            right: "50px",
-            width: "30px",
-          }}
-          id="board-list-delete"
-          onClick={deleteList}
-        >
-          DEL
+      <div className="board-list-headers" style={{ display: "float" }}>
+        <button className="list-down" onClick={() => onMoveCardToHere()}>
+          <FontAwesomeIcon icon={faLevelDownAlt} />
         </button>
+        <span
+          className={`list-down ${
+            move.bool && data.cards.length === 0 ? "visible" : "invisible"
+          }`}
+        >{move.bool ?null:<FontAwesomeIcon icon={faEllipsisV}/>}</span>
+        <h4 style={{ wordBreak: "break-all", float: "left" }}>{data.name}</h4>
       </div>
       <div className="board-cards" id={data.id} ref={scrollRef}>
         <div
@@ -221,13 +214,22 @@ function List({
               />
             ))}
           </DndProvider>
-              <div className="crtCard" style={crtCard ? {cursor: 'text'} : { display: "none" }}>
-            <div id="crtCard_inputWrapper" style={{display: 'flex'}}>
+          <div
+            className="crtCard"
+            style={crtCard ? { cursor: "text" } : { display: "none" }}
+          >
+            <div id="crtCard_inputWrapper" style={{ display: "flex" }}>
               <textarea
                 className="addCard"
                 onChange={(e) => setCardInput(e.target.value)}
                 value={cardInput}
-                style={{fontSize: 15, minHeight: 40, height: 'fit-content', overflowY: 'auto', width: 410}}
+                style={{
+                  fontSize: 15,
+                  minHeight: 40,
+                  height: "fit-content",
+                  overflowY: "auto",
+                  width: 410,
+                }}
                 ref={newCardInput}
                 placeholder="Enter a title for this card..."
                 onKeyPress={createCardEnter}
@@ -243,30 +245,31 @@ function List({
             </button>
             <button id="no_crtCard" onClick={no_crtCard}></button>
           </div>
-      </div>
-      <div style={{display: 'flex'}}>
-      <button
-        style={crtCard ? { display: "none" } : {}}
-        id="board-addcard"
-        onClick={addCard}
-      >
-        <span id="board-addcard-plus">十 </span>Add another card
-      </button>
-      <button
-          style={{
-            float: "right",
-            width: "25px",
-            position: 'relative',
-            top: 2,
-            left: -4,
-            border: 'pink 1px solid',
-            background: "url('https://api.iconify.design/octicon:trash-24.svg') no-repeat center center"
-          }}
-          id="board-list-delete"
-          onClick={deleteList}
-        />
         </div>
-    </div>
+        <div style={{ display: "flex" }}>
+          <button
+            style={crtCard ? { display: "none" } : {}}
+            id="board-addcard"
+            onClick={addCard}
+          >
+            <span id="board-addcard-plus">十 </span>Add another card
+          </button>
+          <button
+            style={{
+              float: "right",
+              width: "25px",
+              position: "relative",
+              top: 2,
+              left: -4,
+              border: "pink 1px solid",
+              background:
+                "url('https://api.iconify.design/octicon:trash-24.svg') no-repeat center center",
+            }}
+            id="board-list-delete"
+            onClick={deleteList}
+          />
+        </div>
+      </div>
     </div>
   );
 }
