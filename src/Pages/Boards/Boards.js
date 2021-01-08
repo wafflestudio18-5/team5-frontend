@@ -20,7 +20,6 @@ function BoardsPage({ history }) {
       .getAll()
       .then((response) => {
         setBoards(response.data.results);
-        console.log(response.data);
       })
       .catch((err) => console.log(err));
   };

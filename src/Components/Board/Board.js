@@ -52,7 +52,7 @@ function Board({
   };
 
   const createListEnter = (e) => {
-    if (e.key == "Enter") {
+    if (e.key === "Enter") {
       createList();
     }
   };
@@ -148,26 +148,26 @@ function Board({
       .catch((err) => console.log(err));
   };
 
-  if (!board) return <div className="board-wrapper"><img src="https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif"/></div>;
+  if (!board) return <div className="board-wrapper"><img alt="p" src="https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif"/></div>;
 
   return (
     <>
       {loading ? (
-        <div className="board-wrapper"><img src="https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif"/></div>
+        <div className="board-wrapper"><img alt="p" src="https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif"/></div>
       ) : (
-        <div className="board-wrapper anime"><img src="https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif"/></div>
+        <div className="board-wrapper anime"><img alt="p" src="https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif"/></div>
       )}
       <div id="Board-wrapper">
         <header id="board-header">
           <div id="board-header-left">
             <select style={{cursor: 'pointer', fontSize: 15}} name="language" defaultValue="English (US)">
-              <option  style={{cursor: 'pointer', fontSize: 15, marginTop: 3, marginBottom: 3}} value="Board">Board</option>
+              <option style={{cursor: 'pointer', fontSize: 15, marginTop: 3, marginBottom: 3}} value="Board">Board</option>
               <option style={{cursor: 'pointer', fontSize: 15, marginTop: 3, marginBottom: 3}}  value="Calendar">Calendar</option>
               <option style={{cursor: 'pointer', fontSize: 15, marginTop: 3, marginBottom: 3}}  value="Map">Map</option>
             </select>
 
             {boardName.edit? 
-            <input className="noOutline" style={{paddingLeft:15, fontSize: 16, paddingRight: 10, backgroundColor: '#35A7EE', color: 'white', border: '0px transparent solid', outline: 'none', fontWeight: 600, fontSize: 20, boxShadow: 'none', width: 'fit-content', borderRadius: 5, padding: 0}}
+            <input className="noOutline" style={{paddingLeft:15, paddingRight: 10, backgroundColor: '#35A7EE', color: 'white', border: '0px transparent solid', outline: 'none', fontWeight: 600, fontSize: 20, boxShadow: 'none', width: 'fit-content', borderRadius: 5, padding: 0}}
               value={boardName.content} onChange={(e) => setBoardName({...boardName, content: e.target.value})}
               onBlur={onClickChangeName}
               onKeyPress={(e) => (e.key === 'Enter')? onClickChangeName() : null}
@@ -193,7 +193,7 @@ function Board({
 
             <div id="board-profile-images" style={{display: 'flex', flexDirection: 'row', height: 28}}>
              {boardUsers.slice(0, 5).map((item, index) => {
-                    return (<img style={{width: 28, height: 28, borderRadius: '50%'}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt="profile"/>)
+                    return (<img key={index} style={{width: 28, height: 28, borderRadius: '50%'}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt="profile"/>)
               })}
             <div style={{
               cursor: 'default',

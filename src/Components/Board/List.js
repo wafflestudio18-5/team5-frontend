@@ -2,9 +2,12 @@ import React, { useState, useRef } from "react";
 import Card from "./Card.js";
 import apis from "../../Library/Apis";
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
-import { XYCoord } from "dnd-core";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import "./List.css";
 import { useBoardContext } from "../../Contexts";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLevelDownAlt } from "@fortawesome/free-solid-svg-icons";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -26,64 +29,26 @@ function List({
   const [cardInput, setCardInput] = useState("");
   const [removed, setRemoved] = useState({ id: data.id, bool: false });
   const [modalMode, setModalMode] = useState(false);
-  const {
-    move,
-    setMove,
-    fetchBoardById,
-    lInd,
-    changeListPos,
-  } = useBoardContext();
+  const { move, lInd, setMove, fetchBoardById, changeListPos } = useBoardContext();
 
   const ref = useRef(null);
   const [, drop] = useDrop({
     accept: "list",
     hover(item, monitor) {
-      if (!move) setMove(true);
-      if (!ref.current) {
-        return;
-      }
+      if (!ref.current) return;
+
       const dragIndex = item.index;
       const hoverIndex = index;
 
-      // Don't replace items with themselves
-      if (dragIndex === hoverIndex) {
-        return;
-      }
-
-      // Determine rectangle on screen
+      if (dragIndex === hoverIndex) return;
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
-
-      // Get vertical middle
       const hoverMiddleX =
         (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
-
-      // Determine mouse position
       const clientOffset = monitor.getClientOffset();
-
-      // Get pixels to the top
       const hoverClientX = clientOffset.x - hoverBoundingRect.left;
-
-      // Only perform the move when the mouse has crossed half of the items height
-      // When dragging downwards, only move when the cursor is below 50%
-      // When dragging upwards, only move when the cursor is above 50%
-
-      // Dragging downwards
-      if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) {
-        return;
-      }
-
-      // Dragging upwards
-      if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
-        return;
-      }
-
-      // Time to actually perform the action
+      if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) return;
+      if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) return;
       changeListPos(dragIndex, hoverIndex);
-
-      // Note: we're mutating the monitor item here!
-      // Generally it's better to avoid mutations,
-      // but it's good here for the sake of performance
-      // to avoid expensive index searches.
       item.index = hoverIndex;
     },
   });
@@ -115,9 +80,10 @@ function List({
 
       apis.list
         .put(reqBody)
-        .then(async response => {
+        .then(async (response) => {
           await _sleep(200);
-          fetchBoardById({ id })})
+          fetchBoardById({ id });
+        })
         .catch((err) => console.log(err));
     },
   });
@@ -189,39 +155,73 @@ function List({
       });
   };
 
+  const onMoveCardToHere = () => {
+    apis.card
+      .put({ id: move.from.card.id, list_id: data.id })
+      .then((response) => {
+        fetchBoardById({ id: board.id });
+        setMove({ bool: false });
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div
       ref={ref}
       draggable="true"
-      style={{display: 'flex', flexDirection: 'column', cursor: 'pointer'}}
-      className={`board-list ${modalMode ? "up" : ""} ${
-        move.from && move.from.id === data.id ? "moving" : ""
-      }`}
+      style={{ display: "flex", flexDirection: "column", cursor: "pointer" }}
+      className={`board-list ${modalMode ? "up" : ""}`}
     >
-      <h4 style={{ wordBreak: "break-all", float: "left" }}>{data.name}</h4>
+      <button className="list-down" onClick={() => onMoveCardToHere()}>
+        <FontAwesomeIcon icon={faLevelDownAlt} />
+      </button>
+      <span
+        className={`list-down ${
+          move.bool && data.cards.length === 0 ? "visible" : "invisible"
+        }`}
+      />
+
+      <div style={{ display: "float" }}>
+        <h4 style={{ wordBreak: "break-all", float: "left" }}>{data.name}</h4>
+        <button
+          style={{
+            position: "absolute",
+            float: "right",
+            right: "50px",
+            width: "30px",
+          }}
+          id="board-list-delete"
+          onClick={deleteList}
+        >
+          DEL
+        </button>
+      </div>
       <div className="board-cards" id={data.id} ref={scrollRef}>
         <div
           className={crtCard ? "board-cards-crtCard" : "board-cards-crtCard-x"}
         >
-          {data.cards.map((card, index) => (
-            <Card
-              list={data}
-              setModalMode={setModalMode}
-              card={card}
-              key={index}
-              index={index}
-              list_name={data.name}
-              board_key={board.key}
-              board_name={board.name}
-              board_id={board.id}
-              deleteCard={deleteCard}
-              putCard={putCard}
-              postActivity={postActivity}
-              putActivity={putActivity}
-              deleteActivity={deleteActivity}
-            />
-          ))}</div>
-          <div className="crtCard" style={crtCard ? {cursor: 'text'} : { display: "none" }}>
+          <DndProvider backend={HTML5Backend}>
+            {data.cards.map((card, index) => (
+              <Card
+                list={data}
+                listIndex={index}
+                setModalMode={setModalMode}
+                card={card}
+                key={index}
+                index={index}
+                list_name={data.name}
+                board_key={board.key}
+                board_name={board.name}
+                board_id={board.id}
+                deleteCard={deleteCard}
+                putCard={putCard}
+                postActivity={postActivity}
+                putActivity={putActivity}
+                deleteActivity={deleteActivity}
+              />
+            ))}
+          </DndProvider>
+              <div className="crtCard" style={crtCard ? {cursor: 'text'} : { display: "none" }}>
             <div id="crtCard_inputWrapper" style={{display: 'flex'}}>
               <textarea
                 className="addCard"

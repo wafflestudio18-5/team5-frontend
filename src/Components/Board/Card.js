@@ -1,13 +1,20 @@
-import React, { useState } from "react";
-import "./Board.css";
+import "./Card.css";
 import CardModal from "../CardModal/CardModal";
 import apis from "../../Library/Apis";
 import { useBoardContext } from "../../Contexts";
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSignInAlt,
+  faLevelUpAlt,
+  faLevelDownAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Card({
   card,
   list,
   index,
+  listIndex,
   list_name,
   board_key,
   board_name,
@@ -20,14 +27,13 @@ function Card({
   deleteActivity,
 }) {
   const [cardPage, setCardPage] = useState(false);
+  const { setModal } = useBoardContext();
+  const { move, setMove, fetchBoardById } = useBoardContext();
+  if(!card) return <div>Loading...</div>
   const key = card.key;
   const dashedName = card.name.replaceAll(" ", "-");
-  const cardPath = "/c/" + key + "/" + String(card.id) + "-" + dashedName;
-  const boardPath = `/b/${String(board_id).padStart(8,'0')}/${board_name}`;
-  const { setModal } = useBoardContext();
-  const [cardName, setCardName] = useState(card.name);
-  const { move, setMove, fetchBoardById } = useBoardContext();
-
+  const cardPath = "/c/" + key + "/" + card.id + "-" + dashedName;
+  const boardPath = `/b/${board_key}/${board_name}`;
   const cardClick = () => {
     setModalMode(true);
     setModal(true);
@@ -56,63 +62,98 @@ function Card({
     ); // 바꿀 주소 앞에 점 찍으면 상대 주소 됨. 우리는 해당 사항 없음
   };
 
-  const onMoveButton = () => {
-    if (move.bool) {
-      // if state is 'moving'
-      if (move.mode === "card") {
-        if (move.from.id === card.id) {
-          setMove({ bool: false });
-          return;
-        }
-        const tList = list.cards;
-        let fIndex = tList.findIndex((item) => item.id === move.from.id);
-        let tIndex = tList.findIndex((item) => item.id === card.id);
+  const onMoveToCard = (dir) => {
+    if (!move.bool) return;
 
-        if (fIndex > tIndex) tIndex--;
-        const reqBody =
-          tIndex === -1
-            ? {
-                id: move.from.id,
-                list_id: list.id,
-              }
-            : {
-                id: move.from.id,
-                list_id: list.id,
-                prev_id: tList[tIndex].id,
-              };
-        apis.card
-          .put(reqBody)
-          .then((response) => {
-            fetchBoardById({ id: board_id });
-            setMove({ bool: false });
-          })
-          .catch((err) => console.log(err));
-      } else {
-        setMove({ bool: false });
-      }
-    } else {
-      // if state is 'not moving'
-      setMove({ bool: true, mode: "card", from: card });
+    const targetList = list.id;
+    let targetId;
+
+    let nowIndex = index;
+
+    switch (dir) {
+      case "up":
+        if (nowIndex) targetId = list.cards[nowIndex - 1].id;
+        else targetId = null;
+        nowIndex--;
+        break;
+      case "down":
+        targetId = card.id;
+        break;
+      default:
+        console.log("cannot reach here");
+        break;
     }
+
+    // if state is 'moving'
+    if (move.from.id === card.id) {
+      setMove({ bool: false });
+      return;
+    }
+
+    const reqBody =
+      targetId
+        ? {
+            id: move.from.card.id,
+            list_id: targetList,
+            prev_id: targetId
+          }
+        : {
+            id: move.from.card.id,
+            list_id: targetList
+          };
+    apis.card
+      .put(reqBody)
+      .then((response) => {        
+        fetchBoardById({ id: board_id });
+        setMove({ bool: false });
+      })
+      .catch((err) => console.log(err));
   };
 
-  /*TODO history 없이 띡 /c/로 시작하는 url이 입력됐다면 어떻게 할 지 결정할 것!*/
+  const onMoveButton = () => {
+    if (move.bool) return;
+    // if state is 'not moving'
+    setMove({ bool: true, mode: "card", from: {listIndex, cardIndex: index, list, card} });
+  };
+
+  /*TODO: history 없이 띡 /c/로 시작하는 url이 입력됐다면 어떻게 할 지 결정할 것!*/
   return (
-    <div className="board-card-wrapper" style={{cursor: 'pointer'}}>
-      <div
-        className="board-card"
-        onClick={cardClick}
-        style={{ marginTop: index === 0 ? 0 : 10 }}
-      >
-        <p style={{ wordBreak: "break-all", color: "black" }}>{cardName}</p>
-      </div>
-      <button className="moveButton" id="card" onClick={onMoveButton}>
-        {move.mode === "card" ? "T" : "M"}
-      </button>
+    <div className="board-card-wrapper" style={{ cursor: "pointer" }}>
+      {!move.bool ? (
+        <>
+          <button className="go" onClick={cardClick}>
+            <FontAwesomeIcon icon={faSignInAlt} />
+          </button>
+          <button className="move" onClick={onMoveButton}>
+            =
+          </button>
+          <div
+            className="board-card"
+            style={{ marginTop: index === 0 ? 0 : 10 }}
+          >
+            {card.name}
+          </div>
+        </>
+      ) : (
+        <>
+          <button className="up" onClick={() => onMoveToCard("up")}>
+            <FontAwesomeIcon icon={faLevelUpAlt} />
+          </button>
+          <button className="down" onClick={() => onMoveToCard("down")}>
+            <FontAwesomeIcon icon={faLevelDownAlt} />
+          </button>
+          <div
+            className="board-card moving"
+            style={{ marginTop: index === 0 ? 0 : 10 }}
+          >
+            {card.name}
+          </div>
+        </>
+      )}
+
       {cardPage ? (
         <CardModal
-          cardName={cardName}
-          setCardName={setCardName}
+          cardName={card.name}
           card_key={key}
           card_id={card.id}
           exit={exitModal}
