@@ -10,7 +10,7 @@ import { useBoardContext } from "../../Contexts";
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 function Board({
-  users,
+  boardUsers,
   userList,
   modal,
   board,
@@ -91,10 +91,10 @@ function Board({
 
   const eUsers = inviteInput
     ? userList
-        .filter((item) => !users.find((it) => it.id === item.id))
+        .filter((item) => !boardUsers.find((it) => it.id === item.id))
         .filter((item) => item.username.includes(inviteInput))
     : userList
-        .filter((item) => !users.find((it) => it.id === item.id))
+        .filter((item) => !boardUsers.find((it) => it.id === item.id))
 
   const deleteBoard = () => {
     apis.board
@@ -176,12 +176,12 @@ function Board({
             <div className="board-header-vertical-line" />
 
             <div id="board-profile-images" style={{display: 'flex', flexDirection: 'row', height: 28}}>
-             {eUsers.slice(0, 5).map((item, index) => {
-                    return (<img style={{width: 28, height: 28, borderRadius: '50%', filter: 'saturate(0%)'}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt="profile"/>)
+             {boardUsers.slice(0, 5).map((item, index) => {
+                    return (<img style={{width: 28, height: 28, borderRadius: '50%'}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt="profile"/>)
               })}
             <div style={{
               cursor: 'default',
-              display: eUsers.length > 5 ? null : 'none', 
+              display: boardUsers.length > 5 ? null : 'none', 
               width: 'fit-content', 
               height: 28,
               borderRadius: '50%',
@@ -192,7 +192,7 @@ function Board({
               position: 'relative',
               top: 0
               }}>
-                <p>+{eUsers.length - 5}</p>
+                <p>+{boardUsers.length - 5}</p>
               </div>
             </div>
             <div className="invite-wrapper">
