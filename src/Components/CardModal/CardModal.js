@@ -149,11 +149,16 @@ function CardModal({
   const [due, setDue] = useState({button: false, calendar: false, clock: false});
   const [date, setDate] = useState(undefined);
   const [time, setTime] = useState(undefined);
-  const addDuedate = () => {
+  const saveDueDate = () => {
+    setDue({button: false, time: false, date: false});
+    const date_ = date.toISOString().slice(0, 10);
+    const datetime = date_ + " " + time + ":00";
+    putCard({cId: card_id, due_date: datetime});
     alert(
-      "[ERROR] NO ACTIVITY PREPARED EXCEPT COMMENTS\n(Failed to add Due Date)"
+      `Your new due date is ${datetime} - talk to the server manager to make sure it is surely saved!`
     );
   };
+  //"Thu Jan 14 2021 00:00:00 GMT+0900 (대한민국 표준시)00:30"
 
   const activities = useRef();
 
@@ -366,6 +371,7 @@ function CardModal({
               ?<div style={{display: 'flex', flexDirection: 'column'}}>
               <div id="NOBUTTON">
               <DatePicker
+              onClick={(e) => {console.log(e.target.id)}}
               autoFocus={true}
               onChange={setDate}
               value={date}
@@ -380,7 +386,7 @@ function CardModal({
               value={time}
               closeClock={() => setDue({button: true, date: false, time: false})}
               /></div>
-              <button onClick={() => setDue({button: false, time: false, date: false})}>Save</button>
+              <button onClick={saveDueDate}>Save</button>
               <button onClick={() => setDue({button: false, time: false, date: false})}>Close</button>
               </div>}
 
