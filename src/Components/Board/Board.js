@@ -179,7 +179,7 @@ function Board({
                     />
                   </div>
 
-                  <div id="inviteUsers" style={{height: 280, background: 'white', overflowX: 'auto', position: 'relative', top: -5}}>
+                  <div id="inviteUsers" style={{height: 280, background: 'white', overflowX: 'auto', position: 'relative', top: -5, paddingRight: eUsers.length > 4 ? 5 : 0}}>
                   {eUsers.map((item, index) => {
                     return (
                       <>
@@ -187,7 +187,7 @@ function Board({
                         className="inviteUser"
                         key={index}
                         onClick={() => inviteMember(board.id, item.username)}
-                        style={{padding: 10, height: 'fit-content', textAlign: 'left', display: 'flex', flexDirection: 'row'}}
+                        style={{padding: 10, height: 'fit-content', textAlign: 'left', display: 'flex', flexDirection: 'row', marginTop: (index === 0? 1 : 5), marginBottom: (index === (eUsers.length - 1))? 1 : 5}}
                       >
                         <img style={{height: 25, width: 25, borderRadius: '50%', position: 'relative', top: 3, left: 3}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt={"profile"}/> 
                         <p style={{position: 'relative', top: -7, marginLeft: 15, pontWeight: 300}}>{item.username}</p>
