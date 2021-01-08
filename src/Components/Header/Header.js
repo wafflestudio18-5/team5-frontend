@@ -48,29 +48,31 @@ function Header(props) {
   return (
     <header className={`logged_header ${modal? "down" : ""}`}>
       <div className="header-left-wrapper">
-        <div className="App-Switcher-Button-Wrapper">{svg_hl_1}</div>
-        <div className="Home-Button-Wrapper" onClick={goToBoards}>{svg_hl_2}</div>
-        <div className="Boards-Link-Wrapper">
+        <div style={{cursor: 'pointer'}} className="App-Switcher-Button-Wrapper">{svg_hl_1}</div>
+        <div style={{cursor: 'pointer'}} className="Home-Button-Wrapper" onClick={goToBoards}>{svg_hl_2}</div>
+        <div style={{cursor: 'pointer'}} className="Boards-Link-Wrapper">
           {svg_hl_3}
           <p>
             <b>Boards</b>
           </p>
         </div>
         <div className="inputWrapper">
-          <input className={`Boards-Search-Wrapper ${serFocused? 'active' : 'inactive'}`}  value={serkey} onChange={onSerChange} onFocus={toggleFocus} onBlur = {toggleFocus} />
+          <input style={{cursor: 'auto'}} className={`Boards-Search-Wrapper ${serFocused? 'active' : 'inactive'}`}  value={serkey} onChange={onSerChange} onFocus={toggleFocus} onBlur = {toggleFocus} />
           <FontAwesomeIcon className={`inputIcon ${serFocused? 'hide' : 'active'}`} icon={faSearch} />
           <FontAwesomeIcon className={`inputExtern ${serFocused? 'active' : 'hide'}`} icon={faExternalLinkAlt} />
           <FontAwesomeIcon className={`inputFin ${serFocused? 'active' : 'hide'}`} icon={faWindowClose} />
         </div>
       </div>
       <div className="header-logo-wrapper">
-        <Link to="/">{logo}</Link>
+        <Link style={{cursor: 'pointer'}} to="/">{logo}</Link>
       </div>
       <div className="header-right-wrapper">
-        <div className="Add-Wrapper">{svg_hr_1}</div>
-        <div className="Info-Wrapper">{svg_hr_2}</div>
-        <div className="Notifications-Wrapper">{svg_hr_3}</div>
-        <div className="Profile-Wrapper" onClick={logoutReq}>O</div>
+        <div style={{cursor: 'pointer'}} className="Add-Wrapper">{svg_hr_1}</div>
+        <div style={{cursor: 'pointer'}} className="Info-Wrapper">{svg_hr_2}</div>
+        <div style={{cursor: 'pointer'}} className="Notifications-Wrapper">{svg_hr_3}</div>
+        <div  style={{cursor: 'pointer'}} className="Profile-Wrapper" onClick={logoutReq}>
+          <img style={{height: 32, width: 32, borderRadius: '50%'}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt={"Profile"}/>
+        </div>
       </div>
     </header>
   );

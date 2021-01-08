@@ -240,11 +240,10 @@ div.Notifications-Wrapper:hover {
 div.Profile-Wrapper {
   position: relative;
   margin: 3px;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  padding: 2px;
-  background-color: hsla(0, 0%, 100%, .3);
+  width: 32px;
+  height: 32px;
+  padding: 0px;
+  background-color: transparent;
 }
 
 /* ------------------------------------------------------------------------ */

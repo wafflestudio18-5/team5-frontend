@@ -23,7 +23,7 @@ function Card({
   const key = card.key;
   const dashedName = card.name.replaceAll(" ", "-");
   const cardPath = "/c/" + key + "/" + String(card.id) + "-" + dashedName;
-  const boardPath = "/b/" + board_key + "/" + board_name;
+  const boardPath = `/b/${String(board_id).padStart(8,'0')}/${board_name}`;
   const { setModal } = useBoardContext();
   const [cardName, setCardName] = useState(card.name);
   const { move, setMove, fetchBoardById } = useBoardContext();
@@ -98,7 +98,7 @@ function Card({
 
   /*TODO history 없이 띡 /c/로 시작하는 url이 입력됐다면 어떻게 할 지 결정할 것!*/
   return (
-    <div className="board-card-wrapper">
+    <div className="board-card-wrapper" style={{cursor: 'pointer'}}>
       <div
         className="board-card"
         onClick={cardClick}

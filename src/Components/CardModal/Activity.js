@@ -45,10 +45,13 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
             {data.is_comment ?
         
                 <><div style={button.editMode? null : {display: 'none'}}>
+                <p>
+                    <span style={{fontWeight: 600, color: 'black', fontSize: 15}}>{data.creator} </span>
+                    <span style={{color: 'gray', fontsize: 12}}>    {data.created_at.replace("T", "  ").replace("Z", "")}</span></p>
                 <div style={{
                   backgroundColor: 'white', 
                   padding: 3, 
-                  paddingLeft: 10,
+                  paddingLeft: 8,
                   paddingBottom: 0,
                   border: '1.5px lightgray solid',
                   borderRadius: 3,
@@ -60,8 +63,10 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
                         style={{fontSize: 14, 
                         border: '1px transparent solid', 
                         outline: 'none', 
-                        paddingTop: 5,
+                        paddingTop: 6,
+                        paddingLeft: 0,
                         width: 413,
+                        fontSize: 15,
                         filter: 'brightness(100%)', background: 'white'}}
                         ref={inputRef}
                         value={changedComment}
@@ -79,6 +84,8 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
                             marginBottom: 10,
                             width: 50,
                             height: 30,
+                            position: 'relative',
+                            left: 3
                             }}>
                         Save
                         </button>
