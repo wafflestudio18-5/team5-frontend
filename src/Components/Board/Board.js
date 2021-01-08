@@ -93,10 +93,8 @@ function Board({
     ? userList
         .filter((item) => !users.find((it) => it.id === item.id))
         .filter((item) => item.username.includes(inviteInput))
-        .slice(0, 7)
     : userList
         .filter((item) => !users.find((it) => it.id === item.id))
-        .slice(0, 7);
 
   const deleteBoard = () => {
     apis.board
@@ -176,8 +174,25 @@ function Board({
             <div className="board-header-vertical-line" />
             <button>Private</button>
             <div className="board-header-vertical-line" />
-            <div id="board-profile-images">
-              <p>프사들동글동글</p>
+
+            <div id="board-profile-images" style={{display: 'flex', flexDirection: 'row', height: 28}}>
+             {eUsers.slice(0, 5).map((item, index) => {
+                    return (<img style={{width: 28, height: 28, borderRadius: '50%'}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt="profile"/>)
+              })}
+            <div style={{
+              display: eUsers.length > 5 ? null : 'none', 
+              width: 'fit-content', 
+              height: 28,
+              borderRadius: '50%',
+              backgroundColor: '#35A7EE',
+              fontSize: 12,
+              paddingLeft: 0,
+              paddingRight: 5,
+              position: 'relative',
+              top: 0
+              }}>
+                <p>+{eUsers.length - 5}</p>
+              </div>
             </div>
             <div className="invite-wrapper">
               <button className="inviteButton" onClick={toggleInvite}>
@@ -256,6 +271,7 @@ function Board({
                   <div className="crtList">
                     <input
                       placeholder="Enter list title..."
+                      style={{fontSize: 15, fontWeight: 600, outline: 'none'}}
                       onChange={(e) => setListInput(e.target.value)}
                       value={listInput}
                     />
