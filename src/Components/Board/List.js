@@ -151,7 +151,7 @@ function List({
 
   const addCard = () => {
     setCrtCard(true);
-    newCardButton.current.focus({ preventScroll: false });
+    newCardInput.current.focus({ preventScroll: false });
     scroll(scrollRef);
   };
 
@@ -202,9 +202,7 @@ function List({
         <h4 style={{ wordBreak: "break-all", float: "left" }}>{data.name}</h4>
         <button
           style={{
-            position: "absolute",
             float: "right",
-            right: "50px",
             width: "30px",
           }}
           id="board-list-delete"
@@ -235,7 +233,7 @@ function List({
               deleteActivity={deleteActivity}
             />
           ))}
-          <div className="crtCard" style={crtCard ? {} : { display: "none" }}>
+          <div className="crtCard" style={crtCard ? {cursor: 'text'} : { display: "none" }}>
             <div id="crtCard_inputWrapper">
               <input
                 className="addCard"
