@@ -223,3 +223,13 @@ textarea {
     width: 135px !important;
     outline: none;
 }
+
+#DUEDATE input {
+    outline: none !important;
+    border: transparent !important;
+}
+
+#DUEDATE div {
+    border: transparent !important;
+    z-index: 900;
+}
