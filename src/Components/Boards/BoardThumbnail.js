@@ -18,8 +18,6 @@ const BoardThumbnail = ({ id, name, boardKey, star, refreshBoards }) => {
   }, [])
 
   const goToBoard = async () => {
-    if (enter) return;
-
     setAnime(true);
     await _sleep(400); // 0.4 sec
 
@@ -34,7 +32,7 @@ const BoardThumbnail = ({ id, name, boardKey, star, refreshBoards }) => {
     apis.board.put({ id: id, star: targetStar }).then((response) => {
       refreshBoards();
       setSt(response.data.star);
-    });
+    }).catch(err => console.log(err));
   };
 
   return (

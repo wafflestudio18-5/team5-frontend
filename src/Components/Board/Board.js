@@ -1,11 +1,13 @@
 import "./Board.css";
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import List from "./List.js";
 import apis from "../../Library/Apis";
+import { useBoardContext } from "../../Contexts";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
-
 
 function Board({
   users,
@@ -25,6 +27,7 @@ function Board({
   const [invite, setInvite] = useState(false);
   const [inviteInput, setInviteInput] = useState("");
   const [loading, setLoading] = useState(true);
+  const { fetchBoardById } = useBoardContext();
 
   const wait = async (delay) => {
     await _sleep(delay);
@@ -85,12 +88,13 @@ function Board({
   }}, [boardName.save])
 
   const eUsers = inviteInput
-  ? userList.filter(item => !users.find(it => it.id === item.id)).filter((item) => item.username.includes(inviteInput)).slice(0, 7)
-  : userList.filter(item => !users.find(it => it.id === item.id)).slice(0, 7);
-
-  const tUsers = inviteInput
-    ? userList.filter((item) => item.username.includes(inviteInput)).slice(0, 7)
-    : userList.slice(0, 7);
+    ? userList
+        .filter((item) => !users.find((it) => it.id === item.id))
+        .filter((item) => item.username.includes(inviteInput))
+        .slice(0, 7)
+    : userList
+        .filter((item) => !users.find((it) => it.id === item.id))
+        .slice(0, 7);
 
   const deleteBoard = () => {
     apis.board
@@ -122,6 +126,13 @@ function Board({
     return <Redirect to="/username/boards" />;
   };
 
+  const toggleStar = (target) => {
+    apis.board
+      .put({ id: board.id, star: target })
+      .then((response) => {fetchBoardById({id: board.id})})
+      .catch((err) => console.log(err));
+  };
+
   if (!board) return <div className="board-wrapper">Loading...</div>;
 
   return (
@@ -139,6 +150,7 @@ function Board({
               <option value="Calendar">Calendar</option>
               <option value="Map">Map</option>
             </select>
+
             {boardName.edit? 
             <input className="noOutline" style={{paddingLeft:10, paddingRight: 10, backgroundColor: '#35A7EE', color: 'white', border: '0px transparent solid', outline: 'none', fontWeight: 600, fontSize: 20, boxShadow: 'none', width: 'fit-content', borderRadius: 5, padding: 0}}
               value={boardName.content} onChange={(e) => setBoardName({...boardName, content: e.target.value, dash: e.target.value.replace(" ", "-")})}
@@ -146,7 +158,14 @@ function Board({
               onKeyPress={(e) => (e.key === 'Enter')? setBoardName({...boardName, edit: false, save: !(boardName.save)}) : null}
             />: 
             <h3 onClick={(e) => setBoardName({...boardName, edit: true, content: board.name, dash: board.name.replace(" ", "-"), id: board.id})} id="board-name">{boardName.content === undefined? board.name : boardName.content}</h3>}
-            <button id="board-header-star">☆</button>
+            <button
+              id="board-header-star"
+              onClick={() => {
+                board.star ? toggleStar("False") : toggleStar("True");
+              }}
+            >
+              <FontAwesomeIcon className={`star ${board.star}`} icon={faStar} />
+            </button>
             <div className="board-header-vertical-line" />
             <button>
               {board.name}
