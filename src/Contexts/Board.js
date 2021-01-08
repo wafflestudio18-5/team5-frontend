@@ -20,7 +20,7 @@ const BoardContext = createContext(defaultBoard);
 
 const BoardProvider = (props) => {
   const { children } = props;
-  const [lastList, setLastList] = useState(null);
+  const [lInd, setLInd] = useState(null);
 
   const setMove = (move) => {
     setState((state) => ({
@@ -37,7 +37,7 @@ const BoardProvider = (props) => {
   };
 
   const changeListPos = (i1, i2) => {
-    setLastList(i2);
+    setLInd(i2);
     setState((state) => {
       let tList = state.board.lists;
       let temp = tList[i1];
@@ -55,25 +55,24 @@ const BoardProvider = (props) => {
   };
 
   const applyListPos = (board) => {
-    const index = lastList;
-    if(!index) {
+    if(!lInd) {
       console.log('변경사항 없음');
       return;
     }
-    console.log(index);
+    console.log(lInd);
     const lists = [...board.lists]
     const id = board.id;
 
     const reqBody =
-      index
+      lInd
         ? {
             board_id: id,
-            list_id: lists[index].id,
-            prev_id: lists[index - 1].id,
+            list_id: lists[lInd].id,
+            prev_id: lists[lInd - 1].id,
           }
         : {
             board_id: id,
-            list_id: lists[index].id,
+            list_id: lists[lInd].id,
           };
 
     apis.list
