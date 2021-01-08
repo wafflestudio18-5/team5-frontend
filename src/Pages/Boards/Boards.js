@@ -41,7 +41,7 @@ function BoardsPage({ history }) {
   }, []);
 
   const personal = boards;
-  const starred = boards.filter((item) => item.starred);
+  const starred = boards.filter((item) => item.star);
   const recent = boards.slice().sort(bComparator).slice(0, RECENT_BOARDS);
 
   return (

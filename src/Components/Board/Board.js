@@ -1,6 +1,8 @@
 import "./Board.css";
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import List from "./List.js";
 import apis from "../../Library/Apis";
 
@@ -73,10 +75,6 @@ function Board({
   ? userList.filter(item => !users.find(it => it.id === item.id)).filter((item) => item.username.includes(inviteInput)).slice(0, 7)
   : userList.filter(item => !users.find(it => it.id === item.id)).slice(0, 7);
 
-  const tUsers = inviteInput
-    ? userList.filter((item) => item.username.includes(inviteInput)).slice(0, 7)
-    : userList.slice(0, 7);
-
   console.log(users);
 
   const deleteBoard = () => {
@@ -129,7 +127,10 @@ function Board({
               <option value="Map">Map</option>
             </select>
             <h3 id="board-name">{board.name}</h3>
-            <button id="board-header-star">☆</button>
+            <button id="board-header-star" onClick={() => {//TODO: star set
+            }}>
+              <FontAwesomeIcon icon={faStar} />
+            </button>
             <div className="board-header-vertical-line" />
             <button>
               {board.name}

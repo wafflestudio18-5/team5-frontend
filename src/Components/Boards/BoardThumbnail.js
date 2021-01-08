@@ -18,9 +18,6 @@ const BoardThumbnail = ({ id, name, boardKey, star, refreshBoards }) => {
   }, [])
 
   const goToBoard = async () => {
-    console.log(enter);
-    if (enter) return;
-
     setAnime(true);
     await _sleep(400); // 0.4 sec
 
@@ -37,7 +34,7 @@ const BoardThumbnail = ({ id, name, boardKey, star, refreshBoards }) => {
       console.log(`modify request from ${st} to ${!st}`);
       refreshBoards();
       setSt(response.data.star);
-    });
+    }).catch(err => console.log(err));
   };
 
   return (
