@@ -103,7 +103,7 @@ function Card({
           };
     apis.card
       .put(reqBody)
-      .then(async (response) => {        
+      .then((response) => {        
         fetchBoardById({ id: board_id });
         setMove({ bool: false });
       })

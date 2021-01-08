@@ -40,6 +40,34 @@ button.moveButton {
   padding-top: 3px;
 }
 
+.board-list button.list-down {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 30px;
+  height: 30px;
+  background-color: #a1c3e1;
+}
+
+.board-list span.list-down.visible {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 35px;
+  top: 5px;
+  transition: 0.3s;
+}
+
+.board-list span.list-down.invisible {
+  background-color: #EBECF0;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  transition: 0.3s;
+}
+
 .board-list button:hover {
   background-color: #DADBE2;
 }

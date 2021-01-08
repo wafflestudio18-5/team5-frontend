@@ -2,11 +2,12 @@ import React, { useState, useRef } from "react";
 import Card from "./Card.js";
 import apis from "../../Library/Apis";
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
-import { XYCoord } from "dnd-core";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import "./List.css";
 import { useBoardContext } from "../../Contexts";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLevelDownAlt } from "@fortawesome/free-solid-svg-icons";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -28,11 +29,7 @@ function List({
   const [cardInput, setCardInput] = useState("");
   const [removed, setRemoved] = useState({ id: data.id, bool: false });
   const [modalMode, setModalMode] = useState(false);
-  const {
-    lInd,
-    fetchBoardById,
-    changeListPos,
-  } = useBoardContext();
+  const { move, lInd, setMove, fetchBoardById, changeListPos } = useBoardContext();
 
   const ref = useRef(null);
   const [, drop] = useDrop({
@@ -158,6 +155,16 @@ function List({
       });
   };
 
+  const onMoveCardToHere = () => {
+    apis.card
+      .put({ id: move.from.card.id, list_id: data.id })
+      .then((response) => {
+        fetchBoardById({ id: board.id });
+        setMove({ bool: false });
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div
       ref={ref}
@@ -165,6 +172,15 @@ function List({
       style={{ display: "flex", flexDirection: "column", cursor: "pointer" }}
       className={`board-list ${modalMode ? "up" : ""}`}
     >
+      <button className="list-down" onClick={() => onMoveCardToHere()}>
+        <FontAwesomeIcon icon={faLevelDownAlt} />
+      </button>
+      <span
+        className={`list-down ${
+          move.bool && data.cards.length === 0 ? "visible" : "invisible"
+        }`}
+      />
+
       <div style={{ display: "float" }}>
         <h4 style={{ wordBreak: "break-all", float: "left" }}>{data.name}</h4>
         <button
