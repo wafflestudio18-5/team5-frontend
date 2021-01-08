@@ -65,7 +65,6 @@ function Card({
           return;
         }
         const tList = list.cards;
-        console.log(tList);
         let fIndex = tList.findIndex((item) => item.id === move.from.id);
         let tIndex = tList.findIndex((item) => item.id === card.id);
 

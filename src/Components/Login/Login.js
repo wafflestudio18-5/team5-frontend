@@ -27,7 +27,6 @@ function Login() {
 
   // login button
   function onClick(e) {
-    console.log("LOG IN as ", email, pw);
     loginReqByPW(email, pw);
   }
    

@@ -18,14 +18,12 @@ const BoardThumbnail = ({ id, name, boardKey, star, refreshBoards }) => {
   }, [])
 
   const goToBoard = async () => {
-    console.log(enter);
     if (enter) return;
 
     setAnime(true);
     await _sleep(400); // 0.4 sec
 
     const newName = name.replaceAll(" ", "-").toLowerCase();
-    console.log(id);
     history.push(`/b/${boardKey}/${newName}`);
   };
 
@@ -34,7 +32,6 @@ const BoardThumbnail = ({ id, name, boardKey, star, refreshBoards }) => {
     if(st) targetStar = "False";
     else targetStar = "True";
     apis.board.put({ id: id, star: targetStar }).then((response) => {
-      console.log(`modify request from ${st} to ${!st}`);
       refreshBoards();
       setSt(response.data.star);
     });
