@@ -34,7 +34,7 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
 
     const inputBlur = (e) => {
         if (e.target.value === "" || e.target.value === data.content) {
-            setButton({...button, editMode: false});
+            setButton({green: false, editMode: false});
             setChangedComment(data.content);
         }
     }
@@ -45,20 +45,46 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
             {data.is_comment ?
         
                 <><div style={button.editMode? null : {display: 'none'}}>
+                <div style={{
+                  backgroundColor: 'white', 
+                  padding: 3, 
+                  paddingLeft: 10,
+                  paddingBottom: 0,
+                  border: '1.5px lightgray solid',
+                  borderRadius: 3,
+                  marginBottom: 5,
+                  display: 'flex',
+                  flexDirection: 'column'
+                  }}>
                     <input
-                        style={{fontSize: 14, border: '1px transparent solid', outline: 'none', filter: 'brightness(100%)'}}
+                        style={{fontSize: 14, 
+                        border: '1px transparent solid', 
+                        outline: 'none', 
+                        paddingTop: 5,
+                        width: 413,
+                        filter: 'brightness(100%)', background: 'white'}}
                         ref={inputRef}
                         value={changedComment}
                         onChange={commentChange}
                         onBlur={inputBlur}
                         placeholder="Edit your comment..."/>
 
-                    <button
-                        onClick={putComment}
-                        style={{backgroundColor: button.green? 'green' : 'lightgray', color: button.green? 'white' : 'gray'}}>
-                    Save
-                    </button>
-                </div>
+                    <div style={{display: 'float'}}>
+                        <button
+                            onClick={putComment}
+                            style={{
+                            backgroundColor: button.green ? "#5AAC44" : "lightgray",
+                            color: button.green ? "white" : "gray",
+                            marginTop: 7,
+                            marginBottom: 10,
+                            width: 50,
+                            height: 30,
+                            }}>
+                        Save
+                        </button>
+                        <button onClick={inputBlur} style={{ float: 'right', display: 'inline-block' }} className="card-modal-x">×</button>
+                    </div>
+                </div></div>
 
                 <div style={button.editMode? {display: 'none'} : null}>
                     <p>
