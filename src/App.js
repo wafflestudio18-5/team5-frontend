@@ -3,6 +3,7 @@ import { useUserContext } from "./Contexts";
 import { routes } from "./Library/Routes";
 import { HeaderPage } from "./Pages";
 import { useEffect } from "react";
+import './App.css';
 
 function App() {
   const { logged, user, loadLoginInfo } = useUserContext();
