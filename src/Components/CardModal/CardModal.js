@@ -165,7 +165,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
               <p className="title">Description</p>
               {description.edit ? (
                   <textarea
-                    style={{marginLeft: 5, borderRadius: 5, outline: 'none', height: 40, width: 485, border: '1px solid lightgray', marginRight: 5}}
+                    style={{marginLeft: 5, borderRadius: 5, outline: 'none', height: 50, width: 490, maxWidth: 490, overflowY: 'auto', border: '1px solid lightgray', marginRight: 5}}
                     onKeyPress={(e) => e.key === "Enter"? 
                     (e.target.value === ""? setDescription({...description, edit: false}) : setDescription({...description, exist: true, edit: false})): null}
                     onBlur={(e) => (e.target.value === ""? setDescription({...description, edit: false}) : setDescription({...description, exist: true, edit: false}))}
@@ -185,7 +185,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                 )
                : (
                 <button
-                  style={{width: 500, textAlign: 'left', height: 50, paddingLeft: 10, marginLeft: 5, paddingTop: 0}}
+                  style={{width: 495, textAlign: 'left', height: 50, paddingLeft: 10, marginLeft: 5, paddingTop: 0}}
                   onClick={() => setDescription({ ...description, edit: true })}
                   id="card-modal-add-descrip"
                 >
