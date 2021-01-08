@@ -52,6 +52,8 @@ function List({ board, data, postCard, putCard, deleteCard, postActivity, putAct
         //withCredentials: true,
       })
       .then(function (response) {
+        console.log("리스트 삭제하기 성공");
+        fetchBoardById({ id: board.id} );
         setRemoved({ id: data.id, bool: true });
       })
       .catch(function (error) {
