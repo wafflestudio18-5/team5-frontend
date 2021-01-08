@@ -360,6 +360,9 @@ function CardModal({
               <button className="nodt" onClick={addMember}>Members</button>
               <button className="nodt" >Labels</button>
               <button className="nodt" >Checklist</button>
+              
+              
+              <div style={{display: 'flex', flexDirection: 'row'}}>
               <button  className="nodt" 
               onClick={() => setDue({button: true, date: true, clock: false})}
               style={due.button? {filter: 'brightness(95%)'} : null}
@@ -371,7 +374,7 @@ function CardModal({
               ?<div style={{display: 'flex', flexDirection: 'column'}}>
               <div id="NOBUTTON">
               <DatePicker
-              onClick={(e) => {console.log(e.target.id)}}
+              onClick={(e) => {console.log(e.target)}}
               autoFocus={true}
               onChange={setDate}
               value={date}
@@ -379,7 +382,7 @@ function CardModal({
               /></div>
               <button onClick={() => setDue({button: true, time: true, date: false})}>OK</button></div>
 
-              :<div style={{display: 'flex', flexDirection: 'column'}}>
+              :<div style={{display: 'flex', flexDirection: 'row'}}>
               <div id="NOBUTTON">
               <TimePicker
               onChange={setTime}
@@ -388,11 +391,9 @@ function CardModal({
               /></div>
               <button onClick={saveDueDate}>Save</button>
               <button onClick={() => setDue({button: false, time: false, date: false})}>Close</button>
-              </div>}
-
-
-              </div> 
+              </div>}</div>
               : null}
+              </div>
               
              
               <p>
