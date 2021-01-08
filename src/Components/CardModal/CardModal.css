@@ -167,3 +167,27 @@
     background-color: '#E4F0F6';
     color: cornflowerblue;
 }
+
+textarea {
+    resize: none;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 3px;
+}
+
+#card-modal-wrapper textarea::-webkit-scrollbar {
+  background-color: transparent;
+  width: 10px !important;
+  border-radius: 10px;
+}
+
+#card-modal-wrapper textarea::-webkit-scrollbar-thumb {
+  background-color: #c5c5c5;
+  border-radius: 10px;
+  width: 10px !important;
+}
+
+#card-modal-wrapper textarea::-webkit-scrollbar-track {
+  background-color: #DADBE2;
+  border-radius: 10px;
+  width: 10px !important;
+}
