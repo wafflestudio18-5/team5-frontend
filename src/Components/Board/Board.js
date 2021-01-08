@@ -142,13 +142,13 @@ function Board({
       ) : (
         <div className="board-wrapper anime"><img src="https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif"/></div>
       )}
-      <div id="Board-wrapper" style={{cursor: 'pointer'}}>
+      <div id="Board-wrapper">
         <header id="board-header">
           <div id="board-header-left">
-            <select name="language" defaultValue="English (US)">
-              <option value="Board">Board</option>
-              <option value="Calendar">Calendar</option>
-              <option value="Map">Map</option>
+            <select style={{cursor: 'pointer'}} name="language" defaultValue="English (US)">
+              <option  style={{cursor: 'pointer'}} value="Board">Board</option>
+              <option style={{cursor: 'pointer'}}  value="Calendar">Calendar</option>
+              <option style={{cursor: 'pointer'}}  value="Map">Map</option>
             </select>
 
             {boardName.edit? 
