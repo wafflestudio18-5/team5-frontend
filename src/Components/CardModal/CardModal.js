@@ -198,7 +198,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
               <div style={{display: 'flex', flexDirection: 'row'}}>
                 <img style={{
                   height: 35, width: 35, borderRadius: '50%', marginBottom: 15, marginRight: 10, position: 'relative', top: 4, left: 2}} 
-                  src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" alt={String(cardName)}/> {/*TODO 프사설정*/}
+                  src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt={String(cardName)}/> {/*TODO 프사설정*/}
                 <div style={{
                   backgroundColor: 'white', 
                   padding: 3, 

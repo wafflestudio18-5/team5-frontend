@@ -41,7 +41,7 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
 
     return (
         <div className="Activity" style={{display: 'flex', flexDirection: 'row', marginTop: 5, marginBottom: 5}}>
-            {(data.is_comment || detail) ? <img style={{height: 35, width: 35, borderRadius: '50%', marginBottom: 15, marginRight: 10, position: 'relative', top: 10, left: 2}} src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" alt={String(data.id)}/> : null}
+            {(data.is_comment || detail) ? <img style={{height: 35, width: 35, borderRadius: '50%', marginBottom: 15, marginRight: 10, position: 'relative', top: 10, left: 2}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt={String(data.id)}/> : null}
             {data.is_comment ?
         
                 <><div style={button.editMode? null : {display: 'none'}}>
@@ -79,11 +79,11 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
                 </div>
                 </>
 
-            :  (detail? <p>
+            :  (detail? <p style={{position: 'relative', top: 3}}>
                     <span style={{fontWeight: 600, color: 'black', fontSize: 15, width: 'fit-content'}}>{data.creator} </span>
                     <span style={{fontSize: 15}}>{data.content}</span>
                     <br/>
-                    <span style={{color: 'gray', fontsize: 12, marginTop: 10}}>    {data.created_at.replace("T", "  ").replace("Z", "")}</span>
+                    <span style={{color: 'gray', fontsize: 12, position: 'relative', top: 4}}>    {data.created_at.replace("T", "  ").replace("Z", "")}</span>
                 </p>:null)}
             {/* TODO 댓글이 아닐 경우 다른 방식으로... */}
         </div>
