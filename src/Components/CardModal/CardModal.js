@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./CardModal.css";
 import Activity from "./Activity.js";
 import apis from '../../Library/Apis';
@@ -127,6 +127,8 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
     );
   };
 
+  const activities = useRef();
+
   return (
     <div id="card-modal-wrapper" onClick={exitIfNotModal} style={{cursor: 'default'}}>
       <div id="card-modal-wrapper-2" style={{display: 'flex', flexDirection: 'column'}}>
@@ -165,6 +167,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                     style={{marginLeft: 5, borderRadius: 5, outline: 'none', height: 40, width: 485, border: '1px solid lightgray', marginRight: 5}}
                     onKeyPress={(e) => e.key === "Enter"? 
                     (e.target.value === ""? setDescription({...description, edit: false}) : setDescription({...description, exist: true, edit: false})): null}
+                    onBlur={(e) => (e.target.value === ""? setDescription({...description, edit: false}) : setDescription({...description, exist: true, edit: false}))}
                     value={description.content}
                     onChange={(e) =>
                       setDescription({
@@ -174,9 +177,13 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                     }
                   />
                 ) : ((description.content !== "" && description.content !== undefined) ? (
-                  <p onClick={() => setDescription({ ...description, edit: true })}>
+                  
+                  <>
+                  <p >
                     {description.content}
                   </p>
+                  </>
+                
                 )
                : (
                 <button
@@ -195,7 +202,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                 <button id="card-modal-detail" onClick={(e) => setDetail(!detail)} style={{float: 'right', display: 'inline-block', width: 100}}>{detail? "Hide Details" : "Show Details"}</button>
               </div>
 
-              <div id="card-modal-activities" style={{height: button.display? 242 : 280, maxHeight: button.display? 242 : 280, overflowX: 'auto', marginTop: 20}}>              
+              <div ref={activities} id="card-modal-activities" style={{height: button.display? 242 : 280, maxHeight: button.display? 242 : 280, overflowX: 'auto', marginTop: 20}}>              
               <div style={{display: 'flex', flexDirection: 'row'}}>
                 <img style={{
                   height: 35, width: 35, borderRadius: '50%', marginBottom: 15, marginRight: 10, position: 'relative', top: 4, left: 2}} 
@@ -206,10 +213,15 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                   paddingBottom: 0,
                   border: '1.5px lightgray solid',
                   borderRadius: 3,
-                  marginBottom: 5
+                  marginBottom: 5,
+                  display: 'flex',
+                  flexDirection: 'column'
                   }}>
                   <input
-                  style={{fontSize: 15}}
+                  style={{
+                    fontSize: 15,
+                    //width: activities.current.isVerticalScroll() ? 510 : 450
+                    }}
                     value={comment}
                     onChange={changeComment}
                     onFocus={() => setButton({ ...button, display: true })}
