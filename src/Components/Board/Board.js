@@ -328,9 +328,9 @@ function Board({
                 </button>
                 {crtList ? (
                   <div className="crtList">
-                    <input
+                    <textarea
                       placeholder="Enter list title..."
-                      style={{fontSize: 15, fontWeight: 600, outline: 'none'}}
+                      style={{fontSize: 15, fontWeight: 600, outline: 'none', width: 300}}
                       onChange={(e) => setListInput(e.target.value)}
                       value={listInput}
                     />

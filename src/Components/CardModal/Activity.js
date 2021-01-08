@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
 import apis from '../../Library/Apis';
 
-function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteActivity, detail}) {
+function Activity({data, getCard, putActivity, deleteActivity, detail}) {
 
     const inputRef = useRef();
 
@@ -30,6 +30,7 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
             return;
         }
         putActivity(changedComment, String(data.id));
+        getCard();
     }
 
     const inputBlur = (e) => {
@@ -47,7 +48,7 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
                 <><div style={button.editMode? null : {display: 'none'}}>
                 <p>
                     <span style={{fontWeight: 600, color: 'black', fontSize: 15}}>{data.creator} </span>
-                    <span style={{color: 'gray', fontsize: 12}}>    {data.created_at.replace("T", "  ").replace("Z", "")}</span></p>
+                    <span style={{color: 'gray', fontsize: 12}}>    {data.created_at}</span></p>
                 <div style={{
                   backgroundColor: 'white', 
                   padding: 3, 
@@ -96,7 +97,7 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
                 <div style={button.editMode? {display: 'none'} : null}>
                     <p>
                         <span style={{fontWeight: 600, color: 'black', fontSize: 15}}>{data.creator} </span>
-                        <span style={{color: 'gray', fontsize: 12}}>    {data.created_at.replace("T", "  ").replace("Z", "")}</span></p>
+                        <span style={{color: 'gray', fontsize: 12}}>    {data.created_at}</span></p>
                     <div style={{              
                         backgroundColor: 'white', 
                         padding: 4, 
@@ -116,7 +117,7 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
                     <span style={{fontWeight: 600, color: 'black', fontSize: 15, width: 'fit-content'}}>{data.creator} </span>
                     <span style={{fontSize: 15}}>{data.content}</span>
                     <br/>
-                    <span style={{color: 'gray', fontsize: 12, position: 'relative', top: 4}}>    {data.created_at.replace("T", "  ").replace("Z", "")}</span>
+                    <span style={{color: 'gray', fontsize: 12, position: 'relative', top: 4}}>    {data.created_at}</span>
                 </p>:null)}
             {/* TODO 댓글이 아닐 경우 다른 방식으로... */}
         </div>

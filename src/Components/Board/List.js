@@ -117,7 +117,7 @@ function List({
 
   const addCard = () => {
     setCrtCard(true);
-    newCardButton.current.focus({ preventScroll: false });
+    newCardInput.current.focus({ preventScroll: false });
     scroll(scrollRef);
   };
 
@@ -221,13 +221,13 @@ function List({
               />
             ))}
           </DndProvider>
-          <div className="crtCard" style={crtCard ? {} : { display: "none" }}>
-            <div id="crtCard_inputWrapper">
-              <input
+              <div className="crtCard" style={crtCard ? {cursor: 'text'} : { display: "none" }}>
+            <div id="crtCard_inputWrapper" style={{display: 'flex'}}>
+              <textarea
                 className="addCard"
                 onChange={(e) => setCardInput(e.target.value)}
                 value={cardInput}
-                style={{ fontSize: 15 }}
+                style={{fontSize: 15, minHeight: 40, height: 'fit-content', overflowY: 'auto', width: 410}}
                 ref={newCardInput}
                 placeholder="Enter a title for this card..."
                 onKeyPress={createCardEnter}
@@ -243,8 +243,8 @@ function List({
             </button>
             <button id="no_crtCard" onClick={no_crtCard}></button>
           </div>
-        </div>
       </div>
+      <div style={{display: 'flex'}}>
       <button
         style={crtCard ? { display: "none" } : {}}
         id="board-addcard"
@@ -252,6 +252,20 @@ function List({
       >
         <span id="board-addcard-plus">十 </span>Add another card
       </button>
+      <button
+          style={{
+            float: "right",
+            width: "25px",
+            position: 'relative',
+            top: 2,
+            left: -4,
+            border: 'pink 1px solid',
+            background: "url('https://api.iconify.design/octicon:trash-24.svg') no-repeat center center"
+          }}
+          id="board-list-delete"
+          onClick={deleteList}
+        />
+        </div>
     </div>
   );
 }

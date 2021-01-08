@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./CardModal.css";
 import Activity from "./Activity.js";
-import apis from "../../Library/Apis";
+import apis from '../../Library/Apis';
+import ReactMarkdown from 'react-markdown';
 import { useBoardContext } from "../../Contexts";
 
 function CardModal({
@@ -145,6 +146,8 @@ function CardModal({
     );
   };
 
+  const activities = useRef();
+
   return (
     <div
       id="card-modal-wrapper"
@@ -210,21 +213,21 @@ function CardModal({
                     marginLeft: 5,
                     borderRadius: 5,
                     outline: "none",
-                    height: 40,
-                    width: 485,
+                    height: 50,
+                    width: 490,
+                    maxWidth: 490,
+                    overflowY: 'auto',
                     border: "1px solid lightgray",
                     marginRight: 5,
                   }}
-                  onKeyPress={(e) => 
-                    e.key === "Enter"
-                      ? !e.target.value
+                  onBlur={(e) => 
+                      !e.target.value
                         ? setDescription({ ...description, edit: false })
                         : setDescription({
                             ...description,
                             exist: true,
                             edit: false,
                           })
-                      : null
                   }
                   value={description.content}
                   onChange={(e) =>
@@ -235,21 +238,12 @@ function CardModal({
                   }
                 />
               ) : description.content ? (
-                <p
-                  onClick={() => setDescription({ ...description, edit: true })}
-                >
-                  {description.content}
-                </p>
+                  <ReactMarkdown>
+                    {description.content}
+                  </ReactMarkdown> 
               ) : (
                 <button
-                  style={{
-                    width: 500,
-                    textAlign: "left",
-                    height: 50,
-                    paddingLeft: 10,
-                    marginLeft: 5,
-                    paddingTop: 0,
-                  }}
+                  style={{width: 495, textAlign: 'left', height: 50, paddingLeft: 10, marginLeft: 5, paddingTop: 0}}
                   onClick={() => setDescription({ ...description, edit: true })}
                   id="card-modal-add-descrip"
                 >
@@ -261,29 +255,10 @@ function CardModal({
                 <p className="title" style={{ float: "left" }}>
                   Activity
                 </p>
-                <button
-                  id="card-modal-detail"
-                  onClick={(e) => setDetail(!detail)}
-                  style={{
-                    float: "right",
-                    display: "inline-block",
-                    width: 100,
-                  }}
-                >
-                  {detail ? "Hide Details" : "Show Details"}
-                </button>
+                <button id="card-modal-detail" onClick={(e) => setDetail(!detail)} style={{float: 'right', display: 'inline-block', width: 100}}>{detail? "Hide Details" : "Show Details"}</button>
               </div>
-
-              <div
-                id="card-modal-activities"
-                style={{
-                  height: button.display ? 242 : 280,
-                  maxHeight: button.display ? 242 : 280,
-                  overflowX: "auto",
-                  marginTop: 20,
-                }}
-              >
-                <div style={{ display: "flex", flexDirection: "row" }}>
+              <div ref={activities} id="card-modal-activities" style={{height: button.display? 242 : 280, maxHeight: button.display? 242 : 280, overflowX: 'auto', marginTop: 20}}>              
+              <div style={{display: 'flex', flexDirection: 'row'}}>
                   <img
                     style={{
                       height: 35,
@@ -297,8 +272,7 @@ function CardModal({
                     }}
                     src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png"
                     alt={String(cardName)}
-                  />{" "}
-                  {/*TODO 프사설정*/}
+                  />
                   <div
                     style={{
                       backgroundColor: "white",
@@ -307,10 +281,12 @@ function CardModal({
                       border: "1.5px lightgray solid",
                       borderRadius: 3,
                       marginBottom: 5,
+                            display: 'flex',                flexDirection: 'column'
                     }}
                   >
                     <input
                       style={{ fontSize: 15 }}
+                      //width: activities.current.isVerticalScroll() ? 510 : 450
                       value={comment}
                       onChange={changeComment}
                       onFocus={() => setButton({ ...button, display: true })}
