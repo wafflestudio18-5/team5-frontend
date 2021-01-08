@@ -160,6 +160,19 @@ div.board-wrapper.anime {
   z-index: 0;
 }
 
+svg.star {
+  stroke-width: 30;
+  stroke: white;
+}
+
+svg.star.true path {
+  fill: white;
+}
+
+svg.star.false path {
+  fill: none;
+}
+
 .board-card-wrapper {
   position: relative;
 }

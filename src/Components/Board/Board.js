@@ -5,9 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import List from "./List.js";
 import apis from "../../Library/Apis";
+import { useBoardContext } from "../../Contexts";
 
 const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
-
 
 function Board({
   users,
@@ -27,6 +27,7 @@ function Board({
   const [invite, setInvite] = useState(false);
   const [inviteInput, setInviteInput] = useState("");
   const [loading, setLoading] = useState(true);
+  const { fetchBoardById } = useBoardContext();
 
   const wait = async (delay) => {
     await _sleep(delay);
@@ -72,8 +73,13 @@ function Board({
   };
 
   const eUsers = inviteInput
-  ? userList.filter(item => !users.find(it => it.id === item.id)).filter((item) => item.username.includes(inviteInput)).slice(0, 7)
-  : userList.filter(item => !users.find(it => it.id === item.id)).slice(0, 7);
+    ? userList
+        .filter((item) => !users.find((it) => it.id === item.id))
+        .filter((item) => item.username.includes(inviteInput))
+        .slice(0, 7)
+    : userList
+        .filter((item) => !users.find((it) => it.id === item.id))
+        .slice(0, 7);
 
   console.log(users);
 
@@ -109,6 +115,13 @@ function Board({
     return <Redirect to="/username/boards" />;
   };
 
+  const toggleStar = (target) => {
+    apis.board
+      .put({ id: board.id, star: target })
+      .then((response) => {fetchBoardById({id: board.id})})
+      .catch((err) => console.log(err));
+  };
+
   if (!board) return <div className="board-wrapper">Loading...</div>;
 
   return (
@@ -127,9 +140,13 @@ function Board({
               <option value="Map">Map</option>
             </select>
             <h3 id="board-name">{board.name}</h3>
-            <button id="board-header-star" onClick={() => {//TODO: star set
-            }}>
-              <FontAwesomeIcon icon={faStar} />
+            <button
+              id="board-header-star"
+              onClick={() => {
+                board.star ? toggleStar("False") : toggleStar("True");
+              }}
+            >
+              <FontAwesomeIcon className={`star ${board.star}`} icon={faStar} />
             </button>
             <div className="board-header-vertical-line" />
             <button>
