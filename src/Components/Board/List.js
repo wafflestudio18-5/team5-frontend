@@ -13,8 +13,8 @@ import {
   faTrash,
   faEdit,
 } from "@fortawesome/free-solid-svg-icons";
+import { _sleep } from '../../Library/Timer';
 
-const _sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 function List({
   board,
@@ -23,7 +23,6 @@ function List({
   postCard,
   putCard,
   deleteCard,
-  postActivity,
   putActivity,
   deleteActivity,
 }) {
@@ -257,7 +256,6 @@ function List({
                 board_id={board.id}
                 deleteCard={deleteCard}
                 putCard={putCard}
-                postActivity={postActivity}
                 putActivity={putActivity}
                 deleteActivity={deleteActivity}
               />

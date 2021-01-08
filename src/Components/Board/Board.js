@@ -20,7 +20,6 @@ function Board({
   postCard,
   putCard,
   deleteCard,
-  postActivity,
   putActivity,
   deleteActivity,
 }) {
@@ -315,7 +314,6 @@ function Board({
                     postCard={postCard}
                     putCard={putCard}
                     deleteCard={deleteCard}
-                    postActivity={postActivity}
                     putActivity={putActivity}
                     deleteActivity={deleteActivity}
                   />

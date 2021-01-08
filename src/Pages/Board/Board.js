@@ -11,15 +11,6 @@ function BoardPage({ match }) {
     fetchBoardByKey({ key: match.params.board_key });
   };
 
-  const postActivity = (cId, content) => {
-    if (!content) return;
-    apis.activity.post({ card_id: cId, content })
-      .then((response) => {
-        fetch(match);
-      })
-      .catch((err) => console.log(err));
-  };
-
   const putActivity = (content, aId) => {
     if (!content) return;
     apis.activity.put({ id: aId, content })
@@ -77,7 +68,6 @@ function BoardPage({ match }) {
         postCard={postCard}
         putCard={putCard}
         deleteCard={deleteCard}
-        postActivity={postActivity}
         putActivity={putActivity}
         deleteActivity={deleteActivity}
         boardUsers={users}
