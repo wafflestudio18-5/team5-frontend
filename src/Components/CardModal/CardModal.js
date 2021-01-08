@@ -215,7 +215,7 @@ function CardModal({
                     border: "1px solid lightgray",
                     marginRight: 5,
                   }}
-                  onKeyPress={(e) => {
+                  onKeyPress={(e) => 
                     e.key === "Enter"
                       ? !e.target.value
                         ? setDescription({ ...description, edit: false })
@@ -224,8 +224,8 @@ function CardModal({
                             exist: true,
                             edit: false,
                           })
-                      : null;
-                  }}
+                      : null
+                  }
                   value={description.content}
                   onChange={(e) =>
                     setDescription({
