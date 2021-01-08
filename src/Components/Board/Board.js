@@ -140,7 +140,7 @@ function Board({
               <option value="Map">Map</option>
             </select>
             {boardName.edit? 
-            <input className="noOutline" style={{outline: 'none', fontWeight: 600, fontSize: 20, boxShadow: 'none', width: 'fit-content', borderRadius: 5, padding: 0}}
+            <input className="noOutline" style={{paddingLeft:10, paddingRight: 10, backgroundColor: '#35A7EE', color: 'white', border: '0px transparent solid', outline: 'none', fontWeight: 600, fontSize: 20, boxShadow: 'none', width: 'fit-content', borderRadius: 5, padding: 0}}
               value={boardName.content} onChange={(e) => setBoardName({...boardName, content: e.target.value, dash: e.target.value.replace(" ", "-")})}
               onBlur={(e) => setBoardName({...boardName, edit: false, save: !(boardName.save)})}
               onKeyPress={(e) => (e.key === 'Enter')? setBoardName({...boardName, edit: false, save: !(boardName.save)}) : null}
@@ -179,16 +179,24 @@ function Board({
                     />
                   </div>
 
+                  <div id="inviteUsers" style={{height: 280, background: 'white', overflowX: 'auto', position: 'relative', top: -5}}>
                   {eUsers.map((item, index) => {
                     return (
-                      <h4
+                      <>
+                      <div
+                        className="inviteUser"
                         key={index}
                         onClick={() => inviteMember(board.id, item.username)}
+                        style={{padding: 10, height: 'fit-content', textAlign: 'left', display: 'flex', flexDirection: 'row'}}
                       >
-                        {item.username}
-                      </h4>
+                        <img style={{height: 25, width: 25, borderRadius: '50%', position: 'relative', top: 3, left: 3}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt={"profile"}/> 
+                        <p style={{position: 'relative', top: -7, marginLeft: 15, pontWeight: 300}}>{item.username}</p>
+                      </div>
+                      </>
                     );
                   })}
+                  </div>
+
                 </div>
               ) : null}
             </div>
