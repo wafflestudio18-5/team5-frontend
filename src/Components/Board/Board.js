@@ -70,8 +70,9 @@ function Board({
     setListInput("");
   };
 
-  const [boardName, setBoardName] = useState({content: undefined, edit: false, save: false, id: undefined, dash: undefined})
-  useEffect(() => {
+  const [boardName, setBoardName] = useState({content: undefined, edit: false, save: false, id: undefined})
+  const onClickChangeName = () => {
+    setBoardName({...boardName, edit: false);
     apis.board
     .put({ id: boardName.id, name: boardName.content })
     .then((response) => console.log(response))
@@ -83,9 +84,10 @@ function Board({
           "바뀐 주소와 함께 저장할 데이터 객체가 이 첫 번째 파라미터. 바뀔 페이지의 정보들을 담아두고 클라이언트에서 정보를 활용해 새로운 페이지를 렌더링하면 된다. 정보는 history.state로 접근하면 된다.",
       },
       "바꿀 제목",
-      boardName.dash
-    ); // 바꿀 주소 앞에 점 찍으면 상대 주소 됨. 우리는 해당 사항 없음
-  }}, [boardName.save])
+      boardName.content.replaceAll(" ", "-")
+    );
+  }
+}
 
   const eUsers = inviteInput
     ? userList
@@ -153,11 +155,11 @@ function Board({
 
             {boardName.edit? 
             <input className="noOutline" style={{paddingLeft:10, paddingRight: 10, backgroundColor: '#35A7EE', color: 'white', border: '0px transparent solid', outline: 'none', fontWeight: 600, fontSize: 20, boxShadow: 'none', width: 'fit-content', borderRadius: 5, padding: 0}}
-              value={boardName.content} onChange={(e) => setBoardName({...boardName, content: e.target.value, dash: e.target.value.replace(" ", "-")})}
+              value={boardName.content} onChange={(e) => setBoardName({...boardName, content: e.target.value})}
               onBlur={(e) => setBoardName({...boardName, edit: false, save: !(boardName.save)})}
               onKeyPress={(e) => (e.key === 'Enter')? setBoardName({...boardName, edit: false, save: !(boardName.save)}) : null}
             />: 
-            <h3 onClick={(e) => setBoardName({...boardName, edit: true, content: board.name, dash: board.name.replace(" ", "-"), id: board.id})} id="board-name">{boardName.content === undefined? board.name : boardName.content}</h3>}
+            <h3 onClick={(e) => setBoardName({...boardName, edit: true, content: board.name, id: board.id})} id="board-name">{boardName.content === undefined? board.name : boardName.content}</h3>}
             <button
               id="board-header-star"
               onClick={() => {
