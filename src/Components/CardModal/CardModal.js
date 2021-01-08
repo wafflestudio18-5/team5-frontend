@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./CardModal.css";
 import Activity from "./Activity.js";
 import apis from "../../Library/Apis";
@@ -126,17 +126,6 @@ function CardModal({
     setNameState({ ...nameState, edit: false });
     setCardName(nameState.name); // 리스트 화면에 보이는 카드 이름 변경
   };
-
-  //Description 추가 및 변경하기
-  const [description, setDescription] = useState({
-    exist: false,
-    content: "",
-    edit: false,
-  });
-  useEffect(() => {
-    // 서버에 description 변경
-    putCard({ cId: card_id, description: description.content });
-  }, [description.edit && false]);
 
   // 멤버 추가하기
   const addMember = () => {
@@ -362,9 +351,8 @@ function CardModal({
                       .map((data, index) => (
                         <Activity
                           data={data}
-                          refresh={refresh}
-                          setRefresh={setRefresh}
                           key={index}
+                          getCard={getCard}
                           postActivity={postActivity}
                           putActivity={putActivity}
                           deleteActivity={deleteActivity}
