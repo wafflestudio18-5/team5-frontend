@@ -198,19 +198,7 @@ function List({
         move.from && move.from.id === data.id ? "moving" : ""
       }`}
     >
-      <div style={{ display: "float" }}>
-        <h4 style={{ wordBreak: "break-all", float: "left" }}>{data.name}</h4>
-        <button
-          style={{
-            float: "right",
-            width: "30px",
-          }}
-          id="board-list-delete"
-          onClick={deleteList}
-        >
-          DEL
-        </button>
-      </div>
+      <h4 style={{ wordBreak: "break-all", float: "left" }}>{data.name}</h4>
       <div className="board-cards" id={data.id} ref={scrollRef}>
         <div
           className={crtCard ? "board-cards-crtCard" : "board-cards-crtCard-x"}
@@ -256,6 +244,7 @@ function List({
             <button id="no_crtCard" onClick={no_crtCard}></button>
           </div>
       </div>
+      <div style={{display: 'flex'}}>
       <button
         style={crtCard ? { display: "none" } : {}}
         id="board-addcard"
@@ -263,6 +252,20 @@ function List({
       >
         <span id="board-addcard-plus">十 </span>Add another card
       </button>
+      <button
+          style={{
+            float: "right",
+            width: "25px",
+            position: 'relative',
+            top: 2,
+            left: -4,
+            border: 'pink 1px solid',
+            background: "url('https://api.iconify.design/octicon:trash-24.svg') no-repeat center center"
+          }}
+          id="board-list-delete"
+          onClick={deleteList}
+        />
+        </div>
     </div>
   );
 }
