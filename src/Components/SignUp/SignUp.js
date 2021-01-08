@@ -38,12 +38,10 @@ function SignUp() {
   }
 
   function greenClick(e) {
-    console.log("CONTINUE as ", email);
     setAccount(true);
   }
 
   function blueClick(e) {
-    console.log("SIGN UP as ", email, fn, pw);
     signUpReq(email, fn, pw);
   }
     

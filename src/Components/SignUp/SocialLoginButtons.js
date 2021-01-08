@@ -13,7 +13,6 @@ function SocialLoginButtons({ login }) {
 
   const onGoogleSuccess = (res) => {
     loginReqBySC("Google", res.tokenObj.id_token);
-    console.log("[debug] Google response: ");
     console.log(res);
   };
 
@@ -23,7 +22,6 @@ function SocialLoginButtons({ login }) {
 
   const onFacebook = (res) => {
     loginReqBySC("Facebook", res.email);
-    console.log("[debug] Facebook response: ")
     console.log(res);
   }
 

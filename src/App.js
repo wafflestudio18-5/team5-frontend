@@ -11,8 +11,6 @@ function App() {
     loadLoginInfo();
   }, []);
 
-  console.log("App render");
-
   return (
     <BrowserRouter>
       {logged ? (

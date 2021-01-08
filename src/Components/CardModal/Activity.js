@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
 import apis from '../../Library/Apis';
 
-function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteActivity}) {
+function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteActivity, detail}) {
 
     const inputRef = useRef();
 
@@ -30,65 +30,87 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
             return;
         }
         putActivity(String(data.id), changedComment);
-        /*apis.activity.put( { content: changedComment, id: String(data.id) })
-        .then(function(response) {
-            console.log("댓글 수정 성공");
-            setRefresh(!refresh);
-        })
-        .catch(function (error) {
-        if (error.response) {
-        console.log("// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.");
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-        }
-        else if (error.request) {
-        console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
-        // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
-        // Node.js의 http.ClientRequest 인스턴스입니다.
-        console.log(error.request);
-        }
-        else {
-        console.log("// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.");
-        console.log('Error', error.message);
-        }
-        console.log(error.config);
-    });*/
     }
 
     const inputBlur = (e) => {
         if (e.target.value === "" || e.target.value === data.content) {
-            setButton({...button, editMode: false});
+            setButton({green: false, editMode: false});
             setChangedComment(data.content);
         }
     }
 
     return (
         <div className="Activity" style={{display: 'flex', flexDirection: 'row', marginTop: 5, marginBottom: 5}}>
-            <img style={{height: 35, width: 35, borderRadius: '50%', marginBottom: 15, marginRight: 10, position: 'relative', top: 10, left: 2}} src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" alt={String(data.id)}/> {/*TODO 프사설정*/}
+            {(data.is_comment || detail) ? <img style={{height: 35, width: 35, borderRadius: '50%', marginBottom: 15, marginRight: 10, position: 'relative', top: 10, left: 2}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt={String(data.id)}/> : null}
             {data.is_comment ?
         
                 <><div style={button.editMode? null : {display: 'none'}}>
+                <div style={{
+                  backgroundColor: 'white', 
+                  padding: 3, 
+                  paddingLeft: 10,
+                  paddingBottom: 0,
+                  border: '1.5px lightgray solid',
+                  borderRadius: 3,
+                  marginBottom: 5,
+                  display: 'flex',
+                  flexDirection: 'column'
+                  }}>
                     <input
-                    ref={inputRef}
-                    value={changedComment}
-                    onChange={commentChange}
-                    onBlur={inputBlur}
-                    placeholder="Edit your comment..."/>
+                        style={{fontSize: 14, 
+                        border: '1px transparent solid', 
+                        outline: 'none', 
+                        paddingTop: 5,
+                        width: 413,
+                        filter: 'brightness(100%)', background: 'white'}}
+                        ref={inputRef}
+                        value={changedComment}
+                        onChange={commentChange}
+                        onBlur={inputBlur}
+                        placeholder="Edit your comment..."/>
 
-                    <button
-                    onClick={putComment}
-                    style={{backgroundColor: button.green? 'green' : 'lightgray', color: button.green? 'white' : 'gray'}}>
-                    Save
-                    </button>
-                </div>
+                    <div style={{display: 'float'}}>
+                        <button
+                            onClick={putComment}
+                            style={{
+                            backgroundColor: button.green ? "#5AAC44" : "lightgray",
+                            color: button.green ? "white" : "gray",
+                            marginTop: 7,
+                            marginBottom: 10,
+                            width: 50,
+                            height: 30,
+                            }}>
+                        Save
+                        </button>
+                        <button onClick={inputBlur} style={{ float: 'right', display: 'inline-block' }} className="card-modal-x">×</button>
+                    </div>
+                </div></div>
+
                 <div style={button.editMode? {display: 'none'} : null}>
-                    <p>{changedComment}</p>
-                    <button className="ActivityCommentModify" onClick={editCommentClick}>edit</button>
-                    <button className="ActivityCommentModify" onClick={() => deleteActivity(data.id)}>delete</button>
-                </div></>
+                    <p>
+                        <span style={{fontWeight: 600, color: 'black', fontSize: 15}}>{data.creator} </span>
+                        <span style={{color: 'gray', fontsize: 12}}>    {data.created_at.replace("T", "  ").replace("Z", "")}</span></p>
+                    <div style={{              
+                        backgroundColor: 'white', 
+                        padding: 4, 
+                        border: '1.5px lightgray solid',
+                        borderRadius: 3,
+                        marginBottom: 0,
+                        width: 'fit-content'}}>
+                        <p style={{fontSize: 15}}>{changedComment}</p>
+                    </div>
+                    <button className="ActivityCommentModify" onClick={editCommentClick}>Edit</button>
+                    <span> · </span>
+                    <button className="ActivityCommentModify" onClick={() => deleteActivity(data.id)}>Delete</button>
+                </div>
+                </>
 
-            : <p>{data.content}</p>}
+            :  (detail? <p style={{position: 'relative', top: 3}}>
+                    <span style={{fontWeight: 600, color: 'black', fontSize: 15, width: 'fit-content'}}>{data.creator} </span>
+                    <span style={{fontSize: 15}}>{data.content}</span>
+                    <br/>
+                    <span style={{color: 'gray', fontsize: 12, position: 'relative', top: 4}}>    {data.created_at.replace("T", "  ").replace("Z", "")}</span>
+                </p>:null)}
             {/* TODO 댓글이 아닐 경우 다른 방식으로... */}
         </div>
     )

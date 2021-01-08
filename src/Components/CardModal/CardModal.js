@@ -11,28 +11,24 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
   function getCard() {
     apis.card.getByKey({key: card_key})
       .then(function (response) {
-        console.log("카드 정보 받아오기 성공");
-        console.log(response.data);
         setCard(response.data);
         setNameState({ ...nameState, name: response.data.name });
         setDescription({...description, content: response.data.description.content})
       })
       .catch(function (error) {
         if (error.response) {
-          console.log(
-            "// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다."
+          console.log("요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다."
           );
           console.log(error.response.data);
           console.log(error.response.status);
           console.log(error.response.headers);
         } else if (error.request) {
-          console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+          console.log("요청이 이루어 졌으나 응답을 받지 못했습니다.");
           // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
           // Node.js의 http.ClientRequest 인스턴스입니다.
           console.log(error.request);
         } else {
-          console.log(
-            "// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다."
+          console.log("오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다."
           );
           console.log("Error", error.message);
         }
@@ -48,13 +44,14 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
     if (
       e.target.id.includes("card-modal-wrapper") ||
       e.target.className === "blank-for-card-modal" ||
-      e.target.id === "card-modal-x"
+      e.target.id === "exit"
     ) {
       exit();
     }
   };
 
   const [button, setButton] = React.useState({ display: false, green: false });
+  const [detail, setDetail] = React.useState(true);
   const [comment, setComment] = React.useState("");
   const changeComment = (e) => {
     setComment(e.target.value);
@@ -63,13 +60,9 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
       : setButton({ ...button, green: true });
   };
 
-  //댓글 달고 저장하기 TODO 안 뜸 아놔
+  //댓글 달고 저장하기
   const saveComment = () => {
-    postActivity(String(card_id), comment);/*() => {
-        setRefresh(!refresh);
-        setComment("");
-        setButton({ display: false, green: false });
-      });*/
+    postActivity(String(card_id), comment);
   };
 
   //해당 카드 지우기
@@ -85,24 +78,21 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
   const changeName = (card_id, name) => {
     apis.card.put( { id: card_id, name })
       .then(function (response) {
-        console.log("카드 제목 바꾸기 성공");
       })
       .catch(function (error) {
         if (error.response) {
-          console.log(
-            "// 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다."
+          console.log("요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다."
           );
           console.log(error.response.data);
           console.log(error.response.status);
           console.log(error.response.headers);
         } else if (error.request) {
-          console.log("// 요청이 이루어 졌으나 응답을 받지 못했습니다.");
+          console.log("요청이 이루어 졌으나 응답을 받지 못했습니다.");
           // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
           // Node.js의 http.ClientRequest 인스턴스입니다.
           console.log(error.request);
         } else {
-          console.log(
-            "// 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다."
+          console.log("오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다."
           );
           console.log("Error", error.message);
         }
@@ -153,14 +143,14 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
             ) : (
               <>
                   <input
-                  style={{ fontWeight: 700, fontSize: 20, float: 'left' }}
+                  style={{ fontWeight: 700, fontSize: 20, float: 'left', marginBottom: 3 }}
                   value={nameState.name}
                   onChange={cardNameChange}
                   onBlur={() => nameState.edit ? changeName(card_id, nameState.name) : null}
                 />
               </>
             )}
-            <button style={{ float: 'right', display: 'inline-block' }} id="card-modal-x" /></div>
+            <button style={{ float: 'right', display: 'inline-block' }} className="card-modal-x" id="exit">×</button></div>
             <p id="card-modal-listname">
               in list{" "}
               <span style={{ textDecoration: "underline" }}>{list_name}</span>
@@ -197,27 +187,28 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                 </button>
               ))}
 
-              <div style={{display: 'float', background: 'pink', textAlign: 'center'}}>
+              <div style={{display: 'float'}}>
                 <p className="title" style={{float: 'left'}}>
                   Activity
                 </p>
-                <button style={{float: 'right', display: 'inline-block'}}>Hide Details</button>
+                <button id="card-modal-detail" onClick={(e) => setDetail(!detail)} style={{float: 'right', display: 'inline-block', width: 100}}>{detail? "Hide Details" : "Show Details"}</button>
               </div>
 
               <div id="card-modal-activities" style={{height: button.display? 242 : 280, maxHeight: button.display? 242 : 280, overflowX: 'auto', marginTop: 20}}>              
               <div style={{display: 'flex', flexDirection: 'row'}}>
                 <img style={{
-                  height: 35, width: 35, borderRadius: '50%', marginBottom: 15, marginRight: 10, position: 'relative', top: 6, left: 2}} 
-                  src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" alt={String(cardName)}/> {/*TODO 프사설정*/}
+                  height: 35, width: 35, borderRadius: '50%', marginBottom: 15, marginRight: 10, position: 'relative', top: 4, left: 2}} 
+                  src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt={String(cardName)}/> {/*TODO 프사설정*/}
                 <div style={{
                   backgroundColor: 'white', 
-                  padding: 5, 
-                  paddingBottom: 10,
-                  border: '1px lightgray solid',
-                  boxShadow: '0px 3px 3px lightgray',
+                  padding: 3, 
+                  paddingBottom: 0,
+                  border: '1.5px lightgray solid',
+                  borderRadius: 3,
                   marginBottom: 5
                   }}>
                   <input
+                  style={{fontSize: 15}}
                     value={comment}
                     onChange={changeComment}
                     onFocus={() => setButton({ ...button, display: true })}
@@ -230,7 +221,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                     placeholder="Write a comment..."
                   />
 
-                <div><button
+                <button
                   onClick={saveComment}
                   style={{
                     display: button.display ? null : "none",
@@ -238,13 +229,13 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                     color: button.green ? "white" : "gray",
                     marginTop: button.display? 7 : 0,
                     marginLeft: button.display? 7 : 0,
-                    marginBottom: 0,
+                    marginBottom: 10,
                     width: 50,
                     height: 30
                   }}
                 >
                   Save
-                </button></div></div>
+                </button></div>
               </div>
 
                 {card !== undefined
@@ -257,6 +248,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                       postActivity={postActivity}
                       putActivity={putActivity}
                       deleteActivity={deleteActivity}
+                      detail={detail}
                     />
                   ))
                 : null}

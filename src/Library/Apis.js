@@ -49,7 +49,6 @@ const apis = {
     },
     // 로그인, pw
     pwLogIn: ({ email, password }) => {
-      console.log({ email, password });
       return requester.put("user/login/", {
         grantType: "PASSWORD",
         email,
