@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
 import apis from '../../Library/Apis';
 
-function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteActivity, detail}) {
+function Activity({data, getCard, putActivity, deleteActivity, detail}) {
 
     const inputRef = useRef();
 
@@ -30,6 +30,7 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
             return;
         }
         putActivity(changedComment, String(data.id));
+        getCard();
     }
 
     const inputBlur = (e) => {
