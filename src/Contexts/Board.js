@@ -5,40 +5,28 @@ const defaultBoard = {
   board: null,
   users: [],
   modal: false,
-  move: {
-    bool: false, // whether moving or not
-    mode: "", // "", "card", "list"
-    from: null, // card which is moving
-  },
+  move: false,
   setModal: () => {},
   setMove: () => {},
   getBoardData: () => {},
   fetchUserList: () => {},
   fetchBoardById: () => {},
   fetchBoardByKey: () => {},
+  changeListPos: () => {},
+  applyListPos: () => {},
 };
 
 const BoardContext = createContext(defaultBoard);
 
 const BoardProvider = (props) => {
   const { children } = props;
+  const [lastList, setLastList] = useState(null);
 
-  const setMove = ({ bool, mode, from }) => {
-    if (bool) {
-      setState((state) => {
-        return {
-          ...state,
-          move: { bool: true, mode, from },
-        };
-      });
-    } else {
-      setState((state) => {
-        return {
-          ...state,
-          move: { bool: false, mode: "", from: null, to: null },
-        };
-      });
-    }
+  const setMove = (move) => {
+    setState((state) => ({
+      ...state,
+      move,
+    }));
   };
 
   const setModal = (e) => {
@@ -46,6 +34,52 @@ const BoardProvider = (props) => {
       ...state,
       modal: e,
     }));
+  };
+
+  const changeListPos = (i1, i2) => {
+    setLastList(i2);
+    setState((state) => {
+      let tList = state.board.lists;
+      let temp = tList[i1];
+      tList[i1] = tList[i2];
+      tList[i2] = temp;
+
+      return {
+        ...state,
+        board: {
+          ...state.board,
+          lists: tList,
+        },
+      };
+    });
+  };
+
+  const applyListPos = (board) => {
+    const index = lastList;
+    if(!index) {
+      console.log('변경사항 없음');
+      return;
+    }
+    console.log(index);
+    const lists = [...board.lists]
+    const id = board.id;
+
+    const reqBody =
+      index
+        ? {
+            board_id: id,
+            list_id: lists[index].id,
+            prev_id: lists[index - 1].id,
+          }
+        : {
+            board_id: id,
+            list_id: lists[index].id,
+          };
+
+    apis.list
+      .put(reqBody)
+      .then(fetchBoardById({ id }))
+      .catch((err) => console.log(err));
   };
 
   const getBoardData = () => state.board;
@@ -100,6 +134,8 @@ const BoardProvider = (props) => {
     fetchUserList,
     setModal,
     setMove,
+    changeListPos,
+    applyListPos,
   };
 
   const [state, setState] = useState(boardState);
