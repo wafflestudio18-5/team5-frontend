@@ -98,7 +98,7 @@ function Card({
 
   /*TODO history 없이 띡 /c/로 시작하는 url이 입력됐다면 어떻게 할 지 결정할 것!*/
   return (
-    <div className="board-card-wrapper">
+    <div className="board-card-wrapper" style={{cursor: 'pointer'}}>
       <div
         className="board-card"
         onClick={cardClick}
