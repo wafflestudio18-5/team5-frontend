@@ -142,7 +142,7 @@ function Board({
       ) : (
         <div className="board-wrapper anime"><img src="https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif"/></div>
       )}
-      <div id="Board-wrapper" style={{cursor: 'hand'}}>
+      <div id="Board-wrapper" style={{cursor: 'pointer'}}>
         <header id="board-header">
           <div id="board-header-left">
             <select name="language" defaultValue="English (US)">
