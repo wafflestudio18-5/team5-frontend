@@ -80,7 +80,7 @@ function BoardPage({ match }) {
         postActivity={postActivity}
         putActivity={putActivity}
         deleteActivity={deleteActivity}
-        users={users}
+        boardUsers={users}
         userList={userList}
       />
     </>

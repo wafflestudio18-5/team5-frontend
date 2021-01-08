@@ -29,7 +29,7 @@ function Activity({data, refresh, setRefresh, postActivity, putActivity, deleteA
             setChangedComment(data.content);
             return;
         }
-        putActivity(String(data.id), changedComment);
+        putActivity(changedComment, String(data.id));
     }
 
     const inputBlur = (e) => {
