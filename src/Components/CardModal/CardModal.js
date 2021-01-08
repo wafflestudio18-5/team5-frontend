@@ -128,7 +128,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
   };
 
   return (
-    <div id="card-modal-wrapper" onClick={exitIfNotModal}>
+    <div id="card-modal-wrapper" onClick={exitIfNotModal} style={{cursor: 'default'}}>
       <div id="card-modal-wrapper-2" style={{display: 'flex', flexDirection: 'column'}}>
         <div className="blank-for-card-modal" />
 
@@ -161,10 +161,10 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
             <div id="card-modal-left" style={{ columnWidth: 400 }}>
               <p className="title">Description</p>
               {description.edit ? (
-                  <input
+                  <textarea
+                    style={{marginLeft: 5, borderRadius: 5, outline: 'none', height: 40, width: 485, border: '1px solid lightgray', marginRight: 5}}
                     onKeyPress={(e) => e.key === "Enter"? 
                     (e.target.value === ""? setDescription({...description, edit: false}) : setDescription({...description, exist: true, edit: false})): null}
-                    onBlur={(e) => e.target.value === ""? setDescription({...description, edit: false}) : setDescription({...description, exist: true, edit: false})}
                     value={description.content}
                     onChange={(e) =>
                       setDescription({
@@ -180,6 +180,7 @@ function CardModal({ cardName, setCardName, card_key, card_id, exit, list_name, 
                 )
                : (
                 <button
+                  style={{width: 500, textAlign: 'left', height: 50, paddingLeft: 10, marginLeft: 5, paddingTop: 0}}
                   onClick={() => setDescription({ ...description, edit: true })}
                   id="card-modal-add-descrip"
                 >
