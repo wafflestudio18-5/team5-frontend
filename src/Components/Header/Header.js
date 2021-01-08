@@ -48,9 +48,9 @@ function Header(props) {
   return (
     <header className={`logged_header ${modal? "down" : ""}`}>
       <div className="header-left-wrapper">
-        <div style={{cursor: 'hand'}} className="App-Switcher-Button-Wrapper">{svg_hl_1}</div>
-        <div style={{cursor: 'hand'}} className="Home-Button-Wrapper" onClick={goToBoards}>{svg_hl_2}</div>
-        <div style={{cursor: 'hand'}} className="Boards-Link-Wrapper">
+        <div style={{cursor: 'pointer'}} className="App-Switcher-Button-Wrapper">{svg_hl_1}</div>
+        <div style={{cursor: 'pointer'}} className="Home-Button-Wrapper" onClick={goToBoards}>{svg_hl_2}</div>
+        <div style={{cursor: 'pointer'}} className="Boards-Link-Wrapper">
           {svg_hl_3}
           <p>
             <b>Boards</b>
@@ -64,13 +64,13 @@ function Header(props) {
         </div>
       </div>
       <div className="header-logo-wrapper">
-        <Link style={{cursor: 'hand'}} to="/">{logo}</Link>
+        <Link style={{cursor: 'pointer'}} to="/">{logo}</Link>
       </div>
       <div className="header-right-wrapper">
-        <div style={{cursor: 'hand'}} className="Add-Wrapper">{svg_hr_1}</div>
-        <div style={{cursor: 'hand'}} className="Info-Wrapper">{svg_hr_2}</div>
-        <div style={{cursor: 'hand'}} className="Notifications-Wrapper">{svg_hr_3}</div>
-        <div  style={{cursor: 'hand'}} className="Profile-Wrapper" onClick={logoutReq}>
+        <div style={{cursor: 'pointer'}} className="Add-Wrapper">{svg_hr_1}</div>
+        <div style={{cursor: 'pointer'}} className="Info-Wrapper">{svg_hr_2}</div>
+        <div style={{cursor: 'pointer'}} className="Notifications-Wrapper">{svg_hr_3}</div>
+        <div  style={{cursor: 'pointer'}} className="Profile-Wrapper" onClick={logoutReq}>
           <img style={{height: 32, width: 32, borderRadius: '50%'}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt={"Profile"}/>
         </div>
       </div>
