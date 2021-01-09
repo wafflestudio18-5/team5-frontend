@@ -47,7 +47,8 @@ function Board({
     apis.board
       .invite({ id: id, username: username })
       .then((response) => fetchUserList(board.id))
-      .catch((err) => console.log(err));
+      .then(response => fetchBoardById({id: board.id}))
+      .catch((err) => alert(err.response.data.error));
   };
 
   const createListEnter = (e) => {
@@ -244,7 +245,7 @@ function Board({
                   >
                     {eUsers.map((item, index) => {
                       return (
-                        <>
+                        
                           <div
                             className="inviteUser"
                             key={index}
@@ -284,7 +285,7 @@ function Board({
                               {item.username}
                             </p>
                           </div>
-                        </>
+                        
                       );
                     })}
                   </div>
