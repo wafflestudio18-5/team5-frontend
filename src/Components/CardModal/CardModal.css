@@ -225,7 +225,8 @@ textarea {
 }
 
 #DUEDATE input {
-    display: none !important;
+    background: transparent !important;
+    color: transparent !important;
     width: 0px !important;
     font-size: 0 !important;
     outline: none !important;
