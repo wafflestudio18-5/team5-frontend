@@ -256,8 +256,8 @@ function CardModal({
                       marginLeft: 5,
                       borderRadius: 5,
                       outline: "none",
-                      cols: 490,
-                      rows: 100,
+                      cols: '4900px',
+        
                       border: "1px solid lightgray",
                       marginRight: 5,
                       padding: 5
@@ -293,14 +293,14 @@ function CardModal({
               : (!(description === undefined || description.content === undefined))
                   
                   ? (
-                    <div onClick={() => setDescription({...description, edit: true})} style={{width: 501, height: 100, background: 'pink'}}>
-                      <ReactMarkdown id="Markdown">
+                    <div onClick={() => setDescription({...description, edit: true})} style={{width: 485, marginBottom: 20, marginTop: 20, height: 'fit-content'}}>
+                      <ReactMarkdown id="Markdown" style={{height: 'fit-content'}}>
                         {description.content}
                       </ReactMarkdown> 
                       </div> )
                   : (
                     <button
-                      style={{width: 495, textAlign: 'left', height: 50, paddingLeft: 10, marginLeft: 5, paddingTop: 0}}
+                      style={{width: 485, textAlign: 'left', height: 50, paddingLeft: 10, marginLeft: 5, paddingTop: 0}}
                       onClick={() => setDescription({ ...description, edit: true })}
                       id="card-modal-add-descrip"
                     >
