@@ -318,6 +318,7 @@ function Board({
                     postActivity={postActivity}
                     putActivity={putActivity}
                     deleteActivity={deleteActivity}
+                    userList={userList}
                   />
                 ))}
               </DndProvider>
