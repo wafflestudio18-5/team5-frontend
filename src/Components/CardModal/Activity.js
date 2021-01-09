@@ -1,7 +1,8 @@
 import React, {useState, useRef} from 'react';
+
 import apis from '../../Library/Apis';
 
-function Activity({data, getCard, putActivity, deleteActivity, detail}) {
+function Activity({data, getCard, putActivity, isComment, deleteActivity, detail}) {
 
     const inputRef = useRef();
 
