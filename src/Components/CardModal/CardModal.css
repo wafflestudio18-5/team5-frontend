@@ -288,3 +288,10 @@ div.react-time-picker__clock {
     border-radius: 5px !important;
     background-color: transparent !important;
 }
+
+div.react-calendar {
+    position: relative !important;
+    left: 112px !important;
+    top: -20px !important;
+    border-radius: 3px !important;
+}
