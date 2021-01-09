@@ -173,6 +173,7 @@ function CardModal({
   //"Thu Jan 14 2021 00:00:00 GMT+0900 (대한민국 표준시)00:30"
 
   const activityy = useRef();
+  console.log(description);
 
   return (
     <div
