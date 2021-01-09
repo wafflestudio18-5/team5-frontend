@@ -94,6 +94,7 @@ function CardModal({
   //댓글 달고 저장하기
   const saveComment = () => {
     postActivity(String(card_id), comment);
+    setComment("");
   };
 
   //해당 카드 지우기
