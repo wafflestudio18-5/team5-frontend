@@ -165,17 +165,17 @@ function CardModal({
   const [due, setDue] = useState(false);
   const [date, setDate] = useState(undefined);
   const saveDueDate = (e) => {
-    setDue(false);
   const date_ = e.target.children? 
       (e.target.children['0']? 
         (e.target.children['0'].ariaLabel? 
           e.target.children['0'].ariaLabel
             : null) : null) : null;
-  if (!date_ || date_.length < 10) {
-    alert("error");
+  if (date_ === null || date_.length < 10) {
+    //alert(`not saved to server / ${date_}`);
     return;
     }
   else {
+    setDue(false);
     const [year, md] = date_.split("년 ");
     let [month, day] = md.split("월 ");
     day = day.split("일")[0];
