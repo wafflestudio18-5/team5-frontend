@@ -169,18 +169,20 @@ function CardModal({
   const date_ = e.target.children? 
       (e.target.children['0']? 
         (e.target.children['0'].ariaLabel? 
-          console.log(e.target.children['0'].ariaLabel.length)
+          e.target.children['0'].ariaLabel
             : null) : null) : null;
-  if (date_.length < 10) return;
+  if (!date_ || date_.length < 10) {
+    alert("error");
+    return;
+    }
   else {
     const [year, md] = date_.split("년 ");
-    const [month, day_] = md.split("월 ");
-    const day = day_.split("일")[0];
+    let [month, day] = md.split("월 ");
+    day = day.split("일")[0];
+    if (month.length === 1) month = "0" + month;
+    if (day.length === 1) day = "0" + day;
 
     putCard({cId: card_id, due_date: `${year}-${month}-${day}`});
-    alert(
-      `Your new due date is ${year} ${month} ${day} - talk to the server manager to make sure it is surely saved!`
-    );
     }
   };
   //"Thu Jan 14 2021 00:00:00 GMT+0900 (대한민국 표준시)00:30"
