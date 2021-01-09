@@ -164,13 +164,24 @@ function CardModal({
   // Due Date 추가하기
   const [due, setDue] = useState(false);
   const [date, setDate] = useState(undefined);
-  const saveDueDate = () => {
+  const saveDueDate = (e) => {
     setDue(false);
-    const date_ = date.toISOString().slice(0, 9);
-    putCard({cId: card_id, due_date: date_});
+  const date_ = e.target.children? 
+      (e.target.children['0']? 
+        (e.target.children['0'].ariaLabel? 
+          console.log(e.target.children['0'].ariaLabel.length)
+            : null) : null) : null;
+  if (date_.length < 10) return;
+  else {
+    const [year, md] = date_.split("년 ");
+    const [month, day_] = md.split("월 ");
+    const day = day_.split("일")[0];
+
+    putCard({cId: card_id, due_date: `${year}-${month}-${day}`});
     alert(
-      `Your new due date is ${date_} - talk to the server manager to make sure it is surely saved!`
+      `Your new due date is ${year} ${month} ${day} - talk to the server manager to make sure it is surely saved!`
     );
+    }
   };
   //"Thu Jan 14 2021 00:00:00 GMT+0900 (대한민국 표준시)00:30"
 
@@ -461,7 +472,7 @@ function CardModal({
               
               
               <div
-              onClick={(e) => {console.log(e.target)}}>
+              onClick={(e) => {/*console.log(e.target)*/}}>
               <button  className="nodt" 
               onClick={() => setDue(!due)}
               style={due? {filter: 'brightness(95%)'} : null}
@@ -477,7 +488,7 @@ function CardModal({
               value={date}
               closeCalendar={false}
               isOpen={true}
-              onClick={() => setDue(false)}
+              onClick={saveDueDate}
               /></div>
               </div>
 
