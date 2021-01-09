@@ -1,0 +1,252 @@
+/* ------------------------------------------------------------------------ */
+/* ------------------------------ 일반 파트 --------------------------------- */
+/* ------------------------------------------------------------------------ */
+header.logged_header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #026aa7;
+  z-index: 999;
+  /* background-color의 경우 추후 테마 설정 기능이 추가되면 업데이트되어야 함 */
+}
+
+header.logged_header.down {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #026aa7;
+  z-index: -1;
+  /* background-color의 경우 추후 테마 설정 기능이 추가되면 업데이트되어야 함 */
+}
+
+header.logged_header div {
+  display: flex;
+}
+
+div.inputWrapper svg.hide {
+  display: none;
+}
+
+div.inputWrapper svg.active.inputIcon {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  color: white;
+}
+
+div.inputWrapper svg.active.inputExtern {
+  position: absolute;
+  top: 12px;
+  right: 50px;
+  color: black;
+}
+
+div.inputWrapper svg.active.inputFin {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  color: black;
+}
+
+div.App-Switcher-Button-Wrapper svg {
+  margin: auto;
+}
+
+div.App-Switcher-Button-Wrapper {
+  position: relative;
+  border-radius: 4px;
+  margin: 3px;
+  width: 28px;
+  height: 28px;
+  padding: 2px;
+  background-color: hsla(0, 0%, 100%, .3);
+}
+
+div.App-Switcher-Button-Wrapper:hover {
+  position: relative;
+  background-color: hsla(0, 0%, 100%, .15);
+}
+
+div.Home-Button-Wrapper {
+  position: relative;
+  border-radius: 4px;
+  margin: 3px;
+  width: 28px;
+  height: 28px;
+  padding: 2px;
+  background-color: hsla(0, 0%, 100%, .3);
+}
+
+div.Home-Button-Wrapper svg {
+  margin: auto;
+}
+
+div.Home-Button-Wrapper:hover {
+  position: relative;
+  background-color: hsla(0, 0%, 100%, .15);
+}
+
+div.Boards-Link-Wrapper {
+  position: relative;
+  border-radius: 4px;
+  margin: 3px;
+  width: 90px;
+  padding-right: 10px;
+  height: 28px;
+  padding: 2px;
+  line-height: 28px;
+  color: white;
+  background-color:hsla(0, 0%, 100%, .3);
+}
+
+div.Boards-Link-Wrapper svg {
+  margin: auto;
+}
+
+div.Boards-Link-Wrapper:hover {
+  position: relative;
+  background-color:hsla(0, 0%, 100%, .15);
+}
+
+div.Boards-Link-Wrapper p {
+  margin: 0;
+  margin-right: 7px;
+}
+
+input.Boards-Search-Wrapper.inactive {
+  position: relative;
+  border-radius: 4px;
+  margin: 3px;
+  width: 180px;
+  height: 28px;
+  padding: 2px;
+  background-color: hsla(0, 0%, 100%, .3);
+  font-size: 0.9em;
+  padding-inline-start: 8px;
+  transition: 0.1s linear;
+  border-width: 0px;
+}
+
+input.Boards-Search-Wrapper.inactive:hover {
+  position: relative;
+  background-color: hsla(0, 0%, 100%, .15);
+  transition: 0.1s linear;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+input.Boards-Search-Wrapper.active {
+  position: relative;
+  transition: 0.1s linear;
+  border-radius: 4px;
+  margin: 3px;
+  width: 300px;
+  height: 28px;
+  padding: 2px;
+  background-color: white;
+  font-size: 0.9em;
+  padding-inline-start: 8px;
+  border-width: 0px;
+  outline: none;
+}
+
+
+.header-logo-wrapper {
+  position: absolute;
+  left: calc(50% - 60px);
+  line-height: 40px;
+  height: 40px;
+  width: 120px;
+  top: 3px;
+}
+
+.header-logo-wrapper img.header_logo {
+  height: 28px;
+  margin: 3px;
+  filter: brightness(85%);
+}
+
+.header-logo-wrapper img.header_logo:hover {
+  filter: brightness(100%);
+}
+
+div.Add-Wrapper {
+  position: relative;
+  border-radius: 4px;
+  margin: 3px;
+  width: 28px;
+  height: 28px;
+  padding: 2px;
+  background-color: hsla(0, 0%, 100%, .3);
+}
+
+div.Add-Wrapper:hover {
+  position: relative;
+  background-color: hsla(0, 0%, 100%, .15);
+}
+
+div.Add-Wrapper svg {
+  margin: auto;
+}
+
+div.Info-Wrapper {
+  position: relative;
+  border-radius: 4px;
+  margin: 3px;
+  width: 28px;
+  height: 28px;
+  padding: 2px;
+  background-color: hsla(0, 0%, 100%, .3);
+}
+
+div.Info-Wrapper svg {
+  margin: auto;
+}
+
+div.Info-Wrapper:hover {
+  position: relative;
+  background-color: hsla(0, 0%, 100%, .15);
+}
+
+div.Notifications-Wrapper {
+  position: relative;
+  border-radius: 4px;
+  margin: 3px;
+  width: 28px;
+  height: 28px;
+  padding: 2px;
+  background-color: #EB5A46;
+}
+
+div.Notifications-Wrapper svg {
+  margin: auto;
+}
+
+div.Notifications-Wrapper:hover {
+  position: relative;
+  background-color: #CF513D;
+}
+
+div.Profile-Wrapper {
+  position: relative;
+  margin: 3px;
+  width: 32px;
+  height: 32px;
+  padding: 0px;
+  background-color: transparent;
+}
+
+/* ------------------------------------------------------------------------ */
+/* -----------------------------모달 창 파트---------------------------------- */
+/* ------------------------------------------------------------------------ */
+

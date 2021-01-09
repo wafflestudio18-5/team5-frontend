@@ -1,0 +1,258 @@
+.board-list {
+  background-color: #EBECF0;
+  width: 250px !important;
+  height: fit-content;
+  color: black;
+  margin-right: 10px;
+  border: 1px transparent solid;
+  border-radius: 3px;
+  padding: 10px;
+  padding-right: 5px;
+  flex-shrink: 0;
+  margin-bottom: 10px;
+  z-index: 1;
+  position: relative;
+  transition: 0.2s;
+}
+
+button.moveButton {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  width: 50px !important;
+}
+
+.board-list.up {
+  z-index: 2;
+}
+
+.board-list.moving {
+  background-color: aliceblue;
+}
+
+.board-list button {
+  height: 30px;
+  width: 245px;
+  color: rgb(100, 100, 100);
+  align-content: center;
+  border: 1px transparent solid;
+  border-radius: 3px;
+  padding-top: 3px;
+}
+
+.board-list button.list-down {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 30px;
+  height: 30px;
+  background-color: #a1c3e1;
+}
+
+.board-list span.list-down {
+  background-color: #EBECF0;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 5px;
+  transition: 0.3s;
+  text-align: center;
+}
+
+div.board-list-headers input.modifyInput {
+  background-color: transparent;
+  border: 1px solid lightslategray;
+  border-radius: 5px;
+  padding-inline-start: 8px;
+  width: 200px;
+  height: 20px;
+  line-height: 20px;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+/* 옵션창 관련 */
+
+button.modify {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 5px;
+  transition: 0.3s;
+  background-color: rgb(62, 39, 174);
+  color: white;
+}
+
+button.modify.true {
+  right: 65px;
+}
+
+button.modify.false {
+  right: 5px;
+}
+
+button.delete {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 5px;
+  transition: 0.3s;
+  background-color: rgb(169, 0, 0);
+  color: white;
+}
+
+button.delete.true {
+  right: 35px;
+}
+
+button.delete.false {
+  right: 5px;
+}
+
+.board-list span.list-down svg.optionIcon {
+  margin-top: 7px;
+  width: 16px;
+  height: 16px;
+  transition: 0.3s;
+}
+
+.board-list span.list-down svg.optionIcon.true {
+  transform: rotate(-90deg);
+}
+
+.board-list span.list-down.visible {
+  right: 35px;
+  width: 0px;
+}
+
+.board-list span.list-down.invisible {
+  right: 5px;
+}
+
+.board-list button:hover {
+  background-color: #DADBE2;
+}
+
+.board-cards-crtCard::-webkit-scrollbar {
+  background-color: transparent;
+  width: 5px !important;
+  border-radius: 10px;
+}
+
+.board-cards-crtCard::-webkit-scrollbar-thumb {
+  background-color: #c5c5c5;
+  border-radius: 10px;
+  width: 5px !important;
+}
+
+.board-cards-crtCard::-webkit-scrollbar-track {
+  background-color: #DADBE2;
+  border-radius: 10px;
+  width: 5px !important;
+}
+
+.board-cards-crtCard-x::-webkit-scrollbar {
+  background-color: transparent;
+  width: 5px !important;
+  border-radius: 10px;
+}
+
+.board-cards-crtCard-x::-webkit-scrollbar-thumb {
+  background-color: #c5c5c5;
+  border-radius: 10px;
+  width: 5px !important;
+}
+
+.board-cards-crtCard-x::-webkit-scrollbar-track {
+  background-color: #DADBE2;
+  border-radius: 5px;
+  width: 10px !important;
+}
+
+.board-cards-crtCard {
+  max-height: calc(100vh - 302px) !important;
+  overflow-y: auto;
+}
+
+.board-cards-crtCard-x {
+  max-height: calc(100vh - 214px) !important;
+  overflow-y: auto;
+}
+
+.crtCard button #AddCard:hover {
+  background-color:  #0f86cf !important;
+  filter: brightness(110%) !important;
+}
+
+.crtCard input:focus {
+  outline: none;
+}
+
+#crtCard_inputWrapper {
+  background-color: white;
+  padding: 10px;
+  margin-top: 10px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  box-shadow: 0px 2px 2px lightgray;
+  border: 1px transparent solid;
+}
+
+input.addcard {
+  width: 100px;
+  height: 5px;
+}
+
+#AddCard {
+  width: auto !important;
+  margin-right: 5px;
+  margin-top: 0px;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color:  #0f86cf !important;
+  color: white;
+  border: 1px transparent solid;
+  border-radius: 3px;
+}
+
+#no_crtCard {
+  background: url('https://api.iconify.design/octicon:x-16.svg') no-repeat center center / contain;
+  width: 25px;
+  margin: 0px;
+  position: relative;
+  top: 8px;
+  z-index: 0 !important;
+}
+
+#no_crtCard:focus {
+  outline: none;
+}
+
+#board-addcard {
+  margin-top: 10px;
+  height: 25px;
+}
+
+#board-list-delete {
+  width: 70px !important;
+  height: 25px !important;
+  position: sticky;
+  right: 10px;
+}
+
+.crtCard textarea::-webkit-scrollbar {
+  background-color: transparent;
+  width: 0px !important;
+}
+
+.crtCard textarea::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  width: 0px !important;
+}
+
+.crtCard textarea::-webkit-scrollbar-track {
+  background-color: transparent;
+  width: 0px !important;
+}
