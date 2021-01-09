@@ -225,11 +225,12 @@ textarea {
 }
 
 #DUEDATE input {
+    display: none !important;
+    width: 0px !important;
+    font-size: 0 !important;
     outline: none !important;
     border: transparent !important;
-    font-weight: 600;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    cursor: pointer !important;
+    font-weight: 0 !important;
 }
 
 #DUEDATE div {
@@ -291,7 +292,10 @@ div.react-time-picker__clock {
 
 div.react-calendar {
     position: relative !important;
-    left: 112px !important;
-    top: -20px !important;
+    top: -15px;
     border-radius: 3px !important;
+}
+
+#NOBUTTON > div > div > div {
+    display: none !important;
 }
