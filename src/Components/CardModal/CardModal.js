@@ -42,7 +42,7 @@ function CardModal({
       .then(function (response) {
         setCard(response.data);
         setNameState({ ...nameState, name: response.data.name });
-        setDescription({ ...description, content: response.data.description });
+        setDescription({ ...description, text: response.data.description });
       })
       .catch(function (error) {
         if (error.response) {
@@ -138,7 +138,7 @@ function CardModal({
   //Description 추가 및 변경하기
   const [description, setDescription] = useState({
     exist: false,
-    content: undefined,
+    text: undefined,
     edit: false,
   });
   const saveDescription = () => {
@@ -267,7 +267,7 @@ function CardModal({
                     onChange={(e) =>
                       setDescription({
                         ...description,
-                        content: e.target.value,
+                        text: e.target.value,
                       })
                     }
                   />
@@ -291,12 +291,12 @@ function CardModal({
                 </div>
                 ) 
               
-              : (!(description === undefined || description.content === undefined))
+              : (!(description === undefined || description['content'] === undefined || description['content' === ""]))
                   
                   ? (
                     <div onClick={() => setDescription({...description, edit: true})} style={{width: 485, marginBottom: 10, marginTop: 10, height: 'fit-content'}}>
                       <ReactMarkdown id="Markdown" style={{height: 'fit-content', background: 'pink'}}>
-                        {description.content+"sksksk"}
+                        {description['content']}
                       </ReactMarkdown> 
                       </div> )
                   : (
@@ -548,7 +548,7 @@ function CardModal({
                     position: "relative",
                     top: 2,
                     left: 30,
-                    content:
+                    text:
                       "url('https://api.iconify.design/octicon:info-24.svg?height=15')",
                     verticalAlign: "-0.125em",
                   }}
