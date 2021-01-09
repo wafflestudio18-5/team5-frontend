@@ -3,13 +3,9 @@ import "./CardModal.css";
 import Activity from "./Activity.js";
 import apis from '../../Library/Apis';
 import ReactMarkdown from 'react-markdown';
-import TimePicker from 'react-time-picker';
 import DatePicker from 'react-date-picker'
 import { useBoardContext } from "../../Contexts";
 import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
-import 'react-time-picker/dist/TimePicker.css';
-import 'react-clock/dist/Clock.css';
 import { _sleep } from "../../Library/Timer";
 
 
@@ -28,7 +24,6 @@ function CardModal({
 }) {
   const [card, setCard] = useState(undefined);
   const [nameState, setNameState] = useState({ name: cardName, edit: false });
-  const [refresh, setRefresh] = useState(false);
   const { fetchBoardById } = useBoardContext();
 
   const postActivity = (cId, content) => {
@@ -47,7 +42,7 @@ function CardModal({
       .then(function (response) {
         setCard(response.data);
         setNameState({ ...nameState, name: response.data.name });
-        setDescription({ ...description, content: response.data.description });
+        setDescription({ ...description, text: response.data.description });
       })
       .catch(function (error) {
         if (error.response) {
@@ -74,7 +69,7 @@ function CardModal({
 
   useEffect(() => {
     getCard();
-  }, [refresh]);
+  }, []);
 
   const exitIfNotModal = (e) => {
     if (
@@ -143,13 +138,13 @@ function CardModal({
   //Description 추가 및 변경하기
   const [description, setDescription] = useState({
     exist: false,
-    content: "",
+    text: undefined,
     edit: false,
   });
-  useEffect(() => {
-    // 서버에 description 변경
-    putCard({ cId: card_id, description: description.content });
-  }, [description.edit && false]);
+  const saveDescription = () => {
+    setDescription({...description, edit: false});
+    putCard({ cId: card_id, description: description.content })
+  }
 
   // 멤버 추가하기
   const [member, setMember] = useState({on: false, search: ""})
@@ -166,17 +161,28 @@ function CardModal({
     );
   };
   // Due Date 추가하기
-  const [due, setDue] = useState({button: false, calendar: false, clock: false});
+  const [due, setDue] = useState(false);
   const [date, setDate] = useState(undefined);
-  const [time, setTime] = useState(undefined);
-  const saveDueDate = () => {
-    setDue({button: false, time: false, date: false});
-    const date_ = date.toISOString().slice(0, 9);
-    const datetime = date_ + " " + time + ":00";
-    putCard({cId: card_id, due_date: datetime});
-    alert(
-      `Your new due date is ${datetime} - talk to the server manager to make sure it is surely saved!`
-    );
+  const saveDueDate = (e) => {
+  const date_ = e.target.children? 
+      (e.target.children['0']? 
+        (e.target.children['0'].ariaLabel? 
+          e.target.children['0'].ariaLabel
+            : null) : null) : null;
+  if (date_ === null || date_.length < 10) {
+    //alert(`not saved to server / ${date_}`);
+    return;
+    }
+  else {
+    setDue(false);
+    const [year, md] = date_.split("년 ");
+    let [month, day] = md.split("월 ");
+    day = day.split("일")[0];
+    if (month.length === 1) month = "0" + month;
+    if (day.length === 1) day = "0" + day;
+
+    putCard({cId: card_id, due_date: `${year}-${month}-${day}`});
+    }
   };
   //"Thu Jan 14 2021 00:00:00 GMT+0900 (대한민국 표준시)00:30"
 
@@ -224,8 +230,9 @@ function CardModal({
                   {nameState.name}
                 </p>
               )}
+              <p>{!card? "" : (!card.due_date? "" : card.due_date)}</p>
               <button
-                style={{ float: "right", display: "inline-block" }}
+                style={{ float: "right", display: "inline-block", width: 25 }}
                 className="card-modal-x"
                 id="exit"
               >
@@ -239,61 +246,78 @@ function CardModal({
           </div>
 
           <div id="card-modal-bottom">
-            <div id="card-modal-left" style={{ columnWidth: 400 }}>
+            <div id="card-modal-left" style={{ maxHeight: 550, overflowY: 'auto' }}>
               <p className="title">Description</p>
-              {description.edit ? (
-                <textarea
-                  style={{
-                    marginLeft: 5,
-                    borderRadius: 5,
-                    outline: "none",
-                    height: 50,
-                    width: 490,
-                    maxWidth: 490,
-                    overflowY: 'auto',
-                    border: "1px solid lightgray",
-                    marginRight: 5,
-                  }}
-                  onBlur={(e) => 
-                      !e.target.value
-                        ? setDescription({ ...description, edit: false })
-                        : setDescription({
-                            ...description,
-                            exist: true,
-                            edit: false,
-                          })
-                  }
-                  value={description.content}
-                  onChange={(e) =>
-                    setDescription({
-                      ...description,
-                      content: e.target.value,
-                    })
-                  }
-                />
-              ) : description.content ? (
-                <div onClick={() => setDescription({...description, edit: true})}>
-                  <ReactMarkdown>
-                    {description.content}
-                  </ReactMarkdown> 
-                  </div>
-              ) : (
-                <button
-                  style={{width: 495, textAlign: 'left', height: 50, paddingLeft: 10, marginLeft: 5, paddingTop: 0}}
-                  onClick={() => setDescription({ ...description, edit: true })}
-                  id="card-modal-add-descrip"
-                >
-                  Add a more detailed description...
-                </button>
-              )}
+              {description.edit 
+              
+              ? (
+                <div style={{height: 100}}><textarea
+                    style={{
+                      fontSize: 14,
+                      marginLeft: 5,
+                      borderRadius: 5,
+                      outline: "none",
+                      cols: '4900px',
+        
+                      border: "1px solid lightgray",
+                      marginRight: 5,
+                      padding: 5
+                    }}
+                    value={description.content}
+                    onChange={(e) =>
+                      setDescription({
+                        ...description,
+                        text: e.target.value,
+                      })
+                    }
+                  />
+                  <div style={{display: 'flex', flexDirection: 'row'}}><button 
+                    style={{
+                        backgroundColor: "#5AAC44",
+                        color: "white",
+                        marginTop: 7,
+                        marginLeft: 7,
+                        marginBottom: 10,
+                        width: 50,
+                        height: 30,}}
+                  onClick={saveDescription}>Save</button>
+                  <button
+                    style={{ float: "right", display: "inline-block", width: 25 }}
+                    className="card-modal-x"
+                    onClick={() => setDescription({...description, edit: false})}
+                  >
+                    ×
+                  </button></div>
+                </div>
+                ) 
+              
+              : (!(description === undefined || description['content'] === undefined || description['content' === ""]))
+                  
+                  ? (
+                    <div onClick={() => setDescription({...description, edit: true})} style={{width: 485, marginBottom: 10, marginTop: 10, height: 'fit-content'}}>
+                      <ReactMarkdown id="Markdown" style={{height: 'fit-content', background: 'pink'}}>
+                        {description['content']}
+                      </ReactMarkdown> 
+                      </div> )
+                  : (
+                    <button
+                      style={{width: 485, textAlign: 'left', height: 50, paddingLeft: 10, marginLeft: 5, paddingTop: 0}}
+                      onClick={() => setDescription({ ...description, edit: true })}
+                      id="card-modal-add-descrip"
+                    >
+                      Add a more detailed description...
+                    </button>
+                  )}
 
-              <div style={{ display: "float" }}>
-                <p className="title" style={{ float: "left" }}>
+              <div style={{ display: "flex", flexDirection: 'row'}}>
+                <p className="title" >
                   Activity
                 </p>
-                <button id="card-modal-detail" onClick={(e) => setDetail(!detail)} style={{float: 'right', display: 'inline-block', width: 100}}>{detail? "Hide Details" : "Show Details"}</button>
+                <button id="card-modal-detail" 
+                onClick={(e) => setDetail(!detail)} 
+                style={{width: 100, position: 'relative', left: 324, top: 10}}>{detail? "Hide Details" : "Show Details"}</button>
               </div>
-              <div ref={activities} id="card-modal-activities" style={{height: button.display? 242 : 280, maxHeight: button.display? 242 : 280, overflowX: 'auto', marginTop: 20}}>              
+              <div ref={activities} id="card-modal-activities" style={{marginTop: 20}}>              
               <div style={{display: 'flex', flexDirection: 'row'}}>
                   <img
                     style={{
@@ -321,7 +345,7 @@ function CardModal({
                     }}
                   >
                     <input
-                      style={{ fontSize: 15 }}
+                      style={{ fontSize: 15, width: 415 }}
                       //width: activities.current.isVerticalScroll() ? 510 : 450
                       value={comment}
                       onChange={changeComment}
@@ -360,8 +384,7 @@ function CardModal({
                       .map((data, index) => (
                         <Activity
                           data={data}
-                          refresh={refresh}
-                          setRefresh={setRefresh}
+                          getCard={getCard}
                           key={index}
                           postActivity={postActivity}
                           putActivity={putActivity}
@@ -380,8 +403,8 @@ function CardModal({
                 ADD TO CARD
               </p>
               <div style={{display: 'flex', flexDirection: 'row'}}>
-                <button className="nodt" onClick={() => setMember({on: !member.on, search: ""})}>Members</button>
-                  <div className="invite-wrapper">
+                <button className="nodt" style={member.on? {filter: 'brightness(95%)'}: null} onClick={() => setMember({on: !member.on, search: ""})}>Members</button>
+                  <div className="invite-wrapper" style={{position: 'relative', top: -38, left: 20}}>
                     {member.on ? (
                       <div className="invite-modal" style={{height: 'fit-content'}}>
                         <div className="im-header">
@@ -466,41 +489,33 @@ function CardModal({
               <button className="nodt" >Checklist</button>
               
               
-              <div style={{display: 'flex', flexDirection: 'row'}} onClick={(e) => {console.log(e.target)}}>
+              <div
+              onClick={(e) => {/*console.log(e.target)*/}}>
               <button  className="nodt" 
-              onClick={() => setDue(due.button? {button: false, date: false, clock: false} : {button: true, date: true, clock: false})}
-              style={due.button? {filter: 'brightness(95%)'} : null}
+              onClick={() => setDue(!due)}
+              style={due? {filter: 'brightness(95%)'} : null}
               >Due Date</button>
-              {due.button? 
+              {due? 
               <div id="DUEDATE" style={{backgroundColor: '#F4F5F7', zIndex: 900, fontSize: 15}}>
-
-              {due.date
-              ?<div style={{display: 'flex', flexDirection: 'column'}}>
-              <div id="NOBUTTON">
+            
+              <div style={{display: 'float'}}>
+              <div id="NOBUTTON" >
               <DatePicker
               autoFocus={true}
               onChange={setDate}
               value={date}
-              closeCalendar={() => setDue({button: true, date: false, time: true})}
+              closeCalendar={false}
+              isOpen={true}
+              onClick={saveDueDate}
               /></div>
-              <button onClick={() => setDue({button: true, time: true, date: false})}>OK</button></div>
+              </div>
 
-              :<div style={{display: 'flex', flexDirection: 'row'}}>
-              <div id="NOBUTTON">
-              <TimePicker
-              onChange={setTime}
-              value={time}
-              closeClock={() => setDue({button: true, date: false, time: false})}
-              /></div>
-              <button  style={{width: 50}} onClick={saveDueDate}>Save</button>
-              <button onClick={() => setDue({button: false, time: false, date: false})}>Close</button>
-              </div>}</div>
+              </div>
               : null}
               </div>
               
              
-              <p>
-                <br />
+              <p style={due? null : {marginTop: 27}}>
                 POWER-UPS
               </p>
               <button className="nodt" >+ Add Power-Ups</button>
@@ -533,7 +548,7 @@ function CardModal({
                     position: "relative",
                     top: 2,
                     left: 30,
-                    content:
+                    text:
                       "url('https://api.iconify.design/octicon:info-24.svg?height=15')",
                     verticalAlign: "-0.125em",
                   }}
