@@ -237,7 +237,7 @@ function Board({
                     style={{
                       height: 280,
                       background: "white",
-                      overflowX: "auto",
+                      overflowY: "auto",
                       position: "relative",
                       top: -5,
                       paddingRight: eUsers.length > 4 ? 5 : 0,
@@ -318,7 +318,7 @@ function Board({
                     postActivity={postActivity}
                     putActivity={putActivity}
                     deleteActivity={deleteActivity}
-                    userList={userList}
+                    boardUsers={boardUsers}
                   />
                 ))}
               </DndProvider>

@@ -23,7 +23,7 @@ function CardModal({
   postActivity,
   putActivity,
   deleteActivity,
-  userName
+  boardUsers
 }) {
   const [card, setCard] = useState(undefined);
   const [nameState, setNameState] = useState({ name: cardName, edit: false });
@@ -141,13 +141,15 @@ function CardModal({
   }, [description.edit && false]);
 
   // 멤버 추가하기
+  const [member, setMember] = useState({on: false, search: ""})
   const memberList = member.search
-    ? userList
+    ? boardUsers
         .filter((item) => boardUsers.find((it) => it.id === item.id))
         .filter((item) => item.username.includes(member.search))
-    : userList
+    : boardUsers
         .filter((item) => boardUsers.find((it) => it.id === item.id));
-  const addMember = () => {
+  const addMember = (username) => {
+    putCard({cId: card_id, member: username});
     alert(
       "[ERROR] NO ACTIVITY PREPARED EXCEPT COMMENTS\n(Failed to add Members)"
     );
@@ -364,7 +366,89 @@ function CardModal({
                 <br />
                 ADD TO CARD
               </p>
-              <button className="nodt" onClick={addMember}>Members</button>
+              <div style={{display: 'flex', flexDirection: 'row'}}>
+                <button className="nodt" onClick={() => setMember({on: !member.on, search: ""})}>Members</button>
+                  <div className="invite-wrapper">
+                    {member.on ? (
+                      <div className="invite-modal" style={{height: 'fit-content'}}>
+                        <div className="im-header">
+                          <span>Board Members</span>
+                        </div>
+
+                        <hr />
+
+                        <div className="im-input-wrapper">
+                          <input
+                            className="im-input"
+                            value={member.search}
+                            placeholder="Search members"
+                            onChange={(e) => setMember({...member, search: e.target.value})}
+                          />
+                        </div>
+
+                        <div
+                          id="inviteUsers"
+                          style={{
+                            maxHeight: 280,
+                            overflowY: 'auto',
+                            background: "white",
+                            position: "relative",
+                            top: -5,
+                            paddingRight: memberList.length > 4 ? 5 : 0,
+                          }}
+                        >
+                          {memberList.map((item, index) => {
+                            return (
+                              <>
+                                <div
+                                  className="inviteUser"
+                                  key={index}
+                                  onClick={() =>
+                                    addMember(item.username)
+                                  }
+                                  style={{
+                                    padding: 10,
+                                    height: "fit-content",
+                                    textAlign: "left",
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    marginTop: index === 0 ? 1 : 5,
+                                    marginBottom: index === memberList.length - 1 ? 1 : 5,
+                                  }}
+                                >
+                                  <img
+                                    style={{
+                                      height: 25,
+                                      width: 25,
+                                      borderRadius: "50%",
+                                      position: "relative",
+                                      top: 3,
+                                      left: 3,
+                                    }}
+                                    src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png"
+                                    alt={"profile"}
+                                  />
+                                  <p
+                                    style={{
+                                      position: "relative",
+                                      top: -7,
+                                      marginLeft: 15,
+                                      pontWeight: 300,
+                                    }}
+                                  >
+                                    {item.username}
+                                  </p>
+                                </div>
+                              </>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    ) : null}
+                  </div>
+                  </div>
+              
+
               <button className="nodt" >Labels</button>
               <button className="nodt" >Checklist</button>
               

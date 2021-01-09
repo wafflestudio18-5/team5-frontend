@@ -25,7 +25,7 @@ function Card({
   postActivity,
   putActivity,
   deleteActivity,
-  userName
+  boardUsers
 }) {
   const [cardPage, setCardPage] = useState(false);
   const { setModal } = useBoardContext();
@@ -165,7 +165,7 @@ function Card({
           postActivity={postActivity}
           putActivity={putActivity}
           deleteActivity={deleteActivity}
-          userName={userName}
+          boardUsers={boardUsers}
         />
       ) : null}
     </div>
