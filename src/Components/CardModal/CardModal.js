@@ -307,7 +307,7 @@ function CardModal({
                       onClick={() => setDescription({ ...description, edit: true })}
                       id="card-modal-add-descrip"
                     >
-                      Add a more detailed description...\n
+                      Add a more detailed description...
                     </button>
                   )}
 
