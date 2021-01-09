@@ -135,37 +135,37 @@ button.delete.false {
 
 .board-cards-crtCard::-webkit-scrollbar {
   background-color: transparent;
-  width: 10px !important;
+  width: 5px !important;
   border-radius: 10px;
 }
 
 .board-cards-crtCard::-webkit-scrollbar-thumb {
   background-color: #c5c5c5;
   border-radius: 10px;
-  width: 10px !important;
+  width: 5px !important;
 }
 
 .board-cards-crtCard::-webkit-scrollbar-track {
   background-color: #DADBE2;
   border-radius: 10px;
-  width: 10px !important;
+  width: 5px !important;
 }
 
 .board-cards-crtCard-x::-webkit-scrollbar {
   background-color: transparent;
-  width: 10px !important;
+  width: 5px !important;
   border-radius: 10px;
 }
 
 .board-cards-crtCard-x::-webkit-scrollbar-thumb {
   background-color: #c5c5c5;
   border-radius: 10px;
-  width: 10px !important;
+  width: 5px !important;
 }
 
 .board-cards-crtCard-x::-webkit-scrollbar-track {
   background-color: #DADBE2;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 10px !important;
 }
 
