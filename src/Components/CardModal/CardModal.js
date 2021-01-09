@@ -23,6 +23,7 @@ function CardModal({
   postActivity,
   putActivity,
   deleteActivity,
+  userName
 }) {
   const [card, setCard] = useState(undefined);
   const [nameState, setNameState] = useState({ name: cardName, edit: false });
@@ -140,6 +141,12 @@ function CardModal({
   }, [description.edit && false]);
 
   // 멤버 추가하기
+  const memberList = member.search
+    ? userList
+        .filter((item) => boardUsers.find((it) => it.id === item.id))
+        .filter((item) => item.username.includes(member.search))
+    : userList
+        .filter((item) => boardUsers.find((it) => it.id === item.id));
   const addMember = () => {
     alert(
       "[ERROR] NO ACTIVITY PREPARED EXCEPT COMMENTS\n(Failed to add Members)"
@@ -151,7 +158,7 @@ function CardModal({
   const [time, setTime] = useState(undefined);
   const saveDueDate = () => {
     setDue({button: false, time: false, date: false});
-    const date_ = date.toISOString().slice(0, 10);
+    const date_ = date.toISOString().slice(0, 9);
     const datetime = date_ + " " + time + ":00";
     putCard({cId: card_id, due_date: datetime});
     alert(
@@ -388,7 +395,7 @@ function CardModal({
               value={time}
               closeClock={() => setDue({button: true, date: false, time: false})}
               /></div>
-              <button onClick={saveDueDate}>Save</button>
+              <button  style={{width: 50}} onClick={saveDueDate}>Save</button>
               <button onClick={() => setDue({button: false, time: false, date: false})}>Close</button>
               </div>}</div>
               : null}
