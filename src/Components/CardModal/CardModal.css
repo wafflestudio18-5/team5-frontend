@@ -229,6 +229,7 @@ textarea {
     border: transparent !important;
     font-weight: 600;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: pointer !important;
 }
 
 #DUEDATE div {
@@ -276,7 +277,7 @@ button.react-date-picker__clear-button.react-date-picker__button {
 }
 
 #NOBUTTON > div > span > div > div > div.react-calendar__viewContainer > div > div > div > div.react-calendar__month-view__days > button {
-    width: 20px !important;
+    align-content: center;
 }
 
 div.react-time-picker__clock {
