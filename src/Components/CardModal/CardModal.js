@@ -380,8 +380,8 @@ function CardModal({
                 ADD TO CARD
               </p>
               <div style={{display: 'flex', flexDirection: 'row'}}>
-                <button className="nodt" onClick={() => setMember({on: !member.on, search: ""})}>Members</button>
-                  <div className="invite-wrapper">
+                <button className="nodt" style={member.on? {filter: 'brightness(95%)'}: null} onClick={() => setMember({on: !member.on, search: ""})}>Members</button>
+                  <div className="invite-wrapper" style={{position: 'relative', top: -38, left: 20}}>
                     {member.on ? (
                       <div className="invite-modal" style={{height: 'fit-content'}}>
                         <div className="im-header">
