@@ -295,7 +295,7 @@ function CardModal({
                   ? (
                     <div onClick={() => setDescription({...description, edit: true})} style={{width: 501, height: 100, background: 'pink'}}>
                       <ReactMarkdown id="Markdown">
-                        {description.content}나나나
+                        {description.content}
                       </ReactMarkdown> 
                       </div> )
                   : (
