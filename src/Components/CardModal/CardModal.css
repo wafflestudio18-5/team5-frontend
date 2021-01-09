@@ -78,7 +78,7 @@
 }
 
 #card-modal-right button {
-    width: 135px !important;
+    width: 135px;
     align-items: flex-start;
     position: relative;
     margin: 3px;
@@ -300,6 +300,12 @@ div.react-date-picker__calendar.react-date-picker__calendar--open {
     border: 3px solid rgb(22, 1, 97) !important;
     border-radius: 5px;
     width: 280px;
+}
+
+button.react-calendar__tile {
+    margin: 0 !important;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
 }
 
 button.react-calendar__tile.react-calendar__month-view__days__day {
