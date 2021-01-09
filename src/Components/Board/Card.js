@@ -24,6 +24,7 @@ function Card({
   deleteCard,
   putActivity,
   deleteActivity,
+  boardUsers
 }) {
   const [cardPage, setCardPage] = useState(false);
   const { setModal } = useBoardContext();
@@ -162,6 +163,7 @@ function Card({
           deleteCard={deleteCard}
           putActivity={putActivity}
           deleteActivity={deleteActivity}
+          boardUsers={boardUsers}
         />
       ) : null}
     </div>
