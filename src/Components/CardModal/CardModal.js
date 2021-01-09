@@ -257,7 +257,7 @@ function CardModal({
                       marginLeft: 5,
                       borderRadius: 5,
                       outline: "none",
-                      cols: '4900px',
+                      width: 460,
         
                       border: "1px solid lightgray",
                       marginRight: 5,
@@ -301,7 +301,7 @@ function CardModal({
                       </div> )
                   : (
                     <button
-                      style={{width: 485, textAlign: 'left', height: 50, paddingLeft: 10, marginLeft: 5, paddingTop: 0}}
+                      style={{width: 475, textAlign: 'left', height: 50, padding: 10, marginLeft: 5,}}
                       onClick={() => setDescription({ ...description, edit: true })}
                       id="card-modal-add-descrip"
                     >
