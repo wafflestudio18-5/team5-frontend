@@ -230,6 +230,7 @@ function CardModal({
                   {nameState.name}
                 </p>
               )}
+              <p>{!card? "" : (!card.due_date? "" : card.due_date)}</p>
               <button
                 style={{ float: "right", display: "inline-block", width: 25 }}
                 className="card-modal-x"
@@ -293,9 +294,9 @@ function CardModal({
               : (!(description === undefined || description.content === undefined))
                   
                   ? (
-                    <div onClick={() => setDescription({...description, edit: true})} style={{width: 485, marginBottom: 20, marginTop: 20, height: 'fit-content'}}>
-                      <ReactMarkdown id="Markdown" style={{height: 'fit-content'}}>
-                        {description.content}
+                    <div onClick={() => setDescription({...description, edit: true})} style={{width: 485, marginBottom: 10, marginTop: 10, height: 'fit-content'}}>
+                      <ReactMarkdown id="Markdown" style={{height: 'fit-content', background: 'pink'}}>
+                        {description.content+"sksksk"}
                       </ReactMarkdown> 
                       </div> )
                   : (
