@@ -28,7 +28,7 @@ function Board({
   const [invite, setInvite] = useState(false);
   const [inviteInput, setInviteInput] = useState("");
   const [loading, setLoading] = useState(true);
-  const { fetchBoardById } = useBoardContext();
+  const { fetchBoardById, fetchUserList } = useBoardContext();
 
   const wait = async (delay) => {
     await _sleep(delay);
@@ -46,7 +46,7 @@ function Board({
   const inviteMember = (id, username) => {
     apis.board
       .invite({ id: id, username: username })
-      .then((response) => console.log(response))
+      .then((response) => fetchUserList(board.id))
       .catch((err) => console.log(err));
   };
 

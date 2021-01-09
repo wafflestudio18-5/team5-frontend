@@ -5,7 +5,7 @@ function HeaderPage() {
   const { user } = useUserContext();
 
   return (
-    <Header user_data={user}/> 
+    <Header user={user}/> 
   )
 }
 
