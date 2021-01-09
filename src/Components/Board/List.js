@@ -92,6 +92,8 @@ function List({
             list_id: lists[lInd].id,
           };
 
+      if(lInd && reqBody.list_id === reqBody.prev_id) return;
+
       apis.list
         .put(reqBody)
         .then(async (response) => {

@@ -25,6 +25,7 @@ const UserProvider = (props) => {
     apis.user
       .pwSignUp({ email, username, password })
       .then((response) => {
+        alert('회원가입에 성공하였습니다');
         setState((state) => {
           return {
             ...state,
