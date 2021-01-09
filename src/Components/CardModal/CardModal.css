@@ -300,8 +300,3 @@ div.react-calendar {
 #NOBUTTON > div > div > div {
     display: none !important;
 }
-
-#Markdown h1 h2 h3 h4 h5 h6 p {
-    width: 500px !important;
-    color: black;
-}
