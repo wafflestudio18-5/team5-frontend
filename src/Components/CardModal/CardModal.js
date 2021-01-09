@@ -10,6 +10,8 @@ import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
+import { _sleep } from "../../Library/Timer";
+
 
 function CardModal({
   cardName,
@@ -20,7 +22,6 @@ function CardModal({
   board_id,
   putCard,
   deleteCard,
-  postActivity,
   putActivity,
   deleteActivity,
   boardUsers
@@ -29,6 +30,16 @@ function CardModal({
   const [nameState, setNameState] = useState({ name: cardName, edit: false });
   const [refresh, setRefresh] = useState(false);
   const { fetchBoardById } = useBoardContext();
+
+  const postActivity = (cId, content) => {
+    if (!content) return;
+    console.log(content);
+    apis.activity.post({ card_id: cId, content })
+      .then(async (response) => {
+        getCard();
+      })
+      .catch((err) => console.log(err));
+  };
 
   function getCard() {
     apis.card
@@ -75,9 +86,9 @@ function CardModal({
     }
   };
 
-  const [button, setButton] = React.useState({ display: false, green: false });
-  const [detail, setDetail] = React.useState(true);
-  const [comment, setComment] = React.useState("");
+  const [button, setButton] = useState({ display: false, green: false });
+  const [detail, setDetail] = useState(true);
+  const [comment, setComment] = useState("");
   const changeComment = (e) => {
     setComment(e.target.value);
     e.target.value === ""
@@ -261,9 +272,11 @@ function CardModal({
                   }
                 />
               ) : description.content ? (
-                  <ReactMarkdown onCLick={() => setDescription({...description, edit: false})}>
+                <div onClick={() => setDescription({...description, edit: true})}>
+                  <ReactMarkdown>
                     {description.content}
                   </ReactMarkdown> 
+                  </div>
               ) : (
                 <button
                   style={{width: 495, textAlign: 'left', height: 50, paddingLeft: 10, marginLeft: 5, paddingTop: 0}}

@@ -22,7 +22,6 @@ function Card({
   putCard,
   setModalMode,
   deleteCard,
-  postActivity,
   putActivity,
   deleteActivity,
   boardUsers
@@ -162,7 +161,6 @@ function Card({
           board_id={board_id}
           putCard={putCard}
           deleteCard={deleteCard}
-          postActivity={postActivity}
           putActivity={putActivity}
           deleteActivity={deleteActivity}
           boardUsers={boardUsers}
