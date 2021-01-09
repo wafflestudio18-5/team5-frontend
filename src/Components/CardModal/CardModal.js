@@ -254,9 +254,9 @@ function CardModal({
                     marginLeft: 5,
                     borderRadius: 5,
                     outline: "none",
-                    height: 50,
-                    width: 490,
-                    maxWidth: 490,
+                    rows: 50,
+                    cols: 490,
+                    maxCols: 490,
                     overflowY: 'auto',
                     border: "1px solid lightgray",
                     marginRight: 5,
@@ -281,7 +281,7 @@ function CardModal({
               ) : description.content ? (
                 <div onClick={() => setDescription({...description, edit: true})}>
                   <ReactMarkdown>
-                    {description.content}
+                    {description.content}jkdfjkajsdfkj
                   </ReactMarkdown> 
                   </div>
               ) : (
@@ -294,11 +294,13 @@ function CardModal({
                 </button>
               )}
 
-              <div style={{ display: "float" }}>
-                <p className="title" style={{ float: "left" }}>
+              <div style={{ display: "flex", flexDirection: 'row'}}>
+                <p className="title" >
                   Activity
                 </p>
-                <button id="card-modal-detail" onClick={(e) => setDetail(!detail)} style={{float: 'right', display: 'inline-block', width: 100}}>{detail? "Hide Details" : "Show Details"}</button>
+                <button id="card-modal-detail" 
+                onClick={(e) => setDetail(!detail)} 
+                style={{width: 100, position: 'relative', left: 324, top: 10}}>{detail? "Hide Details" : "Show Details"}</button>
               </div>
               <div ref={activities} id="card-modal-activities" style={{height: button.display? 242 : 280, maxHeight: button.display? 242 : 280, overflowX: 'auto', marginTop: 20}}>              
               <div style={{display: 'flex', flexDirection: 'row'}}>
@@ -328,7 +330,7 @@ function CardModal({
                     }}
                   >
                     <input
-                      style={{ fontSize: 15 }}
+                      style={{ fontSize: 15, width: 415 }}
                       //width: activities.current.isVerticalScroll() ? 510 : 450
                       value={comment}
                       onChange={changeComment}
