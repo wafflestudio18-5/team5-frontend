@@ -292,7 +292,7 @@ function CardModal({
                       id="card-modal-add-descrip"
                     >
                       Add a more detailed description...
-                    </button><p>Add a more detailed description...</p></>
+                    </button></>
                   )}
 
               <div style={{ display: "flex", flexDirection: 'row'}}>
