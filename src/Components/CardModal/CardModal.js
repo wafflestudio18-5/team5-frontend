@@ -3,13 +3,9 @@ import "./CardModal.css";
 import Activity from "./Activity.js";
 import apis from '../../Library/Apis';
 import ReactMarkdown from 'react-markdown';
-import TimePicker from 'react-time-picker';
 import DatePicker from 'react-date-picker'
 import { useBoardContext } from "../../Contexts";
 import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
-import 'react-time-picker/dist/TimePicker.css';
-import 'react-clock/dist/Clock.css';
 import { _sleep } from "../../Library/Timer";
 
 
@@ -166,16 +162,14 @@ function CardModal({
     );
   };
   // Due Date 추가하기
-  const [due, setDue] = useState({button: false, calendar: false, clock: false});
+  const [due, setDue] = useState(false);
   const [date, setDate] = useState(undefined);
-  const [time, setTime] = useState(undefined);
   const saveDueDate = () => {
-    setDue({button: false, time: false, date: false});
+    setDue(false);
     const date_ = date.toISOString().slice(0, 9);
-    const datetime = date_ + " " + time + ":00";
-    putCard({cId: card_id, due_date: datetime});
+    putCard({cId: card_id, due_date: date_});
     alert(
-      `Your new due date is ${datetime} - talk to the server manager to make sure it is surely saved!`
+      `Your new due date is ${date_} - talk to the server manager to make sure it is surely saved!`
     );
   };
   //"Thu Jan 14 2021 00:00:00 GMT+0900 (대한민국 표준시)00:30"
@@ -466,42 +460,33 @@ function CardModal({
               <button className="nodt" >Checklist</button>
               
               
-              <div style={{display: 'flex', flexDirection: 'row'}} 
+              <div
               onClick={(e) => {console.log(e.target)}}>
               <button  className="nodt" 
-              onClick={() => setDue(due.button? {button: false, date: false, clock: false} : {button: true, date: true, clock: false})}
-              style={due.button? {filter: 'brightness(95%)'} : null}
+              onClick={() => setDue(!due)}
+              style={due? {filter: 'brightness(95%)'} : null}
               >Due Date</button>
-              {due.button? 
+              {due? 
               <div id="DUEDATE" style={{backgroundColor: '#F4F5F7', zIndex: 900, fontSize: 15}}>
-
-              {due.date
-              ?<div style={{display: 'float'}}>
-              <div id="NOBUTTON">
+            
+              <div style={{display: 'float'}}>
+              <div id="NOBUTTON" >
               <DatePicker
               autoFocus={true}
               onChange={setDate}
               value={date}
-              closeCalendar={() => setDue({button: true, date: false, time: true})}
+              closeCalendar={false}
+              isOpen={true}
+              onClick={() => setDue(false)}
               /></div>
-              <button onClick={() => setDue({button: true, time: true, date: false})}>OK</button></div>
+              </div>
 
-              :<div style={{display: 'flex', flexDirection: 'row'}}>
-              <div id="NOBUTTON">
-              <TimePicker
-              onChange={setTime}
-              value={time}
-              closeClock={() => setDue({button: true, date: false, time: false})}
-              /></div>
-              <button  style={{width: 50}} onClick={saveDueDate}>Save</button>
-              <button onClick={() => setDue({button: false, time: false, date: false})}>Close</button>
-              </div>}</div>
+              </div>
               : null}
               </div>
               
              
-              <p>
-                <br />
+              <p style={due? null : {marginTop: 27}}>
                 POWER-UPS
               </p>
               <button className="nodt" >+ Add Power-Ups</button>
