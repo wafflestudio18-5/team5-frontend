@@ -1,4 +1,6 @@
 import React, {useState, useRef} from 'react';
+import ReactMarkdown from 'react-markdown';
+
 import apis from '../../Library/Apis';
 
 function Activity({data, getCard, putActivity, isComment, deleteActivity, detail}) {
@@ -46,9 +48,9 @@ function Activity({data, getCard, putActivity, isComment, deleteActivity, detail
             {data.is_comment ?
         
                 <><div style={button.editMode? null : {display: 'none'}}>
-                <p>
+                <ReactMarkdown>
                     <span style={{fontWeight: 600, color: 'black', fontSize: 15}}>{data.creator} </span>
-                    <span style={{color: 'gray', fontsize: 12}}>    {data.created_at}</span></p>
+                    <span style={{color: 'gray', fontsize: 12}}>    {data.created_at}</span></ReactMarkdown>
                 <div style={{
                   backgroundColor: 'white', 
                   padding: 3, 
@@ -95,9 +97,9 @@ function Activity({data, getCard, putActivity, isComment, deleteActivity, detail
                 </div></div>
 
                 <div style={button.editMode? {display: 'none'} : null}>
-                    <p>
+                    <ReactMarkdown>
                         <span style={{fontWeight: 600, color: 'black', fontSize: 15}}>{data.creator} </span>
-                        <span style={{color: 'gray', fontsize: 12}}>    {data.created_at}</span></p>
+                        <span style={{color: 'gray', fontsize: 12}}>    {data.created_at}</span></ReactMarkdown>
                     <div style={{              
                         backgroundColor: 'white', 
                         padding: 4, 
@@ -105,7 +107,7 @@ function Activity({data, getCard, putActivity, isComment, deleteActivity, detail
                         borderRadius: 3,
                         marginBottom: 0,
                         width: 'fit-content'}}>
-                        <p style={{fontSize: 15}}>{changedComment}</p>
+                        <ReactMarkdown style={{fontSize: 15}}>{changedComment}</ReactMarkdown>
                     </div>
                     <button className="ActivityCommentModify" onClick={editCommentClick}>Edit</button>
                     <span> · </span>
@@ -113,12 +115,12 @@ function Activity({data, getCard, putActivity, isComment, deleteActivity, detail
                 </div>
                 </>
 
-            :  (detail? <p style={{position: 'relative', top: 3}}>
+            :  (detail? <ReactMarkdown style={{position: 'relative', top: 3}}>
                     <span style={{fontWeight: 600, color: 'black', fontSize: 15, width: 'fit-content'}}>{data.creator} </span>
                     <span style={{fontSize: 15}}>{data.content}</span>
                     <br/>
                     <span style={{color: 'gray', fontsize: 12, position: 'relative', top: 4}}>    {data.created_at}</span>
-                </p>:null)}
+                </ReactMarkdown>:null)}
             {/* TODO 댓글이 아닐 경우 다른 방식으로... */}
         </div>
     )
