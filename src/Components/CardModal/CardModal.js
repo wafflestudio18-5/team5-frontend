@@ -139,13 +139,13 @@ function CardModal({
   //Description 추가 및 변경하기
   const [description, setDescription] = useState({
     exist: false,
-    content: "",
+    content: undefined,
     edit: false,
   });
-  useEffect(() => {
-    // 서버에 description 변경
-    putCard({ cId: card_id, description: description.content });
-  }, [description.edit && false]);
+  const saveDescription = () => {
+    setDescription({...description, edit: false});
+    putCard({ cId: card_id, description: description.content })
+  }
 
   // 멤버 추가하기
   const [member, setMember] = useState({on: false, search: ""})
@@ -248,51 +248,75 @@ function CardModal({
           <div id="card-modal-bottom">
             <div id="card-modal-left" style={{ columnWidth: 400 }}>
               <p className="title">Description</p>
-              {description.edit ? (
-                <textarea
-                  style={{
-                    marginLeft: 5,
-                    borderRadius: 5,
-                    outline: "none",
-                    rows: 50,
-                    cols: 490,
-                    maxCols: 490,
-                    overflowY: 'auto',
-                    border: "1px solid lightgray",
-                    marginRight: 5,
-                  }}
-                  onBlur={(e) => 
-                      !e.target.value
-                        ? setDescription({ ...description, edit: false })
-                        : setDescription({
-                            ...description,
-                            exist: true,
-                            edit: false,
-                          })
-                  }
-                  value={description.content}
-                  onChange={(e) =>
-                    setDescription({
-                      ...description,
-                      content: e.target.value,
-                    })
-                  }
-                />
-              ) : description.content ? (
-                <div onClick={() => setDescription({...description, edit: true})}>
-                  <ReactMarkdown>
-                    {description.content}jkdfjkajsdfkj
-                  </ReactMarkdown> 
-                  </div>
-              ) : (
-                <button
-                  style={{width: 495, textAlign: 'left', height: 50, paddingLeft: 10, marginLeft: 5, paddingTop: 0}}
-                  onClick={() => setDescription({ ...description, edit: true })}
-                  id="card-modal-add-descrip"
-                >
-                  Add a more detailed description...
-                </button>
-              )}
+              {description.edit 
+              
+              ? (
+                <><textarea
+                    style={{
+                      marginLeft: 5,
+                      borderRadius: 5,
+                      outline: "none",
+                      rows: 50,
+                      cols: 490,
+                      maxCols: 490,
+                      overflowY: 'auto',
+                      border: "1px solid lightgray",
+                      marginRight: 5,
+                    }}
+                    onBlur={(e) => 
+                        !e.target.value
+                          ? setDescription({ ...description, edit: false })
+                          : setDescription({
+                              ...description,
+                              exist: true,
+                              edit: false,
+                            })
+                    }
+                    value={description.content}
+                    onChange={(e) =>
+                      setDescription({
+                        ...description,
+                        content: e.target.value,
+                      })
+                    }
+                  />
+                  <button 
+                    style={{
+                        backgroundColor: "#5AAC44",
+                        color: "white",
+                        marginTop: 7,
+                        marginLeft: 7,
+                        marginBottom: 10,
+                        width: 50,
+                        height: 30,}}
+                  onClick={saveDescription}>Save</button>
+                  <button
+                    style={{ float: "right", display: "inline-block" }}
+                    className="card-modal-x"
+                    id="exit"
+                  >
+                    ×
+                  </button>
+                </>
+                ) 
+              
+              : ((description === undefined || description.content === undefined))
+                  
+                  ? (
+                    <div onClick={() => setDescription({...description, edit: true})}>
+                      <ReactMarkdown>
+                        {description.content}
+                      </ReactMarkdown> 
+                      </div> )
+                  : (
+                    <button
+                      style={{width: 495, textAlign: 'left', height: 50, paddingLeft: 10, marginLeft: 5, paddingTop: 0}}
+                      onClick={() => setDescription({ ...description, edit: true })}
+                      id="card-modal-add-descrip"
+                    >
+                      Add a more detailed description...
+                    </button>
+                  )}
 
               <div style={{ display: "flex", flexDirection: 'row'}}>
                 <p className="title" >
