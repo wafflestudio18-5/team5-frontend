@@ -144,7 +144,7 @@ function CardModal({
   });
   const saveDescription = () => {
     setDescription({...description, edit: false});
-    putCard({ cId: card_id, description: description.content })
+    putCard({ cId: card_id, description: description['text'] })
   }
 
   // 멤버 추가하기
@@ -187,7 +187,7 @@ function CardModal({
   };
   //"Thu Jan 14 2021 00:00:00 GMT+0900 (대한민국 표준시)00:30"
 
-  const activities = useRef();
+  const activitiesref = useRef();
 
   return (
     <div
@@ -249,7 +249,7 @@ function CardModal({
           <div id="card-modal-bottom">
             <div id="card-modal-left" style={{ maxHeight: 550, overflowY: 'auto' }}>
               <p className="title">Description</p>
-              {description.edit 
+              {description['edit'] 
               
               ? (
                 <div style={{height: 100}}><textarea
@@ -264,7 +264,7 @@ function CardModal({
                       marginRight: 5,
                       padding: 5
                     }}
-                    value={description.content}
+                    value={description['text']}
                     onChange={(e) =>
                       setDescription({
                         ...description,
@@ -292,7 +292,7 @@ function CardModal({
                 </div>
                 ) 
               
-              : (!(description === undefined || description['content'] === undefined || description['content' === ""]))
+              : (!(description === undefined || description['content'] === undefined || description['content'] === "" || description['content'] === null))
                   
                   ? (
                     <div onClick={() => setDescription({...description, edit: true})} style={{width: 485, marginBottom: 10, marginTop: 10, height: 'fit-content'}}>
@@ -301,13 +301,13 @@ function CardModal({
                       </ReactMarkdown> 
                       </div> )
                   : (
-                    <button
+                    <><button
                       style={{width: 485, textAlign: 'left', height: 50, paddingLeft: 10, marginLeft: 5, paddingTop: 0}}
                       onClick={() => setDescription({ ...description, edit: true })}
                       id="card-modal-add-descrip"
                     >
                       Add a more detailed description...
-                    </button>
+                    </button></>
                   )}
 
               <div style={{ display: "flex", flexDirection: 'row'}}>
@@ -318,7 +318,7 @@ function CardModal({
                 onClick={(e) => setDetail(!detail)} 
                 style={{width: 100, position: 'relative', left: 324, top: 10}}>{detail? "Hide Details" : "Show Details"}</button>
               </div>
-              <div ref={activities} id="card-modal-activities" style={{marginTop: 20}}>              
+              <div ref={activitiesref} id="card-modal-activities" style={{marginTop: 20}}>              
               <div style={{display: 'flex', flexDirection: 'row'}}>
                   <img
                     style={{
@@ -384,7 +384,7 @@ function CardModal({
                       .reverse()
                       .map((data, index) => (
                         <Activity
-                          data={data}
+data={Object.assign(data)}
                           getCard={getCard}
                           key={index}
                           postActivity={postActivity}
