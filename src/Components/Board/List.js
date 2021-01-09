@@ -25,6 +25,7 @@ function List({
   deleteCard,
   putActivity,
   deleteActivity,
+  boardUsers
 }) {
   const newCardButton = useRef();
   const newCardInput = useRef();
@@ -258,6 +259,7 @@ function List({
                 putCard={putCard}
                 putActivity={putActivity}
                 deleteActivity={deleteActivity}
+                boardUsers={boardUsers}
               />
             ))}
           </DndProvider>
@@ -304,6 +306,7 @@ function List({
         </div>
       </div>
     </div>
+
   );
 }
 

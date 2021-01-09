@@ -3,8 +3,15 @@ import "./CardModal.css";
 import Activity from "./Activity.js";
 import apis from '../../Library/Apis';
 import ReactMarkdown from 'react-markdown';
+import TimePicker from 'react-time-picker';
+import DatePicker from 'react-date-picker'
 import { useBoardContext } from "../../Contexts";
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
+import 'react-time-picker/dist/TimePicker.css';
+import 'react-clock/dist/Clock.css';
 import { _sleep } from "../../Library/Timer";
+
 
 function CardModal({
   cardName,
@@ -17,6 +24,7 @@ function CardModal({
   deleteCard,
   putActivity,
   deleteActivity,
+  boardUsers
 }) {
   const [card, setCard] = useState(undefined);
   const [nameState, setNameState] = useState({ name: cardName, edit: false });
@@ -144,17 +152,33 @@ function CardModal({
   }, [description.edit && false]);
 
   // 멤버 추가하기
-  const addMember = () => {
+  const [member, setMember] = useState({on: false, search: ""})
+  const memberList = member.search
+    ? boardUsers
+        .filter((item) => boardUsers.find((it) => it.id === item.id))
+        .filter((item) => item.username.includes(member.search))
+    : boardUsers
+        .filter((item) => boardUsers.find((it) => it.id === item.id));
+  const addMember = (username) => {
+    putCard({cId: card_id, member: username});
     alert(
       "[ERROR] NO ACTIVITY PREPARED EXCEPT COMMENTS\n(Failed to add Members)"
     );
   };
   // Due Date 추가하기
-  const addDuedate = () => {
+  const [due, setDue] = useState({button: false, calendar: false, clock: false});
+  const [date, setDate] = useState(undefined);
+  const [time, setTime] = useState(undefined);
+  const saveDueDate = () => {
+    setDue({button: false, time: false, date: false});
+    const date_ = date.toISOString().slice(0, 9);
+    const datetime = date_ + " " + time + ":00";
+    putCard({cId: card_id, due_date: datetime});
     alert(
-      "[ERROR] NO ACTIVITY PREPARED EXCEPT COMMENTS\n(Failed to add Due Date)"
+      `Your new due date is ${datetime} - talk to the server manager to make sure it is surely saved!`
     );
   };
+  //"Thu Jan 14 2021 00:00:00 GMT+0900 (대한민국 표준시)00:30"
 
   const activities = useRef();
 
@@ -355,17 +379,133 @@ function CardModal({
                 <br />
                 ADD TO CARD
               </p>
-              <button onClick={addMember}>Members</button>
-              <button>Labels</button>
-              <button>Checklist</button>
-              <button onClick={addDuedate}>Due Date</button>
+              <div style={{display: 'flex', flexDirection: 'row'}}>
+                <button className="nodt" onClick={() => setMember({on: !member.on, search: ""})}>Members</button>
+                  <div className="invite-wrapper">
+                    {member.on ? (
+                      <div className="invite-modal" style={{height: 'fit-content'}}>
+                        <div className="im-header">
+                          <span>Board Members</span>
+                        </div>
+
+                        <hr />
+
+                        <div className="im-input-wrapper">
+                          <input
+                            className="im-input"
+                            value={member.search}
+                            placeholder="Search members"
+                            onChange={(e) => setMember({...member, search: e.target.value})}
+                          />
+                        </div>
+
+                        <div
+                          id="inviteUsers"
+                          style={{
+                            maxHeight: 280,
+                            overflowY: 'auto',
+                            background: "white",
+                            position: "relative",
+                            top: -5,
+                            paddingRight: memberList.length > 4 ? 5 : 0,
+                          }}
+                        >
+                          {memberList.map((item, index) => {
+                            return (
+                              <>
+                                <div
+                                  className="inviteUser"
+                                  key={index}
+                                  onClick={() =>
+                                    addMember(item.username)
+                                  }
+                                  style={{
+                                    padding: 10,
+                                    height: "fit-content",
+                                    textAlign: "left",
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    marginTop: index === 0 ? 1 : 5,
+                                    marginBottom: index === memberList.length - 1 ? 1 : 5,
+                                  }}
+                                >
+                                  <img
+                                    style={{
+                                      height: 25,
+                                      width: 25,
+                                      borderRadius: "50%",
+                                      position: "relative",
+                                      top: 3,
+                                      left: 3,
+                                    }}
+                                    src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png"
+                                    alt={"profile"}
+                                  />
+                                  <p
+                                    style={{
+                                      position: "relative",
+                                      top: -7,
+                                      marginLeft: 15,
+                                      pontWeight: 300,
+                                    }}
+                                  >
+                                    {item.username}
+                                  </p>
+                                </div>
+                              </>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    ) : null}
+                  </div>
+                  </div>
+              
+
+              <button className="nodt" >Labels</button>
+              <button className="nodt" >Checklist</button>
+              
+              
+              <div style={{display: 'flex', flexDirection: 'row'}} onClick={(e) => {console.log(e.target)}}>
+              <button  className="nodt" 
+              onClick={() => setDue(due.button? {button: false, date: false, clock: false} : {button: true, date: true, clock: false})}
+              style={due.button? {filter: 'brightness(95%)'} : null}
+              >Due Date</button>
+              {due.button? 
+              <div id="DUEDATE" style={{backgroundColor: '#F4F5F7', zIndex: 900, fontSize: 15}}>
+
+              {due.date
+              ?<div style={{display: 'flex', flexDirection: 'column'}}>
+              <div id="NOBUTTON">
+              <DatePicker
+              autoFocus={true}
+              onChange={setDate}
+              value={date}
+              closeCalendar={() => setDue({button: true, date: false, time: true})}
+              /></div>
+              <button onClick={() => setDue({button: true, time: true, date: false})}>OK</button></div>
+
+              :<div style={{display: 'flex', flexDirection: 'row'}}>
+              <div id="NOBUTTON">
+              <TimePicker
+              onChange={setTime}
+              value={time}
+              closeClock={() => setDue({button: true, date: false, time: false})}
+              /></div>
+              <button  style={{width: 50}} onClick={saveDueDate}>Save</button>
+              <button onClick={() => setDue({button: false, time: false, date: false})}>Close</button>
+              </div>}</div>
+              : null}
+              </div>
+              
+             
               <p>
                 <br />
                 POWER-UPS
               </p>
-              <button>+ Add Power-Ups</button>
+              <button className="nodt" >+ Add Power-Ups</button>
               <p>Get unlimited Power-Ups, plus much more.</p>
-              <button style={{ background: "#EDDBF4", paddingTop: 3 }}>
+              <button className="nodt"  style={{ background: "#EDDBF4", paddingTop: 3 }}>
                 <img
                   style={{ position: "relative", top: 2, marginRight: 3 }}
                   src="https://api.iconify.design/octicon:heart-24.svg?height=14"
@@ -399,8 +539,8 @@ function CardModal({
                   }}
                 />
               </p>
-              <button>+ Add Card Button</button>
-              <button
+              <button className="nodt" >+ Add Card Button</button>
+              <button className="nodt" 
                 style={{
                   marginTop: 15,
                   fontWeight: 600,
