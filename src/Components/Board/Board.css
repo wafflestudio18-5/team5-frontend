@@ -395,7 +395,6 @@ input.noOutline {
   width: 10px !important;
 }
 textarea {
-    resize: none;
     font-family: Arial, Helvetica, sans-serif;
     padding: 5px;
     outline: none;
