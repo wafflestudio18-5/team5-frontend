@@ -94,6 +94,8 @@ function CardModal({
   //댓글 달고 저장하기
   const saveComment = () => {
     postActivity(String(card_id), comment);
+    setButton({display: false, green: false});
+    setComment("");
   };
 
   //해당 카드 지우기
@@ -301,11 +303,11 @@ function CardModal({
                       </div> )
                   : (
                     <button
-                      style={{width: 475, textAlign: 'left', height: 50, padding: 10, marginLeft: 5,}}
+                      style={{width: 480, textAlign: 'left', height: 50, padding: 25, alignItems: 'center', marginLeft: 5,}}
                       onClick={() => setDescription({ ...description, edit: true })}
                       id="card-modal-add-descrip"
                     >
-                      Add a more detailed description...
+                      Add a more detailed description...\n
                     </button>
                   )}
 
@@ -315,7 +317,7 @@ function CardModal({
                 </p>
                 <button id="card-modal-detail" 
                 onClick={(e) => setDetail(!detail)} 
-                style={{width: 100, position: 'relative', left: 324, top: 10}}>{detail? "Hide Details" : "Show Details"}</button>
+                style={{width: 100, position: 'relative', left: 322, top: 10}}>{detail? "Hide Details" : "Show Details"}</button>
               </div>
               <div ref={activities} id="card-modal-activities" style={{marginTop: 20}}>              
               <div style={{display: 'flex', flexDirection: 'row'}}>
