@@ -96,6 +96,8 @@ function CardModal({
     postActivity(String(card_id), comment);
     setButton({display: false, green: false});
     setComment("");
+    getCard();
+    getCard();
   };
 
   //해당 카드 지우기
@@ -388,6 +390,7 @@ function CardModal({
                           data={data}
                           getCard={getCard}
                           key={index}
+                          isComment={data.is_comment}
                           postActivity={postActivity}
                           putActivity={putActivity}
                           deleteActivity={deleteActivity}
