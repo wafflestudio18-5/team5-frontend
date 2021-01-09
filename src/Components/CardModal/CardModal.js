@@ -221,8 +221,7 @@ function CardModal({
               <button
                 style={{ float: "right", display: "inline-block", width: 25 }}
                 className="card-modal-x"
-                id="exit"
-              >
+                id="exit">
                 ×
               </button>
             </div>
@@ -278,7 +277,7 @@ function CardModal({
                 </div>
                 ) 
               
-              : (!(description === undefined || description['text'] === undefined || description['text' === ""]))
+              : (!(description === undefined || description['text'] === undefined || description['text'] === "" || description['text'] === null))
                   
                   ? (
                     <div onClick={() => setDescription({...description, edit: true})} style={{width: 485, marginBottom: 10, marginTop: 10, height: 'fit-content'}}>
@@ -287,13 +286,13 @@ function CardModal({
                       </ReactMarkdown> 
                       </div> )
                   : (
-                    <button
+                    <><button
                       style={{width: 480, textAlign: 'left', height: 50, padding: 25, alignItems: 'center', marginLeft: 5,}}
                       onClick={() => setDescription({ ...description, edit: true })}
                       id="card-modal-add-descrip"
                     >
                       Add a more detailed description...
-                    </button>
+                    </button><p>Add a more detailed description...</p></>
                   )}
 
               <div style={{ display: "flex", flexDirection: 'row'}}>
