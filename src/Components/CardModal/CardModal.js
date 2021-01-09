@@ -466,7 +466,8 @@ function CardModal({
               <button className="nodt" >Checklist</button>
               
               
-              <div style={{display: 'flex', flexDirection: 'row'}} onClick={(e) => {console.log(e.target)}}>
+              <div style={{display: 'flex', flexDirection: 'row'}} 
+              onClick={(e) => {console.log(e.target)}}>
               <button  className="nodt" 
               onClick={() => setDue(due.button? {button: false, date: false, clock: false} : {button: true, date: true, clock: false})}
               style={due.button? {filter: 'brightness(95%)'} : null}
