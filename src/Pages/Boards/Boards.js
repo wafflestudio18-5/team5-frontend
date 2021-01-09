@@ -18,6 +18,8 @@ function BoardsPage({ history }) {
   const [fetching, setFetching] = useState(false);
 
   const fetchBoards = async () => {
+    if(fetching) return;
+
     setFetching(true);
     await apis.board
       .getAll()
@@ -41,10 +43,7 @@ function BoardsPage({ history }) {
       .then((response) => {
         const fetchedData = response.data.results; // 피드 데이터 부분
         // 기존 데이터 배열과 새로 받아온 데이터 배열을 합쳐 새 배열을 만들고 state에 저장한다. 
-        console.log(boards);
-        console.log(fetchedData);
         const mergedData = [...boards, ...fetchedData];
-        console.log(mergedData);
         setBoards(mergedData);
         setPage(page + 1);
     }).catch(err => console.log(err));
