@@ -67,7 +67,7 @@ function CardModal({
       });
   }
 
-  useEffect(() => {
+ useEffect(() => {
     getCard();
   }, []);
 
@@ -94,6 +94,7 @@ function CardModal({
   //댓글 달고 저장하기
   const saveComment = () => {
     postActivity(String(card_id), comment);
+    setButton({display: false, green: false});
     setComment("");
   };
 
@@ -144,7 +145,8 @@ function CardModal({
   });
   const saveDescription = () => {
     setDescription({...description, edit: false});
-    putCard({ cId: card_id, description: description['text'] })
+    putCard({ cId: card_id, description: description['text'] });
+    console.log(description.['text']);
   }
 
   // 멤버 추가하기
@@ -187,7 +189,8 @@ function CardModal({
   };
   //"Thu Jan 14 2021 00:00:00 GMT+0900 (대한민국 표준시)00:30"
 
-  const activitiesref = useRef();
+  const activityy = useRef();
+  console.log(description);
 
   return (
     <div
@@ -235,8 +238,7 @@ function CardModal({
               <button
                 style={{ float: "right", display: "inline-block", width: 25 }}
                 className="card-modal-x"
-                id="exit"
-              >
+                id="exit">
                 ×
               </button>
             </div>
@@ -258,7 +260,7 @@ function CardModal({
                       marginLeft: 5,
                       borderRadius: 5,
                       outline: "none",
-                      cols: '4900px',
+                      width: 460,
         
                       border: "1px solid lightgray",
                       marginRight: 5,
@@ -292,17 +294,17 @@ function CardModal({
                 </div>
                 ) 
               
-              : (!(description === undefined || description['content'] === undefined || description['content'] === "" || description['content'] === null))
+              : (!(description === undefined || description['text'] === undefined || description['text'] === "" || description['text'] === null))
                   
                   ? (
                     <div onClick={() => setDescription({...description, edit: true})} style={{width: 485, marginBottom: 10, marginTop: 10, height: 'fit-content'}}>
                       <ReactMarkdown id="Markdown" style={{height: 'fit-content', background: 'pink'}}>
-                        {description['content']}
+                        {description['text']}
                       </ReactMarkdown> 
                       </div> )
                   : (
                     <><button
-                      style={{width: 485, textAlign: 'left', height: 50, paddingLeft: 10, marginLeft: 5, paddingTop: 0}}
+                      style={{width: 480, textAlign: 'left', height: 50, padding: 25, alignItems: 'center', marginLeft: 5,}}
                       onClick={() => setDescription({ ...description, edit: true })}
                       id="card-modal-add-descrip"
                     >
@@ -316,9 +318,9 @@ function CardModal({
                 </p>
                 <button id="card-modal-detail" 
                 onClick={(e) => setDetail(!detail)} 
-                style={{width: 100, position: 'relative', left: 324, top: 10}}>{detail? "Hide Details" : "Show Details"}</button>
+                style={{width: 100, position: 'relative', left: 322, top: 10}}>{detail? "Hide Details" : "Show Details"}</button>
               </div>
-              <div ref={activitiesref} id="card-modal-activities" style={{marginTop: 20}}>              
+              <div ref={activityy} iyd="card-modal-activities" style={{marginTop: 20}}>              
               <div style={{display: 'flex', flexDirection: 'row'}}>
                   <img
                     style={{
@@ -384,9 +386,10 @@ function CardModal({
                       .reverse()
                       .map((data, index) => (
                         <Activity
-data={Object.assign(data)}
+                          data={Object.assign(data)}
                           getCard={getCard}
                           key={index}
+                          isComment={data.is_comment}
                           postActivity={postActivity}
                           putActivity={putActivity}
                           deleteActivity={deleteActivity}
