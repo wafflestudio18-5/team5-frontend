@@ -246,32 +246,22 @@ function CardModal({
           </div>
 
           <div id="card-modal-bottom">
-            <div id="card-modal-left" style={{ columnWidth: 400 }}>
+            <div id="card-modal-left" style={{ columnWidth: 400, maxHeight: 550, overflowY: 'auto' }}>
               <p className="title">Description</p>
               {description.edit 
               
               ? (
                 <><textarea
                     style={{
+                      fontSize: 14,
                       marginLeft: 5,
                       borderRadius: 5,
                       outline: "none",
-                      rows: 50,
                       cols: 490,
-                      maxCols: 490,
-                      overflowY: 'auto',
                       border: "1px solid lightgray",
                       marginRight: 5,
+                      padding: 5
                     }}
-                    onBlur={(e) => 
-                        !e.target.value
-                          ? setDescription({ ...description, edit: false })
-                          : setDescription({
-                              ...description,
-                              exist: true,
-                              edit: false,
-                            })
-                    }
                     value={description.content}
                     onChange={(e) =>
                       setDescription({
@@ -280,7 +270,7 @@ function CardModal({
                       })
                     }
                   />
-                  <button 
+                  <div style={{display: 'flex', flexDirection: 'row'}}><button 
                     style={{
                         backgroundColor: "#5AAC44",
                         color: "white",
@@ -291,20 +281,20 @@ function CardModal({
                         height: 30,}}
                   onClick={saveDescription}>Save</button>
                   <button
-                    style={{ float: "right", display: "inline-block" }}
+                    style={{ float: "right", display: "inline-block", width: 25 }}
                     className="card-modal-x"
-                    id="exit"
+                    onClick={() => setDescription({...description, edit: false})}
                   >
                     ×
-                  </button>
+                  </button></div>
                 </>
                 ) 
               
-              : ((description === undefined || description.content === undefined))
+              : (!(description === undefined || description.content === undefined))
                   
                   ? (
                     <div onClick={() => setDescription({...description, edit: true})}>
-                      <ReactMarkdown>
+                      <ReactMarkdown id="Markdown">
                         {description.content}
                       </ReactMarkdown> 
                       </div> )
@@ -326,7 +316,7 @@ function CardModal({
                 onClick={(e) => setDetail(!detail)} 
                 style={{width: 100, position: 'relative', left: 324, top: 10}}>{detail? "Hide Details" : "Show Details"}</button>
               </div>
-              <div ref={activities} id="card-modal-activities" style={{height: button.display? 242 : 280, maxHeight: button.display? 242 : 280, overflowX: 'auto', marginTop: 20}}>              
+              <div ref={activities} id="card-modal-activities" style={{marginTop: 20}}>              
               <div style={{display: 'flex', flexDirection: 'row'}}>
                   <img
                     style={{
