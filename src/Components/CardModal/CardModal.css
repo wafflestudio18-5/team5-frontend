@@ -271,7 +271,8 @@ button.react-date-picker__clear-button.react-date-picker__button {
     margin: 0px !important;
     background: white !important;
     border: 15px white solid !important;
-    border-radius: 5px !important;    
+    border-radius: 5px !important;
+    
 }
 
 #NOBUTTON > div > span > div > div > div.react-calendar__viewContainer > div > div > div > div.react-calendar__month-view__days > button {
