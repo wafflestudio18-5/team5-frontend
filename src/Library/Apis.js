@@ -65,6 +65,7 @@ const apis = {
     },
     // 로그아웃
     logout: () => {
+      requester.defaults.headers.common["Authorization"] = null;
       return requester.put("user/logout/");
     },
   },

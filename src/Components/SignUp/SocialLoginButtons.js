@@ -37,6 +37,7 @@ function SocialLoginButtons({ login }) {
         onSuccess={onGoogleSuccess}
         onFailure={onGoogleFail}
       />
+      {/*
       <FacebookLogin
         appId={facebookAID}
         autoLoad={false}
@@ -44,6 +45,7 @@ function SocialLoginButtons({ login }) {
         callback={onFacebook}
         cssClass="fb-login-button"
       />
+      */}
     </>
   );
 }

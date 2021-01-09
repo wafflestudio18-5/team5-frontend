@@ -24,11 +24,10 @@ const modal1 = (
   </section>
 );
 
-function Header(props) {
+function Header({user}) {
   const [serkey, setSerkey] = useState("");
   const [serFocused, setSerFocused] = useState(false);
   const { logoutReq } = useUserContext();
-  const { user_data } = props;
   const { modal } = useBoardContext();
   const history = useHistory();
 
@@ -42,7 +41,7 @@ function Header(props) {
   }
 
   const goToBoards = () => {
-    history.push(`/${user_data.name}/boards`);
+    history.push(`/${user.username}/boards`);
   }
   
   return (
@@ -69,7 +68,7 @@ function Header(props) {
       <div className="header-right-wrapper">
         <div style={{cursor: 'pointer'}} className="Add-Wrapper">{svg_hr_1}</div>
         <div style={{cursor: 'pointer'}} className="Info-Wrapper">{svg_hr_2}</div>
-        <div style={{cursor: 'pointer'}} className="Notifications-Wrapper">{svg_hr_3}</div>
+        <div style={{cursor: 'pointer'}} className="Notifications-Wrapper" onClick={() => alert('' + user.username)}>{svg_hr_3}</div>
         <div  style={{cursor: 'pointer'}} className="Profile-Wrapper" onClick={logoutReq}>
           <img style={{height: 32, width: 32, borderRadius: '50%'}} src="https://assets.leetcode.com/users/bundhoo/avatar_1527798889.png" alt={"Profile"}/>
         </div>
