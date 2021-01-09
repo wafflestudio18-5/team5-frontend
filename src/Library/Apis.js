@@ -89,7 +89,11 @@ const apis = {
 
     // all boards
     getAll: () => {
-      return requester.get("board/boardlist/");
+      return requester.get(`board/boardlist/`);
+    },
+    // pagination
+    getPage: (page) => {
+      return requester.get(`board/boardlist/?page=${page}`);
     },
     // invite user to board
     invite: ({ id, username }) => {
