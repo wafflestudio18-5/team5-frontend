@@ -24,7 +24,6 @@ function CardModal({
 }) {
   const [card, setCard] = useState(undefined);
   const [nameState, setNameState] = useState({ name: cardName, edit: false });
-  const [refresh, setRefresh] = useState(false);
   const { fetchBoardById } = useBoardContext();
 
   const postActivity = (cId, content) => {
@@ -70,7 +69,7 @@ function CardModal({
 
   useEffect(() => {
     getCard();
-  }, [refresh]);
+  }, []);
 
   const exitIfNotModal = (e) => {
     if (
@@ -232,7 +231,7 @@ function CardModal({
                 </p>
               )}
               <button
-                style={{ float: "right", display: "inline-block" }}
+                style={{ float: "right", display: "inline-block", width: 25 }}
                 className="card-modal-x"
                 id="exit"
               >
@@ -246,18 +245,19 @@ function CardModal({
           </div>
 
           <div id="card-modal-bottom">
-            <div id="card-modal-left" style={{ columnWidth: 400, maxHeight: 550, overflowY: 'auto' }}>
+            <div id="card-modal-left" style={{ maxHeight: 550, overflowY: 'auto' }}>
               <p className="title">Description</p>
               {description.edit 
               
               ? (
-                <><textarea
+                <div style={{height: 100}}><textarea
                     style={{
                       fontSize: 14,
                       marginLeft: 5,
                       borderRadius: 5,
                       outline: "none",
                       cols: 490,
+                      rows: 100,
                       border: "1px solid lightgray",
                       marginRight: 5,
                       padding: 5
@@ -287,15 +287,15 @@ function CardModal({
                   >
                     ×
                   </button></div>
-                </>
+                </div>
                 ) 
               
               : (!(description === undefined || description.content === undefined))
                   
                   ? (
-                    <div onClick={() => setDescription({...description, edit: true})}>
+                    <div onClick={() => setDescription({...description, edit: true})} style={{width: 501, height: 100, background: 'pink'}}>
                       <ReactMarkdown id="Markdown">
-                        {description.content}
+                        {description.content}나나나
                       </ReactMarkdown> 
                       </div> )
                   : (
@@ -383,8 +383,7 @@ function CardModal({
                       .map((data, index) => (
                         <Activity
                           data={data}
-                          refresh={refresh}
-                          setRefresh={setRefresh}
+                          getCard={getCard}
                           key={index}
                           postActivity={postActivity}
                           putActivity={putActivity}
