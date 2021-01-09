@@ -45,27 +45,10 @@ function CardModal({
         setDescription({ ...description, text: response.data.description });
       })
       .catch(function (error) {
-        if (error.response) {
-          console.log(
-            "요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다."
-          );
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          console.log("요청이 이루어 졌으나 응답을 받지 못했습니다.");
-          // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
-          // Node.js의 http.ClientRequest 인스턴스입니다.
-          console.log(error.request);
-        } else {
-          console.log(
-            "오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다."
-          );
-          console.log("Error", error.message);
-        }
-        console.log(error.config);
-      });
-  }
+          console.log(error);
+        } 
+      )};
+  
 
   useEffect(() => {
     getCard();
@@ -96,8 +79,6 @@ function CardModal({
     postActivity(String(card_id), comment);
     setButton({display: false, green: false});
     setComment("");
-    getCard();
-    getCard();
   };
 
   //해당 카드 지우기
@@ -147,7 +128,8 @@ function CardModal({
   });
   const saveDescription = () => {
     setDescription({...description, edit: false});
-    putCard({ cId: card_id, description: description.content })
+    putCard({ cId: card_id, description: description['text'] });
+    console.log(description.['text']);
   }
 
   // 멤버 추가하기
@@ -190,7 +172,7 @@ function CardModal({
   };
   //"Thu Jan 14 2021 00:00:00 GMT+0900 (대한민국 표준시)00:30"
 
-  const activities = useRef();
+  const activityy = useRef();
 
   return (
     <div
@@ -252,7 +234,7 @@ function CardModal({
           <div id="card-modal-bottom">
             <div id="card-modal-left" style={{ maxHeight: 550, overflowY: 'auto' }}>
               <p className="title">Description</p>
-              {description.edit 
+              {description['edit'] 
               
               ? (
                 <div style={{height: 100}}><textarea
@@ -267,7 +249,7 @@ function CardModal({
                       marginRight: 5,
                       padding: 5
                     }}
-                    value={description.content}
+                    value={description['text']}
                     onChange={(e) =>
                       setDescription({
                         ...description,
@@ -295,12 +277,12 @@ function CardModal({
                 </div>
                 ) 
               
-              : (!(description === undefined || description['content'] === undefined || description['content' === ""]))
+              : (!(description === undefined || description['text'] === undefined || description['text' === ""]))
                   
                   ? (
                     <div onClick={() => setDescription({...description, edit: true})} style={{width: 485, marginBottom: 10, marginTop: 10, height: 'fit-content'}}>
                       <ReactMarkdown id="Markdown" style={{height: 'fit-content', background: 'pink'}}>
-                        {description['content']}
+                        {description['text']}
                       </ReactMarkdown> 
                       </div> )
                   : (
@@ -321,7 +303,7 @@ function CardModal({
                 onClick={(e) => setDetail(!detail)} 
                 style={{width: 100, position: 'relative', left: 322, top: 10}}>{detail? "Hide Details" : "Show Details"}</button>
               </div>
-              <div ref={activities} id="card-modal-activities" style={{marginTop: 20}}>              
+              <div ref={activityy} iyd="card-modal-activities" style={{marginTop: 20}}>              
               <div style={{display: 'flex', flexDirection: 'row'}}>
                   <img
                     style={{
@@ -387,7 +369,7 @@ function CardModal({
                       .reverse()
                       .map((data, index) => (
                         <Activity
-                          data={data}
+                          data={Object.assign(data)}
                           getCard={getCard}
                           key={index}
                           isComment={data.is_comment}
