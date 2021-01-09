@@ -49,23 +49,84 @@ button.moveButton {
   background-color: #a1c3e1;
 }
 
-.board-list span.list-down.visible {
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  right: 35px;
-  top: 5px;
-  transition: 0.3s;
-}
-
-.board-list span.list-down.invisible {
+.board-list span.list-down {
   background-color: #EBECF0;
   width: 30px;
   height: 30px;
   position: absolute;
-  right: 5px;
   top: 5px;
   transition: 0.3s;
+  text-align: center;
+}
+
+div.board-list-headers input.modifyInput {
+  background-color: transparent;
+  border: 1px solid lightslategray;
+  border-radius: 5px;
+  padding-inline-start: 8px;
+  width: 200px;
+  height: 20px;
+  line-height: 20px;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+/* 옵션창 관련 */
+
+button.modify {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 5px;
+  transition: 0.3s;
+  background-color: rgb(62, 39, 174);
+  color: white;
+}
+
+button.modify.true {
+  right: 65px;
+}
+
+button.modify.false {
+  right: 5px;
+}
+
+button.delete {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 5px;
+  transition: 0.3s;
+  background-color: rgb(169, 0, 0);
+  color: white;
+}
+
+button.delete.true {
+  right: 35px;
+}
+
+button.delete.false {
+  right: 5px;
+}
+
+.board-list span.list-down svg.optionIcon {
+  margin-top: 7px;
+  width: 16px;
+  height: 16px;
+  transition: 0.3s;
+}
+
+.board-list span.list-down svg.optionIcon.true {
+  transform: rotate(-90deg);
+}
+
+.board-list span.list-down.visible {
+  right: 35px;
+  width: 0px;
+}
+
+.board-list span.list-down.invisible {
+  right: 5px;
 }
 
 .board-list button:hover {
