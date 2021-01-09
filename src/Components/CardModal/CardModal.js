@@ -476,7 +476,7 @@ function CardModal({
               <div id="DUEDATE" style={{backgroundColor: '#F4F5F7', zIndex: 900, fontSize: 15}}>
 
               {due.date
-              ?<div style={{display: 'flex', flexDirection: 'column'}}>
+              ?<div style={{display: 'float'}}>
               <div id="NOBUTTON">
               <DatePicker
               autoFocus={true}
