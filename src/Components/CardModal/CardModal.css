@@ -301,7 +301,6 @@ div.react-time-picker__clock {
 
 div.react-calendar {
     position: relative !important;
-    top: -15px;
     border-radius: 3px !important;
 }
 
